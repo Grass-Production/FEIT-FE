@@ -1,21 +1,22 @@
-import { HomePage, SignIn, SignUp } from "../pages";
+import { HomePage, SignIn, SignUp, LandingPage } from "../pages";
 
 export const ROUTES = {
-    HomePage: '/',
+    HomePage: '/home',
+    LandingPge: '/',
     SignIn: '/signin',
     SignUp: '/signup'
 }
 
 const routerList = [
     {
+        title: 'FEIT',
+        href: ROUTES.LandingPge,
+        component: LandingPage,
+    },
+    {
         title: 'Home | FEIT',
         href: ROUTES.HomePage,
         component: HomePage,
-    },
-    {
-        title: 'Sign In | FEIT',
-        href: ROUTES.SignIn,
-        component: SignIn,
     },
     {
         title: 'Sign Up | FEIT',

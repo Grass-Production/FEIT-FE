@@ -2,6 +2,7 @@ import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import routerList from './context/routes';
 import {MainLayout} from './pages/MainLayout/MainLayout';
 import {Helmet} from 'react-helmet';
+import {SignIn} from './pages';
 export default function Layout() {
     return (
         <Router>
@@ -26,6 +27,7 @@ export default function Layout() {
                     })}
                     <Route />
                 </Route>
+                <Route path="/signin" element={<SignIn />} />
             </Routes>
         </Router>
     );
