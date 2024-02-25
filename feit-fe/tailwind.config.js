@@ -1,7 +1,7 @@
-import { withTV } from 'tailwind-variants/transformer';
+// import { withTV } from 'tailwind-variants/transformer';
 /** @type {import('tailwindcss').Config} */
 
-export default withTV({
+export default ({
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",

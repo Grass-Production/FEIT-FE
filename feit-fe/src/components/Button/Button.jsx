@@ -12,7 +12,7 @@ export const buttonVariants = tv({
         size: {
             sm: 'py-2 px-3',
             md: ' py-3 px-4',
-            lg: 'py-4 px-5',
+            lg: 'py-4 px-5 w-full',
         },
         disabled: {
             true: '',
@@ -22,9 +22,14 @@ export const buttonVariants = tv({
             left: ' flex gap-[6px]',
         },
     },
+    defaultVariants: {
+        color: 'primary',
+        size: 'md',
+        type: 'none',
+    },
 });
 
-export const Button = ({children, icon, size, color, title, onClick = null}) => {
+export const Button = ({children, icon, size, color, title = 'Click me', onClick = null}) => {
     return (
         <button
             onClick={onClick}
