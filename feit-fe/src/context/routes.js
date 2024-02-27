@@ -1,5 +1,9 @@
-import { HomePage, SignIn, SignUp, LandingPage } from "../pages";
 
+import { lazy } from "react";
+const HomePage = lazy(() => import("../pages/HomePage/HomePage"))
+const SignIn = lazy(() => import("../pages/SignIn/SignIn"))
+const SignUp = lazy(() => import("../pages/SignUp/SignUp"))
+const LandingPage = lazy(() => import("../pages/LandingPage/LandingPage"))
 export const ROUTES = {
     HomePage: '/home',
     LandingPge: '/',

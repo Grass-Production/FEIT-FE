@@ -1,12 +1,18 @@
 import {Navbar} from '../../layouts';
-import {Form} from '../../components';
 
-export const LandingPage = () => {
+import {HeroLandingPage, IntroduceLangdingPage, FeatureLangdingPage} from './component';
+
+export default function LandingPage() {
     return (
         <div className="">
             <Navbar />
-            <Form />
+            <div className=" p-120px">
+                <HeroLandingPage />
+                <IntroduceLangdingPage />
+                <FeatureLangdingPage />
+            </div>
+
             <h1>Landingpage</h1>
         </div>
     );
-};
+}

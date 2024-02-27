@@ -1,7 +1,7 @@
 import {Button} from '../../components';
 import {useState} from 'react';
 
-export const HomePage = () => {
+export default function HomePage() {
     const [load, setLoad] = useState(false);
     function handleSetLoad() {
         setLoad(!load);
@@ -36,4 +36,4 @@ export const HomePage = () => {
             </div>
         </div>
     );
-};
+}

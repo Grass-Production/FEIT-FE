@@ -43,7 +43,7 @@ export const Form = ({valueName, onChangeName, valuePass, onChangePass}) => {
                 </NavLink>
             </div>
             <div className=" flex justify-center ">
-                <Button title="Đăng nhập" size={'lg'} />
+                <Button title="Đăng nhập" className=" w-64" size={'lg'} />
             </div>
         </form>
     );

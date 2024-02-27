@@ -1,9 +1,9 @@
 import {Outlet} from 'react-router-dom';
 
-export const MainLayout = () => {
+export default function MainLayout() {
     return (
         <div className="">
             <Outlet />
         </div>
     );
-};
+}

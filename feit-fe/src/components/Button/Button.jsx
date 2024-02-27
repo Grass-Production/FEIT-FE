@@ -12,7 +12,7 @@ export const buttonVariants = tv({
         size: {
             sm: 'py-2 px-3',
             md: ' py-3 px-4',
-            lg: 'py-4 px-5 w-full',
+            lg: 'py-4 px-5',
         },
         disabled: {
             true: '',
@@ -29,15 +29,15 @@ export const buttonVariants = tv({
     },
 });
 
-export const Button = ({children, icon, size, color, title = 'Click me', onClick = null}) => {
+export const Button = ({children, icon, size, color, title = 'Click me', onClick = null, className = ''}) => {
     return (
         <button
             onClick={onClick}
-            className={buttonVariants({
+            className={`${className} ${buttonVariants({
                 color: color,
                 size: size,
                 type: icon ? 'left' : 'none',
-            })}>
+            })}`}>
             {icon && children}
             <h1>{title}</h1>
         </button>
