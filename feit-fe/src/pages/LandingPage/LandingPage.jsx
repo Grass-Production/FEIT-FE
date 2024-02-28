@@ -1,6 +1,6 @@
 import {Navbar} from '../../layouts';
 
-import {HeroLandingPage, IntroduceLangdingPage, FeatureLangdingPage} from './component';
+import {HeroLandingPage, IntroduceLangdingPage, FeatureLangdingPage, StoryLandingPage} from './component';
 
 export default function LandingPage() {
     return (
@@ -10,6 +10,7 @@ export default function LandingPage() {
                 <HeroLandingPage />
                 <IntroduceLangdingPage />
                 <FeatureLangdingPage />
+                <StoryLandingPage />
             </div>
 
             <h1>Landingpage</h1>

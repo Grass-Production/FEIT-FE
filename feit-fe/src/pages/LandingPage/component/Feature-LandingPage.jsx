@@ -1,6 +1,6 @@
 export const FeatureLangdingPage = () => {
     return (
-        <div className="">
+        <div className=" mb-24">
             <div>
                 <h1 className="text-Dmd mb-8">Những tính năng của website này có gì ?</h1>
                 <div className=" flex gap-8 justify-between">
