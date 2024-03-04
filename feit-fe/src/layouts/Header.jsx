@@ -1,6 +1,6 @@
 import {NavLink} from 'react-router-dom';
 import {Button} from '../components';
-export const Navbar = () => {
+export const Header = () => {
     return (
         <div>
             <div className="flex px-32 py-3 justify-between items-center border border-b border-black">

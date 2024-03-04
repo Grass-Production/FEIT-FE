@@ -1,6 +1,7 @@
-import {Navbar} from '../../layouts';
 import {useState, useEffect} from 'react';
 import {HeroLandingPage, IntroduceLangdingPage, FeatureLangdingPage, StoryLandingPage} from './component';
+
+import {Header} from '../../layouts';
 
 export default function LandingPage() {
     // --- Try Set Query URL ---
@@ -23,7 +24,7 @@ export default function LandingPage() {
 
     return (
         <div className="">
-            <Navbar />
+            <Header />
             <div className=" p-120px">
                 <HeroLandingPage />
                 <IntroduceLangdingPage />

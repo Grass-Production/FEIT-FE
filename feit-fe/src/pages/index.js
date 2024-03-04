@@ -1,7 +1,12 @@
-import { fromJSON } from 'postcss'
 
-export * from './HomePage'
-export * from './SignIn'
-export * from './SignUp'
-export * from './LandingPage'
-
+export { default } from './HomePage'
+export { default } from './SignIn'
+export { default } from './SignUp'
+export { default } from './LandingPage'
+export { default } from './NotFound'
+export { default } from './Announce'
+export { default } from './History'
+export { default } from './LeaderBoard'
+export { default } from './Lesson'
+export { default } from './Profile'
+export { default } from './Welcome'
