@@ -1,27 +1,24 @@
-import { GoogleLogin } from '@react-oauth/google';
-import { googleLogout } from '@react-oauth/google';
-import { useState } from 'react';
+import {GoogleLogin} from '@react-oauth/google';
+import {googleLogout} from '@react-oauth/google';
+import {useState} from 'react';
 
-function TestLogin({ value }) {
-
+function TestLogin({credential}) {
     const callApi = async () => {
-        const res = await fetch(`http://localhost:8080/api/sessions/oauth/google?code=${value}`, {
-            method: "GET",
+        const res = await fetch(`http://localhost:8080/api/sessions/oauth/google?code=${credential}`, {
+            method: 'GET',
             mode: 'cors',
             headers: {
-                "Content-Type": "application/json",
+                'Content-Type': 'application/json',
             },
         });
 
-        console.log(res)
-        console.log(value)
-    }
-    return <button onClick={callApi}>Test Login</button>
+        console.log(res);
+    };
+    return <button onClick={callApi}>Test Login</button>;
 }
 
 export const OAuthGoogle = () => {
-
-    const [credential, setCredential] = useState('')
+    const [credential, setCredential] = useState('');
 
     const onSuccess = () => {
         console.log('log out success');
@@ -32,7 +29,7 @@ export const OAuthGoogle = () => {
             <TestLogin value={credential} />
             <GoogleLogin
                 onSuccess={(credentialResponse) => {
-                    setCredential(credentialResponse.credential)
+                    setCredential(credentialResponse.credential);
                     console.log(credentialResponse);
                     console.log(credentialResponse.credential);
                 }}
