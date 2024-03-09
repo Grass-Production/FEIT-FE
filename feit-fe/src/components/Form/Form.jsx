@@ -15,7 +15,7 @@ export const Form = ({valueName, onChangeName, valuePass, onChangePass}) => {
     return (
         <form className={base()}>
             <div className=" mb-3">
-                <label className=" mb-2" htmlFor="">
+                <label className=" block mb-2" htmlFor="">
                     Email
                 </label>
                 <input
@@ -27,7 +27,9 @@ export const Form = ({valueName, onChangeName, valuePass, onChangePass}) => {
                 />
             </div>
             <div className={label()}>
-                <label htmlFor="">Mật khẩu</label>
+                <label className=" block mb-2" htmlFor="">
+                    Mật khẩu
+                </label>
                 <input
                     value={valuePass}
                     onChange={onChangePass}

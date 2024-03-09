@@ -14,9 +14,13 @@ const routes = publicRouter.map((route) => {
                 <Helmet>
                     <title>{route.title}</title>
                 </Helmet>
-                <Sidebar show={route.showSidebar}>
+                {route.showSidebar ? (
+                    <Sidebar show={route.showSidebar}>
+                        <Page />
+                    </Sidebar>
+                ) : (
                     <Page />
-                </Sidebar>
+                )}
             </>
         ),
         errorElement: (

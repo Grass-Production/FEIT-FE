@@ -42,14 +42,45 @@ export default function Lesson() {
         speed: 500,
         lazyLoad: true,
         slidesToShow: 4,
-        slidesToScroll: 1,
-        initialSlide: 1,
+        slidesToScroll: 4,
+        initialSlide: 0,
         arrows: false,
+        responsive: [
+            {
+                breakpoint: 1260,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    infinite: true,
+                },
+            },
+            {
+                breakpoint: 800,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                    initialSlide: 2,
+                },
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                },
+            },
+        ],
     };
     return (
-        <div className="px-10">
-            <h1 className="text-Dsm">Chủ đề của bạn</h1>
-            <Slider {...settings} className=" ">
+        <div className=" pl-32">
+            <h1 className="text-Dsm mb-4">Chủ đề của bạn</h1>
+            <Slider {...settings} className=" mb-8">
+                {data.map((data, i) => {
+                    return <Card key={data.id} course={data.course} percent={data.percent} />;
+                })}
+            </Slider>
+            <h1 className="text-Dsm mb-4">Chủ đề khác</h1>
+            <Slider {...settings} className=" mb-8">
                 {data.map((data, i) => {
                     return <Card key={data.id} course={data.course} percent={data.percent} />;
                 })}

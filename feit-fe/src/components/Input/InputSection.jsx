@@ -7,8 +7,10 @@ export const inputSectionVariants = tv({
 export const InputSection = ({type = 'checkbox', label = 'label'}) => {
     return (
         <div className={' ' + inputSectionVariants({})}>
-            <input type={type} />
-            <label>{label}</label>
+            <form>
+                <input type={type} id="RemenberPass" name="RemenberPass" />
+                <label htmlFor="RemenberPass">{label}</label>
+            </form>
         </div>
     );
 };

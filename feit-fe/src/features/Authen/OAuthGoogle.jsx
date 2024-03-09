@@ -25,8 +25,8 @@ export const OAuthGoogle = () => {
     };
 
     return (
-        <div>
-            <TestLogin value={credential} />
+        <div className=" mx-auto">
+            {/* <TestLogin value={credential} /> */}
             <GoogleLogin
                 onSuccess={(credentialResponse) => {
                     setCredential(credentialResponse.credential);
@@ -37,7 +37,7 @@ export const OAuthGoogle = () => {
                     console.log('Login Failed');
                 }}
             />
-            <button onClick={() => googleLogout()}>Logout</button>
+            {/* <button onClick={() => googleLogout()}>Logout</button> */}
         </div>
     );
 };
