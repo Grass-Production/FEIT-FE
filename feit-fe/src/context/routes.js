@@ -12,7 +12,8 @@ const Profile = lazy(() => import("../pages/Profile"))
 const SignIn = lazy(() => import("../pages/SignIn"))
 const SignUp = lazy(() => import("../pages/SignUp"))
 const Welcome = lazy(() => import("../pages/Welcome"))
-
+const Unit = lazy(() => import("../pages/Unit"))
+const Learn = lazy(() => import("../pages/Learn"))
 
 
 
@@ -22,11 +23,13 @@ export const ROUTES = {
     HomePage: '/',
     LandingPage: '/about',
     LeaderBoard: '/leaderboard',
-    Lesson: '/lesson',
+    Learn: '/learn',
+    Lesson: '/learn/lesson/:lessonname',
     Profile: '/profile',
     SignIn: '/signIn',
     SignUp: '/signUp',
     Welcome: '/welcome',
+    Unit: '/learn/lesson/:lessonname/unit/:unitid'
 }
 
 export const publicRouter = [
@@ -38,11 +41,21 @@ export const publicRouter = [
         name: 'Trang chủ'
     },
     {
+        title: 'FEIT | Learn',
+        href: ROUTES.Learn,
+        component: Learn,
+        showSidebar: true,
+        name: 'Học tập',
+    },
+    {
         title: 'FEIT | Lesson',
         href: ROUTES.Lesson,
         component: Lesson,
-        showSidebar: true,
-        name: 'Học tập'
+    },
+    {
+        title: 'FEIT | Unit',
+        href: ROUTES.Unit,
+        component: Unit,
     },
     {
         title: 'FEIT | LeaderBoard',
@@ -102,6 +115,7 @@ export const publicRouter = [
 
     },
 ]
+
 
 const privateRouter = [{}]
 

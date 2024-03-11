@@ -1,12 +1,13 @@
-import {publicRouter} from '../context';
-import {createBrowserRouter} from 'react-router-dom';
-import {Helmet} from 'react-helmet';
-import {lazy} from 'react';
-import {Sidebar} from '../layouts';
-const NotFound = lazy(() => import('../pages'));
+import { publicRouter } from '../context';
+import { createBrowserRouter } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
+import { lazy } from 'react';
+import { Sidebar } from '../layouts';
+const NotFound = lazy(() => import('../pages/NotFound'));
 
 const routes = publicRouter.map((route) => {
     const Page = route.component;
+
     return {
         path: route.href,
         element: (
@@ -19,7 +20,9 @@ const routes = publicRouter.map((route) => {
                         <Page />
                     </Sidebar>
                 ) : (
-                    <Page />
+                    <>
+                        <Page />
+                    </>
                 )}
             </>
         ),
