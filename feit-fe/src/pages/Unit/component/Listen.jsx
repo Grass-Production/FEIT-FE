@@ -1,8 +1,10 @@
 export const Listen = ({ word, mean }) => {
     return (
-        <div className=" w-[56.563rem]">
-            <h1 className=" text-center text-Dmd">Hãy nhấn để nghe từ vựng</h1>
-            <h1 className=" text-center text-Hsm mb-28">Hãy nhấn vào biểu tượng âm thanh để nghe từ vựng nha !</h1>
+        <div className=" w-[56.563rem] h-[80vh] flex flex-col justify-around items-center">
+            <div>
+                <h1 className=" text-center text-Dmd">Hãy nhấn để nghe từ vựng</h1>
+                <h1 className=" text-center text-Hsm">Hãy nhấn vào biểu tượng âm thanh để nghe từ vựng nha !</h1>
+            </div>
             <div className=" w-3/4 flex justify-center items-center mx-auto">
                 <div className=" w-1/2 ">
                     <div className=" m-auto  w-56 h-56 rounded-[40px] bg-gray-500"></div>
