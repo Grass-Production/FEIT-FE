@@ -1,7 +1,7 @@
-export const Lesson = ({ name, img = '' }) => {
+export default function LessonDetail({ name }) {
     return (
         <div className="">
-            <div className="">
+            <div className=" pr-8">
                 <div className=" h-80  overflow-hidden rounded-lg mb-3 ">
                     <img className="object-cover" src="/src/assets/images/img-card.jpg" alt="" />
                 </div>
@@ -9,4 +9,4 @@ export const Lesson = ({ name, img = '' }) => {
             </div>
         </div>
     );
-};
+}

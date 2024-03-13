@@ -7,7 +7,7 @@ const History = lazy(() => import("../pages/History"))
 const HomePage = lazy(() => import("../pages/HomePage"))
 const LandingPage = lazy(() => import("../pages/LandingPage"))
 const LeaderBoard = lazy(() => import("../pages/LeaderBoard"))
-const Lesson = lazy(() => import("../pages/Lesson"))
+const LessonDetail = lazy(() => import("../pages/Lesson/LessonDetail"))
 const Profile = lazy(() => import("../pages/Profile"))
 const SignIn = lazy(() => import("../pages/SignIn"))
 const SignUp = lazy(() => import("../pages/SignUp"))
@@ -24,7 +24,7 @@ export const ROUTES = {
     LandingPage: '/about',
     LeaderBoard: '/leaderboard',
     Learn: '/learn',
-    Lesson: '/learn/lesson/:lessonname',
+    LessonDetail: '/learn/lesson/:lessonname',
     Profile: '/profile',
     SignIn: '/signIn',
     SignUp: '/signUp',
@@ -49,8 +49,8 @@ export const publicRouter = [
     },
     {
         title: 'FEIT | Lesson',
-        href: ROUTES.Lesson,
-        component: Lesson,
+        href: ROUTES.LessonDetail,
+        component: LessonDetail,
     },
     {
         title: 'FEIT | Unit',

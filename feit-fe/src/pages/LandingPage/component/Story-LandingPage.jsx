@@ -1,6 +1,6 @@
 export const StoryLandingPage = () => {
     return (
-        <div className="">
+        <div className=" mb-24">
             <h1 className=" text-Dmd mb-10 text-center">Câu chuyện của chúng mình</h1>
             <div className=" flex justify-between gap-8">
                 <div className="">

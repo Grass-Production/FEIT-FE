@@ -1,1 +1,2 @@
-export { default } from './Lesson'
+export * from './Lesson'
+export { default } from './LessonDetail'

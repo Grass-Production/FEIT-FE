@@ -1,4 +1,4 @@
-import {tv} from 'tailwind-variants';
+import { tv } from 'tailwind-variants';
 
 export const buttonVariants = tv({
     base: 'font-semibold text-white rounded-lg active:opacity-80',
@@ -29,7 +29,7 @@ export const buttonVariants = tv({
     },
 });
 
-export const Button = ({children, icon, size, color, title = 'Click me', onClick = null, className = ''}) => {
+export const Button = ({ children, icon, size, color, title = 'Click me', onClick = null, className = '' }) => {
     return (
         <button
             onClick={onClick}
