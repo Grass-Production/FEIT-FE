@@ -33,9 +33,19 @@ export default ({
         'Tsm': ['0.875rem', '1.25rem']
 
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            h1: {
+              '@apply truncate overflow-hidden whitespace-nowrap': '',
+            }
+          }
+        }
+      }
     },
   },
   plugins: [
+
   ]
 })
 

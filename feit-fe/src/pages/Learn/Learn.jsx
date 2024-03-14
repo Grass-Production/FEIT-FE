@@ -1,4 +1,4 @@
-import { Lesson } from '../Lesson';
+import { LessonCard, LessonLoading } from './component';
 import Slider from 'react-slick';
 import { useEffect, useState } from 'react';
 import { getLessons } from '../../services/lessonAPI';
@@ -9,12 +9,14 @@ import { NavLink } from 'react-router-dom';
 
 export default function Learn() {
     const [lessons, setLesson] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         async function fetchData() {
             try {
                 const res = await getLessons();
                 setLesson(res);
+                setLoading(!loading);
                 console.log(res);
             } catch (error) {
                 console.error(error);
@@ -27,7 +29,7 @@ export default function Learn() {
         infinite: false,
         speed: 500,
         lazyLoad: true,
-        slidesToShow: 2,
+        slidesToShow: 4,
         slidesToScroll: 4,
         initialSlide: 0,
         arrows: false,
@@ -61,20 +63,28 @@ export default function Learn() {
     return (
         <div className=" pl-10">
             <h1 className="text-Dsm mb-4">Chủ đề của bạn</h1>
-
-            <Slider {...settings} className=" mb-8">
-                {lessons.map((lesson) => {
-                    return (
-                        <div key={lesson.id} className="pr-8">
-                            <Lesson name={lesson.name} />
-                            <LoadingProgressBar className={'mb-3'} />
-                            <NavLink to={`/learn/lesson/${lesson.id}`}>
-                                <Button title="Xem" className=" w-full"></Button>
-                            </NavLink>
-                        </div>
-                    );
-                })}
-            </Slider>
+            {loading ? (
+                <Slider {...settings} className=" mb-8">
+                    <LessonLoading />
+                    <LessonLoading />
+                    <LessonLoading />
+                    <LessonLoading />
+                </Slider>
+            ) : (
+                <Slider {...settings} className=" mb-8">
+                    {lessons.map((lesson) => {
+                        return (
+                            <div key={lesson.id} className="pr-8">
+                                <LessonCard name={lesson.name} />
+                                <LoadingProgressBar className={'mb-3'} />
+                                <NavLink to={`/learn/lesson/${lesson.id}`}>
+                                    <Button title="Xem" className=" w-full"></Button>
+                                </NavLink>
+                            </div>
+                        );
+                    })}
+                </Slider>
+            )}
         </div>
     );
 }

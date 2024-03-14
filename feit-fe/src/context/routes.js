@@ -51,6 +51,8 @@ export const publicRouter = [
         title: 'FEIT | Lesson',
         href: ROUTES.LessonDetail,
         component: LessonDetail,
+        showSidebar: true,
+
     },
     {
         title: 'FEIT | Unit',

@@ -1,42 +1,15 @@
-import {Button} from '../../components';
-import {useState} from 'react';
-import {Sidebar} from '../../layouts';
-import {Outlet} from 'react-router-dom';
+import { Button } from '../../components';
+
 export default function HomePage() {
-    const [load, setLoad] = useState(false);
-    function handleSetLoad() {
-        setLoad(!load);
-        setTimeout(() => {
-            setLoad((n) => !n);
-        }, 3000);
-    }
     return (
-        <div className=" w-full">
-            <div>
-                <button className=" bg-primary-subtile" onClick={handleSetLoad}>
-                    load
-                </button>
-                <Button onClick={handleSetLoad} icon={true} size={'md'} color={'primary'} title={'Load'}>
-                    <h1>ICon</h1>
-                </Button>
-                <div className={load ? 'animate-pulse' : ''}>
-                    <h1 className=" ">Home Page</h1>
-                    <Button icon={true} size={'md'} color={'primary'} title={'Click me'}>
-                        <h1>ICon</h1>
-                    </Button>
-                    <div className="rounded-full bg-slate-200 h-10 w-10"></div>
-                    <div className="flex-1 space-y-6 py-1">
-                        <div className="h-2 bg-slate-200 rounded"></div>
-                        <div className="space-y-3">
-                            <div className="grid grid-cols-3 gap-4">
-                                <div className="h-2 bg-slate-200 rounded col-span-2"></div>
-                                <div className="h-2 bg-slate-200 rounded col-span-1"></div>
-                            </div>
-                            <div className="h-2 bg-slate-200 rounded"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div className="grid grid-cols-3 gap-4 h-screen px-10 py-7">
+            <div className=" bg-gray-300 rounded-lg">01</div>
+            <div className=" bg-gray-300 rounded-lg">02</div>
+            <div className=" bg-gray-300 rounded-lg">03</div>
+            <div className="col-span-2  bg-gray-300 rounded-lg">04</div>
+            <div className=" bg-gray-300 rounded-lg">05</div>
+            <div className=" bg-gray-300 rounded-lg">06</div>
+            <div className="col-span-2  bg-gray-300 rounded-lg">07</div>
         </div>
     );
 }
