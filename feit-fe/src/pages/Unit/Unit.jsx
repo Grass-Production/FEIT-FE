@@ -46,7 +46,7 @@ export default function Unit() {
                 count={count}
             />
 
-            <div className=" w-full  py-10 flex justify-around items-center border-t-2 border-black">
+            <div className=" w-full  pt-10 flex justify-around items-center border-t-2 border-black">
                 {count !== 2 ? (
                     <>
                         <Button onClick={handleOnClick} className=" w-[25.5rem]" title="Tiếp tục"></Button>

@@ -77,7 +77,7 @@ export default function Learn() {
                             <div key={lesson.id} className="pr-8">
                                 <LessonCard name={lesson.name} />
                                 <LoadingProgressBar className={'mb-3'} />
-                                <NavLink to={`/learn/lesson/${lesson.id}`}>
+                                <NavLink to={`/learn/lesson/${lesson._id}`}>
                                     <Button title="Xem" className=" w-full"></Button>
                                 </NavLink>
                             </div>

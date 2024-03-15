@@ -1,6 +1,6 @@
 export const UnitCard = () => {
     return (
-        <div className="mr-8">
+        <div className="">
             <div className=" ">
                 <div className=" h-80  overflow-hidden rounded-lg mb-3 ">
                     <img className="object-cover" src="/src/assets/images/img-card.jpg" alt="" />

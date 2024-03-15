@@ -24,12 +24,12 @@ export const ROUTES = {
     LandingPage: '/about',
     LeaderBoard: '/leaderboard',
     Learn: '/learn',
-    LessonDetail: '/learn/lesson/:lessonname',
+    LessonDetail: '/learn/lesson/:lessonid',
     Profile: '/profile',
     SignIn: '/signIn',
     SignUp: '/signUp',
     Welcome: '/welcome',
-    Unit: '/learn/lesson/:lessonname/unit/:unitid'
+    Unit: '/learn/lesson/:lessonid/unit/:unitid'
 }
 
 export const publicRouter = [

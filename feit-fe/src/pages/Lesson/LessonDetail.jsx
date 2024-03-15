@@ -1,10 +1,37 @@
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { UnitCard } from './component';
+import { UnitCard, UnitCardLoad } from './component';
 import { Button } from '../../components';
+import { getUnits } from '../../services/unitAPI';
 import { NavLink } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 export default function LessonDetail({ name }) {
+    const [units, setUnits] = useState([]);
+    const [loading, setLoading] = useState(true);
+    let { lessonid } = useParams();
+    console.log(lessonid);
+
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                console.time('time');
+                const res = await getUnits();
+                const data = res.filter((value) => {
+                    return value.Lesson._id === lessonid;
+                });
+                setUnits(data);
+                setLoading(!loading);
+                console.timeEnd('time');
+                console.log(res);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        fetchData();
+    }, []);
+
     var settings = {
         infinite: false,
         speed: 500,
@@ -55,18 +82,22 @@ export default function LessonDetail({ name }) {
                 </div>
                 <div className=" w-[80%]">
                     <Slider {...settings} className=" mr-8">
-                        <NavLink to="/learn/lesson/:lessonname/unit/:unitid">
+                        {/* <NavLink to="/learn/lesson/:lessonname/unit/:unitid">
                             <UnitCard />
-                        </NavLink>
-                        <NavLink to="/learn/lesson/:lessonname/unit/:unitid">
-                            <UnitCard />
-                        </NavLink>
-                        <NavLink to="/learn/lesson/:lessonname/unit/:unitid">
-                            <UnitCard />
-                        </NavLink>
-                        <NavLink to="/learn/lesson/:lessonname/unit/:unitid">
-                            <UnitCard />
-                        </NavLink>
+                        </NavLink> */}
+                        {loading ? (
+                            <div>
+                                <UnitCardLoad />
+                                <UnitCardLoad />
+                                <UnitCardLoad />
+                            </div>
+                        ) : (
+                            <>
+                                {units.map((unit) => {
+                                    return <UnitCard key={unit.id} />;
+                                })}
+                            </>
+                        )}
                     </Slider>
                 </div>
             </div>
