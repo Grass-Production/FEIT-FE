@@ -16,14 +16,12 @@ export default function LessonDetail({ name }) {
     useEffect(() => {
         async function fetchData() {
             try {
-                console.time('time');
                 const res = await getUnits();
                 const data = res.filter((value) => {
                     return value.Lesson._id === lessonid;
                 });
                 setUnits(data);
                 setLoading(!loading);
-                console.timeEnd('time');
                 console.log(res);
             } catch (error) {
                 console.log(error);
@@ -86,11 +84,9 @@ export default function LessonDetail({ name }) {
                             <UnitCard />
                         </NavLink> */}
                         {loading ? (
-                            <div>
+                            <>
                                 <UnitCardLoad />
-                                <UnitCardLoad />
-                                <UnitCardLoad />
-                            </div>
+                            </>
                         ) : (
                             <>
                                 {units.map((unit) => {

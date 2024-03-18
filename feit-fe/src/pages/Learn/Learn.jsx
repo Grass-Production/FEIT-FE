@@ -11,15 +11,24 @@ export default function Learn() {
     const [lessons, setLesson] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    // Dữ liệu bạn muốn lưu vào cache
+
     useEffect(() => {
         async function fetchData() {
             try {
                 const res = await getLessons();
                 setLesson(res);
                 setLoading(!loading);
+                const cacheName = 'lessons-cache'; // Đặt tên cho cache
+                const cacheData = { data: res }; // Chuẩn bị dữ liệu để lưu vào cache
+
+                // Mở hoặc tạo một cache mới với tên được xác định
+                const cache = await caches.open(cacheName);
+                // Lưu dữ liệu vào cache
+                await cache.put('lessons-data', new Response(JSON.stringify(cacheData)));
                 console.log(res);
             } catch (error) {
-                console.error(error);
+                console.log(error);
             }
         }
         fetchData();
