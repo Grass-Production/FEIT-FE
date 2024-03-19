@@ -10,12 +10,13 @@ export default ({
     extend: {
       fontFamily: {
         bitter: ['Bitter', 'sans-serif'],
-        'plus-jakarta-sans': ['Plus Jakarta Sans', 'sans-serif'],
+        plusjakartasans: ['Plus Jakarta Sans', 'sans-serif'],
       },
       colors: {
         'white': '#FBFBFB',
         primary: {
-          'blue': '#0B58FE',
+          'blue-500': '#0B58FE',
+          'blue-800': '#06308C',
           'black': '#1A1823'
         },
         secondary: {
@@ -28,6 +29,9 @@ export default ({
           'danger': '#E72E0A',
           'success': '#E1C536',
           'warning': '#0FBDA8',
+        },
+        foundation: {
+          'violet-600': '#2B283A'
         },
         background: {
           'able': '#FBFBFB',

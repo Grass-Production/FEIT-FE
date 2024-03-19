@@ -1,7 +1,7 @@
-import { Header } from '../../layouts';
+import { Header, Footer } from '../../layouts';
 
 import {
-    HeroLandingPage,
+    SlideLandingPage,
     IntroduceLangdingPage,
     FeatureLangdingPage,
     StoryLandingPage,
@@ -10,15 +10,16 @@ import {
 
 export default function LandingPage() {
     return (
-        <div className="">
+        <div className=" bg-white">
             <Header />
-            <div className=" p-120px">
-                <HeroLandingPage />
+            <div className=" px-120px">
+                <SlideLandingPage />
                 <IntroduceLangdingPage />
                 <FeatureLangdingPage />
                 <StoryLandingPage />
-                <TeamLandingPage />
+                {/* <TeamLandingPage /> */}
             </div>
+            <Footer />
         </div>
     );
 }

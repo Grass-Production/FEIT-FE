@@ -1,8 +1,8 @@
-import {GoogleLogin} from '@react-oauth/google';
-import {googleLogout} from '@react-oauth/google';
-import {useState} from 'react';
+import { GoogleLogin } from '@react-oauth/google';
+import { googleLogout } from '@react-oauth/google';
+import { useState } from 'react';
 
-function TestLogin({credential}) {
+function TestLogin({ credential }) {
     const callApi = async () => {
         const res = await fetch(`http://localhost:8080/api/sessions/oauth/google?code=${credential}`, {
             method: 'GET',
@@ -28,6 +28,9 @@ export const OAuthGoogle = () => {
         <div className=" mx-auto">
             {/* <TestLogin value={credential} /> */}
             <GoogleLogin
+                theme="filled_blue"
+                logo_alignment="left"
+                size="large"
                 onSuccess={(credentialResponse) => {
                     setCredential(credentialResponse.credential);
                     console.log(credentialResponse);
