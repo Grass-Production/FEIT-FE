@@ -7,7 +7,7 @@ const NotFound = lazy(() => import('../pages/NotFound'));
 
 const routes = publicRouter.map((route) => {
     const Page = route.component;
-
+    const Icon = route.icon;
     return {
         path: route.href,
         element: (
@@ -18,6 +18,7 @@ const routes = publicRouter.map((route) => {
                 {route.showSidebar ? (
                     <Sidebar show={route.showSidebar}>
                         <Page />
+                        {/* <Icon /> */}
                     </Sidebar>
                 ) : (
                     <>

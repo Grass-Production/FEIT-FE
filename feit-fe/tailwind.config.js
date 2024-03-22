@@ -15,6 +15,7 @@ export default ({
       colors: {
         'white': '#FBFBFB',
         primary: {
+          'blue-400': '#3C79FE',
           'blue-500': '#0B58FE',
           'blue-800': '#06308C',
           'black': '#1A1823'

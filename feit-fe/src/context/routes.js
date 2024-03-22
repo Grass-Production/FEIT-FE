@@ -1,6 +1,6 @@
-
 import { lazy } from "react";
 
+import IconLaptop from "../svgs/IconLaptop";
 
 const Announce = lazy(() => import("../pages/Announce"))
 const History = lazy(() => import("../pages/History"))
@@ -14,6 +14,7 @@ const SignUp = lazy(() => import("../pages/SignUp"))
 const Welcome = lazy(() => import("../pages/Welcome"))
 const Unit = lazy(() => import("../pages/Unit"))
 const Learn = lazy(() => import("../pages/Learn"))
+
 
 
 
@@ -38,7 +39,7 @@ export const publicRouter = [
         href: ROUTES.HomePage,
         component: HomePage,
         showSidebar: true,
-        name: 'Trang chủ'
+        name: 'Trang chủ',
     },
     {
         title: 'FEIT | Learn',
@@ -46,12 +47,14 @@ export const publicRouter = [
         component: Learn,
         showSidebar: true,
         name: 'Học tập',
+
     },
     {
         title: 'FEIT | Lesson',
         href: ROUTES.LessonDetail,
         component: LessonDetail,
         showSidebar: true,
+
 
     },
     {
@@ -64,28 +67,32 @@ export const publicRouter = [
         href: ROUTES.LeaderBoard,
         component: LeaderBoard,
         showSidebar: true,
-        name: 'Bảng xếp hạng'
+        name: 'Bảng xếp hạng',
+
     },
     {
         title: 'FEIT | Announce',
         href: ROUTES.Announce,
         component: Announce,
         showSidebar: true,
-        name: 'Thông báo'
+        name: 'Thông báo',
+
     },
     {
         title: 'FEIT | History',
         href: ROUTES.History,
         component: History,
         showSidebar: true,
-        name: 'Lịch sử'
+        name: 'Lịch sử',
+
     },
     {
         title: 'FEIT | Profile',
         href: ROUTES.Profile,
         component: Profile,
         showSidebar: true,
-        name: 'Tài khoản'
+        name: 'Tài khoản',
+
     },
     {
         title: 'FEIT | Welcome',
@@ -121,27 +128,52 @@ export const publicRouter = [
 
 const privateRouter = [{}]
 
-const routerList = [
-    {
-        title: 'FEIT',
-        href: ROUTES.LandingPge,
-        component: LandingPage,
-        showSidebar: true,
-        name: ''
-    },
+export const routerList = [
     {
         title: 'FEIT',
         href: ROUTES.HomePage,
         component: HomePage,
-        showSidebar: true,
-        name: ''
+        name: 'Trang chủ',
+        icon: IconLaptop,
     },
     {
-        title: 'Sign Up | FEIT',
-        href: ROUTES.SignUp,
-        component: SignUp,
-        showSidebar: true,
-        name: ''
+        title: 'FEIT | Learn',
+        href: ROUTES.Learn,
+        component: Learn,
+        name: 'Học tập',
+        icon: IconLaptop,
+
     },
+    {
+        title: 'FEIT | LeaderBoard',
+        href: ROUTES.LeaderBoard,
+        component: LeaderBoard,
+        name: 'Bảng xếp hạng',
+        icon: IconLaptop,
+
+    },
+    {
+        title: 'FEIT | Announce',
+        href: ROUTES.Announce,
+        component: Announce,
+        name: 'Thông báo',
+        icon: IconLaptop,
+
+    },
+    {
+        title: 'FEIT | History',
+        href: ROUTES.History,
+        component: History,
+        name: 'Lịch sử',
+        icon: IconLaptop,
+    },
+    {
+        title: 'FEIT | Profile',
+        href: ROUTES.Profile,
+        component: Profile,
+        name: 'Tài khoản',
+        icon: IconLaptop,
+    },
+
 ]
 export default routerList

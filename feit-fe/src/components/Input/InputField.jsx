@@ -1,7 +1,7 @@
 import { tv } from 'tailwind-variants';
 
 export const inputVariant = tv({
-    base: 'py-5 pl-3 placeholder-[#AFB1B6] border border-[#AFB1B6] outline-none rounded-xl',
+    base: 'block w-full border border-secondary-gray rounded-lg p-3',
     variants: {
         color: {
             success: 'border-2 border-green-500 ',
@@ -10,14 +10,16 @@ export const inputVariant = tv({
     },
 });
 
-export const InputField = ({ className, placeholder, status }) => {
+export const InputField = ({ className, placeholder, status, value, onChange, type = 'text' }) => {
     return (
         <input
-            className={`  ${className} ${inputVariant({
+            className={`${className} ${inputVariant({
                 color: status,
             })}`}
-            type="text"
+            value={value}
+            onChange={onChange}
             placeholder={placeholder}
+            type={type}
         />
     );
 };
