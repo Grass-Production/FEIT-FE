@@ -42,3 +42,5 @@ input[type="checkbox"]::before {
 input[type="checkbox"]:checked::before {
   background-color: #007bff; /* Màu nền khi checkbox được chọn */
 }
+
+

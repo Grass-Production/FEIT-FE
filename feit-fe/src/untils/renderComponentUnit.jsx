@@ -1,7 +1,7 @@
 import 'animate.css';
 
 // Hàm render các bài học trong unit.jsx
-export const RenderComponentUnit = ({ listen, example, fillInTheBlank, count }) => {
+export const RenderComponentUnit = ({ listen, example, fillInTheBlank, count, test }) => {
     let componentToRender;
 
     switch (count) {
@@ -13,6 +13,9 @@ export const RenderComponentUnit = ({ listen, example, fillInTheBlank, count }) 
             break;
         case 2:
             componentToRender = <div className="animate__animated wow animate__fadeIn">{fillInTheBlank}</div>;
+            break;
+        case 3:
+            componentToRender = <div className="animate__animated wow animate__fadeIn">{test}</div>;
             break;
         default:
             componentToRender = <div>Default Component</div>;

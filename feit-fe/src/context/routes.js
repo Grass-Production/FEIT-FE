@@ -1,6 +1,7 @@
 import { lazy } from "react";
 
-import IconLaptop from "../svgs/IconLaptop";
+
+import { IconLaptop, IconHouse, IconBell, IconList, IconChartBar, IconSearch, IconUser, IconClockClockwise } from "../svgs";
 
 const Announce = lazy(() => import("../pages/Announce"))
 const History = lazy(() => import("../pages/History"))
@@ -14,6 +15,8 @@ const SignUp = lazy(() => import("../pages/SignUp"))
 const Welcome = lazy(() => import("../pages/Welcome"))
 const Unit = lazy(() => import("../pages/Unit"))
 const Learn = lazy(() => import("../pages/Learn"))
+const List = lazy(() => import("../pages/List"))
+const Search = lazy(() => import("../pages/Search"))
 
 
 
@@ -30,7 +33,9 @@ export const ROUTES = {
     SignIn: '/signIn',
     SignUp: '/signUp',
     Welcome: '/welcome',
-    Unit: '/learn/lesson/:lessonid/unit/:unitid'
+    Unit: '/learn/lesson/:lessonid/unit/:unitid',
+    List: '/list',
+    Search: '/search',
 }
 
 export const publicRouter = [
@@ -47,6 +52,13 @@ export const publicRouter = [
         component: Learn,
         showSidebar: true,
         name: 'Học tập',
+    },
+    {
+        title: 'FEIT | Search',
+        href: ROUTES.Search,
+        component: Search,
+        showSidebar: true,
+        name: 'Học tập',
 
     },
     {
@@ -54,8 +66,6 @@ export const publicRouter = [
         href: ROUTES.LessonDetail,
         component: LessonDetail,
         showSidebar: true,
-
-
     },
     {
         title: 'FEIT | Unit',
@@ -76,6 +86,14 @@ export const publicRouter = [
         component: Announce,
         showSidebar: true,
         name: 'Thông báo',
+
+    },
+    {
+        title: 'FEIT | List',
+        href: ROUTES.List,
+        component: List,
+        showSidebar: true,
+        name: 'List',
 
     },
     {
@@ -134,7 +152,7 @@ export const routerList = [
         href: ROUTES.HomePage,
         component: HomePage,
         name: 'Trang chủ',
-        icon: IconLaptop,
+        icon: IconHouse,
     },
     {
         title: 'FEIT | Learn',
@@ -145,11 +163,19 @@ export const routerList = [
 
     },
     {
+        title: 'FEIT | Search',
+        href: ROUTES.Search,
+        component: Search,
+        name: 'Tìm kiếm',
+        icon: IconSearch,
+
+    },
+    {
         title: 'FEIT | LeaderBoard',
         href: ROUTES.LeaderBoard,
         component: LeaderBoard,
         name: 'Bảng xếp hạng',
-        icon: IconLaptop,
+        icon: IconChartBar,
 
     },
     {
@@ -157,7 +183,7 @@ export const routerList = [
         href: ROUTES.Announce,
         component: Announce,
         name: 'Thông báo',
-        icon: IconLaptop,
+        icon: IconBell,
 
     },
     {
@@ -165,14 +191,21 @@ export const routerList = [
         href: ROUTES.History,
         component: History,
         name: 'Lịch sử',
-        icon: IconLaptop,
+        icon: IconClockClockwise,
+    },
+    {
+        title: 'FEIT | List',
+        href: ROUTES.List,
+        component: List,
+        name: 'Danh sách',
+        icon: IconList,
     },
     {
         title: 'FEIT | Profile',
         href: ROUTES.Profile,
         component: Profile,
         name: 'Tài khoản',
-        icon: IconLaptop,
+        icon: IconUser,
     },
 
 ]

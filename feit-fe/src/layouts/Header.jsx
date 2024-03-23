@@ -1,7 +1,8 @@
 import { Link, NavLink } from 'react-router-dom';
-import { IconArrowLogin } from '../svgs/IconArrowLogin';
 import { useState, useEffect } from 'react';
 import { Button } from '../components';
+
+import { IconArrowLogin, LogoFEIT } from '../svgs';
 
 export const Header = () => {
     const [scrolled, setScrolled] = useState(false);
@@ -30,7 +31,7 @@ export const Header = () => {
             }>
             <div className="flex px-32 py-3 justify-between items-center ">
                 <div className="">
-                    <img className=" max-w-[252px] max-h-[114px]" src="src/assets/images/img-logo-2.jpg" alt="" />
+                    <LogoFEIT />
                 </div>
 
                 <div className=" flex items-center  justify-between">

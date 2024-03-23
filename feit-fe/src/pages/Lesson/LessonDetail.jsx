@@ -7,6 +7,7 @@ import { getUnits } from '../../services/unitAPI';
 import { NavLink } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { IconArrowUpLeft } from '../../svgs';
 export default function LessonDetail({ name }) {
     const [units, setUnits] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -18,7 +19,7 @@ export default function LessonDetail({ name }) {
             try {
                 const res = await getUnits();
                 const data = res.filter((value) => {
-                    return value.Lesson._id === lessonid;
+                    return value.lesson_id === lessonid;
                 });
                 setUnits(data);
                 setLoading(!loading);
@@ -36,7 +37,7 @@ export default function LessonDetail({ name }) {
         dots: true,
         lazyLoad: true,
         slidesToShow: 3,
-        slidesToScroll: 3,
+        slidesToScroll: 1,
         initialSlide: 0,
         arrows: false,
         responsive: [
@@ -69,33 +70,50 @@ export default function LessonDetail({ name }) {
         ],
     };
     return (
-        <div className="px-10 py-9 h-[90vh]">
+        <div className="px-10">
             <NavLink to="/learn">
-                <Button title="<"></Button>
+                <IconArrowUpLeft size="40" className={' mt-8 rounded-md border border-secondary-gray'} />
             </NavLink>
-            <div className=" h-full flex justify-between items-center">
-                <div className=" mr-8">
-                    <h1 className=" mb-2">Lập trình</h1>
-                    <p>Đây là các từ vựng nền tảng trong ngành IT.</p>
+            <div className=" flex flex-col  ">
+                <div className=" flex justify-center mb-20 ">
+                    <div className=" w-2/5 ">
+                        <h1 className=" text-center text-heading-2 font-heading-2 font-bitter text-primary-black">
+                            Lập trình
+                        </h1>
+                        <p className=" text-center text-body-1 font-body-1 font-plusjakartasans text-primary-black">
+                            Đây là các từ vựng nền tảng trong ngành IT. Bạn hãy học thật tập trung và kỹ càng bạn nhé.
+                            Chúc bạn học tập tốt.
+                        </p>
+                    </div>
                 </div>
-                <div className=" w-[80%]">
-                    <Slider {...settings} className=" mr-8">
-                        {/* <NavLink to="/learn/lesson/:lessonname/unit/:unitid">
-                            <UnitCard />
-                        </NavLink> */}
-                        {loading ? (
-                            <>
-                                <UnitCardLoad />
-                            </>
-                        ) : (
-                            <>
-                                {units.map((unit) => {
-                                    return <UnitCard key={unit.id} />;
-                                })}
-                            </>
-                        )}
+                {loading ? (
+                    <Slider {...settings}>
+                        <div className="px-3">
+                            <UnitCardLoad />
+                        </div>
+                        <div className="px-3">
+                            <UnitCardLoad />
+                        </div>
+                        <div className="px-3">
+                            <UnitCardLoad />
+                        </div>
                     </Slider>
-                </div>
+                ) : (
+                    <Slider {...settings}>
+                        {units.map((unit) => {
+                            return (
+                                <div key={unit._id} className=" px-3">
+                                    <UnitCard
+                                        lessonid={unit.lesson_id}
+                                        unitid={unit._id}
+                                        name={unit.name}
+                                        percent={unit.is_complete}
+                                    />
+                                </div>
+                            );
+                        })}
+                    </Slider>
+                )}
             </div>
         </div>
     );

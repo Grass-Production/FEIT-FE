@@ -1,6 +1,6 @@
 export const Listen = ({ word, mean }) => {
     return (
-        <div className=" w-[56.563rem] h-[80vh] flex flex-col justify-around items-center">
+        <div className=" w-[56.563rem] max-h-[500px] h-[60vh] flex flex-col justify-around items-center">
             <div>
                 <h1 className=" text-center text-Dmd">Hãy nhấn để nghe từ vựng</h1>
                 <h1 className=" text-center text-Hsm">Hãy nhấn vào biểu tượng âm thanh để nghe từ vựng nha !</h1>

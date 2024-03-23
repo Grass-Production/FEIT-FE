@@ -1,11 +1,16 @@
-export const LessonCard = ({ name = null, img = '' }) => {
+export const LessonCard = ({ name = null, img = '/src/assets/images/img-card.jpg' }) => {
     return (
-        <div className="">
+        <div className=" ">
             <div className="">
-                <div className=" h-80 overflow-hidden rounded-lg  ">
-                    <img className="object-cover" src="/src/assets/images/img-card.jpg" alt="" />
+                <div
+                    className={` max-h-72 bg-no-repeat bg-contain bg-center bg-[url(${img})] h-72 overflow-hidden rounded-lg `}>
+                    {/* <img className="object-cover" src="/src/assets/images/img-card.jpg" alt="" /> */}
                 </div>
-                {name !== null && <h1 className="mt-3 text-Hlg mb-3">{name}</h1>}
+                {name !== null && (
+                    <h1 className="truncate overflow-hidden whitespace-nowrap mt-3 text-heading-7 font-plusjakartasans font-heading-7 text-primary-black mb-3">
+                        {name}
+                    </h1>
+                )}
             </div>
         </div>
     );

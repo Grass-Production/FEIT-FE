@@ -12,9 +12,14 @@ export default ({
         bitter: ['Bitter', 'sans-serif'],
         plusjakartasans: ['Plus Jakarta Sans', 'sans-serif'],
       },
+      boxShadow: {
+        'card-home': '4px 4px 0px 0px #14121BCC'
+
+      },
       colors: {
         'white': '#FBFBFB',
         primary: {
+          'blue-50': '#E7EEFF',
           'blue-400': '#3C79FE',
           'blue-500': '#0B58FE',
           'blue-800': '#06308C',
@@ -28,8 +33,8 @@ export default ({
         },
         semantic: {
           'danger': '#E72E0A',
-          'success': '#E1C536',
-          'warning': '#0FBDA8',
+          'warning': '#E1C536',
+          'success': '#0FBDA8',
         },
         foundation: {
           'violet-600': '#2B283A'
@@ -87,7 +92,7 @@ export default ({
         'heading-4': '700',
         'heading-5': '700',
         'heading-6': '700',
-        'heading-7': '800',
+        'heading-7': '700',
 
         'body-1': '400',
         'body-2': '400',

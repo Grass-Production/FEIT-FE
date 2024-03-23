@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { FacebookLogo, InstagramLogo, EmailLogo } from '../svgs';
+import { FacebookLogo, InstagramLogo, EmailLogo, LogoFEIT } from '../svgs';
 
 export const Footer = () => {
     return (
@@ -7,7 +7,7 @@ export const Footer = () => {
             <div className="pl-120px pt-6 flex items-start justify-between">
                 <div className="  w-1/2">
                     <div className="">
-                        <img className=" max-w-[252px] max-h-[114px]" src="src/assets/images/img-logo-2.jpg" alt="" />
+                        <LogoFEIT />
                     </div>
                     <div className=" flex gap-3">
                         <FacebookLogo />
