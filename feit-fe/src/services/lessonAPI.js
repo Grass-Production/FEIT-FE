@@ -6,5 +6,5 @@ export const getLessons = async () => {
             "Content-Type": "application / json"
         }
     })
-    return res.data.lesson
+    return res.data.lesson.data
 }

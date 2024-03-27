@@ -3,7 +3,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { UnitCard, UnitCardLoad } from './component';
 import { Button } from '../../components';
-import { getUnits } from '../../services/unitAPI';
+import { getUnits, getUnitByIdLesson } from '../../services/unitAPI';
 import { NavLink } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -17,12 +17,12 @@ export default function LessonDetail({ name }) {
     useEffect(() => {
         async function fetchData() {
             try {
-                const res = await getUnits();
-                const data = res.filter((value) => {
-                    return value.lesson_id === lessonid;
-                });
-                setUnits(data);
+                const res = await getUnitByIdLesson(lessonid);
+                if (res === null || res === '') {
+                    return;
+                }
                 setLoading(!loading);
+                setUnits(res);
                 console.log(res);
             } catch (error) {
                 console.log(error);
@@ -108,6 +108,7 @@ export default function LessonDetail({ name }) {
                                         unitid={unit._id}
                                         name={unit.name}
                                         percent={unit.is_complete}
+                                        checkprocess={false}
                                     />
                                 </div>
                             );

@@ -16,3 +16,8 @@ export async function get(path, config) {
     const init = { method: 'get', ...config }
     return http(path, init)
 }
+
+export async function post(path, body, config) {
+    const init = { method: "post", body: JSON.stringify(body), ...config }
+    return await http(path, init)
+}

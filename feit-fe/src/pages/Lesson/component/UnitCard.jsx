@@ -1,7 +1,14 @@
 import { NavLink } from 'react-router-dom';
 import { LoadingProgressBar, Button } from '../../../components';
 
-export const UnitCard = ({ img = '/src/assets/images/img-card.jpg', name = 'Chương 1', percent, lessonid, unitid }) => {
+export const UnitCard = ({
+    img = '/src/assets/images/img-card.jpg',
+    name = 'Chương 1',
+    percent,
+    lessonid,
+    unitid,
+    checkprocess,
+}) => {
     return (
         <div className=" p-6 border border-secondary-gray hover:bg-background-able bg-background-disable active:bg-background-disable hover:border-primary-blue-400 active:border-primary-blue-400 rounded-[40px]">
             <div className=" ">
@@ -14,7 +21,7 @@ export const UnitCard = ({ img = '/src/assets/images/img-card.jpg', name = 'Chư
                     Đã học 0 / 0 bài học
                 </p>
                 <LoadingProgressBar className={'mb-2 h-2'} percent={percent} />
-                <NavLink to={`/learn/lesson/${lessonid}/unit/${unitid}`}>
+                <NavLink to={checkprocess ? '/' : `/learn/lesson/${lessonid}/unit/${unitid}`}>
                     <Button icon={false} className=" w-full py-6" title="Bắt đầu" color={'primary'}></Button>
                 </NavLink>
             </div>
@@ -26,7 +33,7 @@ export const UnitCardLoad = () => {
     return (
         <div className="">
             <div className="">
-                <div className=" h-80 bg-gray-300  overflow-hidden rounded-lg mb-3 "></div>
+                <div className=" h-80 bg-gray-300 animate-pulse  overflow-hidden rounded-lg mb-3 "></div>
             </div>
         </div>
     );

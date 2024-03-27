@@ -32,7 +32,7 @@ export default function Learn() {
     }, []);
 
     return (
-        <div className=" pl-10">
+        <div className=" px-10">
             <h1 className=" mt-7 text-heading-6 font-plusjakartasans font-heading-6 text-primary-black mb-8">
                 Chủ đề của bạn
             </h1>

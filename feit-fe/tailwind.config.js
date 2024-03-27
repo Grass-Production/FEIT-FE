@@ -13,8 +13,9 @@ export default ({
         plusjakartasans: ['Plus Jakarta Sans', 'sans-serif'],
       },
       boxShadow: {
-        'card-home': '4px 4px 0px 0px #14121BCC'
-
+        'card-home': '4px 4px 0px 0px #14121BCC',
+        'active-button': '6px 6px 0px 0px #0B58FE',
+        'success-button': '6px 6px 0px 0px #11D0B9',
       },
       colors: {
         'white': '#FBFBFB',

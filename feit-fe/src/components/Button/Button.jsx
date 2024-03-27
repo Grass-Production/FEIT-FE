@@ -8,7 +8,8 @@ export const buttonVariants = tv({
                 'bg-white text-button-1 font-button-1 border border-primary-blue-500 text-primary-blue-500  hover:bg-[#3C79FE] hover:text-white active:text-white active:bg-[#0A50E7]',
             secondary:
                 'bg-white  text-button-1 font-button-1 border border-[#74727F] text-primary-blue-500 hover:border-primary-blue-500 active:bg-[#85C8FF]',
-            success: 'bg-green-500  hover:bg-green-700',
+            success:
+                'bg-white text-button-1 shadow-success-button font-button-1 border-[4px] border-semantic-success text-primary-blue-500 ',
 
             tertiary:
                 'bg-white  text-button-1 font-button-1 text-primary-black hover:bg-[#BFBEC4] active:text-white active:text-primary-blue-500',
@@ -20,7 +21,9 @@ export const buttonVariants = tv({
             tertiaryicon:
                 'bg-[#BFBEC4]  text-button-1 font-button-1 text-primary-black hover:bg-[#9F9EA7] active:text-white active:bg-[#3C79FE]',
         },
-
+        active: {
+            true: 'bg-white text-button-1 shadow-active-button font-button-1 border-[4px] border-primary-blue-500 text-primary-blue-500  hover:bg-[#3C79FE] hover:text-white active:text-white active:bg-[#0A50E7]',
+        },
         disabled: {
             true: 'bg-[#F6F6F6] text-button-1 font-button-1 text-secondary-gray',
         },
@@ -34,6 +37,7 @@ export const buttonVariants = tv({
 export const Button = ({
     children,
     disabled,
+    active,
     icon = false,
     left = false,
     right = false,
@@ -41,14 +45,17 @@ export const Button = ({
     title = 'Button',
     onClick = null,
     className = '',
+    id = '',
 }) => {
     return (
         <button
+            id={id}
             onClick={onClick}
-            className={`${className} ${buttonVariants({
+            className={`${className} bg-semantic-success  ${buttonVariants({
                 color: color,
                 type: icon ? 'left' : 'none',
                 disabled: disabled,
+                active: active,
             })}`}>
             {left === icon && children}
             {title}

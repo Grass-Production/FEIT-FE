@@ -30,7 +30,11 @@ export default function SignUp() {
                     </div>
                 </div>
                 <div className=" w-1/2 flex items-center h-screen bg-center bg-no-repeat bg-cover bg-[url('')]">
-                    <img className=" w-3/4 m-auto" src="src/assets/images/img-signup.png" alt="" />
+                    <img
+                        className=" w-full m-auto"
+                        src="https://res.cloudinary.com/df4zm1xjy/image/upload/v1711250571/feit-static/%C4%90%C4%83ng%20k%C3%BD.png.png"
+                        alt=""
+                    />
                 </div>
             </div>
         </div>

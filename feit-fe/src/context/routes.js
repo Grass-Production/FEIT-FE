@@ -25,7 +25,7 @@ export const ROUTES = {
     Announce: '/announce',
     History: '/history',
     HomePage: '/',
-    LandingPage: '/about',
+    LandingPage: '/',
     LeaderBoard: '/leaderboard',
     Learn: '/learn',
     LessonDetail: '/learn/lesson/:lessonid',
@@ -39,6 +39,38 @@ export const ROUTES = {
 }
 
 export const publicRouter = [
+    {
+        title: 'FEIT | Welcome',
+        href: ROUTES.Welcome,
+        component: Welcome,
+        showSidebar: false,
+
+    },
+    {
+        title: 'FEIT',
+        href: ROUTES.LandingPage,
+        component: LandingPage,
+        showSidebar: false,
+
+    },
+
+    {
+        title: 'FEIT | Sign Up',
+        href: ROUTES.SignUp,
+        component: SignUp,
+        showSidebar: false,
+
+    },
+    {
+        title: 'FEIT | Sign In',
+        href: ROUTES.SignIn,
+        component: SignIn,
+        showSidebar: false,
+    },
+]
+
+
+export const privateRouter = [
     {
         title: 'FEIT',
         href: ROUTES.HomePage,
@@ -142,9 +174,6 @@ export const publicRouter = [
 
     },
 ]
-
-
-const privateRouter = [{}]
 
 export const routerList = [
     {

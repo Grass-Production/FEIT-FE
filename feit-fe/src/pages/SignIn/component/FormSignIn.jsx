@@ -8,14 +8,14 @@ export const FormSignIn = ({ account, setAccount, password, setPassword, onClick
                 placeholder={'Email hoặc số điện thoại'}
                 className={' mb-6'}
                 valueName={account}
-                onChangeName={(e) => setAccount(e.target.value)}
+                onChange={setAccount}
             />
             <Form
                 label={'Mật khẩu'}
                 placeholder={'Tạo mật khẩu '}
                 className={' mb-6'}
                 valueName={password}
-                onChangeName={(e) => setPassword(e.target.value)}
+                onChange={setPassword}
             />
             <div className=" flex justify-between mb-9">
                 <InputSection label="Nhớ mật khẩu" />
@@ -25,7 +25,7 @@ export const FormSignIn = ({ account, setAccount, password, setPassword, onClick
             </div>
             <div className=" flex justify-center ">
                 <Button
-                    onClick={onclick}
+                    onClick={onClick}
                     title="Đăng nhập"
                     color={'tertiaryicon'}
                     className=" w-full py-4"
