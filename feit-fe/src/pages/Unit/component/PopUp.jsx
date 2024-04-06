@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { Button } from '../../../components';
 import 'animate.css';
+import { IconSpeakerHigh, IconHeart, IconPlusCircle } from '../../../svgs';
 
-export const PopUp = ({ OnClose }) => {
+export const PopUp = ({ OnClose, work, partofspeech, pronunciation, example }) => {
     return (
         <div className="">
             <div className="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -10,42 +11,79 @@ export const PopUp = ({ OnClose }) => {
 
                 <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
                     <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-                        <div className="relative max-h-[95vh] min-h-[90vh] flex flex-col justify-between transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:w-full sm:max-w-5xl">
-                            <div className=" flex justify-between items-center px-8 py-4 border-b border-black">
-                                <h1>Giải thích từ vựng</h1>
-                                <Button></Button>
+                        <div className="relative max-h-[95vh] min-h-[90vh] flex flex-col justify-between transform overflow-hidden rounded-lg bg-gray-400 text-left shadow-xl transition-all sm:w-full sm:max-w-5xl">
+                            <div className=" flex bg-white justify-between items-center px-8 py-4 border-b border-black">
+                                <h1 className=" text-heading-7 font-heading-7 font-plusjakartasans text-primary-black">
+                                    Giải thích từ vựng
+                                </h1>
+                                <Button title="X"></Button>
                             </div>
-                            <div className=" flex justify-around items-center">
-                                <div className=" w-2/5">
-                                    <h1 className=" mb-3">Tiếng anh</h1>
-                                    <div className=" flex justify-start items-center gap-3 mb-10">
-                                        <div className="w-16 h-16 rounded-full  bg-gray-500"></div>
-                                        <h1 className=" text-Dmd font-medium">Algorithm</h1>
+                            <div className=" flex justify-center h-[50vh] max-h-[60] gap-3 items-center">
+                                <div className=" w-1/3 border h-full bg-white border-secondary-gray px-6 py-3 rounded-3xl">
+                                    <h1 className=" mb-5 text-caption-1 font-caption-1 font-plusjakartasans text-primary-black">
+                                        Tiếng anh
+                                    </h1>
+                                    <div className=" flex justify-start items-center gap-3 mb-4">
+                                        <IconSpeakerHigh />
+                                        <h1 className=" text-heading-6 font-heading-6 font-plusjakartasans text-primary-blue-800 ">
+                                            {work}
+                                        </h1>
                                     </div>
-                                    <div className=" mb-8">
-                                        <h1 className=" mb-3 font-medium text-lg">Loại từ</h1>
-                                        <h1 className=" text-Hsm font-medium">Danh từ (Noun)</h1>
+                                    <div className=" mb-5">
+                                        <h1 className=" mb-2 text-caption-1 font-caption-1 font-plusjakartasans text-secondary-gray">
+                                            Loại từ
+                                        </h1>
+                                        <h1 className=" text-body-3 font-body-3 font-plusjakartasans text-primary-black">
+                                            {partofspeech}
+                                        </h1>
                                     </div>
-                                    <div className=" mb-8">
-                                        <h1 className="mb-3 font-medium text-lg">Phiên âm</h1>
-                                        <h1 className=" text-Hsm font-medium">/ˈæl.ɡə.rɪ.ðəm/</h1>
+                                    <div className=" mb-5">
+                                        <h1 className="mb-2 text-caption-1 font-caption-1 font-plusjakartasans text-secondary-gray">
+                                            Phiên âm
+                                        </h1>
+                                        <h1 className=" text-body-3 font-body-3 font-plusjakartasans text-primary-black">
+                                            {pronunciation}
+                                        </h1>
                                     </div>
                                     <div className="">
-                                        <h1 className="mb-3 font-medium text-lg">Ý nghĩa</h1>
-                                        <h1 className=" text-Hsm font-medium">
-                                            Một tập hợp các bước để giải quyết một vấn đề cụ thể hoặc thực hiện một
-                                            nhiệm vụ cụ thể.
+                                        <h1 className="mb-2 text-caption-1 font-caption-1 font-plusjakartasans text-secondary-gray">
+                                            Ý nghĩa
+                                        </h1>
+                                        <h1 className=" text-body-3 font-body-3 font-plusjakartasans text-primary-black">
+                                            {example}
                                         </h1>
                                     </div>
                                 </div>
-                                <div className=" w-2/5">
-                                    <h1 className=" mb-3 font-medium text-lg text-end">Video phát âm</h1>
-                                    <div className=" mx-auto w-[25rem] h-[25rem] rounded-sm bg-gray-500"></div>
+                                <div className=" w-2/5 h-full border bg-white border-secondary-gray px-6 py-3 rounded-3xl">
+                                    <h1 className=" mb-2 text-caption-1 font-caption-1 font-plusjakartasans text-secondary-gray text-end">
+                                        Video phát âm
+                                    </h1>
+                                    <img
+                                        className=" w-full rounded-3xl"
+                                        src="https://res.cloudinary.com/df4zm1xjy/image/upload/v1711464162/feit-static/Ch%C6%B0%C6%A1ng%208.png.png"
+                                        alt=""
+                                    />
+                                    {/* <div className=" mx-auto w-[100%] rounded-3xl bg-gray-500"></div> */}
                                 </div>
                             </div>
-                            <div className=" flex justify-around px-8 py-4 gap-3 border-t">
-                                <Button onClick={OnClose} title="Đóng" className=" w-full"></Button>
-                                <Button title="Thêm vào danh sách" className=" w-full"></Button>
+                            <div className=" flex bg-white justify-around px-8 py-4 gap-8 border-t">
+                                <Button
+                                    onClick={OnClose}
+                                    icon={true}
+                                    right={true}
+                                    color={'primary'}
+                                    title="Thêm vào yêu thích"
+                                    className=" w-1/2 py-4">
+                                    <IconHeart />
+                                </Button>
+                                <Button
+                                    title="Thêm vào danh sách"
+                                    icon={true}
+                                    color={'primary'}
+                                    right={true}
+                                    className=" w-1/2 py-4">
+                                    <IconPlusCircle />
+                                </Button>
                             </div>
                         </div>
                     </div>

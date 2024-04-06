@@ -11,6 +11,8 @@ export const buttonVariants = tv({
             success:
                 'bg-white text-button-1 shadow-success-button font-button-1 border-[4px] border-semantic-success text-primary-blue-500 ',
 
+            error: 'bg-white text-button-1 shadow-error-button font-button-1 border-[4px] border-semantic-danger text-primary-blue-500 ',
+
             tertiary:
                 'bg-white  text-button-1 font-button-1 text-primary-black hover:bg-[#BFBEC4] active:text-white active:text-primary-blue-500',
 
@@ -22,6 +24,7 @@ export const buttonVariants = tv({
                 'bg-[#BFBEC4]  text-button-1 font-button-1 text-primary-black hover:bg-[#9F9EA7] active:text-white active:bg-[#3C79FE]',
         },
         active: {
+            false: 'error',
             true: 'bg-white text-button-1 shadow-active-button font-button-1 border-[4px] border-primary-blue-500 text-primary-blue-500  hover:bg-[#3C79FE] hover:text-white active:text-white active:bg-[#0A50E7]',
         },
         disabled: {
@@ -51,7 +54,7 @@ export const Button = ({
         <button
             id={id}
             onClick={onClick}
-            className={`${className} bg-semantic-success  ${buttonVariants({
+            className={`${className}   ${buttonVariants({
                 color: color,
                 type: icon ? 'left' : 'none',
                 disabled: disabled,

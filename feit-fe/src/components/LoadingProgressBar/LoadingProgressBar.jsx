@@ -1,7 +1,7 @@
 import { tv } from 'tailwind-variants';
 
 export const buttonVariants = tv({
-    base: 'flex flex-col justify-center rounded-full overflow-hidden bg-semantic-success text-xs text-white text-center whitespace-nowrap transition duration-500 dark:bg-primary-blue-500',
+    base: 'flex flex-col justify-center rounded-full overflow-hidden bg-foundation-brightcyan-700 text-xs text-white text-center whitespace-nowrap transition duration-500 dark:bg-primary-blue-500',
 });
 
 export const LoadingProgressBar = ({ percent, className }) => {

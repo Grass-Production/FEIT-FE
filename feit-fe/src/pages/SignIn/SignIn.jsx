@@ -3,9 +3,14 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import { OAuthGoogle } from '../../features';
 import { FormSignIn } from './component';
 import { useState } from 'react';
+// import { useHistory } from 'react-router-dom';
+
 // import { Login } from '../../services/loginAPI';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 export default function SignIn() {
+    // const history = useHistory();
     const [account, setAccount] = useState('');
     const [password, setPassword] = useState('');
     const callApi = async () => {
@@ -25,7 +30,6 @@ export default function SignIn() {
                 account,
                 password,
             });
-            console.log('hehe');
             return res;
         } catch (error) {
             console.log(error);
@@ -47,6 +51,7 @@ export default function SignIn() {
             console.error('Error:', error);
         }
     };
+    const navigate = useNavigate();
     const Login = async (account, password) => {
         // const axiosInstance = axios.create({
         //     withCredentials: true,
@@ -65,8 +70,9 @@ export default function SignIn() {
             );
             console.log(response);
             if (response.status === 200) {
-                // Đăng nhập thành công, xử lý phản hồi ở đây (ví dụ: lưu token vào localStorage)
-                localStorage.setItem('isLoggedIn', JSON.stringify(true));
+                // history.push('/');
+                navigate(`/`);
+                window.location.reload();
                 console.log('Login successful');
             } else {
                 // Đăng nhập không thành công, xử lý phản hồi ở đây
@@ -107,7 +113,7 @@ export default function SignIn() {
                         <h1 className=" mt-10 text-center mb-5 text-caption-1 font-bitter text-secondary-gray font-caption-1">
                             Hoặc đăng nhập bằng
                         </h1>
-                        <button onClick={DangXuat}>Dang xaut</button>
+
                         <FormSignIn
                             onClick={() => Login(account, password)}
                             account={account}

@@ -16,6 +16,8 @@ export default ({
         'card-home': '4px 4px 0px 0px #14121BCC',
         'active-button': '6px 6px 0px 0px #0B58FE',
         'success-button': '6px 6px 0px 0px #11D0B9',
+        'error-button': '6px 6px 0px 0px #FE330B',
+
       },
       colors: {
         'white': '#FBFBFB',
@@ -23,6 +25,7 @@ export default ({
           'blue-50': '#E7EEFF',
           'blue-400': '#3C79FE',
           'blue-500': '#0B58FE',
+          'blue-700': '#083EB4',
           'blue-800': '#06308C',
           'black': '#1A1823'
         },
@@ -38,7 +41,8 @@ export default ({
           'success': '#0FBDA8',
         },
         foundation: {
-          'violet-600': '#2B283A'
+          'violet-600': '#2B283A',
+          'brightcyan-700': '#7AAC9E'
         },
         background: {
           'able': '#FBFBFB',

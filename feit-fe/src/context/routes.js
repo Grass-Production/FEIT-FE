@@ -3,6 +3,7 @@ import { lazy } from "react";
 
 import { IconLaptop, IconHouse, IconBell, IconList, IconChartBar, IconSearch, IconUser, IconClockClockwise } from "../svgs";
 
+
 const Announce = lazy(() => import("../pages/Announce"))
 const History = lazy(() => import("../pages/History"))
 const HomePage = lazy(() => import("../pages/HomePage"))
@@ -14,6 +15,7 @@ const SignIn = lazy(() => import("../pages/SignIn"))
 const SignUp = lazy(() => import("../pages/SignUp"))
 const Welcome = lazy(() => import("../pages/Welcome"))
 const Unit = lazy(() => import("../pages/Unit"))
+const UnitReview = lazy(() => import("../pages/UnitReview"))
 const Learn = lazy(() => import("../pages/Learn"))
 const List = lazy(() => import("../pages/List"))
 const Search = lazy(() => import("../pages/Search"))
@@ -34,6 +36,7 @@ export const ROUTES = {
     SignUp: '/signUp',
     Welcome: '/welcome',
     Unit: '/learn/lesson/:lessonid/unit/:unitid',
+    UnitReview: '/learn/lesson/:lessonid/unitreview/:unitreview',
     List: '/list',
     Search: '/search',
 }
@@ -51,15 +54,12 @@ export const publicRouter = [
         href: ROUTES.LandingPage,
         component: LandingPage,
         showSidebar: false,
-
     },
-
     {
         title: 'FEIT | Sign Up',
         href: ROUTES.SignUp,
         component: SignUp,
         showSidebar: false,
-
     },
     {
         title: 'FEIT | Sign In',
@@ -103,6 +103,11 @@ export const privateRouter = [
         title: 'FEIT | Unit',
         href: ROUTES.Unit,
         component: Unit,
+    },
+    {
+        title: 'FEIT | Unit',
+        href: ROUTES.UnitReview,
+        component: UnitReview,
     },
     {
         title: 'FEIT | LeaderBoard',
@@ -173,6 +178,7 @@ export const privateRouter = [
         showSidebar: false,
 
     },
+
 ]
 
 export const routerList = [

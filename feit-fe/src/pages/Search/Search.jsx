@@ -31,7 +31,7 @@ export default function Search() {
                         title={a.title}
                         color={'success'}
                         className={'w-96'}
-                        // active={index === i}
+                        active={index === i}
                         onClick={() => setIndexNe(i)}
                         icon={false}></Button>
                 );

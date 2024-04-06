@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 import { LoadingProgressBar, Button } from '../../../components';
 
 export const UnitCard = ({
-    img = '/src/assets/images/img-card.jpg',
+    img = 'https://res.cloudinary.com/df4zm1xjy/image/upload/v1711464162/feit-static/Ch%C6%B0%C6%A1ng%208.png.png',
     name = 'Chương 1',
     percent,
     lessonid,
@@ -12,8 +12,12 @@ export const UnitCard = ({
     return (
         <div className=" p-6 border border-secondary-gray hover:bg-background-able bg-background-disable active:bg-background-disable hover:border-primary-blue-400 active:border-primary-blue-400 rounded-[40px]">
             <div className=" ">
-                <div
-                    className={`  max-h-72 bg-no-repeat bg-contain bg-center bg-[url(${img})] h-[25vh] overflow-hidden rounded-lg `}></div>
+                <div className={`  max-h-72 bg-no-repeat bg-contain bg-center h-[25vh] overflow-hidden rounded-lg `}>
+                    <img
+                        src="https://res.cloudinary.com/df4zm1xjy/image/upload/v1711464162/feit-static/Ch%C6%B0%C6%A1ng%208.png.png"
+                        alt=""
+                    />
+                </div>
                 <h1 className="truncate overflow-hidden whitespace-nowrap mt-3 text-center text-heading-7 font-plusjakartasans font-heading-7 text-primary-black mb-3">
                     {name}
                 </h1>

@@ -1,7 +1,6 @@
 import { publicRouter, privateRouter } from '../context';
 import { createBrowserRouter } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { lazy, useState } from 'react';
 import { Sidebar } from '../layouts';
 import SignIn from '../pages/SignIn';
 import NotFound from '../pages/NotFound';
@@ -33,7 +32,7 @@ const routes = publicRouter.map((route) => {
                 <Helmet>
                     <title>Not Found</title>
                 </Helmet>
-                <NotFound />
+                <SignIn />
             </>
         ),
     };
@@ -65,7 +64,7 @@ const routesPrivate = privateRouter.map((route) => {
                 <Helmet>
                     <title>Not Found</title>
                 </Helmet>
-                <SignIn />
+                <NotFound />
             </>
         ),
     };
