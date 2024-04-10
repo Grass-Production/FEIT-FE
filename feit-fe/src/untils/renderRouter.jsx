@@ -40,13 +40,13 @@ const routes = publicRouter.map((route) => {
 
 const routesPrivate = privateRouter.map((route) => {
     const Page = route.component;
-
+    const title = route.title;
     return {
         path: route.href,
         element: (
             <>
                 <Helmet>
-                    <title>{route.title}</title>
+                    <title>{title}</title>
                 </Helmet>
                 {route.showSidebar ? (
                     <Sidebar show={route.showSidebar}>

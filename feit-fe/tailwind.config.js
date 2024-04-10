@@ -25,6 +25,7 @@ export default ({
           'blue-50': '#E7EEFF',
           'blue-400': '#3C79FE',
           'blue-500': '#0B58FE',
+          'blue-600': '#0A50E7',
           'blue-700': '#083EB4',
           'blue-800': '#06308C',
           'black': '#1A1823'

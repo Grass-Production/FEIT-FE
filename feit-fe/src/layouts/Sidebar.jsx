@@ -42,7 +42,7 @@ export const Sidebar = ({ show, children }) => {
                 </div>
             </div>
             <div className=" relative flex-1 ">
-                <div className=" absolute bg-[#FFFFFF] overflow-y-auto inset-x-0 inset-y-0  ">{children}</div>
+                <div className=" absolute bg-white overflow-y-auto inset-x-0 inset-y-0  ">{children}</div>
             </div>
         </div>
     );

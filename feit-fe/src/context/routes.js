@@ -1,8 +1,7 @@
 import { lazy } from "react";
 
 
-import { IconLaptop, IconHouse, IconBell, IconList, IconChartBar, IconSearch, IconUser, IconClockClockwise } from "../svgs";
-
+import { IconLaptop, IconHouse, IconBell, IconList, IconChartBar, IconSearch, IconUser, IconClockClockwise, IconCrown } from "../svgs";
 
 const Announce = lazy(() => import("../pages/Announce"))
 const History = lazy(() => import("../pages/History"))
@@ -19,8 +18,8 @@ const UnitReview = lazy(() => import("../pages/UnitReview"))
 const Learn = lazy(() => import("../pages/Learn"))
 const List = lazy(() => import("../pages/List"))
 const Search = lazy(() => import("../pages/Search"))
-
-
+const Statistic = lazy(() => import("../pages/Statistic"))
+const ListDetails = lazy(() => import("../pages/ListDetails"))
 
 
 export const ROUTES = {
@@ -39,6 +38,8 @@ export const ROUTES = {
     UnitReview: '/learn/lesson/:lessonid/unitreview/:unitreview',
     List: '/list',
     Search: '/search',
+    Statistic: '/statistic',
+    ListDetails: '/list/:list',
 }
 
 export const publicRouter = [
@@ -126,6 +127,13 @@ export const privateRouter = [
 
     },
     {
+        title: 'FEIT | Statistic',
+        href: ROUTES.Statistic,
+        component: Statistic,
+        showSidebar: true,
+        name: 'Thống kê',
+    },
+    {
         title: 'FEIT | List',
         href: ROUTES.List,
         component: List,
@@ -137,6 +145,14 @@ export const privateRouter = [
         title: 'FEIT | History',
         href: ROUTES.History,
         component: History,
+        showSidebar: true,
+        name: 'Lịch sử',
+
+    },
+    {
+        title: 'FEIT | List',
+        href: ROUTES.ListDetails,
+        component: ListDetails,
         showSidebar: true,
         name: 'Lịch sử',
 
@@ -176,9 +192,7 @@ export const privateRouter = [
         href: ROUTES.SignIn,
         component: SignIn,
         showSidebar: false,
-
     },
-
 ]
 
 export const routerList = [
@@ -220,6 +234,13 @@ export const routerList = [
         name: 'Thông báo',
         icon: IconBell,
 
+    },
+    {
+        title: 'FEIT | Statistic',
+        href: ROUTES.Statistic,
+        component: Statistic,
+        name: 'Thống kê',
+        icon: IconCrown,
     },
     {
         title: 'FEIT | History',

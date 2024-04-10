@@ -6,6 +6,9 @@ export const buttonVariants = tv({
         color: {
             primary:
                 'bg-white text-button-1 font-button-1 border border-primary-blue-500 text-primary-blue-500  hover:bg-[#3C79FE] hover:text-white active:text-white active:bg-[#0A50E7]',
+            primaryerror:
+                'bg-white text-button-1 font-button-1 border border-semantic-danger text-semantic-danger  hover:bg-[#3C79FE] hover:text-white active:text-white active:bg-[#0A50E7]',
+
             secondary:
                 'bg-white  text-button-1 font-button-1 border border-[#74727F] text-primary-blue-500 hover:border-primary-blue-500 active:bg-[#85C8FF]',
             success:
@@ -32,7 +35,7 @@ export const buttonVariants = tv({
         },
         type: {
             none: '',
-            left: ' flex justify-between items-center gap-[6px]',
+            left: ' flex justify-center items-center gap-[6px]',
         },
     },
 });
@@ -53,6 +56,7 @@ export const Button = ({
     return (
         <button
             id={id}
+            disabled={disabled}
             onClick={onClick}
             className={`${className}   ${buttonVariants({
                 color: color,

@@ -12,14 +12,6 @@
 }
 
 
-#contex{
-  transform: translateY(-50%);
-  -webkit-transform: translateY(-50%);
-  top: 50%;
-  transform: scale(2);
-  transform-origin: 0%;
-}
-
 *{
   scroll-behavior: smooth;
 }
