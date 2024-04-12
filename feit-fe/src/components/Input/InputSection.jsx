@@ -4,14 +4,12 @@ export const inputSectionVariants = tv({
     base: ' flex gap-2 items-center',
 });
 
-export const InputSection = ({ type = 'checkbox', label = 'label' }) => {
+export const InputSection = ({ type = 'checkbox', label = 'label', id = '1' }) => {
     return (
-        <div className={' ' + inputSectionVariants({})}>
+        <div className={' ' + +inputSectionVariants({})}>
             <form className="flex justify-between items-center gap-2">
-                <input type={type} className="rounded-full" id="RemenberPass" name="RemenberPass" />
-                <label
-                    className=" block text-body-2 text-primary-black font-body-2 font-plusjakartasans"
-                    htmlFor="RemenberPass">
+                <input type={type} className="rounded-full" id={id} name={id} />
+                <label className=" block text-body-2 text-primary-black font-body-2 font-plusjakartasans" htmlFor={id}>
                     {label}
                 </label>
             </form>

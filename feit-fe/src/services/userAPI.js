@@ -1,11 +1,14 @@
 import { get } from "./fetch";
 
-export const getInforUser = async ({ token }) => {
+const token = localStorage.getItem('myData')
+export const getInforUser = async () => {
     const res = await get('http://localhost:8080/api/user/info', {
-        header: {
-            "Content-Type": "application / json",
+        headers: {
+            "Content-Type": "application/json",
             Authorization: `Bearer ${token} `,
         }
     })
+    console.log(res)
+    console.log('token : ', token)
     return res
 }

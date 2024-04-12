@@ -18,7 +18,6 @@ export default function Learn() {
                 setLoading(!loading);
                 const cacheName = 'lessons-cache'; // Đặt tên cho cache
                 const cacheData = { data: res }; // Chuẩn bị dữ liệu để lưu vào cache
-
                 // Mở hoặc tạo một cache mới với tên được xác định
                 const cache = await caches.open(cacheName);
                 // Lưu dữ liệu vào cache

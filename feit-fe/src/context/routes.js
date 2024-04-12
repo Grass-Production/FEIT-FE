@@ -20,6 +20,7 @@ const List = lazy(() => import("../pages/List"))
 const Search = lazy(() => import("../pages/Search"))
 const Statistic = lazy(() => import("../pages/Statistic"))
 const ListDetails = lazy(() => import("../pages/ListDetails"))
+const UnitQuiz = lazy(() => import("../pages/UnitQuiz"))
 
 
 export const ROUTES = {
@@ -35,7 +36,8 @@ export const ROUTES = {
     SignUp: '/signUp',
     Welcome: '/welcome',
     Unit: '/learn/lesson/:lessonid/unit/:unitid',
-    UnitReview: '/learn/lesson/:lessonid/unitreview/:unitreview',
+    UnitReview: '/learn/lesson/:lessonid/exercise/:exercise',
+    UnitQuiz: '/learn/lesson/:lessonid/quiz/:quiz',
     List: '/list',
     Search: '/search',
     Statistic: '/statistic',
@@ -109,6 +111,11 @@ export const privateRouter = [
         title: 'FEIT | Unit',
         href: ROUTES.UnitReview,
         component: UnitReview,
+    },
+    {
+        title: 'FEIT | Unit',
+        href: ROUTES.UnitQuiz,
+        component: UnitQuiz,
     },
     {
         title: 'FEIT | LeaderBoard',

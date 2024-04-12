@@ -6,17 +6,15 @@ export const getVocabulary = async (unitid) => {
             "Content-Type": "application / json"
         }
     })
-    return res.vocabulary.data
+    return res.vocabulary.Vocabulary
 }
 
 export const getVocabularyByWord = async (word) => {
-    const res = await get(`http://localhost:8080/api/vocabulary/fetch-by-word`, {
+    const res = await get(`http://localhost:8080/api/vocabulary/fetch-by-word?word=${word}`, {
         headers: {
             "Content-Type": "application / json"
-        },
-        body: {
-            word: word
         }
+
     })
-    return res.data.word.data
+    return res.data.Vocabulary
 }

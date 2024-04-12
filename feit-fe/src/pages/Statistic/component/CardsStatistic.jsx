@@ -14,10 +14,6 @@ export const CardTime = ({ time = '153' }) => {
     );
 };
 
-export const CardBarchart = () => {
-    return <div className=""></div>;
-};
-
 export const CardScore = ({ score = '1800' }) => {
     return (
         <div className=" ">
@@ -27,7 +23,7 @@ export const CardScore = ({ score = '1800' }) => {
                 </h1>
             </div>
             <h1 className=" text-center text-heading-4 font-heading-4 font-plusjakartasans text-primary-blue-800">
-                {score} phút
+                {score}
             </h1>
         </div>
     );
@@ -49,9 +45,6 @@ export const CardLessonComplete = ({ number = '3' }) => {
     );
 };
 
-export const CardPiechart = () => {
-    return <div className=""></div>;
-};
 export const CardStreak = ({ streak = '7' }) => {
     return (
         <div className="">

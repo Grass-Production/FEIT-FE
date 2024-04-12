@@ -1,16 +1,19 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { Button, LoadingProgressBar } from '../../components';
-import { Listen, Example, FillInTheBlank, PopUp, Test, Finish, Score, ListVocabulary } from './component';
 import { RenderComponentUnit } from '../../untils/renderComponentUnit';
 import { IconXCircle } from '../../svgs';
 import { NavLink, useParams } from 'react-router-dom';
+import { PopUp } from './component/PopUp';
+import { Example, Listen, FillInTheBlank, Tip } from './component/CategoryUnit';
+import { Finish, ListVocabulary, Score } from './component/UIFinish';
+import { getVocabulary } from '../../services/vocabulary';
 import 'animate.css';
 
-import { getVocabulary } from '../../services/vocabulary';
 export default function Unit() {
     // Lấy lessonId và unitId
     let { lessonid, unitid } = useParams();
     const [vocabularys, setVocabularys] = useState([]);
+
     const [vocabulary, setVocabulary] = useState({
         word: '',
         part_of_speech: '',
@@ -23,24 +26,17 @@ export default function Unit() {
         async function fetchData() {
             try {
                 const res = await getVocabulary(unitid);
-                // vocabularyRef.current = res;
-                const data = await res.filter((value) => {
-                    return value.lesson_id === lessonid;
-                });
                 setVocabulary({
                     word: res[index].word,
                     part_of_speech: res[index].part_of_speech,
                     pronunciation: res[index].pronunciation,
-                    example: res[index].example,
+                    explain_vie: res[index].explain_vie,
+                    example_vie: res[index].example_vie,
+                    example_eng: res[index].example_eng,
                     field_of_it: res[index].field_of_it,
                 });
 
                 setVocabularys(res);
-                console.log(res);
-
-                // setLoading(!loading);
-
-                // console.log(vocabularyRef.current);
             } catch (error) {
                 console.log(error);
             }
@@ -55,9 +51,11 @@ export default function Unit() {
     const [process, setProcess] = useState(5);
     // Dùng ẩn hiện pop up
     const [showpopup, setShowPopup] = useState(false);
-    // Dung để kiểm tra kết quả
+    // Trả về true nếu đúng cho fillintheblank
     const [resultRight, setRightResult] = useState(false);
-    const [result, setResult] = useState(false);
+    // Dung để kiểm tra kết quả
+    const [check, setCheck] = useState(false);
+    // Trả về true nếu sai cho fillintheblank
     const [resultError, setErrortResult] = useState(false);
 
     const [inputValue, setInputValue] = useState('');
@@ -65,7 +63,6 @@ export default function Unit() {
     function handleChange(event) {
         setInputValue(event.target.value);
     }
-    // handleOnClick : Xử lý điều kiện render component bằng count và process để hiển thị thành phần trăm
 
     function checkResult() {
         if (inputValue === vocabulary.word.toLowerCase() || inputValue === vocabulary.word) {
@@ -73,50 +70,51 @@ export default function Unit() {
         } else {
             setErrortResult(true);
         }
-        setResult(true);
+        setCheck(true);
     }
 
+    // handleOnClick : Xử lý điều kiện render component bằng count và process để hiển thị thành phần trăm
     function handleOnClick() {
         // Nếu process đạt 100% thì return
         if (process === 100) {
             return;
         }
-
-        setResult(false);
+        setCheck(false);
         setRightResult(false);
         setErrortResult(false);
+
         if (process === 55) {
             setCount((n) => n - 1);
             setIndex((n) => n - 1);
             if (count === 0) {
                 setIndex((n) => n + 1);
-                console.log('count === 1');
             }
-            console.log('process == 50');
-        }
-        if (count === 1) {
-            setIndex((n) => n + 1);
-            console.log('count === 1');
-        }
-        // Nếu
-        if (process === 25) {
+        } else if (process === 25) {
             setCount((n) => n - 1);
             setIndex((n) => n - 1);
             console.log('process == 50');
         }
 
-        setVocabulary({
-            word: vocabularys[index].word,
-            part_of_speech: vocabularys[index].part_of_speech,
-            pronunciation: vocabularys[index].pronunciation,
-            example: vocabularys[index].example,
-            field_of_it: vocabularys[index].field_of_it,
-        });
+        if (count === 1) {
+            setIndex((n) => n + 1);
+            console.log('count === 1');
+        }
+
+        if (process < 85) {
+            setVocabulary({
+                word: vocabularys[index].word,
+                part_of_speech: vocabularys[index].part_of_speech,
+                pronunciation: vocabularys[index].pronunciation,
+                explain_vie: vocabularys[index].explain_vie,
+                example_vie: vocabularys[index].example_vie,
+                example_eng: vocabularys[index].example_eng,
+                field_of_it: vocabularys[index].field_of_it,
+            });
+        }
 
         setCount((n) => (n + 1) % 3);
+
         setProcess((n) => n + 5);
-        console.log(count);
-        console.log(process);
     }
 
     function handlePopUp() {
@@ -126,18 +124,27 @@ export default function Unit() {
     return (
         <div className=" flex flex-col justify-between h-screen items-center">
             <div className=" flex w-full justify-center items-center gap-2 mt-7">
-                <IconXCircle color={'#3C79FE'} />
+                <NavLink to={`/learn/lesson/${lessonid}`}>
+                    <IconXCircle color={'#3C79FE'} />
+                </NavLink>
                 <div className=" w-3/4  flex justify-center items-center h-1.5 bg-gray-200 rounded-full  dark:bg-gray-700">
                     <LoadingProgressBar percent={process} />
                 </div>
             </div>
+
             <RenderComponentUnit
-                listen={process === 90 ? <Finish /> : <Listen word={vocabulary.word} mean={vocabulary.example} />}
+                listen={
+                    process === 90 ? <Finish /> : <Listen word={vocabulary.word} explain_vie={vocabulary.explain_vie} />
+                }
                 example={
                     process === 95 ? (
                         <Score score="10" />
                     ) : (
-                        <Example exampleen={vocabulary.example} examplevn={vocabulary.example} />
+                        <Example
+                            exampleen={vocabulary.example}
+                            example_vie={vocabulary.example_vie}
+                            example_eng={vocabulary.example_eng}
+                        />
                     )
                 }
                 fillInTheBlank={
@@ -153,16 +160,9 @@ export default function Unit() {
                         />
                     )
                 }
-                test={<Test />}
+                tip={<Tip />}
                 count={process === 25 || process == 55 ? 3 : count}
             />
-            {/* <RenderComponentUnit
-                listen={<Listen word={'Xin Chào'} mean={'Thuật toán'} />}
-                example={<Example exampleen={'Xin Chào'} examplevn={'Xin Chào'} />}
-                fillInTheBlank={<FillInTheBlank word={''} />}
-                test={<Test />}
-                count={process === 50 ? 3 : count}
-            /> */}
 
             <div className=" w-full py-10 flex justify-around items-center border-t-2 border-black">
                 {process === 100 ? (
@@ -175,7 +175,7 @@ export default function Unit() {
                             <Button
                                 icon={false}
                                 color={'primary'}
-                                onClick={result ? handleOnClick : checkResult}
+                                onClick={check ? handleOnClick : checkResult}
                                 className="w-3/4"
                                 title="Tiếp tục"></Button>
                         ) : (

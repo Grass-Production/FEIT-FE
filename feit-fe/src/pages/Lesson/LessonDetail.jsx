@@ -4,6 +4,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import { UnitCard, UnitCardLoad } from './component';
 import { Button } from '../../components';
 import { getUnits, getUnitByIdLesson } from '../../services/unitAPI';
+import { getLessons } from '../../services/lessonAPI';
 import { NavLink } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -11,6 +12,7 @@ import { IconArrowUpLeft } from '../../svgs';
 export default function LessonDetail({ name }) {
     const [units, setUnits] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [nameLesson, setNameLesson] = useState([]);
     let { lessonid } = useParams();
     console.log(lessonid);
 
@@ -18,6 +20,10 @@ export default function LessonDetail({ name }) {
         async function fetchData() {
             try {
                 const res = await getUnitByIdLesson(lessonid);
+                const resLesson = await getLessons();
+                const name = resLesson.filter((value) => value._id === lessonid);
+                console.log(name);
+                setNameLesson(name);
                 if (res === null || res === '') {
                     return;
                 }
@@ -76,10 +82,14 @@ export default function LessonDetail({ name }) {
             </NavLink>
             <div className=" flex flex-col  ">
                 <div className=" flex justify-center mb-20 ">
-                    <div className=" w-2/5 ">
-                        <h1 className=" text-center text-heading-2 font-heading-2 font-bitter text-primary-black">
-                            Lập trình
-                        </h1>
+                    <div className="  ">
+                        {nameLesson.map((a, i) => (
+                            <h1
+                                key={i}
+                                className=" text-center text-heading-2 font-heading-2 font-bitter text-primary-black">
+                                {a.name}
+                            </h1>
+                        ))}
                         <p className=" text-center text-body-1 font-body-1 font-plusjakartasans text-primary-black">
                             Đây là các từ vựng nền tảng trong ngành IT. Bạn hãy học thật tập trung và kỹ càng bạn nhé.
                             Chúc bạn học tập tốt.

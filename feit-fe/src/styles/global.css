@@ -15,6 +15,7 @@
 *{
   scroll-behavior: smooth;
 }
+
 input[type="checkbox"] {
   appearance: none; /* Loại bỏ giao diện mặc định của checkbox */
   -webkit-appearance: none; /* Tương tự với trình duyệt Safari */

@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { IconArrowUpLeft, IconDelete } from '../../svgs';
 import { CardsListDetails } from './component';
+
 export default function ListDetails() {
     const datas = [
         {

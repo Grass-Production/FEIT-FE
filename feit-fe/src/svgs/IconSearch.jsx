@@ -1,6 +1,6 @@
-const IconSearch = ({ color = '#14121B' }) => {
+const IconSearch = ({ color = '#14121B', sizew = '24', sizeh = '25' }) => {
     return (
-        <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width={sizew} height={sizeh} viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
             <mask
                 id="mask0_761_1863"
                 style={{ maskType: 'luminance' }} // Thay đổi style từ chuỗi sang đối tượng

@@ -14,3 +14,4 @@ export const Login = async (newData) => {
     )
     return res
 }
+

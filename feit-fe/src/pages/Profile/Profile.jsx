@@ -6,11 +6,14 @@ import { getInforUser } from '../../services/userAPI';
 export default function Profile() {
     useEffect(() => {
         async function getUser() {
-            const res = await getInforUser(
-                'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTI2ODU2ODYsImlhdCI6MTcxMjY4NDc4NiwibmJmIjoxNzEyNjg0Nzg2LCJzdWIiOiI2NjExNDJjZTA5MThjZDg0OTkyZTRhODcifQ.5yHAarA4YjY2KA4VrNSVltLTfC8GGAC8HIW2GX3o_2TNAGVGYzL3YKpjQLg9VlVyIMReiHGROwhdq6dbb5Wa4A',
-            );
-            console.log(res);
+            const token = localStorage.getItem('myData');
+            console.log(token);
+            if (token) {
+                const res = await getInforUser();
+                console.log(res);
+            }
         }
+        getUser();
     }, []);
     return (
         <div className=" px-10 pt-7  ">

@@ -2,7 +2,15 @@ import { useState } from 'react';
 import { Button, InputField } from '../../components';
 import { getVocabularyByWord } from '../../services/vocabulary';
 import { useEffect } from 'react';
+import { IconSearch } from '../../svgs';
+import { CardsSearch } from './component/CardsSearch';
 export default function Search() {
+    const datas = [
+        {
+            word: '',
+            field_of_it: '',
+        },
+    ];
     var data = [
         {
             title: 'a',
@@ -18,18 +26,30 @@ export default function Search() {
         },
     ];
     const [index, setIndex] = useState(null);
-
+    const [words, setWord] = useState([]);
+    const [value, setValue] = useState('');
     function setIndexNe(i) {
         setIndex(i);
     }
-    const [word, setWord] = useState('');
     useEffect(() => {
         async function getApi() {
-            const res = await getVocabularyByWord('syntax');
-            console.log(res);
+            try {
+                const res = await getVocabularyByWord(value);
+                setWord(res);
+                // if (res == null || res == '') {
+                //     setWord([
+                //         {
+                //             word: '',
+                //             field_of_it: '',
+                //         },
+                //     ]);
+                // }
+            } catch (error) {
+                console.log(error);
+            }
         }
         getApi();
-    }, []);
+    }, [value]);
     return (
         // <div className="">
         //     {data.map((a, i) => {
@@ -46,16 +66,22 @@ export default function Search() {
         //     })}
         // </div>
         <div className=" px-10">
-            <h1 className=" mt-7 text-center text-heading-6 font-plusjakartasans font-heading-6 text-primary-black mb-1">
-                Bảng xếp hạng của tuần
-            </h1>
-            <h1 className="text-center text-heading-7 font-plusjakartasans font-heading-7 text-secondary-gray mb-8">
-                Bảng xếp hạng của tuần
-            </h1>
-            <InputField value={word} onChange={(event) => setWord(event.target.value)} />
-            <div className=" border-[4px] w-3/5 max-w-3xl border-secondary-gray rounded-xl p-6 mx-auto">
-                <h1 className=" text-heading-7 font-heading-7 font-plusjakartasans text-secondary-gray">Hôm nay</h1>
+            <div className=" flex justify-center items-center gap-5">
+                <h1 className=" text-center text-heading-3 font-bitter font-heading-3 text-primary-black">Tìm kiếm</h1>
+                <IconSearch sizew="40" sizeh="41" />
             </div>
+            <InputField
+                value={value}
+                className="w-3/5 mx-auto max-w-3xl mb-12"
+                onChange={(event) => setValue(event.target.value)}
+            />
+            {words != null && (
+                <div className=" border-[4px] w-3/5 max-w-3xl border-secondary-gray rounded-xl p-6 mx-auto">
+                    {words.map((value, index) => {
+                        return <CardsSearch key={index} word={value.word} programing={value.field_of_it} />;
+                    })}
+                </div>
+            )}
         </div>
     );
 }

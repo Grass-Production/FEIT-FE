@@ -8,5 +8,6 @@
     "htmlWhitespaceSensitivity": "css",
     "trailingComma": "all",
     "printWidth": 120,
-    "proseWrap": "never"
+    "proseWrap": "never",
+    "eslintIntegration": true
 }

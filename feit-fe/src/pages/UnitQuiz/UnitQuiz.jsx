@@ -1,20 +1,24 @@
 import { useEffect, useState } from 'react';
 import { Button, LoadingProgressBar } from '../../components';
-import { RenderComponentUnitReview } from '../../untils/renderComponentUnitReview';
+// import { RenderComponentUnitReview } from '../../untils/renderComponentUnitReview';
+import { RenderComponentUnitQuiz } from '../../untils/renderComponentUnitReview';
 import { IconXCircle } from '../../svgs';
-import { Multiplechoice, FillInTheBlankReview, Listen } from './component';
+import { Multiplechoice, FillInTheBlankReview, Listen, TrueFalse } from './component';
+import { Start } from './component';
 import 'animate.css';
 
 export default function UnitReview() {
     const datas = [
         {
             id: '6611a3c017dae17cd8ca050b',
-            question: 'What is the capital of France?',
-            options: ['Phong', 'London', 'Berlin', 'Rome'],
-            correct_answer: 'London',
+            question: 'London is the capital of France',
+            options: ['Đúng', 'Sai'],
+            truefalse: 'London is the capital of France',
+            correct_answer_truefalse: 'Sai',
+            correct_answer: 'Sai',
             mean: 'Anh',
             explanation: '',
-            question_type: 'checkbox',
+            question_type: 'truefalse',
             level: 0,
             filename: '_ _ _ is the capital of France',
             audio_duration: '',
@@ -27,10 +31,12 @@ export default function UnitReview() {
             id: '6611a3c017dae17cd8ca0521',
             question: 'What is the capital of VietNam?',
             options: ['Phong', 'London', 'Berlin', 'Ha Noi'],
+            truefalse: 'Ha Noi is the capital of VietNam',
+            correct_answer_truefalse: 'Đúng',
             correct_answer: 'Ha Noi',
             explanation: '',
             mean: 'Vietnam',
-            question_type: 'checkbox',
+            question_type: 'multichoise',
             level: 0,
             filename: '',
             audio_duration: '',
@@ -43,10 +49,12 @@ export default function UnitReview() {
             id: '6611a3c017dae17cd8ca0521',
             question: 'What is the capital of Korena?',
             options: ['Phong', 'London', 'Berlin', 'Seoul'],
+            truefalse: 'Berlin is the capital of Korena',
+            correct_answer_truefalse: 'Sai',
             correct_answer: 'Seoul',
             mean: 'Hàn',
             explanation: '',
-            question_type: 'checkbox',
+            question_type: 'fil',
             level: 0,
             filename: '',
             audio_duration: '',
@@ -59,10 +67,12 @@ export default function UnitReview() {
             id: '6611a3c017dae17cd8ca0521',
             question: 'What is the capital of Thailan?',
             options: ['Phong', 'London', 'Berlin', 'Bangkok'],
+            truefalse: 'Bangkok is the capital of Thailan',
+            correct_answer_truefalse: 'Đúng',
             correct_answer: 'Bangkok',
             mean: 'Thái',
             explanation: '',
-            question_type: 'checkbox',
+            question_type: 'multichoise',
             level: 0,
             filename: '',
             audio_duration: '',
@@ -75,10 +85,12 @@ export default function UnitReview() {
             id: '6611a3c017dae17cd8ca0521',
             question: 'What is the capital of American?',
             options: ['Phong', 'London', 'Berlin', 'Washington'],
+            truefalse: 'Berlin is the capital of American',
+            correct_answer_truefalse: 'Sai',
             correct_answer: 'Washington',
             mean: 'Mỹ',
             explanation: '',
-            question_type: 'checkbox',
+            question_type: 'listen',
             level: 0,
             filename: '',
             audio_duration: '',
@@ -103,6 +115,7 @@ export default function UnitReview() {
         correct_answer: '',
         filename: '',
         mean: '',
+        question_type: '',
     });
 
     // Dùng để lưu phần trăm
@@ -138,7 +151,7 @@ export default function UnitReview() {
             for (let i = 0; i < length; i++) {
                 let randomNumber;
                 do {
-                    randomNumber = Math.floor(Math.random() * 3); // Tạo số ngẫu nhiên từ 0 đến 2
+                    randomNumber = Math.floor(Math.random() * 4); // Tạo số ngẫu nhiên từ 0 đến 2
                 } while (randomNumber === numbers[i - 1] && count[randomNumber] >= 2); // Kiểm tra số ngẫu nhiên có trùng với số trước đó và đã xuất hiện quá 2 lần chưa
 
                 numbers.push(randomNumber);
@@ -173,9 +186,21 @@ export default function UnitReview() {
             correct_answer: datas[index].correct_answer,
             filename: datas[index].filename,
             mean: datas[index].mean,
+            truefalse: datas[index].truefalse,
+            correct_answer_truefalse: datas[index].correct_answer_truefalse,
+            question_type: datas[index].question_type,
         });
+        if (dataRes.question_type === 'multichoise') {
+            setCount(0);
+        } else if (dataRes.question_type === 'truefalse') {
+            setCount(3);
+        } else if (dataRes.question_type === 'fil') {
+            setCount(1);
+        } else if (dataRes.question_type === 'listen') {
+            setCount(2);
+        }
     }, []);
-
+    console.log(arrayRandomRes);
     function handleOnClick() {
         // Nếu process đạt 100% thì return
         if (process === 100) {
@@ -189,16 +214,28 @@ export default function UnitReview() {
 
         setIndex((n) => n + 1);
 
-        setCount(arrayRandomUI[index]);
+        if (dataRes.question_type === 'multichoise') {
+            setCount(0);
+        } else if (dataRes.question_type === 'truefalse') {
+            setCount(3);
+        } else if (dataRes.question_type === 'fil') {
+            setCount(1);
+        } else if (dataRes.question_type === 'listen') {
+            setCount(2);
+        }
+        console.log(count);
 
+        // setCount(arrayRandomUI[index]);
         setProcess((n) => n + 5);
-
         setDataRes({
             question: datas[arrayRandomRes[index]].question,
             options: datas[arrayRandomRes[index]].options,
             correct_answer: datas[arrayRandomRes[index]].correct_answer,
             filename: datas[arrayRandomRes[index]].filename,
             mean: datas[arrayRandomRes[index]].mean,
+            truefalse: datas[arrayRandomRes[index]].truefalse,
+            correct_answer_truefalse: datas[arrayRandomRes[index]].correct_answer_truefalse,
+            question_type: datas[arrayRandomRes[index]].question_type,
         });
     }
 
@@ -210,8 +247,8 @@ export default function UnitReview() {
                     <LoadingProgressBar percent={process} />
                 </div>
             </div>
-
-            <RenderComponentUnitReview
+            {/* <Start /> */}
+            <RenderComponentUnitQuiz
                 multipleChoice={
                     <Multiplechoice
                         option={dataRes.options}
@@ -240,7 +277,15 @@ export default function UnitReview() {
                         mean={dataRes.mean}
                     />
                 }
-                count={count}
+                truefalse={
+                    <TrueFalse
+                        option={dataRes.options}
+                        checkresult={check}
+                        correctAnswer={dataRes.correct_answer}
+                        question={dataRes.question}
+                    />
+                }
+                count={dataRes.question_type}
             />
 
             <div className=" w-full py-10 flex justify-around items-center border-t-2 border-black">

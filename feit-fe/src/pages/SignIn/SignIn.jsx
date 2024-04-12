@@ -68,11 +68,12 @@ export default function SignIn() {
                     withCredentials: true,
                 },
             );
-            console.log(response);
+            console.log(response.data.access_token);
             if (response.status === 200) {
                 // history.push('/');
-                navigate(`/`);
-                window.location.reload();
+                // navigate(`/`);
+                // window.location.reload();
+                localStorage.setItem('myData', response.data.access_token);
                 console.log('Login successful');
             } else {
                 // Đăng nhập không thành công, xử lý phản hồi ở đây
@@ -121,6 +122,7 @@ export default function SignIn() {
                             password={password}
                             setPassword={(e) => setPassword(e.target.value)}
                         />
+                        <button onClick={DangXuat}>Đăng xuất</button>
                     </div>
                 </div>
             </div>
