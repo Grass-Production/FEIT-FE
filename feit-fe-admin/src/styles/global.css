@@ -16,7 +16,7 @@
   scroll-behavior: smooth;
 }
 
- input[type="checkbox"] {
+input[type="checkbox"] {
   appearance: none; /* Loại bỏ giao diện mặc định của checkbox */
   -webkit-appearance: none; /* Tương tự với trình duyệt Safari */
   width: 20px; /* Đặt kích thước checkbox */
@@ -42,6 +42,6 @@ input[type="checkbox"]::before {
 /* Thiết lập màu khi checkbox được chọn */
 input[type="checkbox"]:checked::before {
   background-color: #007bff; /* Màu nền khi checkbox được chọn */
-} 
+}
 
 
