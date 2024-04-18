@@ -43,6 +43,7 @@ export const buttonVariants = tv({
 export const Button = ({
     children,
     disabled,
+    type = 'submit',
     active,
     icon = false,
     left = false,
@@ -56,6 +57,7 @@ export const Button = ({
     return (
         <button
             id={id}
+            type={type}
             disabled={disabled}
             onClick={onClick}
             className={`${className}   ${buttonVariants({

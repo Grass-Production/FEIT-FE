@@ -9,6 +9,9 @@ export const TableData = ({ data }) => {
                     Id
                 </th>
                 <th className=" px-5 border border-primary-black border-t-0 py-2 text-body-2 font-body-2 text-white font-plusjakartasans">
+                    Img
+                </th>
+                <th className=" px-5 border border-primary-black border-t-0 py-2 text-body-2 font-body-2 text-white font-plusjakartasans">
                     Course Id
                 </th>
                 <th className=" px-5 border border-primary-black border-t-0 py-2 text-body-2 font-body-2 text-white font-plusjakartasans">
@@ -38,6 +41,9 @@ export const TableData = ({ data }) => {
                         </td>
                         <td className=" px-5 border border-primary-black text-left py-2 text-body-2 font-body-2 text-primary-black font-plusjakartasans">
                             {v._id}
+                        </td>
+                        <td className=" px-5 border border-primary-black text-left py-2 text-body-2 font-body-2 text-primary-black font-plusjakartasans">
+                            <img src={v.image_url} alt="" />
                         </td>
                         <td className=" px-5 border border-primary-black text-left py-2 text-body-2 font-body-2 text-primary-black font-plusjakartasans">
                             {v.course_id}

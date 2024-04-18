@@ -3,6 +3,7 @@ import { IconArrowLogin, IconUploadSimple } from '../../../svgs';
 
 export const CardImage = ({
     img = 'https://res.cloudinary.com/df4zm1xjy/image/upload/v1711464162/feit-static/Ch%C6%B0%C6%A1ng%208.png.png',
+    onClick,
 }) => {
     return (
         <div className="">
@@ -12,7 +13,13 @@ export const CardImage = ({
             <Button title="Thay đổi ảnh đại diện" icon={true} right={true} className={'w-full mb-5'} color={'primary'}>
                 <IconUploadSimple />
             </Button>
-            <Button title="Đăng xuất" icon={true} className={'w-full'} right={true} color={'primaryerror'}>
+            <Button
+                title="Đăng xuất"
+                icon={true}
+                onClick={onClick}
+                className={'w-full'}
+                right={true}
+                color={'primaryerror'}>
                 <IconArrowLogin color="#FE330B" />
             </Button>
         </div>

@@ -21,3 +21,17 @@ export async function post(path, body, config) {
     const init = { method: "post", body: JSON.stringify(body), ...config }
     return await http(path, init)
 }
+export async function postfile(path, body, config) {
+    const init = { method: "post", body: body, ...config }
+    return await http(path, init)
+}
+
+export async function put(path, body, config) {
+    const init = { method: "put", body: JSON.stringify(body), ...config }
+    return await http(path, init)
+}
+
+export async function del(path, config) {
+    const init = { method: "delete", ...config }
+    return await http(path, init)
+}

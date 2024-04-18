@@ -5,7 +5,7 @@ export const inputVariant = tv({
     variants: {
         color: {
             success: 'border-2  border-green-500 ',
-            error: 'text-semantic-danger ',
+            error: 'text-semantic-danger outline-semantic-danger',
         },
     },
 });

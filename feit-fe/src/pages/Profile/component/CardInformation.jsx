@@ -6,7 +6,7 @@ export const CardInformation = ({
     name = 'Đoàn Đình Hoàng',
     email = 'hoang@gmail.com',
     phone = '0792900210',
-    position = 'Người trái ngành',
+    specialize = 'Người trái ngành',
 }) => {
     return (
         <div className="">
@@ -23,7 +23,7 @@ export const CardInformation = ({
 
                 <div className=" flex mb-7 justify-between items-center">
                     <h1 className=" text-label-1 font-label-1 font-plusjakartasans text-primary-black">Bạn là</h1>
-                    <InputField placeholder={position} className={' w-4/5'} />
+                    <InputField placeholder={specialize} className={' w-4/5'} />
                 </div>
 
                 <div className=" flex justify-between mb-[60px] items-center">

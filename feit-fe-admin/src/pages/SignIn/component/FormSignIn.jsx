@@ -2,7 +2,7 @@ import { Form, InputSection, Button } from '../../../components';
 import { NavLink } from 'react-router-dom';
 export const FormSignIn = ({ account, setAccount, password, setPassword, onClick }) => {
     return (
-        <div>
+        <form onSubmit={onClick}>
             <Form
                 label={'Tài khoản'}
                 placeholder={'Email hoặc số điện thoại'}
@@ -24,13 +24,7 @@ export const FormSignIn = ({ account, setAccount, password, setPassword, onClick
                 </NavLink>
             </div>
             <div className=" flex justify-center ">
-                <Button
-                    onClick={onClick}
-                    title="Đăng nhập"
-                    color={'tertiaryicon'}
-                    className=" w-full py-4"
-                    size={'lg'}
-                />
+                <Button title="Đăng nhập" color={'tertiaryicon'} className=" w-full py-4" size={'lg'} />
             </div>
             <h1 className=" text-center text-button-1 text-primary-black font-button-1 font-plusjakartasans mt-16 ">
                 Chưa có tài khoản ?{' '}
@@ -40,6 +34,6 @@ export const FormSignIn = ({ account, setAccount, password, setPassword, onClick
                     Đăng ký
                 </NavLink>
             </h1>
-        </div>
+        </form>
     );
 };

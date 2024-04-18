@@ -8,14 +8,21 @@ const formVariants = tv({
     },
 });
 
-export const Form = ({ value, onChange, className, label, placeholder }) => {
+export const Form = ({ value, onChange, className, classNameInput, label, placeholder, status, type = 'text' }) => {
     const { base, input } = formVariants();
     return (
-        <form className={`${className} ${base()}`}>
+        <div className={`${className} ${base()}`}>
             <div className="">
-                <label className=" mb-2 block text-label-2 font-label-2 text-primary-black mb-2">{label}</label>
-                <InputField value={value} onChange={onChange} placeholder={placeholder} type={'text'} />
+                <label className=" block text-label-2 font-label-2 text-primary-black mb-2">{label}</label>
+                <InputField
+                    value={value}
+                    onChange={onChange}
+                    className={classNameInput}
+                    status={status}
+                    placeholder={placeholder}
+                    type={type}
+                />
             </div>
-        </form>
+        </div>
     );
 };

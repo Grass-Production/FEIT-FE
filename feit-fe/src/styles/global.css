@@ -16,6 +16,27 @@
   scroll-behavior: smooth;
 }
 
+  html {
+    font-size: 85%;
+  }
+
+@media (max-width: 1270px) {
+  html {
+    font-size: 80%;
+  }
+}
+
+@media (min-width: 740px) and (max-width: 1023px) {
+  html {
+    font-size: 55.5%;
+  }
+}
+
+@media (max-width: 739px) {
+  html {
+    font-size: 50%;
+  }
+}
  input[type="checkbox"] {
   appearance: none; /* Loại bỏ giao diện mặc định của checkbox */
   -webkit-appearance: none; /* Tương tự với trình duyệt Safari */

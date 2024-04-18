@@ -1,17 +1,25 @@
-import { post } from "./fetch"
+import axios from "axios"
 
-export const Login = async (newData) => {
-    const res = await post(
-        "http://localhost:8080/api/login/role",
-        newData,
-        {
-            headers: {
-                "Content-Type": "application/json",
-                'Access-Control-Allow-Origin': '*'
-            }
-        },
-
-    )
-    return res
+export const Login = async (account, password) => {
+    try {
+        const response = await axios.post(
+            'http://localhost:8080/api/login/role',
+            {
+                email: account,
+                password: password,
+            },
+            {
+                headers: { 'Content-Type': 'application/json' },
+                withCredentials: true,
+            },
+        );
+        if (response.status === 200) {
+            localStorage.setItem('access_token', response.data.access_token);
+            return response
+        } else {
+            console.log('Login failed');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
 }
-

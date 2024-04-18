@@ -2,86 +2,27 @@ import { getGoogleURL } from '../../untils';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { OAuthGoogle } from '../../features';
 import { FormSignIn } from './component';
-import { useState } from 'react';
-// import { useHistory } from 'react-router-dom';
 
-// import { Login } from '../../services/loginAPI';
-import axios from 'axios';
+import { useState } from 'react';
+
+import { Login } from '../../services/loginAPI';
 import { useNavigate } from 'react-router-dom';
 
 export default function SignIn() {
     // const history = useHistory();
     const [account, setAccount] = useState('');
     const [password, setPassword] = useState('');
-    const callApi = async () => {
-        const res = await fetch(`http://localhost:8080/api/sessions/oauth/google`, {
-            method: 'GET',
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-        // const b = await res.json()
-        console.log(res);
-    };
-    const LoginUser = async () => {
-        try {
-            const res = await Login({
-                account,
-                password,
-            });
-            return res;
-        } catch (error) {
-            console.log(error);
-        }
-    };
-    const DangXuat = async () => {
-        try {
-            const response = await axios.get('http://localhost:8080/api/user/logout');
-            console.log(response);
-            if (response.status === 200) {
-                // Xử lý dữ liệu nhận được từ phản hồi
-                console.log('Data:', response.data);
-            } else {
-                // Xử lý khi nhận được phản hồi không thành công
-                console.log('Error:', response.status);
-            }
-        } catch (error) {
-            // Xử lý lỗi khi gửi yêu cầu GET
-            console.error('Error:', error);
-        }
-    };
     const navigate = useNavigate();
-    const Login = async (account, password) => {
-        // const axiosInstance = axios.create({
-        //     withCredentials: true,
-        // });
-        try {
-            const response = await axios.post(
-                'http://localhost:8080/api/login/role',
-                {
-                    email: account,
-                    password: password,
-                },
-                {
-                    headers: { 'Content-Type': 'application/json' },
-                    withCredentials: true,
-                },
-            );
-            console.log(response.data.access_token);
-            if (response.status === 200) {
-                // history.push('/');
-                // navigate(`/`);
-                // window.location.reload();
-                localStorage.setItem('myData', response.data.access_token);
-                console.log('Login successful');
-            } else {
-                // Đăng nhập không thành công, xử lý phản hồi ở đây
-                console.log('Login failed');
-            }
-        } catch (error) {
-            // Xử lý lỗi ở đây
-            console.error('Error:', error);
+
+    const handleLogin = async (event) => {
+        event.preventDefault();
+        const res = await Login(account, password);
+        if (res.status === 200) {
+            navigate(`/`);
+            window.location.reload();
+            console.log('Login successful');
+        } else {
+            console.log('Login failed');
         }
     };
 
@@ -114,15 +55,13 @@ export default function SignIn() {
                         <h1 className=" mt-10 text-center mb-5 text-caption-1 font-bitter text-secondary-gray font-caption-1">
                             Hoặc đăng nhập bằng
                         </h1>
-
                         <FormSignIn
-                            onClick={() => Login(account, password)}
+                            onClick={handleLogin}
                             account={account}
                             setAccount={(e) => setAccount(e.target.value)}
                             password={password}
                             setPassword={(e) => setPassword(e.target.value)}
                         />
-                        <button onClick={DangXuat}>Đăng xuất</button>
                     </div>
                 </div>
             </div>

@@ -42,7 +42,7 @@ export default function LessonDetail({ name }) {
         speed: 500,
         dots: true,
         lazyLoad: true,
-        slidesToShow: 3,
+        slidesToShow: 4,
         slidesToScroll: 1,
         initialSlide: 0,
         arrows: false,
@@ -50,9 +50,9 @@ export default function LessonDetail({ name }) {
             {
                 breakpoint: 1260,
                 settings: {
-                    slidesToShow: 3,
+                    slidesToShow: 4,
                     dots: true,
-                    slidesToScroll: 3,
+                    slidesToScroll: 4,
                     infinite: true,
                 },
             },
@@ -98,6 +98,9 @@ export default function LessonDetail({ name }) {
                 </div>
                 {loading ? (
                     <Slider {...settings}>
+                        <div className="px-3">
+                            <UnitCardLoad />
+                        </div>
                         <div className="px-3">
                             <UnitCardLoad />
                         </div>

@@ -5,15 +5,15 @@ import { routerPublic, routerPrivate } from './untils/renderRouter';
 import { useEffect } from 'react';
 
 export default function Layout() {
-    const [isLogin, setIslogin] = useState(true);
+    const [isLogin, setIslogin] = useState(false);
     useEffect(() => {
         const checkLoginStatus = () => {
-            const cookies = document.cookie;
-            const statusLogin = cookies.includes('logged_in');
-            setIslogin(statusLogin);
+            const token = localStorage.getItem('access_token') !== null;
+            if (token) {
+                setIslogin(true);
+            }
         };
         checkLoginStatus();
-        console.log('setIslogin : ', isLogin);
     }, []);
     return (
         <Suspense fallback={<Loading />}>

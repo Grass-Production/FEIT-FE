@@ -11,6 +11,7 @@ export default function Search() {
             field_of_it: '',
         },
     ];
+
     var data = [
         {
             title: 'a',
@@ -50,6 +51,9 @@ export default function Search() {
         }
         getApi();
     }, [value]);
+    const handleGetWord = (word) => {
+        console.log('word : ', word);
+    };
     return (
         // <div className="">
         //     {data.map((a, i) => {
@@ -78,7 +82,17 @@ export default function Search() {
             {words != null && (
                 <div className=" border-[4px] w-3/5 max-w-3xl border-secondary-gray rounded-xl p-6 mx-auto">
                     {words.map((value, index) => {
-                        return <CardsSearch key={index} word={value.word} programing={value.field_of_it} />;
+                        return (
+                            <CardsSearch
+                                onClick={() => handleGetWord(value.word)}
+                                key={index}
+                                word={value.word}
+                                programing={value.field_of_it}
+                                partofspeech={value.part_of_speech}
+                                pronunciation={value.pronunciation}
+                                example={value.example_vie}
+                            />
+                        );
                     })}
                 </div>
             )}

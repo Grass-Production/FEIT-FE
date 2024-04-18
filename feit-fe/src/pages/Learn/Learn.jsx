@@ -43,12 +43,12 @@ export default function Learn() {
                     <LessonLoading />
                 </div>
             ) : (
-                <div className=" grid grid-cols-4 gap-4">
+                <div className=" grid grid-cols-4 gap-8">
                     {lessons.map((lesson) => {
                         return (
                             <div
                                 key={lesson.id}
-                                className="border p-4 border-secondary-gray hover:border-[2px] active:border-[2px] hover:border-primary-blue-500 bg-background-disable hover:bg-white active:bg-white">
+                                className="border-[4px] rounded-[20px] p-4 border-secondary-gray hover:border-[4px] active:border-[4px] hover:border-primary-blue-500 bg-background-disable hover:bg-white active:bg-white">
                                 <LessonCard name={lesson.name} />
                                 <LoadingProgressBar className={'mb-3'} percent={lesson.level} />
                                 <NavLink to={`/learn/lesson/${lesson._id}`}>

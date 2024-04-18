@@ -7,6 +7,7 @@ export default function SignUp() {
     const [account, setAccount] = useState('');
     const [password, setPassword] = useState('');
     const [repassword, setRepassword] = useState('');
+
     return (
         <div>
             <div className=" flex h-screen">
@@ -21,11 +22,11 @@ export default function SignUp() {
                         </h1>
                         <FormSignUp
                             account={account}
-                            setAccount={setAccount}
+                            setAccount={(e) => setAccount(e.target.value)}
                             password={password}
-                            setPassword={setPassword}
+                            setPassword={(e) => setPassword(e.target.value)}
                             repassword={repassword}
-                            setRepassword={setRepassword}
+                            setRepassword={(e) => setRepassword(e.target.value)}
                         />
                     </div>
                 </div>

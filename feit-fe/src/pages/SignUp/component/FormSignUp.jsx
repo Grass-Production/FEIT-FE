@@ -1,32 +1,64 @@
+import { useState } from 'react';
 import { Form, Button } from '../../../components';
 import { Link } from 'react-router-dom';
 export const FormSignUp = ({ account, setAccount, password, setPassword, repassword, setRepassword, onClick }) => {
+    const [checkInput, setCheckInput] = useState({
+        email: true,
+        pass: true,
+        repass: true,
+    });
+    const handleSubmit = (event) => {
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const passPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.])[A-Za-z\d@$!%*?&.]{8,}$/;
+        const isValidEmail = emailPattern.test(account);
+        const isValidPass = passPattern.test(password);
+        console.log(isValidPass);
+        setCheckInput({
+            ...checkInput,
+            email: emailPattern.test(account),
+            pass: passPattern.test(password),
+        });
+
+        event.preventDefault();
+    };
+    console.log(checkInput);
     return (
-        <div>
+        <form onSubmit={handleSubmit} noValidate>
             <Form
                 label={'Tài khoảng'}
                 placeholder={'Email hoặc số điện thoại'}
-                className={' mb-6'}
-                valueName={account}
-                onChangeName={(e) => setAccount(e.target.value)}
+                className={''}
+                classNameInput=" border-semantic-danger border outline-semantic-danger w-full"
+                value={account}
+                type="email"
+                onChange={setAccount}
             />
+            <span className="mb-6 block text-semantic-danger">Email không hợp lệ</span>
+
             <Form
                 label={'Mật khẩu'}
                 placeholder={'Tạo mật khẩu '}
                 className={' mb-6'}
-                valueName={password}
-                onChangeName={(e) => setPassword(e.target.value)}
+                value={password}
+                onChange={setPassword}
             />
             <Form
                 label={'Nhập lại mật khẩu'}
                 placeholder={'Nhập lại mật khẩu'}
                 className={' mb-9'}
-                valueName={repassword}
-                onChangeName={(e) => setRepassword(e.target.value)}
+                value={repassword}
+                onChange={setRepassword}
             />
 
             <div className=" flex justify-center ">
-                <Button onClick={onClick} title="Đăng ký" color={'tertiaryicon'} className=" w-full py-4" size={'lg'} />
+                <Button
+                    onClick={onClick}
+                    title="Đăng ký"
+                    color={'tertiaryicon'}
+                    type="submit"
+                    className=" w-full py-4"
+                    size={'lg'}
+                />
             </div>
             <h1 className=" text-center text-button-1 text-primary-black font-button-1 font-plusjakartasans mt-16 ">
                 Đã có tài khoảng ?{' '}
@@ -34,6 +66,6 @@ export const FormSignUp = ({ account, setAccount, password, setPassword, repassw
                     Đăng nhập
                 </Link>
             </h1>
-        </div>
+        </form>
     );
 };
