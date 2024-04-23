@@ -10,9 +10,9 @@ export const UnitCard = ({
     checkprocess,
 }) => {
     return (
-        <div className=" p-6 border border-secondary-gray hover:bg-background-able bg-background-disable active:bg-background-disable hover:border-primary-blue-400 active:border-primary-blue-400 rounded-[40px]">
+        <div className=" p-6 border border-secondary-gray hover:bg-background-able bg-background-disable active:bg-background-disable hover:border-primary-blue-400 active:border-primary-blue-400 ">
             <div className=" ">
-                <div className={`  max-h-72 bg-no-repeat bg-contain bg-center h-[25vh] overflow-hidden rounded-lg `}>
+                <div className={`  max-h-72 bg-no-repeat bg-contain bg-center h-[25vh] overflow-hidden  `}>
                     <img
                         src="https://res.cloudinary.com/df4zm1xjy/image/upload/v1711464162/feit-static/Ch%C6%B0%C6%A1ng%208.png.png"
                         alt=""
@@ -26,7 +26,11 @@ export const UnitCard = ({
                 </p>
                 <LoadingProgressBar className={'mb-2 h-2'} percent={percent} />
                 <NavLink to={checkprocess ? '/' : `/learn/lesson/${lessonid}/unit/${unitid}`}>
-                    <Button icon={false} className=" w-full py-6" title="Bắt đầu" color={'primary'}></Button>
+                    <Button
+                        icon={false}
+                        className=" w-full py-6 rounded-none"
+                        title="Bắt đầu"
+                        color={'primary'}></Button>
                 </NavLink>
             </div>
         </div>

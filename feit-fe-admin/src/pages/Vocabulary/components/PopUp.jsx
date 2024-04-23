@@ -33,139 +33,88 @@ export const PopUpCreate = ({ lesson, handleClose }) => {
                                         <span class="sr-only">Close modal</span>
                                     </button>
                                 </div>
-                                <form class="p-4 md:p-5">
-                                    <div class="grid gap-4 mb-4 grid-cols-2">
-                                        <div class="col-span-2">
-                                            <label
-                                                for="name"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                Word
-                                            </label>
-                                            <input
-                                                type="text"
-                                                name="name"
-                                                id="name"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                                placeholder="Unit 1"
-                                                required=""
-                                            />
-                                        </div>
-                                        <div class="col-span-2">
-                                            <label
-                                                for="name"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                Part Of Speech
-                                            </label>
-                                            <input
-                                                type="text"
-                                                name="name"
-                                                id="name"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                                placeholder="Unit 1"
-                                                required=""
-                                            />
-                                        </div>
-                                        <div class="col-span-2 ">
-                                            <label
-                                                for="price"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                Pronunciation
-                                            </label>
-                                            <input
-                                                type="text"
-                                                name="price"
-                                                id="price"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                                placeholder="Introduction to Computer Networks"
-                                                required=""
-                                            />
-                                        </div>
-                                        <div class="col-span-2 ">
-                                            <label
-                                                for="price"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                Pronunciation
-                                            </label>
-                                            <input
-                                                type="text"
-                                                name="price"
-                                                id="price"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                                placeholder="Introduction to Computer Networks"
-                                                required=""
-                                            />
-                                        </div>
-                                        <div class="col-span-2 ">
-                                            <label
-                                                for="price"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                Example
-                                            </label>
-                                            <input
-                                                type="text"
-                                                name="price"
-                                                id="price"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                                placeholder="Introduction to Computer Networks"
-                                                required=""
-                                            />
-                                        </div>
-                                        <div class="col-span-2 ">
-                                            <label
-                                                for="price"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                Field Of It
-                                            </label>
-                                            <input
-                                                type="text"
-                                                name="price"
-                                                id="price"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                                placeholder="Introduction to Computer Networks"
-                                                required=""
-                                            />
-                                        </div>
-                                        <div class="col-span-2 sm:col-span-1">
-                                            <label
-                                                for="category"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                Unit
-                                            </label>
-                                            <select
-                                                id="category"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                                <option selected="">Select category</option>
-                                                {lesson.map((v, i) => {
-                                                    return (
-                                                        <option key={i} value={v.name}>
-                                                            {v.name}
-                                                        </option>
-                                                    );
-                                                })}
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <button
-                                        type="submit"
-                                        onClick={OnClickClose}
-                                        class="text-white mb-4 inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                        <svg
-                                            class="me-1 -ms-1 w-5 h-5"
-                                            fill="currentColor"
-                                            viewBox="0 0 20 20"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                fill-rule="evenodd"
-                                                d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                                                clip-rule="evenodd"></path>
-                                        </svg>
-                                        Add new Vocabulary
-                                    </button>
+                                <form onSubmit={handleCreateImages} className=" flex  flex-col">
                                     <input
-                                        className=" w-full text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                                        type="file"
+                                        type="text"
+                                        name="word"
+                                        value={formInput.word}
+                                        onChange={handleChange}
+                                        placeholder="Word"
                                     />
+                                    <input
+                                        type="text"
+                                        name="part_of_speech"
+                                        value={formInput.part_of_speech}
+                                        onChange={handleChange}
+                                        placeholder="Part of Speech"
+                                    />
+                                    <input
+                                        type="text"
+                                        name="pronunciation"
+                                        value={formInput.pronunciation}
+                                        onChange={handleChange}
+                                        placeholder="Pronunciation"
+                                    />
+                                    <input
+                                        type="text"
+                                        name="mean"
+                                        value={formInput.mean}
+                                        onChange={handleChange}
+                                        placeholder="Mean"
+                                    />
+                                    <input
+                                        type="text"
+                                        name="example_vie"
+                                        value={formInput.example_vie}
+                                        onChange={handleChange}
+                                        placeholder="Example (Vietnamese)"
+                                    />
+                                    <input
+                                        type="text"
+                                        name="example_eng"
+                                        value={formInput.example_eng}
+                                        onChange={handleChange}
+                                        placeholder="Example (English)"
+                                    />
+                                    <input
+                                        type="text"
+                                        name="explain_vie"
+                                        value={formInput.explain_vie}
+                                        onChange={handleChange}
+                                        placeholder="Explanation (Vietnamese)"
+                                    />
+                                    <input
+                                        type="text"
+                                        name="explain_eng"
+                                        value={formInput.explain_eng}
+                                        onChange={handleChange}
+                                        placeholder="Explanation (English)"
+                                    />
+                                    <input
+                                        type="text"
+                                        name="field_of_it"
+                                        value={formInput.field_of_it}
+                                        onChange={handleChange}
+                                        placeholder="Field of IT"
+                                    />
+                                    <input
+                                        type="text"
+                                        name="link_url"
+                                        value={formInput.link_url}
+                                        onChange={handleChange}
+                                        placeholder="Link URL"
+                                    />
+                                    <input
+                                        type="text"
+                                        name="unit_id"
+                                        value={formInput.unit_id}
+                                        onChange={handleChange}
+                                        placeholder="Unit ID"
+                                    />
+                                    <input type="file" multiple onChange={(e) => setFile(e.target.files[0])} />
+                                    <button type="submit">Create</button>
                                 </form>
+                                ;
                             </div>
                         </div>
                     </div>

@@ -78,7 +78,7 @@ export default function LessonDetail({ name }) {
     return (
         <div className="px-10">
             <NavLink to="/learn">
-                <IconArrowUpLeft size="40" className={' mt-8 rounded-md border border-secondary-gray'} />
+                <IconArrowUpLeft size="40" className={' mt-8 border bg-white border-primary-black'} />
             </NavLink>
             <div className=" flex flex-col  ">
                 <div className=" flex justify-center mb-20 ">

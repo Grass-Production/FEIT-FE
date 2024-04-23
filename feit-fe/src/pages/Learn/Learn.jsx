@@ -48,7 +48,7 @@ export default function Learn() {
                         return (
                             <div
                                 key={lesson.id}
-                                className="border-[4px] rounded-[20px] p-4 border-secondary-gray hover:border-[4px] active:border-[4px] hover:border-primary-blue-500 bg-background-disable hover:bg-white active:bg-white">
+                                className="border-[4px]  p-4 border-secondary-gray hover:border-[4px] active:border-[4px] hover:border-primary-blue-500 bg-background-disable hover:bg-white active:bg-white">
                                 <LessonCard name={lesson.name} />
                                 <LoadingProgressBar className={'mb-3'} percent={lesson.level} />
                                 <NavLink to={`/learn/lesson/${lesson._id}`}>
@@ -56,7 +56,7 @@ export default function Learn() {
                                         icon={false}
                                         color={'primary'}
                                         title="Tiếp tục"
-                                        className=" w-full"></Button>
+                                        className=" w-full rounded-none"></Button>
                                 </NavLink>
                             </div>
                         );

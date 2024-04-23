@@ -61,6 +61,7 @@ export const createLessonFile = async (newData) => {
             headers: {
                 Authorization: `Bearer ${token} `,
             },
+            credentials: "include",
             body: formData,
         })
         console.log("message : ", res)

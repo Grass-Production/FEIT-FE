@@ -5,8 +5,8 @@ export const Sidebar = ({ show, children }) => {
     // ----------- Active Link Router
     const navLinkStyle = ({ isActive }) => {
         return isActive
-            ? 'border-primary-blue-500 border-[2px] text-primary-blue-400 text-body-1 font-plusjakartasans font-body-1 p-3 flex gap-1  mb-4 rounded items-center justify-start'
-            : ' border-secondary-gray border text-primary-black text-body-1 font-plusjakartasans font-body-1 p-3 flex gap-1  mb-4 rounded items-center justify-start';
+            ? ' text-primary-blue-400 text-button-1 font-plusjakartasans font-button-1 p-3 flex gap-1  mb-4 rounded items-center justify-start'
+            : ' text-primary-black text-button-1 font-plusjakartasans font-button-1 p-3 flex gap-1  mb-4 rounded items-center justify-start';
     };
     const borderStyle = ({ isActive }) => {
         return {
@@ -26,13 +26,13 @@ export const Sidebar = ({ show, children }) => {
                         {routerList.map((link) => {
                             const Icon = link.icon;
                             return (
-                                <NavLink style={borderStyle} className={navLinkStyle} key={link.href} to={link.href}>
+                                <NavLink className={navLinkStyle} key={link.href} to={link.href}>
                                     {/* // ----------- Active Link Router */}
                                     {({ isActive }) => (
-                                        <>
+                                        <div className=" flex justify-center items-center gap-2">
                                             <Icon color={isActive ? '#5C8FFE' : '#14121B'} key={link.href} />
                                             {link.name}
-                                        </>
+                                        </div>
                                     )}
                                     {/* // ----------- Active Link Router */}
                                 </NavLink>
@@ -42,7 +42,7 @@ export const Sidebar = ({ show, children }) => {
                 </div>
             </div>
             <div className=" relative flex-1 ">
-                <div className=" absolute bg-white overflow-y-auto inset-x-0 inset-y-0  ">{children}</div>
+                <div className=" absolute bg-primary-grey overflow-y-auto inset-x-0 inset-y-0  ">{children}</div>
             </div>
         </div>
     );

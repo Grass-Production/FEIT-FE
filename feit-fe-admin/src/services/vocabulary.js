@@ -9,6 +9,16 @@ export const getVocabularyByUinit = async (unitid) => {
     return res.vocabulary.Vocabulary
 }
 
+export const getVocabularyByLesson = async (field_of_it) => {
+    const res = await get(`http://localhost:8080/api/vocabulary/fetch-by-lesson?field_of_it=${field_of_it}`, {
+        headers: {
+            "Content-Type": "application / json"
+        }
+    })
+
+    return res.data.word.Vocabulary
+}
+
 export const getVocabulary = async () => {
     const res = await get(`http://localhost:8080/api/vocabulary/fetch`, {
         headers: {

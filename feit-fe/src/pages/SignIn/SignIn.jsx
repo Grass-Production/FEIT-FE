@@ -1,22 +1,51 @@
-import { getGoogleURL } from '../../untils';
-import { GoogleOAuthProvider } from '@react-oauth/google';
-import { OAuthGoogle } from '../../features';
 import { FormSignIn } from './component';
-
+import { useGoogleLogin } from '@react-oauth/google';
+import axios from 'axios';
 import { useState } from 'react';
 
 import { Login } from '../../services/loginAPI';
+
 import { useNavigate } from 'react-router-dom';
 
 export default function SignIn() {
     // const history = useHistory();
-    const [account, setAccount] = useState('');
-    const [password, setPassword] = useState('');
+    const [formInput, setFormInput] = useState({
+        account: '',
+        password: '',
+    });
+
     const navigate = useNavigate();
+
+    const handleOnChange = (event) => {
+        const { name, value } = event.target;
+        setFormInput({ ...formInput, [name]: value });
+    };
+
+    const LoginGoogle = useGoogleLogin({
+        onSuccess: async (codeResponse) => {
+            // Gửi mã phản hồi đến máy chủ để đăng nhập
+            try {
+                const res = await axios.get(
+                    `http://localhost:8080/api/auth/google/callback?code=${codeResponse.code}`,
+                    { withCredentials: true },
+                );
+                if (res.status === 200) {
+                    localStorage.setItem('access_token', res.data.token);
+                    navigate(`/`);
+                    window.location.reload();
+                    console.log('tokenResponse', res.data.token);
+                }
+                return res;
+            } catch (error) {
+                console.error('Error while exchanging code for token:', error);
+            }
+        },
+        flow: 'auth-code',
+    });
 
     const handleLogin = async (event) => {
         event.preventDefault();
-        const res = await Login(account, password);
+        const res = await Login(formInput.account, formInput.password);
         if (res.status === 200) {
             navigate(`/`);
             window.location.reload();
@@ -26,14 +55,6 @@ export default function SignIn() {
         }
     };
 
-    // const location = useLocation();
-    // let from = ((location.state && location.state.from && location.state.from.pathname) || '/') + '';
-    // return (
-    //     <div className=" bg-red-800">
-    //         <h1 className=" text-zinc-800">Hello</h1>
-    //         <a href={getGoogleURL(from)}>Login Google</a>
-    //     </div>
-    // );
     return (
         <div>
             <div className=" flex h-screen">
@@ -49,19 +70,11 @@ export default function SignIn() {
                         <h1 className=" text-center text-heading-4 text-primary-black font-heading-4 mb-10">
                             Đăng nhập
                         </h1>
-                        {/* <GoogleOAuthProvider clientId="168558856798-cohnb8nqdnl38nriop2v752sap4mgpb8.apps.googleusercontent.com">
-                            <OAuthGoogle />
-                        </GoogleOAuthProvider> */}
+                        <button onClick={LoginGoogle}>test Login</button>
                         <h1 className=" mt-10 text-center mb-5 text-caption-1 font-bitter text-secondary-gray font-caption-1">
                             Hoặc đăng nhập bằng
                         </h1>
-                        <FormSignIn
-                            onClick={handleLogin}
-                            account={account}
-                            setAccount={(e) => setAccount(e.target.value)}
-                            password={password}
-                            setPassword={(e) => setPassword(e.target.value)}
-                        />
+                        <FormSignIn onClick={handleLogin} inputData={formInput} onChange={handleOnChange} />
                     </div>
                 </div>
             </div>

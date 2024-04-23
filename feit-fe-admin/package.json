@@ -11,6 +11,9 @@
         "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
     },
     "dependencies": {
+        "@emotion/react": "^11.11.4",
+        "@emotion/styled": "^11.11.5",
+        "@mui/material": "^5.15.15",
         "@react-oauth/google": "^0.12.1",
         "animate.css": "^4.1.1",
         "apexcharts": "^3.48.0",

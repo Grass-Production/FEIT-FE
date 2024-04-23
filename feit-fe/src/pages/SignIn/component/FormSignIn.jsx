@@ -1,22 +1,28 @@
-import { Form, InputSection, Button } from '../../../components';
+import { Form, InputSection, Button, InputField } from '../../../components';
 import { NavLink } from 'react-router-dom';
-export const FormSignIn = ({ account, setAccount, password, setPassword, onClick }) => {
+export const FormSignIn = ({ inputData, onClick, onChange }) => {
     return (
         <form onSubmit={onClick}>
-            <Form
-                label={'Tài khoản'}
-                placeholder={'Email hoặc số điện thoại'}
-                className={' mb-6'}
-                valueName={account}
-                onChange={setAccount}
-            />
-            <Form
-                label={'Mật khẩu'}
-                placeholder={'Tạo mật khẩu '}
-                className={' mb-6'}
-                valueName={password}
-                onChange={setPassword}
-            />
+            <Form label={'Tài khoản'}>
+                <InputField
+                    placeholder={'Email hoặc số điện thoại'}
+                    className={' w-full mb-6'}
+                    name={Object.keys(inputData)[0]}
+                    value={inputData.account}
+                    type="text"
+                    onChange={onChange}
+                />
+            </Form>
+            <Form label={'Mật khẩu'}>
+                <InputField
+                    placeholder={'Tạo mật khẩu'}
+                    className={' w-full mb-6'}
+                    name={Object.keys(inputData)[1]}
+                    value={inputData.password}
+                    type="text"
+                    onChange={onChange}
+                />
+            </Form>
             <div className=" flex justify-between mb-9">
                 <InputSection label="Nhớ mật khẩu" />
                 <NavLink className=" text-primary-blue-500 text-button-1 font-button-1 font-plusjakartasans" to="/home">

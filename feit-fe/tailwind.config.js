@@ -28,7 +28,8 @@ export default ({
           'blue-600': '#0A50E7',
           'blue-700': '#083EB4',
           'blue-800': '#06308C',
-          'black': '#1A1823'
+          'black': '#1A1823',
+          'grey': "#F2F4F7"
         },
         secondary: {
           'gray': '#858585',
@@ -43,7 +44,12 @@ export default ({
         },
         foundation: {
           'violet-600': '#2B283A',
-          'brightcyan-700': '#7AAC9E'
+          'brightcyan-700': '#7AAC9E',
+          'blue-primary-50': '#E7EEFF',
+          'green-highlight-50': '#EAFFEA',
+          'purple-50': '#FFE6FE',
+          'soft-blue-50': '#F2FEFF',
+
         },
         background: {
           'able': '#FBFBFB',

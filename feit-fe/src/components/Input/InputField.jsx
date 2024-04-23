@@ -10,14 +10,16 @@ export const inputVariant = tv({
     },
 });
 
-export const InputField = ({ className = 'w-full', placeholder, status, value, onChange, type = 'text' }) => {
+export const InputField = ({ className = 'w-full', placeholder, name, status, value, onChange, type = 'text' }) => {
     return (
         <input
             className={`${className}  ${inputVariant({
                 color: status,
             })}`}
+            name={name}
             disabled={status != null && true}
             value={value}
+            autoComplete={type === 'password' ? 'new-password' : 'off'}
             onChange={onChange}
             placeholder={placeholder}
             type={type}

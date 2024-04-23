@@ -28,13 +28,15 @@ export default ({
           'blue-600': '#0A50E7',
           'blue-700': '#083EB4',
           'blue-800': '#06308C',
-          'black': '#1A1823'
+          'black': '#1A1823',
+          'grey': '#F2F4F7'
         },
         secondary: {
           'gray': '#858585',
         },
         tetiary: {
-          'silver': '#DCDCDC'
+          'silver': '#DCDCDC',
+          'tertiary': '#96999C'
         },
         semantic: {
           'danger': '#E72E0A',
@@ -43,7 +45,8 @@ export default ({
         },
         foundation: {
           'violet-600': '#2B283A',
-          'brightcyan-700': '#7AAC9E'
+          'brightcyan-700': '#7AAC9E',
+          'yellow-400': '#F9E062'
         },
         background: {
           'able': '#FBFBFB',

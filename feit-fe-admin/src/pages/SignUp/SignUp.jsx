@@ -1,5 +1,5 @@
-import { GoogleOAuthProvider } from '@react-oauth/google';
-import { OAuthGoogle } from '../../features';
+// import { GoogleOAuthProvider } from '@react-oauth/google';
+// import { OAuthGoogle } from '../../features';
 import { FormSignUp } from './component';
 import { useState } from 'react';
 
@@ -13,9 +13,9 @@ export default function SignUp() {
                 <div className=" px-52 flex justify-center items-center">
                     <div>
                         <h1 className=" text-center text-heading-4 text-primary-black font-heading-4 mb-10">Đăng Ký</h1>
-                        <GoogleOAuthProvider clientId="168558856798-cohnb8nqdnl38nriop2v752sap4mgpb8.apps.googleusercontent.com">
+                        {/* <GoogleOAuthProvider clientId="168558856798-cohnb8nqdnl38nriop2v752sap4mgpb8.apps.googleusercontent.com">
                             <OAuthGoogle />
-                        </GoogleOAuthProvider>
+                        </GoogleOAuthProvider> */}
                         <h1 className="  mt-10 text-center mb-5 text-caption-1 font-bitter text-secondary-gray font-caption-1">
                             Hoặc đăng ký bằng
                         </h1>

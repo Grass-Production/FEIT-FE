@@ -15,7 +15,7 @@ const routesPrivate = privateRouter.map((route) => {
                     <title>{title}</title>
                 </Helmet>
                 {route.showSidebar ? (
-                    <Sidebar show={route.showSidebar}>
+                    <Sidebar show={route.showSidebar} showheader={route.showHeader}>
                         <Page />
                     </Sidebar>
                 ) : (
