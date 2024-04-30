@@ -4,7 +4,7 @@ import { getLessons } from '../../services/lessonAPI';
 import { useEffect, useState } from 'react';
 import { TableData } from './components';
 import { HeaderSearch } from '../../layouts';
-
+import { Outlet } from 'react-router-dom';
 import { CardStatistic } from '../Course/component';
 import { CardCrud, CardView, CardItem } from './components';
 import {
@@ -26,7 +26,7 @@ export default function HomePage() {
     useEffect(() => {
         async function GetLessons() {
             const res = await getLessons();
-            setData(res);
+            setData(res.data);
         }
         GetLessons();
     }, [render]);
@@ -106,9 +106,6 @@ export default function HomePage() {
 
     return (
         <div className="">
-            <div className=" mb-7">
-                <CardStatistic />
-            </div>
             <div className=" mb-7">
                 <CardCrud onClickAddFile={handleCreateLessonFile} />
             </div>

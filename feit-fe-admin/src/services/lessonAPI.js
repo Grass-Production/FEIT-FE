@@ -7,7 +7,16 @@ export const getLessons = async () => {
             "Content-Type": "application / json"
         }
     })
-    return res.data.lesson.Lesson
+    return res
+}
+
+export const getLessonByIdCourse = async () => {
+    const res = await get('http://localhost:8080/api/lesson/fetch/:course_id?course_id=660b8a0c2aef1f3a28265523', {
+        headers: {
+            "Content-Type": "application / json"
+        }
+    })
+    return res
 }
 
 export const createLesson = async (newData) => {

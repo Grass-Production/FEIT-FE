@@ -42,10 +42,11 @@ export const CardView = ({
     };
     const [showFilterCourse, setShowFilterCourse] = useState(false);
     const [showFilterLesson, setShowFilterLesson] = useState(false);
-
+    const [checked, setChecked] = useState(false);
     const [showCheckbox, setShowCheckbox] = useState(false);
     const handleShowCheckbox = () => {
         setShowCheckbox(!showCheckbox);
+        setChecked(!checked);
     };
 
     const handleShowFilterCourse = () => {
@@ -102,7 +103,7 @@ export const CardView = ({
                                 <div className=" w-3/5">
                                     {showCheckbox && (
                                         <div>
-                                            <InputSection label="Chọn" className={'gap-2'} />
+                                            <InputSection Checked={checked} label="Chọn" className={'gap-2'} />
                                         </div>
                                     )}
                                     <h1 className=" text-heading-7 font-heading-7 font-plusjakartasans text-secondary-gray">
@@ -182,7 +183,7 @@ export const CardItem = ({ onClickDelete, name = 'Lập trình', quantityVocabul
     return (
         <div className=" bg-white border-t border-dashed border-secondary-gray px-12 py-6">
             <div className="">
-                <InputSection id="1" label="Chọn" />
+                <InputSection id="choose" label="Chọn" />
                 <div className=" flex justify-between items-center">
                     <div className=" flex justify-start items-center gap-7">
                         <div className=" max-w-24">

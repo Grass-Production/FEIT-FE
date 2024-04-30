@@ -6,7 +6,7 @@ export const getVocabularyByUinit = async (unitid) => {
             "Content-Type": "application / json"
         }
     })
-    return res.vocabulary.Vocabulary
+    return res
 }
 
 export const getVocabularyByLesson = async (field_of_it) => {

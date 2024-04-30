@@ -1,21 +1,18 @@
 import 'animate.css';
 
 // Hàm render các bài học trong unit.jsx
-export const RenderComponentUnitQuiz = ({ multipleChoice, fillInTheBlank, count, listen, truefalse }) => {
+export const RenderComponentUnitReview = ({ multipleChoice, fillInTheBlank, count, listen }) => {
     let componentToRender;
 
     switch (count) {
-        case 'multichoise':
+        case 0:
             componentToRender = <div className="animate__animated wow animate__fadeIn">{multipleChoice}</div>;
             break;
-        case 'fil':
+        case 1:
             componentToRender = <div className="animate__animated wow animate__fadeIn">{fillInTheBlank}</div>;
             break;
-        case 'listen':
+        case 2:
             componentToRender = <div className="animate__animated wow animate__fadeIn">{listen}</div>;
-            break;
-        case 'truefalse':
-            componentToRender = <div className="animate__animated wow animate__fadeIn">{truefalse}</div>;
             break;
         default:
             componentToRender = <div>Default Component</div>;

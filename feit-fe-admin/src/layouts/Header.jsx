@@ -4,7 +4,7 @@ import { Button, InputField } from '../components';
 import { NoneIcon } from '../svgs';
 import { IconArrowLogin, LogoFEIT, IconSearch, IconPlusCircle, IconDelete, IconPencil, ArrowCircleDown } from '../svgs';
 import { routerList, routerSidebar } from '../context';
-export const Header = () => {
+export const Header = ({ title }) => {
     const [scrolled, setScrolled] = useState(false);
     const navLinkStyle = ({ isActive }) => {
         return isActive
@@ -37,9 +37,7 @@ export const Header = () => {
         <div className="">
             <div className="flex justify-between items-center border-[4px] border-primary-black p-3 mb-7">
                 <div className="">
-                    <h1 className=" text-heading-7 font-heading-7 font-plusjakartasans text-primary-black">
-                        Quản lý bài học
-                    </h1>
+                    <h1 className=" text-heading-7 font-heading-7 font-plusjakartasans text-primary-black">{title}</h1>
                 </div>
                 <div className="flex justify-center items-center gap-6 ">
                     <img src="/src/assets/images/Avatar.png" alt="" />

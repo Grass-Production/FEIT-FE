@@ -2,7 +2,7 @@ import { routerList, routerSidebar } from '../context';
 import { NavLink } from 'react-router-dom';
 import { LogoFEIT } from '../svgs';
 import { Header, HeaderRouter } from './Header';
-export const Sidebar = ({ show, children, showheader }) => {
+export const Sidebar = ({ show, children, titleHeader }) => {
     // ----------- Active Link Router
     const navLinkStyle = ({ isActive }) => {
         return isActive
@@ -45,9 +45,8 @@ export const Sidebar = ({ show, children, showheader }) => {
             <div className=" relative flex-1 ">
                 <div className=" bg-white px-10 py-7 absolute overflow-y-auto inset-x-0 inset-y-0  ">
                     <div className=" mb-7">
-                        <Header />
+                        <Header title={titleHeader} />
                     </div>
-                    <div className=" mb-7">{showheader && <HeaderRouter />}</div>
                     <div className="">{children}</div>
                 </div>
             </div>

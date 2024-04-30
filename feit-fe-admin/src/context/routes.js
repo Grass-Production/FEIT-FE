@@ -12,17 +12,69 @@ const Vocabulary = lazy(() => import("../pages/Vocabulary"))
 const Dashboard = lazy(() => import("../pages/Dashboard"))
 const Course = lazy(() => import("../pages/Course"))
 const ManageLearn = lazy(() => import("../pages/ManageLearn"))
+const ActivityLog = lazy(() => import("../pages/ActivityLog"))
+const LessonDetail = lazy(() => import("../pages/LessonDetail"))
+const SubManageLearn = lazy(() => import("../pages/SubManageLearn"))
+
+export const CHILD = {
+    Lesson: 'lesson',
+    Unit: 'unit',
+    Vocabulary: 'vocabulary',
+    Course: 'course',
+}
+
+export const SUBCHILD = {
+    LessonDetail: 'idlesson/:idlesson'
+}
 
 export const ROUTES = {
     Dashboard: '/',
-    Course: '/course',
-    Lesson: '/lesson',
+    ActivityLog: '/logging',
+    SubManageLearn: '/managelearn/lesson/:idlesson',
     SignIn: '/signIn',
+    ManageLearn: '/managelearn',
     SignUp: '/signUp',
-    Unit: '/unit',
-    Vocabulary: '/vocabulary',
     UnitDetails: '/unit/:lessonid',
 }
+
+export const subchildRouter = [
+    {
+        title: 'FEIT',
+        href: SUBCHILD.LessonDetail,
+        component: LessonDetail,
+        showSidebar: false,
+    },
+]
+
+export const childRouter = [
+    {
+        title: 'FEIT',
+        href: CHILD.Course,
+        component: Course,
+        showSidebar: false,
+    },
+    {
+        title: 'FEIT',
+        href: CHILD.Lesson,
+        component: Lesson,
+        showSidebar: false,
+
+    },
+    {
+        title: 'FEIT',
+        href: CHILD.Vocabulary,
+        component: Vocabulary,
+        showSidebar: false,
+
+    },
+    {
+        title: 'FEIT',
+        href: CHILD.Unit,
+        component: Unit,
+        showSidebar: false,
+    },
+
+]
 
 
 export const privateRouter = [
@@ -30,62 +82,36 @@ export const privateRouter = [
         title: 'FEIT',
         href: ROUTES.Dashboard,
         component: Dashboard,
+        name: 'Dashboard',
         showSidebar: true,
-        showHeader: false,
     },
     {
         title: 'FEIT',
-        href: ROUTES.Course,
-        component: Course,
+        href: ROUTES.SubManageLearn,
+        component: SubManageLearn,
+        name: 'Dashboard',
         showSidebar: true,
-        showHeader: true,
-
     },
     {
         title: 'FEIT',
-        href: ROUTES.Lesson,
-        component: Lesson,
+        href: ROUTES.ActivityLog,
+        component: ActivityLog,
+        name: 'Activity Log',
         showSidebar: true,
-        showHeader: true,
-
     },
     {
-        title: 'FEIT',
-        href: ROUTES.Vocabulary,
-        component: Vocabulary,
+        title: 'FEIT | Quản lý bài học',
+        href: ROUTES.ManageLearn,
+        component: ManageLearn,
+        name: 'Quản lý bài học',
         showSidebar: true,
-        showHeader: true,
-
-    },
-    {
-        title: 'FEIT',
-        href: ROUTES.Unit,
-        component: Unit,
-        showSidebar: true,
-        showHeader: true,
-
-    },
-    {
-        title: 'FEIT',
-        href: ROUTES.UnitDetails,
-        component: UnitDetails,
-        showSidebar: true,
-        showHeader: true,
-
-    },
-    {
-        title: 'FEIT | Sign Up',
-        href: ROUTES.SignUp,
-        component: SignUp,
-        showSidebar: false,
-        showHeader: false,
     },
     {
         title: 'FEIT | Sign In',
         href: ROUTES.SignIn,
         component: SignIn,
+        name: 'Đăng nhập',
         showSidebar: false,
-        showHeader: false,
     },
 ]
 
@@ -99,9 +125,16 @@ export const routerSidebar = [
     },
     {
         title: 'FEIT',
-        href: ROUTES.Course,
-        component: Course,
+        href: ROUTES.ManageLearn,
+        component: ManageLearn,
         name: 'Quản lý bài học',
+        icon: IconHouse,
+    },
+    {
+        title: 'FEIT',
+        href: ROUTES.ActivityLog,
+        component: ActivityLog,
+        name: 'Activity Log',
         icon: IconHouse,
     },
     {
@@ -116,33 +149,32 @@ export const routerSidebar = [
 export const routerList = [
     {
         title: 'FEIT',
-        href: ROUTES.Course,
+        href: CHILD.Course,
         component: Course,
         name: 'Khóa học',
         icon: IconHouse,
     },
     {
         title: 'FEIT',
-        href: ROUTES.Lesson,
+        href: CHILD.Lesson,
         component: Lesson,
         name: 'Chủ đề',
         icon: IconHouse,
     },
     {
         title: 'FEIT',
-        href: ROUTES.Unit,
+        href: CHILD.Unit,
         component: Unit,
         name: 'Chương',
         icon: IconHouse,
     },
     {
         title: 'FEIT',
-        href: ROUTES.Vocabulary,
+        href: CHILD.Vocabulary,
         component: Vocabulary,
         name: 'Từ vựng',
         icon: IconHouse,
     },
-
 
 ]
 export default routerList

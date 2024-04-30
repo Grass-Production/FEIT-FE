@@ -241,9 +241,6 @@ export default function UnitDetails() {
                 </div>
             </> */}
             <div className=" mb-7">
-                <CardStatistic />
-            </div>
-            <div className=" mb-7">
                 <CardCrud onClickAddFile={handleCreateFile} />
             </div>
             <CardView

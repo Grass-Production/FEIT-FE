@@ -41,9 +41,6 @@ export default function HomePage() {
     return (
         <div className="">
             <div className=" mb-7">
-                <CardStatistic />
-            </div>
-            <div className=" mb-7">
                 <CardCrud />
             </div>
             <CardView nameLesson={nameLesson} sendidlesson={handleSetIdLesson} datalesson={lesson}>
