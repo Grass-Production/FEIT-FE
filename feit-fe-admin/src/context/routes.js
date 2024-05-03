@@ -15,6 +15,8 @@ const ManageLearn = lazy(() => import("../pages/ManageLearn"))
 const ActivityLog = lazy(() => import("../pages/ActivityLog"))
 const LessonDetail = lazy(() => import("../pages/LessonDetail"))
 const SubManageLearn = lazy(() => import("../pages/SubManageLearn"))
+const VocabularyDetail = lazy(() => import("../pages/VocabularyDetail"))
+const CourseDetail = lazy(() => import("../pages/CourseDetail"))
 
 export const CHILD = {
     Lesson: 'lesson',
@@ -23,28 +25,19 @@ export const CHILD = {
     Course: 'course',
 }
 
-export const SUBCHILD = {
-    LessonDetail: 'idlesson/:idlesson'
-}
-
 export const ROUTES = {
     Dashboard: '/',
     ActivityLog: '/logging',
-    SubManageLearn: '/managelearn/lesson/:idlesson',
     SignIn: '/signIn',
     ManageLearn: '/managelearn',
     SignUp: '/signUp',
-    UnitDetails: '/unit/:lessonid',
+    SubManageLearn: '/managelearn/details/:idlesson',
+    CourseDetail: '/managelearn/coursedetails/:idcourse',
+    LessonDetail: '/managelearn/lessondetails/:idlesson',
+    UnitDetails: '/managelearn/unitdetails/:idunit',
+    VocabularyDetail: '/managelearn/vocabularydetails/:idvocabulary',
 }
 
-export const subchildRouter = [
-    {
-        title: 'FEIT',
-        href: SUBCHILD.LessonDetail,
-        component: LessonDetail,
-        showSidebar: false,
-    },
-]
 
 export const childRouter = [
     {
@@ -89,6 +82,34 @@ export const privateRouter = [
         title: 'FEIT',
         href: ROUTES.SubManageLearn,
         component: SubManageLearn,
+        name: 'Dashboard',
+        showSidebar: true,
+    },
+    {
+        title: 'FEIT',
+        href: ROUTES.CourseDetail,
+        component: CourseDetail,
+        name: 'Dashboard',
+        showSidebar: true,
+    },
+    {
+        title: 'FEIT',
+        href: ROUTES.LessonDetail,
+        component: LessonDetail,
+        name: 'Dashboard',
+        showSidebar: true,
+    },
+    {
+        title: 'FEIT',
+        href: ROUTES.UnitDetails,
+        component: UnitDetails,
+        name: 'Dashboard',
+        showSidebar: true,
+    },
+    {
+        title: 'FEIT',
+        href: ROUTES.VocabularyDetail,
+        component: VocabularyDetail,
         name: 'Dashboard',
         showSidebar: true,
     },

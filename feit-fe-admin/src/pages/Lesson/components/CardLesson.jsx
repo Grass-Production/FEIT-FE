@@ -185,6 +185,7 @@ export const CardItem = ({
     quantityVocabulary = '51',
     createAt = '1',
     id,
+    idCourse,
 }) => {
     const handleDelete = () => {
         onClickDelete(id);
@@ -192,7 +193,7 @@ export const CardItem = ({
     return (
         <div className=" bg-white border-t border-dashed border-secondary-gray px-12 py-6">
             <div className="">
-                <InputSection id="1" label="Chọn" />
+                <InputSection id={id} label="Chọn" />
                 <div className=" flex justify-between items-center">
                     <div className=" flex justify-start items-center gap-7">
                         <div className=" max-w-24">
@@ -218,7 +219,7 @@ export const CardItem = ({
                         </div>
                     </div>
                     <div className=" flex justify-center items-center gap-3">
-                        <NavLink to={`/managelearn/lesson/${id}`}>
+                        <NavLink to={`/managelearn/lessondetails/${id}`}>
                             <IconPencilSimple w="28" h="28" color="#3C79FE" />
                         </NavLink>
                         <Button onClick={handleDelete} icon={true} left={true} title="">

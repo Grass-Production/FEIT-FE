@@ -28,7 +28,7 @@ export default function UnitDetails() {
     // const [file, setFile] = useState(null);
     const [nameLesson, setNameLesson] = useState('Programing');
     const [nameUnit, setNameUnit] = useState('');
-    const [idLesson, setIdLesson] = useState('661e94b29570433c92f0b25b');
+    const [idLesson, setIdLesson] = useState('');
     const [idUnit, setItUnit] = useState('');
     const [render, setRender] = useState(0);
 
@@ -138,17 +138,24 @@ export default function UnitDetails() {
         }
         async function GetLessons() {
             const res = await getLessons();
-            const data = await res.filter((v) => v._id === idLesson);
+            const lessondata = await res.data;
+            const data = await lessondata.filter((v) => v._id === idLesson);
             setLesson(res);
             setNameLesson(data[0].name);
         }
-        GetLessons();
         async function GetUnits() {
             const res = await getUnitByIdLesson(idLesson);
-            const data = await res.filter((v) => v._id === idUnit);
-            setUnits(res);
-            setNameUnit(data[0].name);
+
+            if (res !== null) {
+                const lessondata = await res.unit.Unit;
+                const data = await lessondata.filter((v) => v._id === idUnit);
+                setUnits(lessondata);
+                console.log(lessondata);
+                setNameUnit(data[0].name);
+            }
         }
+        GetLessons();
+
         GetVocabulary();
         GetUnits();
     }, [idLesson, idUnit, render]);

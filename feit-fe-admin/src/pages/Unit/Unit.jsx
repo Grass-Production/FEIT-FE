@@ -11,7 +11,7 @@ export default function HomePage() {
     const [lesson, setLesson] = useState([]);
     const [changeUI, setChangeUI] = useState(false);
     const [showPopUp, setShowPopUp] = useState(false);
-    const [idLesson, setIdLesson] = useState('661e94b29570433c92f0b25b');
+    const [idLesson, setIdLesson] = useState('');
     const [nameLesson, setNameLesson] = useState('Programing');
     function handleChangeUI(changeUI) {
         setChangeUI(changeUI);
@@ -25,12 +25,13 @@ export default function HomePage() {
     useEffect(() => {
         async function GetUnits() {
             const res = await getUnitByIdLesson(idLesson);
-            setData(res);
+            setData(res.unit.Unit);
         }
         async function GetLessons() {
             const res = await getLessons();
-            const data = await res.filter((v) => v._id === idLesson);
-            setLesson(res);
+            const lessondata = await res.data;
+            const data = await lessondata.filter((v) => v._id === idLesson);
+            setLesson(lessondata);
             setNameLesson(data[0].name);
         }
         GetLessons();
@@ -47,7 +48,7 @@ export default function HomePage() {
                 {data != null && (
                     <>
                         {data.map((v) => {
-                            return <CardItem key={v._id} name={v.name} />;
+                            return <CardItem id={v._id} key={v._id} name={v.name} />;
                         })}
                     </>
                 )}

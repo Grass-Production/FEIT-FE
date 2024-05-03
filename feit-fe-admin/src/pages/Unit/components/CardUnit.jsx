@@ -183,7 +183,7 @@ export const CardItem = ({ onClickDelete, name = 'Lập trình', quantityVocabul
     return (
         <div className=" bg-white border-t border-dashed border-secondary-gray px-12 py-6">
             <div className="">
-                <InputSection id="choose" label="Chọn" />
+                <InputSection id={id} label="Chọn" />
                 <div className=" flex justify-between items-center">
                     <div className=" flex justify-start items-center gap-7">
                         <div className=" max-w-24">
@@ -203,7 +203,9 @@ export const CardItem = ({ onClickDelete, name = 'Lập trình', quantityVocabul
                         </div>
                     </div>
                     <div className=" flex justify-center items-center gap-3">
-                        <IconPencilSimple w="28" h="28" color="#3C79FE" />
+                        <NavLink to={`/managelearn/unitdetails/${id}`}>
+                            <IconPencilSimple w="28" h="28" color="#3C79FE" />
+                        </NavLink>
                         <Button onClick={handleDelete} icon={true} left={true} title="">
                             <IconDelete size="28" color="#3C79FE" />
                         </Button>

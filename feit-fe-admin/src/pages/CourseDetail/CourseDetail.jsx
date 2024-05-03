@@ -8,7 +8,7 @@ import { getUnitByIdLesson } from '../../services/unitAPI';
 import { getVocabularyByUinit } from '../../services/vocabulary';
 import { useParams } from 'react-router-dom';
 
-export default function LessonDetail() {
+export default function CourseDetail() {
     const [lesson, setLesson] = useState([]);
     const [unit, setUnit] = useState([]);
     const [vocabulary, setVocabulary] = useState([]);
@@ -63,6 +63,10 @@ export default function LessonDetail() {
                                 {unit.map((v) => {
                                     return <CardUnit key={v._id} idUnit={v._id} name={v.name} />;
                                 })}
+                                {/* <CardUnit />
+                             <CardUnit />
+                             <CardUnit />
+                             <CardUnit /> */}
                             </div>
                         </div>
                     </div>
