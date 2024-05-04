@@ -2,7 +2,7 @@ import { FormSignIn } from './component';
 import { useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
 import { useState } from 'react';
-
+import { Button } from '../../components';
 import { Login } from '../../services/loginAPI';
 
 import { useNavigate } from 'react-router-dom';
@@ -70,7 +70,12 @@ export default function SignIn() {
                         <h1 className=" text-center text-heading-4 text-primary-black font-heading-4 mb-10">
                             Đăng nhập
                         </h1>
-                        <button onClick={LoginGoogle}>test Login</button>
+                        <Button
+                            onClick={LoginGoogle}
+                            title="Đăng nhập Google"
+                            className=" w-full"
+                            color="primary"></Button>
+                        {/* <button onClick={LoginGoogle}>test Login</button> */}
                         <h1 className=" mt-10 text-center mb-5 text-caption-1 font-bitter text-secondary-gray font-caption-1">
                             Hoặc đăng nhập bằng
                         </h1>

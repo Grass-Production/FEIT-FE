@@ -28,7 +28,7 @@ export default function LessonDetail({ name }) {
                     return;
                 }
                 setLoading(!loading);
-                setUnits(res);
+                setUnits(res.unit.unit);
                 console.log(res);
             } catch (error) {
                 console.log(error);

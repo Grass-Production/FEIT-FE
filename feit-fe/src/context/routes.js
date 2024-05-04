@@ -1,27 +1,35 @@
-import { lazy } from "react";
+import { lazy } from 'react';
 
+import {
+    IconLaptop,
+    IconHouse,
+    IconBell,
+    IconList,
+    IconChartBar,
+    IconSearch,
+    IconUser,
+    IconClockClockwise,
+    IconCrown,
+} from '../svgs';
 
-import { IconLaptop, IconHouse, IconBell, IconList, IconChartBar, IconSearch, IconUser, IconClockClockwise, IconCrown } from "../svgs";
-
-const Announce = lazy(() => import("../pages/Announce"))
-const History = lazy(() => import("../pages/History"))
-const HomePage = lazy(() => import("../pages/HomePage"))
-const LandingPage = lazy(() => import("../pages/LandingPage"))
-const LeaderBoard = lazy(() => import("../pages/LeaderBoard"))
-const LessonDetail = lazy(() => import("../pages/Lesson/LessonDetail"))
-const Profile = lazy(() => import("../pages/Profile"))
-const SignIn = lazy(() => import("../pages/SignIn"))
-const SignUp = lazy(() => import("../pages/SignUp"))
-const Welcome = lazy(() => import("../pages/Welcome"))
-const Unit = lazy(() => import("../pages/Unit"))
-const UnitReview = lazy(() => import("../pages/UnitReview"))
-const Learn = lazy(() => import("../pages/Learn"))
-const List = lazy(() => import("../pages/List"))
-const Search = lazy(() => import("../pages/Search"))
-const Statistic = lazy(() => import("../pages/Statistic"))
-const ListDetails = lazy(() => import("../pages/ListDetails"))
-const UnitQuiz = lazy(() => import("../pages/UnitQuiz"))
-
+const Announce = lazy(() => import('../pages/Announce'));
+const History = lazy(() => import('../pages/History'));
+const HomePage = lazy(() => import('../pages/HomePage'));
+const LandingPage = lazy(() => import('../pages/LandingPage'));
+const LeaderBoard = lazy(() => import('../pages/LeaderBoard'));
+const LessonDetail = lazy(() => import('../pages/Lesson/LessonDetail'));
+const Profile = lazy(() => import('../pages/Profile'));
+const SignIn = lazy(() => import('../pages/SignIn'));
+const SignUp = lazy(() => import('../pages/SignUp'));
+const Welcome = lazy(() => import('../pages/Welcome'));
+const Unit = lazy(() => import('../pages/Unit'));
+const UnitReview = lazy(() => import('../pages/UnitReview'));
+const Learn = lazy(() => import('../pages/Learn'));
+const List = lazy(() => import('../pages/List'));
+const Search = lazy(() => import('../pages/Search'));
+const Statistic = lazy(() => import('../pages/Statistic'));
+const ListDetails = lazy(() => import('../pages/ListDetails'));
+const UnitQuiz = lazy(() => import('../pages/UnitQuiz'));
 
 export const ROUTES = {
     Announce: '/announce',
@@ -42,7 +50,7 @@ export const ROUTES = {
     Search: '/search',
     Statistic: '/statistic',
     ListDetails: '/list/:list',
-}
+};
 
 export const publicRouter = [
     {
@@ -50,7 +58,6 @@ export const publicRouter = [
         href: ROUTES.Welcome,
         component: Welcome,
         showSidebar: false,
-
     },
     {
         title: 'FEIT',
@@ -70,8 +77,7 @@ export const publicRouter = [
         component: SignIn,
         showSidebar: false,
     },
-]
-
+];
 
 export const privateRouter = [
     {
@@ -94,7 +100,6 @@ export const privateRouter = [
         component: Search,
         showSidebar: true,
         name: 'Học tập',
-
     },
     {
         title: 'FEIT | Lesson',
@@ -123,7 +128,6 @@ export const privateRouter = [
         component: LeaderBoard,
         showSidebar: true,
         name: 'Bảng xếp hạng',
-
     },
     {
         title: 'FEIT | Announce',
@@ -131,7 +135,6 @@ export const privateRouter = [
         component: Announce,
         showSidebar: true,
         name: 'Thông báo',
-
     },
     {
         title: 'FEIT | Statistic',
@@ -146,7 +149,6 @@ export const privateRouter = [
         component: List,
         showSidebar: true,
         name: 'List',
-
     },
     {
         title: 'FEIT | History',
@@ -154,7 +156,6 @@ export const privateRouter = [
         component: History,
         showSidebar: true,
         name: 'Lịch sử',
-
     },
     {
         title: 'FEIT | List',
@@ -162,7 +163,6 @@ export const privateRouter = [
         component: ListDetails,
         showSidebar: true,
         name: 'Lịch sử',
-
     },
     {
         title: 'FEIT | Profile',
@@ -170,21 +170,18 @@ export const privateRouter = [
         component: Profile,
         showSidebar: true,
         name: 'Tài khoản',
-
     },
     {
         title: 'FEIT | Welcome',
         href: ROUTES.Welcome,
         component: Welcome,
         showSidebar: false,
-
     },
     {
         title: 'FEIT',
         href: ROUTES.LandingPage,
         component: LandingPage,
         showSidebar: false,
-
     },
 
     {
@@ -192,7 +189,6 @@ export const privateRouter = [
         href: ROUTES.SignUp,
         component: SignUp,
         showSidebar: false,
-
     },
     {
         title: 'FEIT | Sign In',
@@ -200,7 +196,7 @@ export const privateRouter = [
         component: SignIn,
         showSidebar: false,
     },
-]
+];
 
 export const routerList = [
     {
@@ -216,7 +212,6 @@ export const routerList = [
         component: Learn,
         name: 'Học tập',
         icon: IconLaptop,
-
     },
     {
         title: 'FEIT | Search',
@@ -224,7 +219,6 @@ export const routerList = [
         component: Search,
         name: 'Tìm kiếm',
         icon: IconSearch,
-
     },
     {
         title: 'FEIT | LeaderBoard',
@@ -232,7 +226,6 @@ export const routerList = [
         component: LeaderBoard,
         name: 'Bảng xếp hạng',
         icon: IconChartBar,
-
     },
     {
         title: 'FEIT | Announce',
@@ -240,7 +233,6 @@ export const routerList = [
         component: Announce,
         name: 'Thông báo',
         icon: IconBell,
-
     },
     {
         title: 'FEIT | Statistic',
@@ -249,13 +241,7 @@ export const routerList = [
         name: 'Thống kê',
         icon: IconCrown,
     },
-    {
-        title: 'FEIT | History',
-        href: ROUTES.History,
-        component: History,
-        name: 'Lịch sử',
-        icon: IconClockClockwise,
-    },
+
     {
         title: 'FEIT | List',
         href: ROUTES.List,
@@ -270,6 +256,5 @@ export const routerList = [
         name: 'Tài khoản',
         icon: IconUser,
     },
-
-]
-export default routerList
+];
+export default routerList;

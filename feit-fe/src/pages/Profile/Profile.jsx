@@ -9,8 +9,10 @@ import { useNavigate } from 'react-router-dom';
 export default function Profile() {
     const [inforUser, setInforUser] = useState({
         full_name: '',
+        email: '',
         phone: '',
         specialize: '',
+        avatar_url: '',
     });
     const navigate = useNavigate();
 
@@ -21,14 +23,14 @@ export default function Profile() {
             if (token) {
                 const res = await getInforUser();
                 if (res) {
-                    setInforUser(res.user);
+                    setInforUser(res);
                 }
                 console.log(res);
             }
         }
         getUser();
     }, []);
-
+    console.log(inforUser);
     const handleLogout = async () => {
         const res = await logout();
         if (res.status === 'success') {
@@ -56,11 +58,12 @@ export default function Profile() {
                 </div>
                 <div className=" flex justify-center mt-[-8%] gap-8 ">
                     <div className="shadow-card-home rounded-[20px] bg-white border-[4px] px-6 py-12 border-secondary-gray">
-                        <CardImage onClick={handleLogout} />
+                        <CardImage onClick={handleLogout} img={inforUser.avatar_url} />
                     </div>
                     <div className="shadow-card-home rounded-[20px] bg-white w-2/4 border-[4px] px-6 py-12 border-secondary-gray">
                         <CardInformation
                             name={inforUser.full_name}
+                            email={inforUser.email}
                             phone={inforUser.phone}
                             specialize={inforUser.specialize}
                         />

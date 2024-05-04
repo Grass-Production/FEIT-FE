@@ -36,7 +36,8 @@ export default function Search() {
         async function getApi() {
             try {
                 const res = await getVocabularyByWord(value);
-                setWord(res);
+                setWord(res.data.vocabulary);
+                console.log(res.data.vocabulary);
                 // if (res == null || res == '') {
                 //     setWord([
                 //         {

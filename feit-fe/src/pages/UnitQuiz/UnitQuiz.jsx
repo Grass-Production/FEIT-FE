@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Button, LoadingProgressBar } from '../../components';
 // import { RenderComponentUnitReview } from '../../untils/renderComponentUnitReview';
-import { RenderComponentUnitQuiz } from '../../untils/renderComponentUnitReview';
+import { RenderComponentUnitQuiz } from '../../untils/RenderComponentUnitQuiz';
 import { IconXCircle } from '../../svgs';
 import { Multiplechoice, FillInTheBlankReview, Listen, TrueFalse } from './component';
 import { Start } from './component';
