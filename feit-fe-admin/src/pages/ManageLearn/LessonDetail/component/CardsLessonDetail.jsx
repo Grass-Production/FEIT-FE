@@ -1,9 +1,10 @@
-import { Button, InputSection } from '../../../components';
-import { IconPencilSimple, IconDelete, IconDotsThreeVertical, IconGear } from '../../../svgs';
+import { Button, InputSection } from '../../../../components';
+import { IconPencilSimple, IconDelete, IconDotsThreeVertical, IconGear } from '../../../../svgs';
 import { useEffect, useState } from 'react';
-import { getVocabularyByUinit } from '../../../services/vocabulary';
+import { getVocabularyByUinit } from '../../../../services/vocabulary';
+import { NavLink } from 'react-router-dom';
 
-export const CardCourse = () => {
+export const CardCourse = ({ id = 'test' }) => {
     return (
         <div>
             <InputSection size={'w-6 h-6'} label="Chọn" />
@@ -26,7 +27,7 @@ export const CardCourse = () => {
                     </div>
                 </div>
 
-                <div className=" flex">
+                <div className=" flex items-center">
                     <Button
                         className=" text-secondary-gray w-full border-none hover:bg-slate-300 rounded-none"
                         icon={true}
@@ -35,21 +36,23 @@ export const CardCourse = () => {
                         title="">
                         <IconDelete size="28" color="#3C79FE" />
                     </Button>
-                    <Button
-                        className=" text-secondary-gray w-full border-none hover:bg-slate-300 rounded-none"
-                        icon={true}
-                        color={'primary'}
-                        right={true}
-                        title="">
-                        <IconGear />
-                    </Button>
+                    <NavLink to={`/managelearn/coursedetails/${id}/setting`}>
+                        <Button
+                            className=" text-secondary-gray w-full border-none hover:bg-slate-300 rounded-none"
+                            icon={true}
+                            color={'primary'}
+                            right={true}
+                            title="">
+                            <IconGear />
+                        </Button>
+                    </NavLink>
                 </div>
             </div>
         </div>
     );
 };
 
-export const CardLesson = () => {
+export const CardLesson = ({ id = 'test' }) => {
     return (
         <div>
             <InputSection label="Chọn" />
@@ -77,20 +80,22 @@ export const CardLesson = () => {
                     title="Xóa">
                     <IconDelete size="28" color="#3C79FE" />
                 </Button>
-                <Button
-                    className=" text-secondary-gray w-full border-none hover:bg-slate-300 rounded-none"
-                    icon={true}
-                    color={'primary'}
-                    right={true}
-                    title="Tùy chỉnh">
-                    <IconGear />
-                </Button>
+                <NavLink to={`/managelearn/lessondetails/${id}/setting`}>
+                    <Button
+                        className=" text-secondary-gray w-full border-none hover:bg-slate-300 rounded-none"
+                        icon={true}
+                        color={'primary'}
+                        right={true}
+                        title="Tùy chỉnh">
+                        <IconGear />
+                    </Button>
+                </NavLink>
             </div>
         </div>
     );
 };
 
-export const RowVocabulary = ({ word }) => {
+export const RowVocabulary = ({ word, id }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleDropdown = () => {
@@ -123,14 +128,16 @@ export const RowVocabulary = ({ word }) => {
                                 right={true}>
                                 <IconDelete />
                             </Button>
-                            <Button
-                                color={'primary'}
-                                className="text-body-2 font-body-2 border-none rounded-none text-secondary-gray font-plusjakartasans"
-                                title="Tùy chỉnh"
-                                icon={true}
-                                right={true}>
-                                <IconGear />
-                            </Button>
+                            <NavLink to={`/managelearn/vocabularydetails/${id}/setting`}>
+                                <Button
+                                    color={'primary'}
+                                    className="text-body-2 font-body-2 border-none rounded-none text-secondary-gray font-plusjakartasans"
+                                    title="Tùy chỉnh"
+                                    icon={true}
+                                    right={true}>
+                                    <IconGear />
+                                </Button>
+                            </NavLink>
                         </div>
                     </>
                 )}
@@ -167,7 +174,7 @@ export const CardUnit = ({ name, idUnit }) => {
                 <div className="flex flex-col gap-1 justify-between items-start">
                     {vocabulary != null &&
                         vocabulary.map((v, i) => {
-                            return <RowVocabulary key={v._id} word={v.word} />;
+                            return <RowVocabulary id={v._id} key={v._id} word={v.word} />;
                         })}
                 </div>
             </div>

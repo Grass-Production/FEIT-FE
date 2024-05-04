@@ -1,7 +1,7 @@
-import { Button, InputSection } from '../../../components';
-import { IconPencilSimple, IconDelete, IconDotsThreeVertical, IconGear } from '../../../svgs';
+import { Button, InputSection } from '../../../../components';
+import { IconPencilSimple, IconDelete, IconDotsThreeVertical, IconGear } from '../../../../svgs';
 import { useEffect, useState } from 'react';
-import { getVocabularyByUinit } from '../../../services/vocabulary';
+import { getVocabularyByUinit } from '../../../../services/vocabulary';
 
 export const CardCourse = () => {
     return (

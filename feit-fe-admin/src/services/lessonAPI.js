@@ -80,6 +80,26 @@ export const createLessonFile = async (newData) => {
     }
 }
 
+export const createLessonFileLoading = async (newData, sendprogress) => {
+    const formData = new FormData();
+    formData.append('files', newData);
+    try {
+        const res = await axios.post('http://localhost:8080/api/admin/lesson/create/file', formData, {
+            withCredentials: true,
+            // Theo dõi % hoàn thành
+            onUploadProgress: (progressEvent) => {
+                const percentComplete = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+                sendprogress(percentComplete);
+            },
+        });
+        return res;
+
+    } catch (error) {
+        console.log('error : ', error)
+    }
+};
+
+
 export const updateLesson = async (newData, lessonid) => {
     const token = localStorage.getItem('access_token')
     const res = await put(`http://localhost:8080/api/admin/lesson/update/:_id?_id=${lessonid}`,
