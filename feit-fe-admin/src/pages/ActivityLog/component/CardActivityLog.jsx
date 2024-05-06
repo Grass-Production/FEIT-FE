@@ -4,7 +4,7 @@ import Stack from '@mui/material/Stack';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
-export const CardView = ({ children, sendPage }) => {
+export const CardView = ({ children, sendPage, count }) => {
     const [page, setPage] = useState(1);
 
     const handleChange = (event, value) => {
@@ -27,12 +27,9 @@ export const CardView = ({ children, sendPage }) => {
                         </h1>
                         <div className=" w-2/5 border-l border-primary-black pl-6">
                             <div className=" flex justify-start items-center ">
-                                <h1 className=" text-body-3 font-body-3 font-plusjakartasans text-primary-black">
-                                    2 Khóa học
-                                </h1>
                                 <Stack spacing={2}>
                                     <Pagination
-                                        count={5}
+                                        count={count}
                                         siblingCount={0}
                                         page={page}
                                         onChange={handleChange}
@@ -54,6 +51,57 @@ export const CardView = ({ children, sendPage }) => {
                 </div>
             </div>
         </div>
+    );
+};
+
+export const TableData = ({ data }) => {
+    return (
+        <table className=" w-full">
+            <tr className=" justify-between items-center bg-primary-blue-400  ">
+                <th className=" px-5 border border-primary-black border-t-0 py-2 text-body-1 font-body-1 text-white font-plusjakartasans">
+                    Client IP
+                </th>
+                <th className=" px-5 border border-primary-black border-t-0 py-2 text-body-1 font-body-1 text-white font-plusjakartasans">
+                    Status code
+                </th>
+                <th className=" px-5 border border-primary-black border-t-0 py-2 text-body-1 font-body-1 text-white font-plusjakartasans">
+                    Path
+                </th>
+                <th className=" px-5 border border-primary-black border-t-0 py-2 text-body-1 font-body-1 text-white font-plusjakartasans">
+                    Latency
+                </th>
+                <th className=" px-5 border border-primary-black border-t-0 py-2 text-body-1 font-body-1 text-white font-plusjakartasans">
+                    Thời gian hoạt động
+                </th>
+                <th className=" px-5 border border-primary-black border-t-0 py-2 text-body-1 font-body-1 text-white font-plusjakartasans">
+                    Thời gian hoạt động
+                </th>
+            </tr>
+            {data.map((v, i) => {
+                return (
+                    <tr key={i} className=" justify-between items-center ">
+                        <td className=" px-5 border border-primary-black text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
+                            {v.client_ip}
+                        </td>
+                        <td className=" px-5 border border-primary-black text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
+                            {v.status_code}
+                        </td>
+                        <td className=" px-5 border border-primary-black text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
+                            {v.path}
+                        </td>
+                        <td className=" px-5 border border-primary-black text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
+                            {v.latency}
+                        </td>
+                        <td className=" px-5 border border-primary-black text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
+                            {v.activity_time}
+                        </td>
+                        <td className=" px-5 border border-primary-black text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
+                            {v.expire_at}
+                        </td>
+                    </tr>
+                );
+            })}
+        </table>
     );
 };
 

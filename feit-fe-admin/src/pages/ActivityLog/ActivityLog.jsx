@@ -1,19 +1,21 @@
-import { CardView, CardItem } from './component';
+import { CardView, CardItem, TableData } from './component';
 import { getActivityLog } from '../../services/activitylogAPI';
 import { useEffect, useState } from 'react';
 
 export default function ActivityLog() {
     const [activitylog, setActivityLog] = useState([]);
+    const [pageCurrent, setPageCurrent] = useState('');
     const [page, setPage] = useState('');
     const [loading, setLoading] = useState(true);
     useEffect(() => {
         const GetActivityLog = async () => {
             try {
                 setLoading(true);
-                const res = await getActivityLog(page);
+                const res = await getActivityLog(pageCurrent);
                 if ((res.status = '"success"')) {
                     setLoading(false);
-                    setActivityLog(res.activity_log.ActivityLog);
+                    setActivityLog(res.activity_log.activity_log);
+                    setPage(res.activity_log.page);
                 }
                 console.log(res);
             } catch (error) {
@@ -21,20 +23,21 @@ export default function ActivityLog() {
             }
         };
         GetActivityLog();
-    }, [page]);
-    console.log('page:', page);
+    }, [pageCurrent]);
+    console.log('page:', pageCurrent);
 
-    const handleSetPage = (page) => {
-        setPage(page);
+    const handleSetPage = (pageCurrent) => {
+        setPageCurrent(pageCurrent);
     };
 
     return (
         <div className="">
-            <CardView sendPage={handleSetPage}>
+            <CardView sendPage={handleSetPage} count={page}>
                 {loading ? (
                     <div className=" animate-pulse h-[40vh] w-full bg-gray-200"></div>
                 ) : (
-                    <CardItem data={activitylog} />
+                    // <CardItem data={activitylog} />
+                    <TableData data={activitylog} />
                 )}
             </CardView>
         </div>

@@ -151,8 +151,8 @@ export const CardUnit = ({ name, idUnit }) => {
     useEffect(() => {
         async function GetVocabulary() {
             const res = await getVocabularyByUinit(idUnit);
-            setVocabulary(res.vocabulary.Vocabulary);
-            console.log('res :', res.vocabulary.Vocabulary);
+            setVocabulary(res.vocabulary.vocabulary);
+            console.log('res :', res.vocabulary.vocabulary);
         }
         GetVocabulary();
     }, []);

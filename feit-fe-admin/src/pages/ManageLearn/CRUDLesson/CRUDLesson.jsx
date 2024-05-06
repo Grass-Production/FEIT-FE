@@ -1,4 +1,4 @@
-import { CardUpdate } from './component';
+import { CardUpdate, CardCreateOne } from './component';
 import { NavLink } from 'react-router-dom';
 import { InputSection } from '../../../components';
 import { useState } from 'react';
@@ -59,9 +59,7 @@ export default function CRUDLesson() {
                         />
                     </div>
                 </div>
-                <div className=" w-1/2 bg-white">
-                    <CardUpdate />
-                </div>
+                <div className=" w-1/2 bg-white">{isCheck ? <CardCreateOne /> : <CardUpdate />}</div>
             </div>
         </div>
     );

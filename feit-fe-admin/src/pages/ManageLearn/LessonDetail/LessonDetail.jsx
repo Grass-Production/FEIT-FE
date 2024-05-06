@@ -17,14 +17,14 @@ export default function LessonDetail() {
     useEffect(() => {
         async function GetLessonByIdCourse() {
             const res = await getLessonByIdCourse();
-            console.log(res.lesson.Lesson);
-            setLesson(res.lesson.Lesson);
+            console.log('lesson', res);
+            setLesson(res);
         }
 
         async function GetUnit() {
             const res = await getUnitByIdLesson(idlesson);
             console.log(res);
-            setUnit(res.unit.Unit);
+            setUnit(res.unit);
         }
 
         async function GetVocabulary() {

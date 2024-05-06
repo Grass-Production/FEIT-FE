@@ -16,7 +16,7 @@ export const getVocabularyByLesson = async (field_of_it) => {
         }
     })
 
-    return res.data.word.Vocabulary
+    return res.data.word.vocabulary
 }
 
 export const getVocabulary = async () => {
@@ -25,7 +25,7 @@ export const getVocabulary = async () => {
             "Content-Type": "application / json"
         }
     })
-    return res.data.word.Vocabulary
+    return res.data.word.vocabulary
 }
 
 export const getVocabularyByWord = async (word) => {
@@ -35,7 +35,7 @@ export const getVocabularyByWord = async (word) => {
         }
 
     })
-    return res.data.Vocabulary
+    return res.data.vocabulary
 }
 
 export const createVocabulary = async (newData) => {
