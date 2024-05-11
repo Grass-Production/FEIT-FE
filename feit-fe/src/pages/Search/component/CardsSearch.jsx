@@ -1,7 +1,14 @@
 import { IconHeartSearch } from '../../../svgs';
 import { PopUp } from './PopUp';
 import { useState } from 'react';
-export const CardsSearch = ({ word = 'Funcion', programing = 'Lập trình', partofspeech, pronunciation, example }) => {
+export const CardsSearch = ({
+    word = 'Funcion',
+    programing = 'Lập trình',
+    partofspeech,
+    pronunciation,
+    example,
+    sound,
+}) => {
     const [showPopup, setShowPopup] = useState(false);
     const handlePopup = () => {
         setShowPopup(!showPopup);
@@ -29,6 +36,7 @@ export const CardsSearch = ({ word = 'Funcion', programing = 'Lập trình', par
                     partofspeech={partofspeech}
                     pronunciation={pronunciation}
                     example={example}
+                    sound={sound}
                     OnClose={handlePopup}
                 />
             )}

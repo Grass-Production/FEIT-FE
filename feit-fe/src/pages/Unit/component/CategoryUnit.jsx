@@ -1,4 +1,4 @@
-import { InputField } from '../../../components';
+import { InputField, Sound } from '../../../components';
 import { IconSpeakerHigh, IconSpeakerLow } from '../../../svgs';
 
 import { IconNote } from '../../../svgs';
@@ -19,7 +19,7 @@ export const Tip = () => {
     );
 };
 
-export const Listen = ({ word, explain_vie }) => {
+export const Listen = ({ word, explain_vie, sound }) => {
     return (
         <div className="  max-h-[500px] h-[60vh] flex flex-col justify-around items-center">
             <div>
@@ -32,9 +32,10 @@ export const Listen = ({ word, explain_vie }) => {
             </div>
             <div className=" w-3/4 flex justify-center items-center mx-auto">
                 <div className=" w-1/2 ">
-                    <div className=" m-auto border-[4px] flex justify-center items-center border-secondary-gray w-44 h-44 rounded-[40px] bg-white">
+                    {/* <div className=" m-auto border-[4px] flex justify-center items-center border-secondary-gray w-44 h-44 rounded-[40px] bg-white">
                         <IconSpeakerHigh sizew="100" sizeh="100" color="#14121B" />
-                    </div>
+                    </div> */}
+                    <Sound sound={sound} />
                 </div>
                 <div className=" w-1/2 ">
                     <div className=" mb-8">
@@ -92,7 +93,7 @@ export const Example = ({ example_vie, example_eng }) => {
     );
 };
 
-export const FillInTheBlank = ({ field, result, right = false, error = false, inputValue, handleChange }) => {
+export const FillInTheBlank = ({ field, result, right = false, error = false, inputValue, handleChange, sound }) => {
     return (
         <div className=" w-[56.563rem] max-h-[750px] h-[70vh] flex flex-col justify-around items-center">
             <div>
@@ -106,9 +107,10 @@ export const FillInTheBlank = ({ field, result, right = false, error = false, in
             <div className="mx-auto w-11/12">
                 <div className="">
                     <div className=" flex gap-8 justify-center">
-                        <div className="  mb-10 border-[4px] border-secondary-gray w-44 h-44 flex justify-center items-center rounded-[40px] bg-white">
+                        {/* <div className="  mb-10 border-[4px] border-secondary-gray w-44 h-44 flex justify-center items-center rounded-[40px] bg-white">
                             <IconSpeakerHigh sizeh="100" sizew="100" color="#14121B" />
-                        </div>
+                        </div> */}
+                        <Sound sound={sound} />
                         <div className="  mb-10 border-[4px] border-secondary-gray w-44 h-44 flex justify-center items-center rounded-[40px] bg-white">
                             <IconSpeakerLow />
                         </div>

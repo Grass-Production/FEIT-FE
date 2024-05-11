@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { Button, InputSection } from '../../../components';
+import { Button, InputSection, Sound } from '../../../components';
 import 'animate.css';
 import { IconSpeakerHigh, IconHeart, IconPlusCircle } from '../../../svgs';
 
-export const PopUp = ({ OnClose, work, partofspeech, pronunciation, example }) => {
+export const PopUp = ({ OnClose, work, partofspeech, pronunciation, example, sound }) => {
     const [show, setShow] = useState(false);
     return (
         <div className="">
@@ -24,12 +24,11 @@ export const PopUp = ({ OnClose, work, partofspeech, pronunciation, example }) =
                                     <h1 className=" mb-5 text-caption-1 font-caption-1 font-plusjakartasans text-primary-black">
                                         Tiếng anh
                                     </h1>
-                                    <div className=" flex justify-start items-center gap-3 mb-4">
+                                    <h1>{work}</h1>
+                                    {/* <div className=" flex justify-start items-center gap-3 mb-4">
                                         <IconSpeakerHigh />
-                                        <h1 className=" text-heading-6 font-heading-6 font-plusjakartasans text-primary-blue-800 ">
-                                            {work}
-                                        </h1>
-                                    </div>
+                                    </div> */}
+                                    <Sound />
                                     <div className=" mb-5">
                                         <h1 className=" mb-2 text-caption-1 font-caption-1 font-plusjakartasans text-secondary-gray">
                                             Loại từ

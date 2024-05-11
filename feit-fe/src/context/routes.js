@@ -22,7 +22,7 @@ const Statistic = lazy(() => import("../pages/Statistic"))
 const ListDetails = lazy(() => import("../pages/ListDetails"))
 const UnitQuiz = lazy(() => import("../pages/UnitQuiz"))
 const VerifyCode = lazy(() => import("../pages/VerifyCode"))
-
+const ForgetPassword = lazy(() => import("../pages/ForgetPassword"))
 
 export const ROUTES = {
     Announce: '/announce',
@@ -33,15 +33,16 @@ export const ROUTES = {
     Learn: '/learn',
     LessonDetail: '/learn/lesson/:lessonid',
     Profile: '/profile',
-    SignIn: '/signIn',
-    SignUp: '/signUp',
+    SignIn: '/signin',
+    SignUp: '/signup',
     Welcome: '/welcome',
     Unit: '/learn/lesson/:lessonid/unit/:unitid',
     UnitReview: '/learn/lesson/:lessonid/exercise/:exercise',
     UnitQuiz: '/learn/lesson/:lessonid/quiz/:quiz',
     List: '/list',
     Search: '/search',
-    VerifyCode: '/verify',
+    VerifyCode: '/verify/:verifytype',
+    ForgetPassword: '/forgetpassword',
     Statistic: '/statistic',
     ListDetails: '/list/:list',
 }
@@ -53,6 +54,18 @@ export const publicRouter = [
         component: Welcome,
         showSidebar: false,
 
+    },
+    {
+        title: 'FEIT | Unit',
+        href: ROUTES.VerifyCode,
+        component: VerifyCode,
+        showSidebar: false,
+    },
+    {
+        title: 'FEIT | Forget Password',
+        href: ROUTES.ForgetPassword,
+        component: ForgetPassword,
+        showSidebar: false,
     },
     {
         title: 'FEIT',
@@ -77,9 +90,14 @@ export const publicRouter = [
 
 export const privateRouter = [
     {
-        title: 'FEIT | Unit',
+        title: 'FEIT | VerifyCode',
         href: ROUTES.VerifyCode,
         component: VerifyCode,
+    },
+    {
+        title: 'FEIT | Forget Password',
+        href: ROUTES.ForgetPassword,
+        component: ForgetPassword,
     },
     {
         title: 'FEIT',

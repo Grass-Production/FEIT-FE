@@ -23,7 +23,7 @@ export default function LessonDetail({ name }) {
                 const resLesson = await getLessons();
                 console.log('res: ', res);
                 console.log('resLesson: ', resLesson);
-                const lessons = resLesson.data;
+                const lessons = await resLesson.data;
                 const name = lessons.filter((value) => value._id === lessonid);
                 console.log(name);
                 setNameLesson(name);
@@ -78,11 +78,13 @@ export default function LessonDetail({ name }) {
             },
         ],
     };
+
     return (
         <div className="px-10">
             <NavLink to="/learn">
                 <IconArrowUpLeft size="40" className={' mt-8 border bg-white border-primary-black'} />
             </NavLink>
+
             <div className=" flex flex-col  ">
                 <div className=" flex justify-center mb-20 ">
                     <div className="  ">

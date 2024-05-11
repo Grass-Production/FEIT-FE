@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Button, LoadingProgressBar } from '../../components';
+import { Button, LoadingProgressBar, Sound } from '../../components';
 import { RenderComponentUnit } from '../../untils/renderComponentUnit';
 import { IconXCircle } from '../../svgs';
 import { NavLink, useParams } from 'react-router-dom';
@@ -20,6 +20,7 @@ export default function Unit() {
         pronunciation: '',
         example: '',
         field_of_it: '',
+        link_url: '',
     });
 
     useEffect(() => {
@@ -27,7 +28,7 @@ export default function Unit() {
             try {
                 const vocabularys = await getVocabulary(unitid);
                 const res = vocabularys.vocabulary.vocabulary;
-                console.log('res', res);
+                console.log('res :', res);
                 setVocabulary({
                     word: res[index].word,
                     part_of_speech: res[index].part_of_speech,
@@ -36,6 +37,7 @@ export default function Unit() {
                     example_vie: res[index].example_vie,
                     example_eng: res[index].example_eng,
                     field_of_it: res[index].field_of_it,
+                    link_url: res[index].link_url,
                 });
 
                 setVocabularys(res);
@@ -111,6 +113,7 @@ export default function Unit() {
                 example_vie: vocabularys[index].example_vie,
                 example_eng: vocabularys[index].example_eng,
                 field_of_it: vocabularys[index].field_of_it,
+                link_url: vocabularys[index].link_url,
             });
         }
 
@@ -133,10 +136,18 @@ export default function Unit() {
                     <LoadingProgressBar percent={process} />
                 </div>
             </div>
-
+            {/* <h1>d</h1> */}
             <RenderComponentUnit
                 listen={
-                    process === 90 ? <Finish /> : <Listen word={vocabulary.word} explain_vie={vocabulary.explain_vie} />
+                    process === 90 ? (
+                        <Finish />
+                    ) : (
+                        <Listen
+                            word={vocabulary.word}
+                            sound={vocabulary.link_url}
+                            explain_vie={vocabulary.explain_vie}
+                        />
+                    )
                 }
                 example={
                     process === 95 ? (
@@ -155,6 +166,7 @@ export default function Unit() {
                     ) : (
                         <FillInTheBlank
                             word={''}
+                            sound={vocabulary.link_url}
                             inputValue={inputValue}
                             right={resultRight && true}
                             error={resultError && true}
@@ -214,6 +226,7 @@ export default function Unit() {
                 <div className={showpopup ? 'animate__animated animate__fadeIn' : 'animate__animated animate__fadeOut'}>
                     <PopUp
                         OnClose={handlePopUp}
+                        sound={vocabulary.link_url}
                         work={vocabulary.word}
                         partofspeech={vocabulary.part_of_speech}
                         pronunciation={vocabulary.pronunciation}

@@ -21,7 +21,10 @@ export async function post(path, body, config) {
     const init = { method: "post", body: JSON.stringify(body), ...config }
     return await http(path, init)
 }
-
+export async function patch(path, body, config) {
+    const init = { method: "patch", body: JSON.stringify(body), ...config }
+    return await http(path, init)
+}
 export async function put(path, body, config, isShowToast = false) {
     const init = { method: "put", body: JSON.stringify(body), ...config }
     return await http(path, init, isShowToast)

@@ -92,6 +92,7 @@ export default function Search() {
                                 partofspeech={value.part_of_speech}
                                 pronunciation={value.pronunciation}
                                 example={value.example_vie}
+                                sound={value.link_url}
                             />
                         );
                     })}

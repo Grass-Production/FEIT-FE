@@ -3,6 +3,7 @@ import { OAuthGoogle } from '../../features';
 import { FormSignUp } from './component';
 import { useState } from 'react';
 import { signup } from '../../services/userAPI';
+import { useNavigate } from 'react-router-dom';
 export default function SignUp() {
     const [formInput, setFormInput] = useState({
         full_name: '',
@@ -14,6 +15,7 @@ export default function SignUp() {
         phone: '',
         repassword: '',
     });
+    const navigate = useNavigate();
 
     const handleSignUp = async () => {
         try {
@@ -25,6 +27,9 @@ export default function SignUp() {
                 specialize: formInput.specialize,
                 phone: formInput.phone,
             });
+            if (res.status === 200) {
+                navigate(`/verify/signup`);
+            }
             console.log(res);
         } catch (error) {
             console.log('error : ', error);
