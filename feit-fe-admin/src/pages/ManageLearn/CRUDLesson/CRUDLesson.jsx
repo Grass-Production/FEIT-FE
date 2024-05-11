@@ -59,7 +59,7 @@ export default function CRUDLesson() {
                         />
                     </div>
                 </div>
-                <div className=" w-1/2 bg-white">{isCheck ? <CardCreateOne /> : <CardUpdate />}</div>
+                <div className=" w-1/2 bg-white">{isCheck ? <CardCreateOne /> : <CardUpdate id={idlesson} />}</div>
             </div>
         </div>
     );

@@ -21,14 +21,17 @@ export default function LessonDetail({ name }) {
             try {
                 const res = await getUnitByIdLesson(lessonid);
                 const resLesson = await getLessons();
-                const name = resLesson.filter((value) => value._id === lessonid);
+                console.log('res: ', res);
+                console.log('resLesson: ', resLesson);
+                const lessons = resLesson.data;
+                const name = lessons.filter((value) => value._id === lessonid);
                 console.log(name);
                 setNameLesson(name);
                 if (res === null || res === '') {
                     return;
                 }
                 setLoading(!loading);
-                setUnits(res);
+                setUnits(res.unit);
                 console.log(res);
             } catch (error) {
                 console.log(error);

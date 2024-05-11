@@ -6,7 +6,7 @@ export const getVocabulary = async (unitid) => {
             "Content-Type": "application / json"
         }
     })
-    return res.vocabulary.Vocabulary
+    return res
 }
 
 export const getVocabularyByWord = async (word) => {
@@ -16,5 +16,5 @@ export const getVocabularyByWord = async (word) => {
         }
 
     })
-    return res.data.Vocabulary
+    return res
 }

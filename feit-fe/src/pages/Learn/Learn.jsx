@@ -14,7 +14,7 @@ export default function Learn() {
         async function fetchData() {
             try {
                 const res = await getLessons();
-                setLesson(res);
+                setLesson(res.data);
                 setLoading(!loading);
                 const cacheName = 'lessons-cache'; // Đặt tên cho cache
                 const cacheData = { data: res }; // Chuẩn bị dữ liệu để lưu vào cache

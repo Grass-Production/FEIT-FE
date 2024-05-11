@@ -21,6 +21,7 @@ const Search = lazy(() => import("../pages/Search"))
 const Statistic = lazy(() => import("../pages/Statistic"))
 const ListDetails = lazy(() => import("../pages/ListDetails"))
 const UnitQuiz = lazy(() => import("../pages/UnitQuiz"))
+const VerifyCode = lazy(() => import("../pages/VerifyCode"))
 
 
 export const ROUTES = {
@@ -40,6 +41,7 @@ export const ROUTES = {
     UnitQuiz: '/learn/lesson/:lessonid/quiz/:quiz',
     List: '/list',
     Search: '/search',
+    VerifyCode: '/verify',
     Statistic: '/statistic',
     ListDetails: '/list/:list',
 }
@@ -75,6 +77,11 @@ export const publicRouter = [
 
 export const privateRouter = [
     {
+        title: 'FEIT | Unit',
+        href: ROUTES.VerifyCode,
+        component: VerifyCode,
+    },
+    {
         title: 'FEIT',
         href: ROUTES.HomePage,
         component: HomePage,
@@ -107,6 +114,7 @@ export const privateRouter = [
         href: ROUTES.Unit,
         component: Unit,
     },
+
     {
         title: 'FEIT | Unit',
         href: ROUTES.UnitReview,

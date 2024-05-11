@@ -17,8 +17,8 @@ export const CardProgress = () => {
             try {
                 const res = await getLessons();
                 setLoading(!loading);
-                setLesson(res);
-                console.log(res);
+                console.log('res: ', res);
+                setLesson(res.data);
             } catch (error) {
                 console.log(error);
             }

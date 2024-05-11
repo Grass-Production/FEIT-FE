@@ -6,17 +6,44 @@ import {
     IconCloudArrowUp,
     IconDesktopTower,
 } from '../../../../svgs';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '../../../../components';
 import { createLessonFileLoading } from '../../../../services/lessonAPI';
 import axios from 'axios';
-
-export const CardUpdate = ({ name = 'Programing', namefile = 'congnghe.png' }) => {
+import { updateLesson, getLessonById } from '../../../../services/lessonAPI';
+export const CardUpdate = ({ name = 'Programing', namefile = 'congnghe.png', id }) => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [isCheckInputFile, setIsCheckInputFile] = useState(false);
     const [inputChange, setInputChange] = useState('Programing');
     const [file, setFile] = useState(null);
     const [progress, setProgess] = useState(0);
+
+    const [lesson, setLesson] = useState([]);
+
+    useEffect(() => {
+        async function GetLessonById() {
+            const res = await getLessonById(id);
+            console.log('lesson : ', res);
+            setLesson(res.lesson);
+            setInputChange(res.lesson.name);
+        }
+        GetLessonById();
+    }, []);
+
+    const handleUpdate = async () => {
+        const res = await updateLesson(
+            {
+                _id: id,
+                course_id: '6631ff4e2f95034732cdbfaa',
+                name: inputChange,
+                content: 'Introduces fundamental concepts in computer networking.',
+                level: 6,
+                image_url: selectedFile,
+            },
+            handleSetSetProgess,
+        );
+        console.log('resupdate: ', res);
+    };
 
     const handleSetSetProgess = (value) => {
         setProgess(value);
@@ -78,6 +105,7 @@ export const CardUpdate = ({ name = 'Programing', namefile = 'congnghe.png' }) =
                 className=" rounded-none w-full mb-4"
                 value={inputChange}
             />
+            <h1>{inputChange}</h1>
             <h3 className=" text-label-2 font-label-2 font-plusjakartasans text-primary-black mb-1">Tập tin</h3>
             <div className=" p-3 border border-primary-black bg-primary-grey mb-5">
                 <div className=" border flex justify-center items-center h-64 bg-white border-dashed border-primary-black">
@@ -170,7 +198,7 @@ export const CardUpdate = ({ name = 'Programing', namefile = 'congnghe.png' }) =
                     <IconCloudArrowUp />
                 </Button>
                 <Button
-                    onClick={handleCreateLessonFile}
+                    onClick={handleUpdate}
                     className=" w-full bg-background-disable border-background-disable text-secondary-gray rounded-none"
                     title="Lưu"
                     icon={true}
@@ -343,11 +371,10 @@ const FormCreateFile = () => {
         const res = await createLessonFileLoading(selectedFile, handleSetSetProgess);
         if (res.status === 200) {
             alert('Thêm Dữ liệu bằng file thành công');
-            setRender((n) => n + 1);
         } else if (res.message === 'validate: Token is expired') {
             alert('Vui lòng đăng nhập');
         }
-        console.log(res);
+        console.log('res create flie : ', res);
     };
 
     const handleFileChange = (event) => {

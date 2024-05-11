@@ -52,7 +52,7 @@ export const CardCourse = ({ id = 'test' }) => {
     );
 };
 
-export const CardLesson = ({ id = 'test' }) => {
+export const CardLesson = ({ id = 'test', name, quantityUnit }) => {
     return (
         <div>
             <InputSection label="Chọn" />
@@ -65,10 +65,10 @@ export const CardLesson = ({ id = 'test' }) => {
                     />
                 </div>
                 <div className="">
-                    <h1 className=" text-heading-7 font-heading-7 font-plusjakartasans text-primary-black">
-                        Lập trình
+                    <h1 className=" text-heading-7 font-heading-7 font-plusjakartasans text-primary-black">{name}</h1>
+                    <h1 className=" text-body-1 font-body-1 font-plusjakartasans text-secondary-gray">
+                        {quantityUnit} chương
                     </h1>
-                    <h1 className=" text-body-1 font-body-1 font-plusjakartasans text-secondary-gray">Chương</h1>
                 </div>
             </div>
             <div className=" gap-3">

@@ -25,7 +25,9 @@ export default function Unit() {
     useEffect(() => {
         async function fetchData() {
             try {
-                const res = await getVocabulary(unitid);
+                const vocabularys = await getVocabulary(unitid);
+                const res = vocabularys.vocabulary.vocabulary;
+                console.log('res', res);
                 setVocabulary({
                     word: res[index].word,
                     part_of_speech: res[index].part_of_speech,
