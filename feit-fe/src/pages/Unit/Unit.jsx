@@ -3,7 +3,8 @@ import { Button, LoadingProgressBar, Sound } from '../../components';
 import { RenderComponentUnit } from '../../untils/renderComponentUnit';
 import { IconXCircle } from '../../svgs';
 import { NavLink, useParams } from 'react-router-dom';
-import { PopUp } from './component/PopUp';
+// import { PopUp } from './component/PopUp';
+import { PopUp } from '../../components/PopupVocabulary/PopupVocabulary';
 import { Example, Listen, FillInTheBlank, Tip } from './component/CategoryUnit';
 import { Finish, ListVocabulary, Score } from './component/UIFinish';
 import { getVocabulary } from '../../services/vocabulary';
@@ -16,6 +17,7 @@ export default function Unit() {
 
     const [vocabulary, setVocabulary] = useState({
         word: '',
+        _id: '',
         part_of_speech: '',
         pronunciation: '',
         example: '',
@@ -31,8 +33,10 @@ export default function Unit() {
                 console.log('res :', res);
                 setVocabulary({
                     word: res[index].word,
+                    _id: res[index]._id,
                     part_of_speech: res[index].part_of_speech,
                     pronunciation: res[index].pronunciation,
+                    mean: res[index].mean,
                     explain_vie: res[index].explain_vie,
                     example_vie: res[index].example_vie,
                     example_eng: res[index].example_eng,
@@ -109,6 +113,8 @@ export default function Unit() {
                 word: vocabularys[index].word,
                 part_of_speech: vocabularys[index].part_of_speech,
                 pronunciation: vocabularys[index].pronunciation,
+                mean: vocabularys[index].mean,
+                _id: vocabularys[index]._id,
                 explain_vie: vocabularys[index].explain_vie,
                 example_vie: vocabularys[index].example_vie,
                 example_eng: vocabularys[index].example_eng,
@@ -136,17 +142,14 @@ export default function Unit() {
                     <LoadingProgressBar percent={process} />
                 </div>
             </div>
+
             {/* <h1>d</h1> */}
             <RenderComponentUnit
                 listen={
                     process === 90 ? (
                         <Finish />
                     ) : (
-                        <Listen
-                            word={vocabulary.word}
-                            sound={vocabulary.link_url}
-                            explain_vie={vocabulary.explain_vie}
-                        />
+                        <Listen word={vocabulary.word} sound={vocabulary.link_url} mean={vocabulary.mean} />
                     )
                 }
                 example={
@@ -190,7 +193,7 @@ export default function Unit() {
                                 icon={false}
                                 color={'primary'}
                                 onClick={check ? handleOnClick : checkResult}
-                                className="w-3/4"
+                                className="w-3/4 "
                                 title="Tiếp tục"></Button>
                         ) : (
                             <>
@@ -200,7 +203,7 @@ export default function Unit() {
                                             icon={false}
                                             color={'primary'}
                                             onClick={handleOnClick}
-                                            className=" w-1/4 py-6"
+                                            className=" w-1/4 py-6 !bg-primary-blue-400 hover:!bg-primary-blue-500 !border-primary-black text-white"
                                             title="Tiếp tục"></Button>
                                         <Button
                                             icon={false}
@@ -225,12 +228,13 @@ export default function Unit() {
             {showpopup && (
                 <div className={showpopup ? 'animate__animated animate__fadeIn' : 'animate__animated animate__fadeOut'}>
                     <PopUp
+                        idVocabulary={vocabulary._id}
                         OnClose={handlePopUp}
                         sound={vocabulary.link_url}
-                        work={vocabulary.word}
+                        word={vocabulary.word}
                         partofspeech={vocabulary.part_of_speech}
                         pronunciation={vocabulary.pronunciation}
-                        example={vocabulary.example}
+                        example={vocabulary.explain_vie}
                     />
                 </div>
             )}

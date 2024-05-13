@@ -11,9 +11,13 @@ import { useParams } from 'react-router-dom';
 import { IconArrowUpLeft } from '../../svgs';
 export default function LessonDetail({ name }) {
     const [units, setUnits] = useState([]);
+
     const [loading, setLoading] = useState(true);
+
     const [nameLesson, setNameLesson] = useState([]);
+
     let { lessonid } = useParams();
+
     console.log(lessonid);
 
     useEffect(() => {

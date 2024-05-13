@@ -61,6 +61,21 @@ export const signup = async (newData) => {
     formData.append('avatar_url', newData.avatar_url);
     formData.append('phone', newData.phone);
     console.log(newData.email)
+    // try {
+    //     const response = await axios.post(
+    //         'http://localhost:8080/api/user/signup',
+    //         formData,
+    //         {
+    //             headers: { 'Content-Type': 'application/json' },
+    //             withCredentials: true,
+    //         },
+    //     );
+    //     console.log(response)
+    //     return response
+    // } catch (error) {
+    //     console.error('Error:', error);
+    // }
+
     try {
         const res = await fetch('http://localhost:8080/api/user/signup', {
             method: 'POST',
@@ -129,17 +144,31 @@ export const verifypassowrd = async (newData) => {
 }
 
 export const verifysignup = async (newData) => {
+
     try {
-        const res = await patch('http://localhost:8080/api/user/verify',
-            newData, {
-            headers: {
-                "Content-Type": "application/json",
+        const res = await axios.patch('http://localhost:8080/api/user/verify',
+            newData,
+            {
+                headers: { 'Content-Type': 'application/json' },
+                withCredentials: true,
             },
-        })
+        )
         return res
     } catch (error) {
         console.error('Error:', error);
     }
+
+    // try {
+    //     const res = await patch('http://localhost:8080/api/user/verify',
+    //         newData, {
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //         },
+    //     })
+    //     return res
+    // } catch (error) {
+    //     console.error('Error:', error);
+    // }
 }
 
 export const logout = async () => {

@@ -44,7 +44,7 @@ export const ROUTES = {
     VerifyCode: '/verify/:verifytype',
     ForgetPassword: '/forgetpassword',
     Statistic: '/statistic',
-    ListDetails: '/list/:list',
+    ListDetails: '/list/:idlist',
 }
 
 export const publicRouter = [

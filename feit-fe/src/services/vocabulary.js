@@ -18,3 +18,4 @@ export const getVocabularyByWord = async (word) => {
     })
     return res
 }
+

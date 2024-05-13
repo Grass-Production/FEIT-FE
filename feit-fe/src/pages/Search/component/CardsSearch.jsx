@@ -1,5 +1,6 @@
 import { IconHeartSearch } from '../../../svgs';
-import { PopUp } from './PopUp';
+// import { PopUp } from './PopUp';
+import { PopUp } from '../../../components/PopupVocabulary/PopupVocabulary';
 import { useState } from 'react';
 export const CardsSearch = ({
     word = 'Funcion',
@@ -8,6 +9,7 @@ export const CardsSearch = ({
     pronunciation,
     example,
     sound,
+    idVocabulary,
 }) => {
     const [showPopup, setShowPopup] = useState(false);
     const handlePopup = () => {
@@ -32,7 +34,8 @@ export const CardsSearch = ({
             </div>
             {showPopup && (
                 <PopUp
-                    work={word}
+                    idVocabulary={idVocabulary}
+                    word={word}
                     partofspeech={partofspeech}
                     pronunciation={pronunciation}
                     example={example}

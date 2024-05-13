@@ -87,6 +87,7 @@ export default function Search() {
                             <CardsSearch
                                 onClick={() => handleGetWord(value.word)}
                                 key={index}
+                                idVocabulary={value._id}
                                 word={value.word}
                                 programing={value.field_of_it}
                                 partofspeech={value.part_of_speech}

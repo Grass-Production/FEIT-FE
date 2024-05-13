@@ -1,9 +1,14 @@
-import { useState } from 'react';
-import { Button, InputSection, Sound, SoundSmall } from '../../../components';
+import { useState, useEffect } from 'react';
+// import { Button, InputSection, Sound, SoundSmall } from '../../../components';
+import { Button } from '../Button';
+import { InputSection } from '../Input';
+import { Sound } from '../Sound';
+import { SoundSmall } from '../Sound';
 import 'animate.css';
-import { IconSpeakerHigh, IconHeart, IconPlusCircle } from '../../../svgs';
+import { IconSpeakerHigh, IconHeart, IconPlusCircle } from '../../svgs';
+import { getMaskList, createMarkVocabulary } from '../../services/masklistAPI';
 
-export const PopUp = ({ OnClose, work, partofspeech, pronunciation, example, sound }) => {
+export const PopUp = ({ OnClose, word, partofspeech, pronunciation, example, sound, idVocabulary }) => {
     const [show, setShow] = useState(false);
     const img =
         'https://res.cloudinary.com/df4zm1xjy/image/upload/v1711464162/feit-static/Ch%C6%B0%C6%A1ng%208.png.png';
@@ -11,7 +16,6 @@ export const PopUp = ({ OnClose, work, partofspeech, pronunciation, example, sou
         <div className="">
             <div className="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
                 <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
-
                 <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
                     <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
                         <div className="relative max-h-[95vh] min-h-[90vh] flex flex-col justify-between transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:w-full sm:max-w-5xl">
@@ -29,7 +33,7 @@ export const PopUp = ({ OnClose, work, partofspeech, pronunciation, example, sou
                                     <div className=" flex items-center mb-3 gap-3">
                                         <SoundSmall sound={sound} />
                                         <h1 className=" text-heading-7 font-heading-7 font-plusjakartasans text-primary-blue-800">
-                                            {work}
+                                            {word}
                                         </h1>
                                     </div>
                                     <div className=" mb-5 ">
@@ -94,7 +98,7 @@ export const PopUp = ({ OnClose, work, partofspeech, pronunciation, example, sou
                     </div>
                 </div>
             </div>
-            {show && <SubPopUp OnClose={() => setShow(false)} />}
+            {show && <SubPopUp idVocabulary={idVocabulary} OnClose={() => setShow(false)} />}
         </div>
     );
 };
@@ -112,7 +116,35 @@ export const CardVideo = ({ src = 'https://www.youtube.com/embed/y14IxVnBEaU' })
     );
 };
 
-export const SubPopUp = ({ OnClose }) => {
+export const SubPopUp = ({ OnClose, idVocabulary }) => {
+    const [maskLists, setMaskLists] = useState([]);
+    const [idmaskLists, setIdMaskLists] = useState([]);
+
+    useEffect(() => {
+        const handleGetMaskList = async () => {
+            try {
+                const res = await getMaskList();
+                setMaskLists(res.mark_list.mark_list);
+                // if (res.mark_list.mark_list !== null || res.mark_list.mark_list !== '') {
+                //     setIsLoading(false);
+                // }
+                console.log(res.mark_list.mark_list);
+            } catch (error) {
+                console.log('message :', error);
+            }
+        };
+        handleGetMaskList();
+    }, []);
+
+    const handleCheckboxChange = (e) => {
+        const { id: checkboxId, checked } = e.target;
+        if (checked) {
+            setIdMaskLists((prevIds) => [...prevIds, checkboxId]);
+        } else {
+            setIdMaskLists((prevIds) => prevIds.filter((itemId) => itemId !== checkboxId));
+        }
+    };
+
     let datas = [
         {
             title: 'Danh sach 1',
@@ -132,6 +164,21 @@ export const SubPopUp = ({ OnClose }) => {
         console.log(datas);
         setData([...data, newdata]);
     }
+
+    const handleCreateMarkVocabulary = async () => {
+        try {
+            for (let i = 0; i < idmaskLists.length; i++) {
+                const res = await createMarkVocabulary({
+                    mark_list_id: idmaskLists[i],
+                    vocabulary_id: idVocabulary,
+                });
+                console.log(res);
+            }
+        } catch (error) {
+            console.log('message :', error);
+        }
+    };
+
     return (
         <div className="">
             <div className="relative z-100" aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -149,11 +196,22 @@ export const SubPopUp = ({ OnClose }) => {
 
                             <div className=" flex flex-col justify-start items-start h-[50vh] px-4 max-h-[60] gap-3">
                                 <InputSection id="1" label="Danh sách yêu thích" />
-                                {data.map((a, i) => (
-                                    <InputSection key={i} label={a.title} id={a.title} />
+
+                                {maskLists.map((v, i) => (
+                                    <InputSection
+                                        onChange={handleCheckboxChange}
+                                        key={v._id}
+                                        label={v.name_list}
+                                        id={v._id}
+                                    />
                                 ))}
                             </div>
                             <div className=" flex bg-white  border-t">
+                                <Button
+                                    onClick={handleCreateMarkVocabulary}
+                                    color={'primary'}
+                                    title="Thêm"
+                                    className="w-full py-4 rounded-b-lg rounded-t-none"></Button>
                                 <Button
                                     onClick={CreateList}
                                     color={'primary'}
