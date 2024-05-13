@@ -10,17 +10,43 @@ export const inputVariant = tv({
     },
 });
 
-export const InputField = ({ className = 'w-full', placeholder, status, value, onChange, type = 'text' }) => {
-    return (
+export const InputField = ({
+    className = 'w-full',
+    placeholder,
+    isrequired,
+    status,
+    value,
+    onChange,
+    name,
+    pattern,
+    type = 'text',
+}) => {
+    return isrequired ? (
+        <input
+            className={`${className}  ${inputVariant({
+                color: status,
+            })}`}
+            required
+            disabled={status != null && true}
+            value={value}
+            name={name}
+            onChange={onChange}
+            placeholder={placeholder}
+            type={type}
+            pattern={pattern}
+        />
+    ) : (
         <input
             className={`${className}  ${inputVariant({
                 color: status,
             })}`}
             disabled={status != null && true}
             value={value}
+            name={name}
             onChange={onChange}
             placeholder={placeholder}
             type={type}
+            pattern={pattern}
         />
     );
 };

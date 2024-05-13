@@ -1,7 +1,16 @@
 import { IconHeartSearch } from '../../../svgs';
-import { PopUp } from './PopUp';
+// import { PopUp } from './PopUp';
+import { PopUp } from '../../../components/PopupVocabulary/PopupVocabulary';
 import { useState } from 'react';
-export const CardsSearch = ({ word = 'Funcion', programing = 'Lập trình', partofspeech, pronunciation, example }) => {
+export const CardsSearch = ({
+    word = 'Funcion',
+    programing = 'Lập trình',
+    partofspeech,
+    pronunciation,
+    example,
+    sound,
+    idVocabulary,
+}) => {
     const [showPopup, setShowPopup] = useState(false);
     const handlePopup = () => {
         setShowPopup(!showPopup);
@@ -25,10 +34,12 @@ export const CardsSearch = ({ word = 'Funcion', programing = 'Lập trình', par
             </div>
             {showPopup && (
                 <PopUp
-                    work={word}
+                    idVocabulary={idVocabulary}
+                    word={word}
                     partofspeech={partofspeech}
                     pronunciation={pronunciation}
                     example={example}
+                    sound={sound}
                     OnClose={handlePopup}
                 />
             )}

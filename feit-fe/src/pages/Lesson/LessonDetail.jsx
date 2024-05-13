@@ -11,9 +11,13 @@ import { useParams } from 'react-router-dom';
 import { IconArrowUpLeft } from '../../svgs';
 export default function LessonDetail({ name }) {
     const [units, setUnits] = useState([]);
+
     const [loading, setLoading] = useState(true);
+
     const [nameLesson, setNameLesson] = useState([]);
+
     let { lessonid } = useParams();
+
     console.log(lessonid);
 
     useEffect(() => {
@@ -21,14 +25,17 @@ export default function LessonDetail({ name }) {
             try {
                 const res = await getUnitByIdLesson(lessonid);
                 const resLesson = await getLessons();
-                const name = resLesson.filter((value) => value._id === lessonid);
+                console.log('res: ', res);
+                console.log('resLesson: ', resLesson);
+                const lessons = await resLesson.data;
+                const name = lessons.filter((value) => value._id === lessonid);
                 console.log(name);
                 setNameLesson(name);
                 if (res === null || res === '') {
                     return;
                 }
                 setLoading(!loading);
-                setUnits(res);
+                setUnits(res.unit);
                 console.log(res);
             } catch (error) {
                 console.log(error);
@@ -75,11 +82,13 @@ export default function LessonDetail({ name }) {
             },
         ],
     };
+
     return (
         <div className="px-10">
             <NavLink to="/learn">
                 <IconArrowUpLeft size="40" className={' mt-8 border bg-white border-primary-black'} />
             </NavLink>
+
             <div className=" flex flex-col  ">
                 <div className=" flex justify-center mb-20 ">
                     <div className="  ">

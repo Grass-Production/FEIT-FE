@@ -1,4 +1,4 @@
-import { get, post, put, del, postfile } from "./fetch";
+import { get, post, put, del, patch } from "./fetch";
 import axios from "axios"
 
 export const getLessons = async () => {
@@ -7,7 +7,25 @@ export const getLessons = async () => {
             "Content-Type": "application / json"
         }
     })
-    return res.data.lesson.Lesson
+    return res
+}
+
+export const getLessonById = async (id) => {
+    const res = await get(`http://localhost:8080/api/lesson/fetch/_id?_id=${id}`, {
+        headers: {
+            "Content-Type": "application / json"
+        }
+    })
+    return res
+}
+
+export const getLessonByIdCourse = async () => {
+    const res = await get('http://localhost:8080/api/lesson/fetch/:course_id?course_id=660b8a0c2aef1f3a28265523', {
+        headers: {
+            "Content-Type": "application / json"
+        }
+    })
+    return res
 }
 
 export const createLesson = async (newData) => {
@@ -71,19 +89,57 @@ export const createLessonFile = async (newData) => {
     }
 }
 
-export const updateLesson = async (newData, lessonid) => {
-    const token = localStorage.getItem('access_token')
-    const res = await put(`http://localhost:8080/api/admin/lesson/update/:_id?_id=${lessonid}`,
-        newData,
-        {
-            credentials: "include",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token} `,
+export const createLessonFileLoading = async (newData, sendprogress) => {
+    const formData = new FormData();
+    formData.append('files', newData);
+    try {
+        const res = await axios.post('http://localhost:8080/api/admin/lesson/create/file', formData, {
+            withCredentials: true,
+            // Theo dõi % hoàn thành
+            onUploadProgress: (progressEvent) => {
+                const percentComplete = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+                sendprogress(percentComplete);
             },
-        })
-    return res
-}
+        });
+        return res;
+
+    } catch (error) {
+        console.log('error : ', error)
+    }
+};
+
+
+export const updateLesson = async (newData, sendprogress) => {
+
+    try {
+        const res = await axios.patch('http://localhost:8080/api/admin/lesson/update',
+            newData,
+            {
+                headers: { 'Content-Type': 'application/json' },
+                withCredentials: true,
+
+            },
+
+        );
+        return res;
+    } catch (error) {
+        console.log('error : ', error)
+    }
+};
+
+// export const updateLesson = async (newData) => {
+//     const token = localStorage.getItem('access_token')
+//     const res = await patch(`http://localhost:8080/api/admin/lesson/update`,
+//         newData,
+//         {
+//             credentials: "include",
+//             headers: {
+//                 "Content-Type": "application/json",
+//                 Authorization: `Bearer ${token} `,
+//             },
+//         })
+//     return res
+// }
 
 export const deleteLesson = async (lessonid) => {
     const token = localStorage.getItem('access_token')

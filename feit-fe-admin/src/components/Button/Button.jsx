@@ -5,7 +5,7 @@ export const buttonVariants = tv({
     variants: {
         color: {
             primary:
-                'bg-white text-button-1 font-button-1 border border-primary-blue-500 text-primary-blue-500  hover:bg-[#3C79FE] hover:text-white active:text-white active:bg-[#0A50E7]',
+                'bg-white text-button-1 font-button-1 border border-primary-blue-500 text-primary-blue-500  hover:bg-[#3C79FE] hover:text-white hover:fill-white active:text-white active:bg-[#0A50E7]',
             primaryerror:
                 'bg-white text-button-1 font-button-1 border border-semantic-danger text-semantic-danger  hover:bg-[#3C79FE] hover:text-white active:text-white active:bg-[#0A50E7]',
 
@@ -44,6 +44,7 @@ export const Button = ({
     children,
     disabled,
     active,
+    strokeColor,
     icon = false,
     left = false,
     right = false,
@@ -58,15 +59,15 @@ export const Button = ({
             id={id}
             disabled={disabled}
             onClick={onClick}
-            className={`${className}   ${buttonVariants({
+            className={`${className} ${buttonVariants({
                 color: color,
                 type: icon ? 'left' : 'none',
                 disabled: disabled,
                 active: active,
             })}`}>
-            {left === icon && children}
+            {left === icon && <div>{children}</div>}
             {title}
-            {right === icon && children}
+            {right === icon && <div>{children}</div>}
         </button>
     );
 };

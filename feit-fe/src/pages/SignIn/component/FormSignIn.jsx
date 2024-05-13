@@ -25,7 +25,9 @@ export const FormSignIn = ({ inputData, onClick, onChange }) => {
             </Form>
             <div className=" flex justify-between mb-9">
                 <InputSection label="Nhớ mật khẩu" />
-                <NavLink className=" text-primary-blue-500 text-button-1 font-button-1 font-plusjakartasans" to="/home">
+                <NavLink
+                    className=" text-primary-blue-500 text-button-1 font-button-1 font-plusjakartasans"
+                    to="/forgetpassword">
                     Quên mật khẩu ?
                 </NavLink>
             </div>

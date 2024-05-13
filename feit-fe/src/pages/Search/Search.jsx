@@ -36,7 +36,8 @@ export default function Search() {
         async function getApi() {
             try {
                 const res = await getVocabularyByWord(value);
-                setWord(res);
+
+                setWord(res.data.vocabulary);
                 // if (res == null || res == '') {
                 //     setWord([
                 //         {
@@ -86,11 +87,13 @@ export default function Search() {
                             <CardsSearch
                                 onClick={() => handleGetWord(value.word)}
                                 key={index}
+                                idVocabulary={value._id}
                                 word={value.word}
                                 programing={value.field_of_it}
                                 partofspeech={value.part_of_speech}
                                 pronunciation={value.pronunciation}
                                 example={value.example_vie}
+                                sound={value.link_url}
                             />
                         );
                     })}

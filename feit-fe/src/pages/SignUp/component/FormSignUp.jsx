@@ -10,11 +10,15 @@ export const FormSignUp = ({ account, onChange, onClick, inputData, onSubmit }) 
         phone: true,
         repass: true,
     });
+
     const [showPass, setShowPass] = useState(false);
+
     const handleShowHidePass = () => {
         setShowPass(!showPass);
     };
-    const handleCheckInput = () => {
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         const passPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.])[A-Za-z\d@$!%*?&.]{8,}$/;
 
@@ -27,16 +31,22 @@ export const FormSignUp = ({ account, onChange, onClick, inputData, onSubmit }) 
             pass: isValidPass,
             repass: isValiRePass,
         });
-    };
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        handleCheckInput();
-        console.log(checkInput);
-        if (checkInput.email === false || checkInput.pass === false || checkInput.repass === false) {
+
+        if (isValidEmail === false || isValidPass === false || isValiRePass === false) {
             return;
         }
+
         onSubmit();
     };
+    // const handleSubmit = (event) => {
+    //     event.preventDefault();
+    //     handleCheckInput();
+    //     console.log(checkInput);
+    //     if (checkInput.email === false || checkInput.pass === false || checkInput.repass === false) {
+    //         return;
+    //     }
+    //     onSubmit();
+    // };
     const optionValue = [
         {
             value: 'IT',

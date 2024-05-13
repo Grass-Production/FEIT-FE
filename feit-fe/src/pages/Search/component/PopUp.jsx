@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { Button, InputSection } from '../../../components';
+import { Button, InputSection, SoundSmall } from '../../../components';
 import 'animate.css';
 import { IconSpeakerHigh, IconHeart, IconPlusCircle } from '../../../svgs';
 
-export const PopUp = ({ OnClose, work, partofspeech, pronunciation, example }) => {
+export const PopUp = ({ OnClose, work, partofspeech, pronunciation, example, sound }) => {
     const [show, setShow] = useState(false);
     return (
         <div className="">
@@ -19,56 +19,52 @@ export const PopUp = ({ OnClose, work, partofspeech, pronunciation, example }) =
                                 </h1>
                                 <Button title="X" onClick={OnClose}></Button>
                             </div>
-                            <div className=" flex justify-center h-[50vh] max-h-[60] gap-3 items-center">
-                                <div className=" w-1/3 border h-full bg-white border-secondary-gray px-6 py-3 rounded-3xl">
-                                    <h1 className=" mb-5 text-caption-1 font-caption-1 font-plusjakartasans text-primary-black">
+                            <div className=" flex flex-col justify-center h-[60vh] max-h-[60] gap-3 items-center">
+                                <div className="  w-4/5 h-[60%] border-[2px] bg-white border-primary-black px-6 py-3">
+                                    <h1 className="  mb-3 text-xs font-bold font-plusjakartasans text-primary-black">
                                         Tiếng anh
                                     </h1>
-                                    <div className=" flex justify-start items-center gap-3 mb-4">
-                                        <IconSpeakerHigh />
-                                        <h1 className=" text-heading-6 font-heading-6 font-plusjakartasans text-primary-blue-800 ">
+                                    <div className="  flex items-center mb-3 gap-3">
+                                        <SoundSmall sound={sound} />
+                                        <h1 className=" text-heading-7 font-heading-7 font-plusjakartasans text-primary-blue-800 ">
                                             {work}
                                         </h1>
                                     </div>
                                     <div className=" mb-5">
-                                        <h1 className=" mb-2 text-caption-1 font-caption-1 font-plusjakartasans text-secondary-gray">
+                                        <h1 className="  text-caption-1 font-bold font-plusjakartasans text-secondary-gray">
                                             Loại từ
                                         </h1>
-                                        <h1 className=" text-body-3 font-body-3 font-plusjakartasans text-primary-black">
+                                        <h1 className=" text-body-3 font-bold font-plusjakartasans text-primary-black">
                                             {partofspeech}
                                         </h1>
                                     </div>
                                     <div className=" mb-5">
-                                        <h1 className="mb-2 text-caption-1 font-caption-1 font-plusjakartasans text-secondary-gray">
+                                        <h1 className=" text-caption-1 font-bold font-plusjakartasans text-secondary-gray">
                                             Phiên âm
                                         </h1>
-                                        <h1 className=" text-body-3 font-body-3 font-plusjakartasans text-primary-black">
+                                        <h1 className=" text-body-3 font-bold font-plusjakartasans text-primary-black">
                                             {pronunciation}
                                         </h1>
                                     </div>
                                     <div className="">
-                                        <h1 className="mb-2 text-caption-1 font-caption-1 font-plusjakartasans text-secondary-gray">
+                                        <h1 className="mb-2 text-caption-1 font-bold font-plusjakartasans text-secondary-gray">
                                             Ý nghĩa
                                         </h1>
-                                        <h1 className=" text-body-3 font-body-3 font-plusjakartasans text-primary-black">
+                                        <h1 className=" text-body-3 font-bold font-plusjakartasans text-primary-black">
                                             {example}
                                         </h1>
                                     </div>
                                 </div>
-                                <div className=" w-2/5 h-full border bg-white border-secondary-gray px-6 py-3 rounded-3xl">
-                                    <h1 className=" mb-2 text-caption-1 font-caption-1 font-plusjakartasans text-secondary-gray text-end">
+                                <div className="w-4/5 h-full border-[2px] bg-white border-primary-black px-6 py-3">
+                                    <h1 className="mb-2 text-caption-1 font-bold font-plusjakartasans text-primary-black text-start">
                                         Video phát âm
                                     </h1>
-                                    <img
-                                        className=" w-full rounded-3xl"
-                                        src="https://res.cloudinary.com/df4zm1xjy/image/upload/v1711464162/feit-static/Ch%C6%B0%C6%A1ng%208.png.png"
-                                        alt=""
-                                    />
+                                    <CardVideo />
                                     {/* <div className=" mx-auto w-[100%] rounded-3xl bg-gray-500"></div> */}
                                 </div>
                             </div>
-                            <div className=" flex bg-white justify-around px-8 py-4 gap-8 border-t">
-                                <Button
+                            <div className="flex bg-white justify-around px-8 py-4 gap-8 border-t border-secondary-gray">
+                                {/* <Button
                                     onClick={OnClose}
                                     icon={true}
                                     right={true}
@@ -76,7 +72,7 @@ export const PopUp = ({ OnClose, work, partofspeech, pronunciation, example }) =
                                     title="Thêm vào yêu thích"
                                     className=" w-1/2 py-4">
                                     <IconHeart />
-                                </Button>
+                                </Button> */}
                                 <Button
                                     title="Thêm vào danh sách"
                                     icon={true}
@@ -85,7 +81,7 @@ export const PopUp = ({ OnClose, work, partofspeech, pronunciation, example }) =
                                     onClick={() => {
                                         setShow(true);
                                     }}
-                                    className=" w-1/2 py-4">
+                                    className="  w-full py-4">
                                     <IconPlusCircle />
                                 </Button>
                             </div>
@@ -94,6 +90,20 @@ export const PopUp = ({ OnClose, work, partofspeech, pronunciation, example }) =
                 </div>
             </div>
             {show && <SubPopUp OnClose={() => setShow(false)} />}
+        </div>
+    );
+};
+
+export const CardVideo = ({ src = 'https://www.youtube.com/embed/y14IxVnBEaU' }) => {
+    return (
+        <div>
+            <iframe
+                className=" h-fit w-full"
+                src={src}
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen></iframe>
         </div>
     );
 };
