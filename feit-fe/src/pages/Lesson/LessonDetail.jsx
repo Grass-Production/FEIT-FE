@@ -20,6 +20,16 @@ export default function LessonDetail({ name }) {
 
     console.log(lessonid);
 
+    const isUnitDisabled = (index) => {
+        if (index === 0) return false; // Unit 1 luôn được enable
+        const previousUnit = units[index - 1];
+        return (
+            previousUnit.exam_is_complete === 0 ||
+            previousUnit.exercise_is_complete === 0 ||
+            previousUnit.quiz_is_complete === 0
+        );
+    };
+
     useEffect(() => {
         async function fetchData() {
             try {
@@ -121,11 +131,16 @@ export default function LessonDetail({ name }) {
                         </div>
                     </Slider>
                 ) : (
-                    <Slider {...settings}>
-                        {units.map((unit) => {
+                    <Slider className=" " {...settings}>
+                        {units.map((unit, i) => {
                             return (
-                                <div key={unit._id} className=" px-3">
+                                <div key={unit._id} className=" px-3 ">
                                     <UnitCard
+                                        level={unit.level}
+                                        isUnitDisabled={isUnitDisabled(i)}
+                                        exam_is_complete={unit.exam_is_complete}
+                                        exercise_is_complete={unit.exercise_is_complete}
+                                        quiz_is_complete={unit.quiz_is_complete}
                                         lessonid={unit.lesson_id}
                                         unitid={unit._id}
                                         name={unit.name}

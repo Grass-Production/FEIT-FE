@@ -11,6 +11,9 @@
  
 }
 
+.slick-list{
+ overflow-y: unset !important;
+}
 
 *{
   scroll-behavior: smooth;

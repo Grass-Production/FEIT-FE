@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { FacebookLogo, InstagramLogo, EmailLogo, LogoFEIT } from '../svgs';
+import { FacebookLogo, InstagramLogo, IconEmailLogo, LogoFEIT } from '../svgs';
 
 export const Footer = () => {
     return (

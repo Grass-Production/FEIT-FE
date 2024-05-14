@@ -1,4 +1,4 @@
-import { post, get } from "./fetch"
+import { post, get, del } from "./fetch"
 
 export const createMaskList = async (newData) => {
     const res = await post('http://localhost:8080/api/mark_list/create',
@@ -41,6 +41,17 @@ export const createMarkVocabulary = async (newData) => {
                 "Content-Type": "application/json",
             },
             credentials: "include",
+        })
+    return res
+}
+
+export const deleteMaskList = async (idmasklist) => {
+    const res = await del(`http://localhost:8080/api/mark_list/delete/_id?_id=${idmasklist}`,
+        {
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
         })
     return res
 }

@@ -29,3 +29,7 @@ export async function put(path, body, config, isShowToast = false) {
     const init = { method: "put", body: JSON.stringify(body), ...config }
     return await http(path, init, isShowToast)
 }
+export async function del(path, config) {
+    const init = { method: "delete", ...config }
+    return await http(path, init)
+}

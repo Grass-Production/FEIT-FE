@@ -1,10 +1,10 @@
 import { lazy } from "react";
 
 
-import { IconLaptop, IconHouse, IconBell, IconList, IconChartBar, IconSearch, IconUser, IconClockClockwise, IconCrown } from "../svgs";
+import { IconLaptop, IconHouse, IconBell, IconList, IconChartBar, IconSearch, IconUser, IconClockClockwise, IconCrown, IconChatTeardropText } from "../svgs";
 
 const Announce = lazy(() => import("../pages/Announce"))
-const History = lazy(() => import("../pages/History"))
+const Feedback = lazy(() => import("../pages/Feedback"))
 const HomePage = lazy(() => import("../pages/HomePage"))
 const LandingPage = lazy(() => import("../pages/LandingPage"))
 const LeaderBoard = lazy(() => import("../pages/LeaderBoard"))
@@ -26,7 +26,7 @@ const ForgetPassword = lazy(() => import("../pages/ForgetPassword"))
 
 export const ROUTES = {
     Announce: '/announce',
-    History: '/history',
+    Feedback: '/feedback',
     HomePage: '/',
     LandingPage: '/',
     LeaderBoard: '/leaderboard',
@@ -175,9 +175,9 @@ export const privateRouter = [
 
     },
     {
-        title: 'FEIT | History',
-        href: ROUTES.History,
-        component: History,
+        title: 'FEIT | Feedback',
+        href: ROUTES.Feedback,
+        component: Feedback,
         showSidebar: true,
         name: 'Lịch sử',
 
@@ -276,11 +276,11 @@ export const routerList = [
         icon: IconCrown,
     },
     {
-        title: 'FEIT | History',
-        href: ROUTES.History,
-        component: History,
-        name: 'Lịch sử',
-        icon: IconClockClockwise,
+        title: 'FEIT | Feedback',
+        href: ROUTES.Feedback,
+        component: Feedback,
+        name: 'Đóng góp ý kiến',
+        icon: IconChatTeardropText,
     },
     {
         title: 'FEIT | List',

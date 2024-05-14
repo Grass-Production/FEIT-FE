@@ -31,8 +31,8 @@ export default function Learn() {
     }, []);
 
     return (
-        <div className=" px-10">
-            <h1 className=" mt-7 text-heading-6 font-plusjakartasans font-heading-6 text-primary-black mb-8">
+        <div className=" px-10 py-7">
+            <h1 className=" text-heading-6 font-plusjakartasans font-heading-6 text-primary-black mb-8 text-center">
                 Chủ đề của bạn
             </h1>
             {loading ? (

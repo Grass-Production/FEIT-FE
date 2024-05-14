@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { CardFavoritesList, PopupCreateList, CardCustomFavoritesList, CardLoading } from './component';
-import { IconHeart, IconPlusCircle } from '../../svgs';
+import { IconHeart, IconPlusCircle, IconCheckCircle } from '../../svgs';
 import { useEffect, useState } from 'react';
 import { getMaskList } from '../../services/masklistAPI';
 export default function List() {
@@ -10,8 +10,14 @@ export default function List() {
 
     const [isPopup, setIsPopup] = useState(false);
 
+    const [render, setRender] = useState(0);
+
     const handleReceiveIsPopup = (value) => {
         setIsPopup(value);
+    };
+
+    const handleSetRender = (value) => {
+        setRender(value);
     };
 
     const handleSetIsPopup = () => {
@@ -32,13 +38,13 @@ export default function List() {
             }
         };
         handleGetMaskList();
-    }, []);
+    }, [render]);
 
     return (
         <div className=" px-10">
             <>
                 <h1 className=" mt-7 text-center text-heading-6 font-plusjakartasans font-heading-6 text-primary-black mb-8">
-                    Danh sách của bạn
+                    Danh sách của bạn {render}
                 </h1>
                 <div className="grid grid-cols-6 gap-4">
                     <div onClick={handleSetIsPopup} className=" h-72 cursor-pointer">
@@ -67,7 +73,11 @@ export default function List() {
                             {maskLists.map((v) => {
                                 return (
                                     <div key={v._id} className=" h-72">
-                                        <CardCustomFavoritesList name={v.name_list} id={v._id} />
+                                        <CardCustomFavoritesList
+                                            handleSetRender={handleSetRender}
+                                            name={v.name_list}
+                                            id={v._id}
+                                        />
                                     </div>
                                 );
                             })}
@@ -75,7 +85,7 @@ export default function List() {
                     )}
                 </div>
             </>
-            {isPopup && <PopupCreateList handleSendIsPopup={handleReceiveIsPopup} />}
+            {isPopup && <PopupCreateList sendRender={handleSetRender} handleSendIsPopup={handleReceiveIsPopup} />}
         </div>
     );
 }

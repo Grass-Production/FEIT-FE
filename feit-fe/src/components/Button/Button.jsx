@@ -8,7 +8,6 @@ export const buttonVariants = tv({
                 'bg-white text-button-1 font-button-1 border border-primary-blue-500 text-primary-blue-500  hover:bg-[#3C79FE] hover:text-white active:text-white active:bg-[#0A50E7]',
             primaryerror:
                 'bg-white text-button-1 font-button-1 border border-semantic-danger text-semantic-danger  hover:bg-[#3C79FE] hover:text-white active:text-white active:bg-[#0A50E7]',
-
             secondary:
                 'bg-white  text-button-1 font-button-1 border border-[#74727F] text-primary-blue-500 hover:border-primary-blue-500 active:bg-[#85C8FF]',
             success:
@@ -31,7 +30,7 @@ export const buttonVariants = tv({
             true: 'bg-white text-button-1 shadow-active-button font-button-1 border-[4px] border-primary-blue-500 text-primary-blue-500  hover:bg-[#3C79FE] hover:text-white active:text-white active:bg-[#0A50E7]',
         },
         disabled: {
-            true: 'bg-[#F6F6F6] text-button-1 font-button-1 text-secondary-gray',
+            true: 'bg-[#F6F6F6] text-button-1 font-button-1 text-secondary-gray ',
         },
         type: {
             none: '',

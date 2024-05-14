@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 // import { Button, InputSection, Sound, SoundSmall } from '../../../components';
 import { Button } from '../Button';
-import { InputSection } from '../Input';
+import { InputSection, InputField } from '../Input';
 import { Sound } from '../Sound';
 import { SoundSmall } from '../Sound';
 import 'animate.css';
 import { IconSpeakerHigh, IconHeart, IconPlusCircle } from '../../svgs';
-import { getMaskList, createMarkVocabulary } from '../../services/masklistAPI';
+import { getMaskList, createMarkVocabulary, createMaskList } from '../../services/masklistAPI';
 
 export const PopUp = ({ OnClose, word, partofspeech, pronunciation, example, sound, idVocabulary }) => {
     const [show, setShow] = useState(false);
@@ -119,7 +119,9 @@ export const CardVideo = ({ src = 'https://www.youtube.com/embed/y14IxVnBEaU' })
 export const SubPopUp = ({ OnClose, idVocabulary }) => {
     const [maskLists, setMaskLists] = useState([]);
     const [idmaskLists, setIdMaskLists] = useState([]);
-
+    const [inputValue, setInputValue] = useState('');
+    const [isShowInput, setIsShowInput] = useState(false);
+    const [render, setRender] = useState(0);
     useEffect(() => {
         const handleGetMaskList = async () => {
             try {
@@ -133,8 +135,29 @@ export const SubPopUp = ({ OnClose, idVocabulary }) => {
                 console.log('message :', error);
             }
         };
+
         handleGetMaskList();
-    }, []);
+    }, [render]);
+
+    const handleIsShowInput = () => {
+        setIsShowInput(!isShowInput);
+    };
+
+    const handleOnChangeInput = (event) => {
+        setInputValue(event.target.value);
+    };
+
+    const handleCreateMaskList = async () => {
+        try {
+            const res = await createMaskList({ name_list: inputValue });
+            console.log(res);
+            setRender((r) => r + 1);
+            setInputValue('');
+            setIsShowInput(false);
+        } catch (error) {
+            console.log('message :', error);
+        }
+    };
 
     const handleCheckboxChange = (e) => {
         const { id: checkboxId, checked } = e.target;
@@ -196,7 +219,6 @@ export const SubPopUp = ({ OnClose, idVocabulary }) => {
 
                             <div className=" flex flex-col justify-start items-start h-[50vh] px-4 max-h-[60] gap-3">
                                 <InputSection id="1" label="Danh sách yêu thích" />
-
                                 {maskLists.map((v, i) => (
                                     <InputSection
                                         onChange={handleCheckboxChange}
@@ -205,18 +227,33 @@ export const SubPopUp = ({ OnClose, idVocabulary }) => {
                                         id={v._id}
                                     />
                                 ))}
+                                {isShowInput && (
+                                    <InputField
+                                        value={inputValue}
+                                        onChange={handleOnChangeInput}
+                                        placeholder={'Nhập tên danh sách'}
+                                    />
+                                )}
                             </div>
-                            <div className=" flex bg-white  border-t">
+                            <div className=" flex bg-white border-t border-secondary-gray p-4 gap-3">
                                 <Button
                                     onClick={handleCreateMarkVocabulary}
                                     color={'primary'}
                                     title="Thêm"
-                                    className="w-full py-4 rounded-b-lg rounded-t-none"></Button>
-                                <Button
-                                    onClick={CreateList}
-                                    color={'primary'}
-                                    title="Tạo danh sách mới"
-                                    className="w-full py-4 rounded-b-lg rounded-t-none"></Button>
+                                    className="w-full py-4 "></Button>
+                                {inputValue != '' ? (
+                                    <Button
+                                        onClick={handleCreateMaskList}
+                                        color={'primary'}
+                                        title={'Đồng ý'}
+                                        className="w-full py-4 "></Button>
+                                ) : (
+                                    <Button
+                                        onClick={handleIsShowInput}
+                                        color={!isShowInput && 'primary'}
+                                        title={isShowInput ? 'Hủy' : 'Tạo danh sách mới'}
+                                        className="w-full py-4 "></Button>
+                                )}
                             </div>
                         </div>
                     </div>

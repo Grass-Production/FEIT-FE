@@ -1,8 +1,8 @@
-import { IconHeart, IconPlus, IconClose, IconList, IconDelete } from '../../../svgs';
+import { IconHeart, IconPlus, IconClose, IconList, IconDelete, IconCheckCircle, IconCheck } from '../../../svgs';
 import { Button, InputSection, InputField } from '../../../components';
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
-import { createMaskList } from '../../../services/masklistAPI';
+import { createMaskList, deleteMaskList } from '../../../services/masklistAPI';
 
 export const CardFavoritesList = ({ vocabulary = '5', name }) => {
     return (
@@ -18,9 +18,9 @@ export const CardFavoritesList = ({ vocabulary = '5', name }) => {
     );
 };
 
-export const PopupCreateList = ({ handleSendIsPopup }) => {
+export const PopupCreateList = ({ handleSendIsPopup, sendRender }) => {
     const [valueInput, setValueInput] = useState('');
-
+    const [render, setRender] = useState(0);
     const handleOnChangeInput = (e) => {
         setValueInput(e.target.value);
     };
@@ -29,6 +29,8 @@ export const PopupCreateList = ({ handleSendIsPopup }) => {
         try {
             const res = await createMaskList({ name_list: valueInput });
             console.log(res);
+            const a = 4;
+            sendRender((r) => r + 1);
         } catch (error) {
             console.log('message :', error);
         }
@@ -110,7 +112,7 @@ export const CardLoading = () => {
     );
 };
 
-export const CardCustomFavoritesList = ({ vocabulary = '5', name, id }) => {
+export const CardCustomFavoritesList = ({ vocabulary = '5', name, id, handleSetRender }) => {
     const [isPopup, setIsPopup] = useState(false);
 
     const handleReceiveIsPopup = (value) => {
@@ -139,12 +141,18 @@ export const CardCustomFavoritesList = ({ vocabulary = '5', name, id }) => {
                     </div>
                 </NavLink>
             </div>
-            {isPopup && <PopupDeleteList handleSendIsPopup={handleReceiveIsPopup} />}
+            {isPopup && (
+                <PopupDeleteList
+                    sendRender={handleSetRender}
+                    idmasklist={id}
+                    handleSendIsPopup={handleReceiveIsPopup}
+                />
+            )}
         </>
     );
 };
 
-export const PopupDeleteList = ({ handleSendIsPopup }) => {
+export const PopupDeleteList = ({ handleSendIsPopup, idmasklist, sendRender }) => {
     const HandleParentSendIsPopup = () => {
         handleSendIsPopup(false);
     };
@@ -152,6 +160,16 @@ export const PopupDeleteList = ({ handleSendIsPopup }) => {
     const HandleChilSendIsPopup = (event) => {
         event.stopPropagation();
         handleSendIsPopup(false);
+    };
+
+    const handleDeleteMaskList = async () => {
+        try {
+            const res = await deleteMaskList(idmasklist);
+            console.log(res);
+            sendRender((r) => r + 1);
+        } catch (error) {
+            console.log('message : ', error);
+        }
     };
 
     return (
@@ -185,11 +203,17 @@ export const PopupDeleteList = ({ handleSendIsPopup }) => {
                                     icon={true}
                                     right={true}
                                     title="Hủy"
-                                    className="w-full  py-4">
-                                    <IconClose />
+                                    className="w-full py-4 border-[2px] bg-primary-blue-500 !text-white">
+                                    <IconClose color="#FEFEFE" />
                                 </Button>
-                                <Button color={'primary'} title="Xóa" icon={true} right={true} className="w-full py-4 ">
-                                    <IconPlus />
+                                <Button
+                                    color={'primary'}
+                                    onClick={handleDeleteMaskList}
+                                    title="Xóa"
+                                    icon={true}
+                                    right={true}
+                                    className="w-full py-4 ">
+                                    <IconCheck />
                                 </Button>
                             </div>
                         </div>
