@@ -44,7 +44,7 @@ export default function Profile() {
                 <h1 className=" text-center text-heading-3 font-heading-3 font-bitter text-primary-black">
                     Thông tin tài khoản
                 </h1>
-                <div className=" bg-[#FFFFFF] w-full h-[30vh] rounded-xl flex justify-end items-baseline">
+                <div className=" bg-[#FFFFFF] w-full h-[30vh] border-[4px] border-primary-black flex justify-end items-baseline mb-5">
                     <Button
                         title="Thay đổi ảnh bìa"
                         color={'tertiary'}
@@ -54,11 +54,11 @@ export default function Profile() {
                         <IconPencilSimpleLine />
                     </Button>
                 </div>
-                <div className=" flex justify-center mt-[-8%] gap-8 ">
-                    <div className="shadow-card-home rounded-[20px] bg-white border-[4px] px-6 py-12 border-secondary-gray">
+                <div className=" flex justify-start h-[50vh]  gap-8 ">
+                    <div className="shadow-card-home w-1/3 bg-white border-[4px] px-6  border-primary-black">
                         <CardImage onClick={handleLogout} />
                     </div>
-                    <div className="shadow-card-home rounded-[20px] bg-white w-2/4 border-[4px] px-6 py-12 border-secondary-gray">
+                    <div className="shadow-card-home w-full overflow-scroll bg-white border-[4px] px-6 py-12 border-primary-black">
                         <CardInformation
                             name={inforUser.full_name}
                             phone={inforUser.phone}

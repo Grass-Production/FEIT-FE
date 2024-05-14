@@ -70,17 +70,21 @@ export default function List() {
                         <CardLoading />
                     ) : (
                         <>
-                            {maskLists.map((v) => {
-                                return (
-                                    <div key={v._id} className=" h-72">
-                                        <CardCustomFavoritesList
-                                            handleSetRender={handleSetRender}
-                                            name={v.name_list}
-                                            id={v._id}
-                                        />
-                                    </div>
-                                );
-                            })}
+                            {maskLists !== null && (
+                                <>
+                                    {maskLists.map((v) => {
+                                        return (
+                                            <div key={v._id} className=" h-72">
+                                                <CardCustomFavoritesList
+                                                    handleSetRender={handleSetRender}
+                                                    name={v.name_list}
+                                                    id={v._id}
+                                                />
+                                            </div>
+                                        );
+                                    })}
+                                </>
+                            )}
                         </>
                     )}
                 </div>
