@@ -5,7 +5,9 @@ export const getLessons = async () => {
     const res = await get('http://localhost:8080/api/lesson/fetch', {
         headers: {
             "Content-Type": "application / json"
-        }
+        },
+        credentials: "include",
+
     })
     return res
 }
@@ -14,16 +16,20 @@ export const getLessonById = async (id) => {
     const res = await get(`http://localhost:8080/api/lesson/fetch/_id?_id=${id}`, {
         headers: {
             "Content-Type": "application / json"
-        }
+        },
+        credentials: "include",
+
     })
     return res
 }
 
 export const getLessonByIdCourse = async () => {
-    const res = await get('http://localhost:8080/api/lesson/fetch/:course_id?course_id=660b8a0c2aef1f3a28265523', {
+    const res = await get('http://localhost:8080/api/lesson/fetch/course_id?course_id=6631ff4e2f95034732cdbfaa', {
         headers: {
             "Content-Type": "application / json"
-        }
+        },
+        credentials: "include",
+
     })
     return res
 }
@@ -59,6 +65,8 @@ export const createLessonFiles = async (courseId, name, content, level, file) =>
             headers: {
                 Authorization: `Bearer ${token} `,
             },
+            credentials: "include",
+
             body: formData,
         })
         console.log("message : ", res)
@@ -150,6 +158,7 @@ export const deleteLesson = async (lessonid) => {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${token} `,
             },
+
         })
     return res
 }

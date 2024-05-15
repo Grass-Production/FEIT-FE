@@ -4,7 +4,9 @@ export const getVocabularyByUinit = async (unitid) => {
     const res = await get(`http://localhost:8080/api/vocabulary/fetch/unit?unit_id=${unitid}`, {
         headers: {
             "Content-Type": "application / json"
-        }
+        },
+        credentials: "include",
+
     })
     return res
 }
@@ -13,17 +15,21 @@ export const getVocabularyByLesson = async (field_of_it) => {
     const res = await get(`http://localhost:8080/api/vocabulary/fetch-by-lesson?field_of_it=${field_of_it}`, {
         headers: {
             "Content-Type": "application / json"
-        }
+        },
+        credentials: "include",
+
     })
 
-    return res.data.word.vocabulary
+    return res.data.vocabulary
 }
 
 export const getVocabulary = async () => {
     const res = await get(`http://localhost:8080/api/vocabulary/fetch`, {
         headers: {
             "Content-Type": "application / json"
-        }
+        },
+        credentials: "include",
+
     })
     return res.data.word.vocabulary
 }
@@ -32,7 +38,9 @@ export const getVocabularyByWord = async (word) => {
     const res = await get(`http://localhost:8080/api/vocabulary/fetch-by-word?word=${word}`, {
         headers: {
             "Content-Type": "application / json"
-        }
+        },
+        credentials: "include",
+
 
     })
     return res.data.vocabulary
@@ -78,6 +86,7 @@ export const createVocabularyFile = async (newData) => {
         const res = await postfile('http://localhost:8080/api/admin/vocabulary/create/file',
             formData,
             {
+                withCredentials: true,
                 headers: { Authorization: `Bearer ${token} ` },
             }
         )

@@ -29,7 +29,8 @@ export default ({
           'blue-700': '#083EB4',
           'blue-800': '#06308C',
           'black': '#1A1823',
-          'grey': '#F2F4F7'
+          'grey': '#F2F4F7',
+          'green': '#EAFFEA'
         },
         secondary: {
           'gray': '#858585',
@@ -37,6 +38,9 @@ export default ({
         tetiary: {
           'silver': '#DCDCDC',
           'tertiary': '#96999C'
+        },
+        neutral: {
+          'grey': '#F4F5F5'
         },
         semantic: {
           'danger': '#E72E0A',

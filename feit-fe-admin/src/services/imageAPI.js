@@ -9,6 +9,7 @@ export const createImages = async (newData) => {
         const res = await postfile('http://localhost:8080/api/admin/image/files/upload/many/static',
             formData,
             {
+                withCredentials: true,
                 headers: { Authorization: `Bearer ${token} ` },
             }
         )

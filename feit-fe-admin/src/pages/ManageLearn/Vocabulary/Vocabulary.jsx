@@ -1,8 +1,9 @@
-import { getLessons } from '../../services/lessonAPI';
-import { getUnits, getUnitByIdLesson } from '../../services/unitAPI';
+// import { getLessons } from '../../services/lessonAPI';
+import { getLessons } from '../../../services/lessonAPI';
+import { getUnits, getUnitByIdLesson } from '../../../services/unitAPI';
 import { useEffect, useState } from 'react';
 import { TableData, JsonUI } from './components/DataUI';
-import { HeaderSearch } from '../../layouts';
+import { HeaderSearch } from '../../../layouts';
 import { useParams } from 'react-router-dom';
 // import { PopUpCreate } from '../Unit/components';
 import { PopUpCreate } from './components';
@@ -14,10 +15,10 @@ import {
     deleteVocabulary,
     createVocabularyFile,
     getVocabularyByLesson,
-} from '../../services/vocabulary';
+} from '../../../services/vocabulary';
 
-import { createImages } from '../../services/imageAPI';
-import { CardStatistic } from '../ManageLearn/Course/component';
+import { createImages } from '../../../services/imageAPI';
+import { CardStatistic } from '../../ManageLearn/Course/component';
 import { CardCrud, CardItem, CardView } from './components';
 export default function UnitDetails() {
     const [units, setUnits] = useState([]);
@@ -132,14 +133,15 @@ export default function UnitDetails() {
             //     setVocabulary(res);
             // }
             if (idUnit != null || idUnit != '') {
-                const res = await getVocabularyByUinit(idUnit);
-                setVocabulary(res);
+                const res = await getVocabularyByUinit('6632921fff2c0d7a5d03b584');
+                setVocabulary(res.vocabulary.vocabulary);
             }
         }
         async function GetLessons() {
             const res = await getLessons();
             const lessondata = await res.data;
             const data = await lessondata.filter((v) => v._id === idLesson);
+            console.log('message da', data);
             setLesson(res);
             setNameLesson(data[0].name);
         }
@@ -147,14 +149,14 @@ export default function UnitDetails() {
             const res = await getUnitByIdLesson(idLesson);
 
             if (res !== null) {
-                const lessondata = await res.unit.Unit;
+                const lessondata = await res.unit;
                 const data = await lessondata.filter((v) => v._id === idUnit);
                 setUnits(lessondata);
                 console.log(lessondata);
                 setNameUnit(data[0].name);
             }
         }
-        GetLessons();
+        // GetLessons();
 
         GetVocabulary();
         GetUnits();

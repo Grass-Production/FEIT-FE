@@ -6,7 +6,8 @@ export const getInforUser = async () => {
         headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token} `,
-        }
+        },
+        credentials: "include",
     })
     console.log(res)
     console.log('token : ', token)

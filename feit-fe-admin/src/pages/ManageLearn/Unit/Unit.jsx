@@ -25,7 +25,7 @@ export default function HomePage() {
     useEffect(() => {
         async function GetUnits() {
             const res = await getUnitByIdLesson(idLesson);
-            setData(res.unit.Unit);
+            setData(res.unit);
         }
         async function GetLessons() {
             const res = await getLessons();
@@ -48,7 +48,7 @@ export default function HomePage() {
                 {data != null && (
                     <>
                         {data.map((v) => {
-                            return <CardItem id={v._id} key={v._id} name={v.name} />;
+                            return <CardItem idlesson={idLesson} id={v._id} key={v._id} name={v.name} />;
                         })}
                     </>
                 )}

@@ -1,4 +1,4 @@
-import { InputSection } from '../../../components';
+import { InputSection } from '../../../../components';
 
 export const JsonUI = ({ data }) => {
     return (

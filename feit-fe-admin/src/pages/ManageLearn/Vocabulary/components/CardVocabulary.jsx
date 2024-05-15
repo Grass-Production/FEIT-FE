@@ -9,9 +9,9 @@ import {
     IconPencilSimple,
     IconExport,
     IconArrowUp,
-} from '../../../svgs';
+} from '../../../../svgs';
 import { useState } from 'react';
-import { Button, InputSection, InputField } from '../../../components';
+import { Button, InputSection, InputField } from '../../../../components';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import PaginationItem from '@mui/material/PaginationItem';

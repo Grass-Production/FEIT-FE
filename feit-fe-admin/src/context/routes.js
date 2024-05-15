@@ -1,7 +1,7 @@
 import { lazy } from "react";
 
 
-import { IconLaptop, IconHouse, IconBell, IconList, IconChartBar, IconSearch, IconUser, IconClockClockwise, IconCrown } from "../svgs";
+import { IconLaptop, IconHouse, IconBell, IconList, IconChartBar, IconSearch, IconUser, IconClockClockwise, IconCrown, IconChatTeardropText, IconUsers } from "../svgs";
 
 
 
@@ -23,6 +23,8 @@ const CRUDCourse = lazy(() => import("../pages/ManageLearn/CRUDCourse"))
 const CRUDLesson = lazy(() => import("../pages/ManageLearn/CRUDLesson"))
 const CRUDUnit = lazy(() => import("../pages/ManageLearn/CRUDUnit"))
 const CRUDVocabulary = lazy(() => import("../pages/ManageLearn/CRUDVocabulary"))
+const Feedback = lazy(() => import("../pages/Feedback"))
+const Users = lazy(() => import("../pages/Users"))
 
 export const CHILD = {
     Lesson: 'lesson',
@@ -34,14 +36,16 @@ export const CHILD = {
 export const ROUTES = {
     Dashboard: '/',
     ActivityLog: '/logging',
+    Feedback: '/managefeedback',
+    Users: '/manageusers',
     SignIn: '/signIn',
     ManageLearn: '/managelearn',
     SignUp: '/signUp',
     SubManageLearn: '/managelearn/details/:idlesson',
     CourseDetail: '/managelearn/coursedetails/:idcourse',
     LessonDetail: '/managelearn/lessondetails/:idlesson',
-    UnitDetails: '/managelearn/unitdetails/:idunit',
-    VocabularyDetail: '/managelearn/vocabularydetails/:idvocabulary',
+    UnitDetails: '/managelearn/lesson/:idlesson/unitdetails/:idunit',
+    VocabularyDetail: '/managelearn/lesson/:idlesson/vocabularydetails/:idvocabulary',
     CRUDCourse: '/managelearn/coursedetails/:idcourse/setting',
     CRUDLesson: '/managelearn/lessondetails/:idlesson/setting',
     CRUDUnit: '/managelearn/unitdetails/:idunit/setting',
@@ -85,6 +89,20 @@ export const privateRouter = [
         title: 'FEIT',
         href: ROUTES.Dashboard,
         component: Dashboard,
+        name: 'Dashboard',
+        showSidebar: true,
+    },
+    {
+        title: 'FEIT',
+        href: ROUTES.Feedback,
+        component: Feedback,
+        name: 'Dashboard',
+        showSidebar: true,
+    },
+    {
+        title: 'FEIT',
+        href: ROUTES.Users,
+        component: Users,
         name: 'Dashboard',
         showSidebar: true,
     },
@@ -191,10 +209,24 @@ export const routerSidebar = [
     },
     {
         title: 'FEIT',
+        href: ROUTES.Users,
+        component: Users,
+        name: 'Quản lý người dùng',
+        icon: IconUsers,
+    },
+    {
+        title: 'FEIT',
         href: ROUTES.ActivityLog,
         component: ActivityLog,
         name: 'Activity Log',
         icon: IconHouse,
+    },
+    {
+        title: 'FEIT',
+        href: ROUTES.Feedback,
+        component: Feedback,
+        name: 'Quản lý feedback',
+        icon: IconChatTeardropText,
     },
     {
         title: 'FEIT',

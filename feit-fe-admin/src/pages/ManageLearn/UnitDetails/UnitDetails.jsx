@@ -4,7 +4,7 @@ import { Button, InputSection } from '../../../components';
 import { IconArrowUpLeft } from '../../../svgs';
 import { CardLesson, CardUnit, CardCourse } from './component';
 import { useEffect, useState } from 'react';
-import { getLessonByIdCourse } from '../../../services/lessonAPI';
+import { getLessonByIdCourse, getLessonById } from '../../../services/lessonAPI';
 import { getUnitByIdLesson } from '../../../services/unitAPI';
 import { getVocabularyByUinit } from '../../../services/vocabulary';
 import { useParams } from 'react-router-dom';
@@ -13,26 +13,34 @@ export default function UnitDetails() {
     const [lesson, setLesson] = useState([]);
     const [unit, setUnit] = useState([]);
     const [vocabulary, setVocabulary] = useState([]);
-    let { idlesson } = useParams();
+    let { idlesson, idunit } = useParams();
 
     useEffect(() => {
         async function GetLessonByIdCourse() {
             const res = await getLessonByIdCourse();
-            console.log(res.lesson.Lesson);
-            setLesson(res.lesson.Lesson);
+            console.log(res.lesson);
+            setLesson(res.lesson);
         }
 
         async function GetUnit() {
             const res = await getUnitByIdLesson(idlesson);
             console.log(res);
-            setUnit(res.unit.Unit);
+            setUnit(res.unit);
+        }
+        async function GetLessonById() {
+            const res = await getLessonById(idlesson);
+            console.log(res);
+            setLesson(res.lesson);
         }
 
         async function GetVocabulary() {
-            const res = await getVocabularyByUinit();
+            const res = await getVocabularyByUinit(idunit);
+            setVocabulary(res.vocabulary.vocabulary);
+            console.log('res voca', res);
         }
 
-        GetLessonByIdCourse();
+        // GetLessonByIdCourse();
+        GetLessonById();
         GetUnit();
     }, []);
 
@@ -58,7 +66,7 @@ export default function UnitDetails() {
                         <h1 className=" text-heading-5 font-heading-5 font-plusjakartasans">Chủ đề</h1>
                         <div className="flex  justify-between">
                             <div className="">
-                                <CardLesson />
+                                <CardLesson name={lesson.name} quantityUnit={lesson.count_unit} />
                             </div>
                             <div className=" w-3/4 grid grid-cols-2 gap-4">
                                 {unit.map((v) => {
