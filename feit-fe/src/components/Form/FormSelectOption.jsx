@@ -40,8 +40,8 @@ export const FormSelectOption = ({
             <select onChange={onchange} className="block w-full  border border-secondary-gray rounded-lg p-3">
                 {option.map((v, i) => {
                     return (
-                        <option key={i} value={v.value}>
-                            {v.value}
+                        <option key={i} value={v}>
+                            {v}
                         </option>
                     );
                 })}

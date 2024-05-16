@@ -66,7 +66,7 @@ export default function UnitDetails() {
                         <h1 className=" text-heading-5 font-heading-5 font-plusjakartasans">Chủ đề</h1>
                         <div className="flex  justify-between">
                             <div className="">
-                                <CardLesson name={lesson.name} quantityUnit={lesson.count_unit} />
+                                <CardLesson id={idlesson} name={lesson.name} quantityUnit={lesson.count_unit} />
                             </div>
                             <div className=" w-3/4 grid grid-cols-2 gap-4">
                                 {unit.map((v) => {

@@ -1,7 +1,7 @@
 import { lazy } from "react";
 
 
-import { IconLaptop, IconHouse, IconBell, IconList, IconChartBar, IconSearch, IconUser, IconClockClockwise, IconCrown, IconChatTeardropText, IconUsers } from "../svgs";
+import { IconLaptop, IconHouse, IconFileCloud, IconBell, IconList, IconChartBar, IconSearch, IconUser, IconClockClockwise, IconCrown, IconChatTeardropText, IconUsers } from "../svgs";
 
 
 
@@ -25,6 +25,10 @@ const CRUDUnit = lazy(() => import("../pages/ManageLearn/CRUDUnit"))
 const CRUDVocabulary = lazy(() => import("../pages/ManageLearn/CRUDVocabulary"))
 const Feedback = lazy(() => import("../pages/Feedback"))
 const Users = lazy(() => import("../pages/Users"))
+const Cloudinary = lazy(() => import("../pages/Cloudinary"))
+const CloudinaryDetails = lazy(() => import("../pages/CloudinaryDetails"))
+const CRUDExam = lazy(() => import("../pages/ManageExam/CRUDExam"))
+
 
 export const CHILD = {
     Lesson: 'lesson',
@@ -37,6 +41,8 @@ export const ROUTES = {
     Dashboard: '/',
     ActivityLog: '/logging',
     Feedback: '/managefeedback',
+    Cloudinary: '/cloudinary',
+    CloudinaryDetails: '/cloudinary/:idcloudinary',
     Users: '/manageusers',
     SignIn: '/signIn',
     ManageLearn: '/managelearn',
@@ -50,6 +56,7 @@ export const ROUTES = {
     CRUDLesson: '/managelearn/lessondetails/:idlesson/setting',
     CRUDUnit: '/managelearn/unitdetails/:idunit/setting',
     CRUDVocabulary: '/managelearn/vocabularydetails/:idvocabulary/setting',
+    CRUDExam: '/manageexam/exam',
 }
 
 
@@ -97,6 +104,27 @@ export const privateRouter = [
         href: ROUTES.Feedback,
         component: Feedback,
         name: 'Dashboard',
+        showSidebar: true,
+    },
+    {
+        title: 'FEIT',
+        href: ROUTES.Cloudinary,
+        component: Cloudinary,
+        name: 'Cloudinary',
+        showSidebar: true,
+    },
+    {
+        title: 'FEIT',
+        href: ROUTES.CRUDExam,
+        component: CRUDExam,
+        name: 'Exam',
+        showSidebar: true,
+    },
+    {
+        title: 'FEIT',
+        href: ROUTES.CloudinaryDetails,
+        component: CloudinaryDetails,
+        name: 'Cloudinary',
         showSidebar: true,
     },
     {
@@ -227,6 +255,13 @@ export const routerSidebar = [
         component: Feedback,
         name: 'Quản lý feedback',
         icon: IconChatTeardropText,
+    },
+    {
+        title: 'FEIT',
+        href: ROUTES.Cloudinary,
+        component: Cloudinary,
+        name: 'Cloudinary',
+        icon: IconFileCloud,
     },
     {
         title: 'FEIT',

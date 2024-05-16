@@ -16,7 +16,7 @@ export default function LessonDetail() {
     useEffect(() => {
         async function GetUnit() {
             const res = await getUnitByIdLesson(idlesson);
-            console.log(res);
+            console.log('res unit ', res);
             setUnit(res.unit);
         }
 

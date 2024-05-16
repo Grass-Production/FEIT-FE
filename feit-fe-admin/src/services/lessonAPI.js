@@ -34,10 +34,15 @@ export const getLessonByIdCourse = async () => {
     return res
 }
 
-export const createLesson = async (newData) => {
+export const createLesson = async (courseId, name, content, level, file) => {
     const token = localStorage.getItem('access_token')
+    const formData = new FormData(); // Tạo đối tượng FormData
+    formData.append('course_id', courseId);
+    formData.append('name', name);
+    // formData.append('content', content);
+    // formData.append('file', file);
     const res = await post('http://localhost:8080/api/admin/lesson/create',
-        newData, {
+        formData, {
         headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token} `,
@@ -52,21 +57,17 @@ export const createLesson = async (newData) => {
 
 
 export const createLessonFiles = async (courseId, name, content, level, file) => {
-    const token = localStorage.getItem('access_token')
+
     const formData = new FormData(); // Tạo đối tượng FormData
     formData.append('course_id', courseId);
     formData.append('name', name);
-    formData.append('content', content);
-    formData.append('level', level);
-    formData.append('file', file);
+    // formData.append('content', content);
+    // formData.append('level', level);
+    // formData.append('file', file);
     try {
         const res = await fetch('http://localhost:8080/api/admin/lesson/create', {
             method: 'POST',
-            headers: {
-                Authorization: `Bearer ${token} `,
-            },
             credentials: "include",
-
             body: formData,
         })
         console.log("message : ", res)
@@ -101,7 +102,7 @@ export const createLessonFileLoading = async (newData, sendprogress) => {
     const formData = new FormData();
     formData.append('files', newData);
     try {
-        const res = await axios.post('http://localhost:8080/api/admin/lesson/create/file', formData, {
+        const res = await axios.post('http://localhost:8080/api/admin/course/create/file/final', formData, {
             withCredentials: true,
             // Theo dõi % hoàn thành
             onUploadProgress: (progressEvent) => {
@@ -116,6 +117,24 @@ export const createLessonFileLoading = async (newData, sendprogress) => {
     }
 };
 
+// export const createLessonFileLoading = async (newData, sendprogress) => {
+//     const formData = new FormData();
+//     formData.append('files', newData);
+//     try {
+//         const res = await axios.post('http://localhost:8080/api/admin/lesson/create/file', formData, {
+//             withCredentials: true,
+//             // Theo dõi % hoàn thành
+//             onUploadProgress: (progressEvent) => {
+//                 const percentComplete = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+//                 sendprogress(percentComplete);
+//             },
+//         });
+//         return res;
+
+//     } catch (error) {
+//         console.log('error : ', error)
+//     }
+// };
 
 export const updateLesson = async (newData, sendprogress) => {
 

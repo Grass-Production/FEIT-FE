@@ -288,9 +288,11 @@ export const CardItem = ({
                         </div>
                     </div>
                     <div className=" flex justify-center items-center gap-3">
-                        <Button onClick={OnClickClose} icon={true} left={true} title="">
-                            <IconPencilSimple w="28" h="28" color="#3C79FE" />
-                        </Button>
+                        <NavLink to={`/managelearn/vocabularydetails/${id}/setting`}>
+                            <Button icon={true} left={true} title="">
+                                <IconPencilSimple w="28" h="28" color="#3C79FE" />
+                            </Button>
+                        </NavLink>
                         <Button onClick={handleDelete} icon={true} left={true} title="">
                             <IconDelete size="28" color="#3C79FE" />
                         </Button>

@@ -12,6 +12,7 @@ export const InputSection = ({
     className,
     value,
     onChange,
+    disabled,
     size,
     id = '1',
     name = id,
@@ -23,6 +24,7 @@ export const InputSection = ({
                     onChange={onChange}
                     type={type}
                     value={value}
+                    disabled={disabled}
                     defaultChecked
                     className={`${size} rounded-full`}
                     id={id}
@@ -33,6 +35,7 @@ export const InputSection = ({
                     onChange={onChange}
                     type={type}
                     value={value}
+                    disabled={disabled}
                     className={`${size} rounded-full`}
                     id={id}
                     name={name}

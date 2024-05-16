@@ -1,15 +1,28 @@
-import { CardUpdate, CardCreateOne } from './component';
+import { FormCreate, CardCreateOne } from './component';
 import { NavLink } from 'react-router-dom';
 import { InputSection } from '../../../components';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IconArrowUpLeft } from '../../../svgs';
 import { Button } from '../../../components';
 import { createLessonFile } from '../../../services/lessonAPI';
 import { useParams } from 'react-router-dom';
-import { SoundSmall } from '../../../components/Sound';
-export default function CRUDVocabulary() {
+import { getLessons } from '../../../services/lessonAPI';
+export default function CRUDLesson() {
     const [isCheck, setIsCheck] = useState(false);
+    const [lessons, setLessons] = useState([]);
     let { idlesson } = useParams();
+
+    useEffect(() => {
+        const GetLessons = async () => {
+            try {
+                const res = await getLessons();
+                console.log('lesason :', res);
+            } catch (error) {
+                console.log('message', error);
+            }
+        };
+        GetLessons();
+    }, []);
 
     const handleRadioChange = (event) => {
         const value = event.target.value;
@@ -28,19 +41,13 @@ export default function CRUDVocabulary() {
                 <div className=" w-1/2  ">
                     <div className=" border-b border-primary-black pb-2 mb-5">
                         <h1 className=" text-heading-6 font-heading-6 font-plusjakartasans text-primary-black">
-                            Chủ đề {idlesson}
+                            Tạo bài kiểm tra
                         </h1>
                         <p className=" text-body-1 font-body-1 font-plusjakartasans text-secondary-gray">
-                            Bạn có thể chỉnh sửa chủ đề hoặc thêm một chủ đề bằng cách thủ công hoặc thêm bằng file
-                            excel.
+                            Đây là form tạo bài kiểm, dựa vào chủ đề và chương để tạo bài kiểm nhé
                         </p>
-                        {/* <SoundSmall
-                            sound={
-                                'https://res.cloudinary.com/df4zm1xjy/video/upload/v1714590655/feit-audio-vocabulary/Designpatterns.mp3.mp3'
-                            }
-                        /> */}
                     </div>
-                    <div className=" flex justify-start items-center gap-7">
+                    {/* <div className=" flex justify-start items-center gap-7">
                         <InputSection
                             size={' w-6 h-6'}
                             className={' w-1/4 text-label-2 font-label-2 font-plusjakartasans text-primary-black'}
@@ -62,9 +69,12 @@ export default function CRUDVocabulary() {
                             value="create"
                             type="radio"
                         />
-                    </div>
+                    </div> */}
                 </div>
-                <div className=" w-1/2 bg-white">{isCheck ? <CardCreateOne /> : <CardUpdate />}</div>
+                {/* <div className=" w-1/2 bg-white">{isCheck ? <CardCreateOne /> : <CardUpdate id={idlesson} />}</div> */}
+                <div className=" w-1/2 bg-white">
+                    <FormCreate id={idlesson} />
+                </div>
             </div>
         </div>
     );

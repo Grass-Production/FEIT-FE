@@ -7,9 +7,13 @@ import {
     IconDesktopTower,
     IconVideoCamera,
 } from '../../../../svgs';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '../../../../components';
 import { createLessonFileLoading } from '../../../../services/lessonAPI';
+import { getVocabularyById } from '../../../../services/vocabulary';
+import { useParams } from 'react-router-dom';
+import { SoundSmall } from '../../../../components/Sound';
+import { createVocabulary } from '../../../../services/vocabulary';
 import axios from 'axios';
 
 export const CardUpdate = ({ name = 'Programing', namefile = 'congnghe.png' }) => {
@@ -29,8 +33,12 @@ export const CardUpdate = ({ name = 'Programing', namefile = 'congnghe.png' }) =
         explain_eng: '',
         field_of_it: '',
         link_url: '',
+        image_url: '',
+        video_url: '',
         unit_id: '',
     });
+
+    let { idvocabulary } = useParams();
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -40,6 +48,29 @@ export const CardUpdate = ({ name = 'Programing', namefile = 'congnghe.png' }) =
     const handleSetSetProgess = (value) => {
         setProgess(value);
     };
+    useEffect(() => {
+        const handleGetVocabulary = async () => {
+            const res = await getVocabularyById(idvocabulary);
+            const vocabulary = await res.vocabulary;
+            setFormInput({
+                word: vocabulary.word,
+                part_of_speech: vocabulary.part_of_speech,
+                pronunciation: vocabulary.pronunciation,
+                mean: vocabulary.mean,
+                example_vie: vocabulary.example_vie,
+                example_eng: vocabulary.example_eng,
+                explain_vie: vocabulary.explain_vie,
+                explain_eng: vocabulary.explain_eng,
+                field_of_it: vocabulary.field_of_it,
+                link_url: vocabulary.link_url,
+                image_url: vocabulary.image_url,
+                video_url: vocabulary.video_url,
+                unit_id: vocabulary.unit_id,
+            });
+            console.log('message voca', res);
+        };
+        handleGetVocabulary();
+    }, []);
 
     const handleCreateLessonFile = async () => {
         const res = await createLessonFileLoading(selectedFile, handleSetSetProgess);
@@ -164,15 +195,40 @@ export const CardUpdate = ({ name = 'Programing', namefile = 'congnghe.png' }) =
                     value={formInput.example_eng}
                 />
             </div>
+            <div className=" w-full">
+                <div className=" flex justify-start gap-4 items-center">
+                    <h3 className=" text-label-2 font-label-2 font-plusjakartasans text-primary-black mb-2">
+                        Link phát âm
+                    </h3>
+                    <SoundSmall sound={formInput.link_url} />
+                </div>
+                <InputField
+                    onChange={handleInputChange}
+                    placeholder={'Câu ví dụ Tiếng Anh'}
+                    className=" rounded-none w-full py-2 mb-4"
+                    name={'example_eng'}
+                    value={formInput.link_url}
+                />
+            </div>
+            <div className=" w-full">
+                <h3 className=" text-label-2 font-label-2 font-plusjakartasans text-primary-black mb-2">Link video</h3>
+                <InputField
+                    onChange={handleInputChange}
+                    placeholder={'Câu ví dụ Tiếng Anh'}
+                    className=" rounded-none w-full py-2 mb-4"
+                    name={'example_eng'}
+                    value={formInput.video_url}
+                />
+            </div>
             <h3 className=" text-label-2 font-label-2 font-plusjakartasans text-primary-black mb-1">Tập tin</h3>
             <div className=" p-3 border border-primary-black bg-primary-grey mb-5">
                 <div className=" border flex justify-center items-center h-64 bg-white border-dashed border-primary-black mb-5">
                     <div className="">
                         <div className=" flex justify-center items-center mb-3">
                             <IconImagesSquare />
-                            <IconVideoCamera />
+                            {/* <IconVideoCamera /> */}
                         </div>
-                        <h1>Tải hình ảnh hoặc video của bạn lên</h1>
+                        <h1>Tải hình ảnh của từ vựng lên</h1>
                     </div>
                 </div>
                 <div className=" border bg-white p-4  border-dashed border-primary-black mb-5">
@@ -278,6 +334,8 @@ const FormCreateOne = () => {
         explain_eng: '',
         field_of_it: '',
         link_url: '',
+        image_url: '',
+        video_url: '',
         unit_id: '',
     });
 
@@ -288,6 +346,45 @@ const FormCreateOne = () => {
 
     const handleSetSetProgess = (value) => {
         setProgess(value);
+    };
+
+    const handleCreateVocabulary = async () => {
+        if (
+            formInput.word !== '' ||
+            formInput.part_of_speech !== '' ||
+            formInput.pronunciation !== '' ||
+            formInput.mean !== '' ||
+            formInput.example_vie !== '' ||
+            formInput.example_eng !== '' ||
+            formInput.field_of_it !== '' ||
+            formInput.link_url !== '' ||
+            formInput.image_url !== '' ||
+            formInput.video_url !== '' ||
+            formInput.unit_id !== ''
+        ) {
+            const res = await createVocabulary(
+                formInput.word,
+                formInput.part_of_speech,
+                formInput.pronunciation,
+                formInput.mean,
+                formInput.example_vie,
+                formInput.example_eng,
+                formInput.field_of_it,
+                formInput.link_url,
+                formInput.image_url,
+                formInput.video_url,
+                formInput.unit_id,
+            );
+            if (res.status === 200) {
+                alert('Thêm Dữ liệu bằng file thành công');
+                setRender((n) => n + 1);
+            } else if (res.message === 'validate: Token is expired') {
+                alert('Vui lòng đăng nhập');
+            }
+            console.log(res);
+        } else {
+            alert('Vui lòng điền đủ thông tin');
+        }
     };
 
     const handleCreateLessonFile = async () => {
@@ -410,6 +507,16 @@ const FormCreateOne = () => {
                     value={formInput.example_eng}
                 />
             </div>
+            <div className=" w-full">
+                <h3 className=" text-label-2 font-label-2 font-plusjakartasans text-primary-black mb-2">Link video</h3>
+                <InputField
+                    onChange={handleInputChange}
+                    placeholder={'Câu ví dụ Tiếng Anh'}
+                    className=" rounded-none w-full py-2 mb-4"
+                    name={'video_url'}
+                    value={formInput.video_url}
+                />
+            </div>
             <h3 className=" text-label-2 font-label-2 font-plusjakartasans text-primary-black mb-1">Tập tin</h3>
             <div className=" p-3 border border-primary-black bg-primary-grey mb-5">
                 <div className=" border flex justify-center items-center h-64 bg-white border-dashed border-primary-black mb-5">
@@ -494,9 +601,9 @@ const FormCreateOne = () => {
                     <IconCloudArrowUp />
                 </Button>
                 <Button
-                    onClick={handleCreateLessonFile}
+                    onClick={handleCreateVocabulary}
                     className=" w-full bg-background-disable border-background-disable text-secondary-gray rounded-none"
-                    title="Lưu"
+                    title="Thêm"
                     icon={true}
                     right={true}
                     color={'primary'}>
@@ -520,7 +627,7 @@ const FormCreateFile = () => {
         const res = await createLessonFileLoading(selectedFile, handleSetSetProgess);
         if (res.status === 200) {
             alert('Thêm Dữ liệu bằng file thành công');
-            setRender((n) => n + 1);
+            // setRender((n) => n + 1);
         } else if (res.message === 'validate: Token is expired') {
             alert('Vui lòng đăng nhập');
         }

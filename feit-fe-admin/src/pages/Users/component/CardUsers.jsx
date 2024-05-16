@@ -3,6 +3,7 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { Button, InputSection } from '../../../components';
 import {
     IconGraduationCap,
     IconBookOpenText,
@@ -10,7 +11,9 @@ import {
     IconTextAUnderline,
     IconArrowUpRight,
     IconUsers,
+    IconClose,
 } from '../../../svgs';
+
 import { PieChart } from './Chart';
 export const CardStatic = ({
     quantityCourse = '2',
@@ -125,53 +128,64 @@ export const CardView = ({ children, sendPage, count }) => {
 };
 
 export const TableData = ({ data }) => {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const toggleDropdown = () => {
+        setIsOpen(!isOpen);
+        console.log(isOpen);
+    };
+
     return (
-        <table className=" w-full">
-            <tr className=" justify-between items-center bg-neutral-grey  ">
-                <th className=" text-start px-5 border border-primary-black  py-2 text-button-1 font-button-1 text-primary-black font-plusjakartasans">
-                    Tên
-                </th>
-                <th className=" text-start px-5 border border-primary-black  py-2 text-button-1 font-button-1 text-primary-black font-plusjakartasans">
-                    Vai trò
-                </th>
-                <th className=" text-start px-5 border border-primary-black  py-2 text-button-1 font-button-1 text-primary-black font-plusjakartasans">
-                    Ngày thêm vào
-                </th>
-                <th className=" text-start px-5 border border-primary-black  py-2 text-button-1 font-button-1 text-primary-black font-plusjakartasans">
-                    Latency
-                </th>
-                <th className=" text-start px-5 border border-primary-black  py-2 text-button-1 font-button-1 text-primary-black font-plusjakartasans">
-                    Thời gian hoạt động
-                </th>
-                <th className=" text-start px-5 border border-primary-black  py-2 text-button-1 font-button-1 text-primary-black font-plusjakartasans">
-                    Thời gian hoạt động
-                </th>
-            </tr>
-            {data.map((v, i) => {
-                return (
-                    <tr key={i} className=" justify-between bg-white items-center ">
-                        <td className=" px-5 border border-primary-black text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
-                            {v.client_ip}
-                        </td>
-                        <td className=" px-5 border border-primary-black text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
-                            {v.status_code}
-                        </td>
-                        <td className=" px-5 border border-primary-black text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
-                            {v.path}
-                        </td>
-                        <td className=" px-5 border border-primary-black text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
-                            {v.latency}
-                        </td>
-                        <td className=" px-5 border border-primary-black text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
-                            {v.activity_time}
-                        </td>
-                        <td className=" px-5 border border-primary-black text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
-                            {v.expire_at}
-                        </td>
-                    </tr>
-                );
-            })}
-        </table>
+        <>
+            {/* <PopupUser /> */}
+            {/* {isOpen && <div onClick={toggleDropdown} className=" z-10 fixed inset-0"></div>} */}
+            <table className=" w-full">
+                <tr className=" justify-between items-center bg-neutral-grey  ">
+                    <th className=" text-start px-5 border border-primary-black  py-2 text-button-1 font-button-1 text-primary-black font-plusjakartasans">
+                        Tên
+                    </th>
+                    <th className=" text-start px-5 border border-primary-black  py-2 text-button-1 font-button-1 text-primary-black font-plusjakartasans">
+                        Vai trò
+                    </th>
+                    <th className=" text-start px-5 border border-primary-black  py-2 text-button-1 font-button-1 text-primary-black font-plusjakartasans">
+                        Ngày thêm vào
+                    </th>
+                    <th className=" text-start px-5 border border-primary-black  py-2 text-button-1 font-button-1 text-primary-black font-plusjakartasans">
+                        Latency
+                    </th>
+                    <th className=" text-start px-5 border border-primary-black  py-2 text-button-1 font-button-1 text-primary-black font-plusjakartasans">
+                        Thời gian hoạt động
+                    </th>
+                    <th className=" text-start px-5 border border-primary-black  py-2 text-button-1 font-button-1 text-primary-black font-plusjakartasans">
+                        Thời gian hoạt động
+                    </th>
+                </tr>
+                {data.map((v, i) => {
+                    return (
+                        <tr onClick={toggleDropdown} key={i} className=" justify-between bg-white items-center ">
+                            <td className=" px-5 border border-primary-black text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
+                                {v.client_ip}
+                            </td>
+                            <td className=" px-5 border border-primary-black text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
+                                {v.status_code}
+                            </td>
+                            <td className=" px-5 border border-primary-black text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
+                                {v.path}
+                            </td>
+                            <td className=" px-5 border border-primary-black text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
+                                {v.latency}
+                            </td>
+                            <td className=" px-5 border border-primary-black text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
+                                {v.activity_time}
+                            </td>
+                            <td className=" px-5 border border-primary-black text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
+                                {v.expire_at}
+                            </td>
+                        </tr>
+                    );
+                })}
+            </table>
+        </>
     );
 };
 
@@ -257,6 +271,132 @@ export const CardItem = ({ data }) => {
                 );
             })}
         </>
+    );
+};
+
+export const PopupUser = ({
+    handleSendIsPopup,
+    full_name = 'Doan Dinh Hoang',
+    email = 'Hoang@gmail.com',
+    avatar_url,
+    phone = '123456789',
+    cover_url,
+    position = 'IT',
+}) => {
+    const HandleParentSendIsPopup = () => {
+        handleSendIsPopup(false);
+    };
+
+    const HandleChilSendIsPopup = (event) => {
+        event.stopPropagation();
+        handleSendIsPopup(false);
+    };
+
+    return (
+        <div className="">
+            <div className="relative z-100" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+                <div className="fixed inset-0 z-10 bg-gray-500 bg-opacity-65 transition-opacity w-screen overflow-y-auto">
+                    <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                        <div className="  z-20  relative w-[50vw]  h-[95vh] flex flex-col justify-between  bg-white border-[4px] border-primary-black text-left shadow-xl transition-all  sm:max-w-5xl">
+                            <div className=" px-8 py-4 flex justify-between items-center border-b border-secondary-gray">
+                                <h1 className=" text-heading-7 font-heading-7 font-plusjakartasans text-primary-black">
+                                    Phản hồi
+                                </h1>
+                                {/* <Button onClick={HandleChilSendIsPopup} icon={true} left={true} title="">
+                                    <IconClose />
+                                </Button> */}
+                                <Button icon={true} left={true} title="">
+                                    <IconClose />
+                                </Button>
+                            </div>
+                            <div className=" px-5 flex flex-col h-full justify-center ">
+                                <div className=" flex flex-col justify-between p-5 border-[2px] border-primary-black bg-neutral-grey shadow-card-home">
+                                    <div className=" mb-3">
+                                        <h1 className=" mb-1 text-lable-2 font-lable-2 font-plusjakartasans text-secondary-gray">
+                                            Ảnh bìa
+                                        </h1>
+                                        <div
+                                            className=" w-full h-52"
+                                            style={{
+                                                background:
+                                                    'url(https://res.cloudinary.com/df4zm1xjy/image/upload/v1715501873/feit-user/wallpaperflare.com_wallpaper.jpg.jpg) center center/cover no-repeat',
+                                            }}></div>
+                                    </div>
+                                    <div className=" flex justify-between items-center gap-7">
+                                        <div className="w-1/2">
+                                            <h1 className=" mb-1 text-lable-2 font-lable-2 font-plusjakartasans text-secondary-gray">
+                                                Ảnh đại diện
+                                            </h1>
+                                            <div
+                                                className=" w-full h-56"
+                                                style={{
+                                                    background:
+                                                        'url(https://res.cloudinary.com/df4zm1xjy/image/upload/v1715501873/feit-user/wallpaperflare.com_wallpaper.jpg.jpg) center center/cover no-repeat',
+                                                }}></div>
+                                        </div>
+
+                                        <div className=" w-1/2">
+                                            <h1 className=" mb-1 text-lable-2 font-lable-2 font-plusjakartasans text-secondary-gray">
+                                                Thông tin cá nhân
+                                            </h1>
+                                            <div className=" border-[2px] border-primary-black p-2">
+                                                <div className=" mb-2">
+                                                    <h1 className=" text-label-3 font-label-3 font-plusjakartasans text-secondary-gray">
+                                                        Họ và tên
+                                                    </h1>
+                                                    <h1 className=" text-button-1 font-button-1 font-plusjakartasans text-primary-black">
+                                                        {full_name}
+                                                    </h1>
+                                                </div>
+                                                <div className=" mb-2">
+                                                    <h1 className=" text-label-3 font-label-3 font-plusjakartasans text-secondary-gray">
+                                                        Email
+                                                    </h1>
+                                                    <h1 className=" text-button-1 font-button-1 font-plusjakartasans text-primary-black">
+                                                        {email}
+                                                    </h1>
+                                                </div>
+                                                <div className=" mb-2">
+                                                    <h1 className=" text-label-3 font-label-3 font-plusjakartasans text-secondary-gray">
+                                                        Số điện thoại
+                                                    </h1>
+                                                    <h1 className=" text-button-1 font-button-1 font-plusjakartasans text-primary-black">
+                                                        {phone}
+                                                    </h1>
+                                                </div>
+                                                <div className="">
+                                                    <h1 className=" text-label-3 font-label-3 font-plusjakartasans text-secondary-gray">
+                                                        Vai trò
+                                                    </h1>
+                                                    <h1 className=" text-button-1 font-button-1 font-plusjakartasans text-primary-black">
+                                                        {position}
+                                                    </h1>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="  px-4 border-secondary-gray  py-4 border-t">
+                                {/* <Button
+                                    color={'primary'}
+                                    onClick={HandleChilSendIsPopup}
+                                    icon={true}
+                                    right={true}
+                                    title="Đóng"
+                                    className="w-full py-4"></Button> */}
+                                <Button
+                                    color={'primary'}
+                                    icon={true}
+                                    right={true}
+                                    title="Đóng"
+                                    className="w-full py-4"></Button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 };
 

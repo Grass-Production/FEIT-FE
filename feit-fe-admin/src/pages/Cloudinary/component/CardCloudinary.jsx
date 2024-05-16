@@ -3,6 +3,7 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { IconFolderSimple } from '../../../svgs';
 
 export const CardView = ({ children, sendPage, count }) => {
     const [page, setPage] = useState(1);
@@ -16,92 +17,55 @@ export const CardView = ({ children, sendPage, count }) => {
             sendPage('');
         }
     };
-
+    const folders = [
+        {
+            name: 'feit-audio-vocabulary',
+        },
+        {
+            name: 'feit-lesson',
+        },
+        {
+            name: 'feit-quiz',
+        },
+        {
+            name: 'feit-static',
+        },
+        {
+            name: 'feit-exam',
+        },
+        {
+            name: 'feit-user',
+        },
+    ];
     return (
         <div className="">
             <div className=" border-[4px] border-primary-black shadow-card-home bg-white px-10 py-8">
                 <div className="">
-                    <div className="flex items-center mb-4 justify-between border-b border-primary-black pb-3">
+                    <div className=" mb-8 border-b border-primary-black pb-3">
                         <h1 className=" text-heading-5 font-heading-5 font-plusjakartasans text-primary-black">
-                            Theo dõi
+                            Tập tin
                         </h1>
-                        <div className=" w-2/5 border-l border-primary-black pl-6">
-                            <div className=" flex justify-start items-center ">
-                                <Stack spacing={2}>
-                                    <Pagination
-                                        count={count}
-                                        siblingCount={0}
-                                        page={page}
-                                        onChange={handleChange}
-                                        variant="outlined"
-                                        shape="rounded"
-                                        renderItem={(item) => (
-                                            <PaginationItem
-                                                component={NavLink}
-                                                to={`/logging${item.page === 1 ? '' : `?page=${item.page}`}`}
-                                                {...item}
-                                            />
-                                        )}
-                                    />
-                                </Stack>
-                            </div>
-                        </div>
+                        <h1 className=" text-body-2 font-body-2 font-plusjakartasans text-secondary-gray">6 tập tin</h1>
                     </div>
-                    {children}
+                    <div className="grid grid-cols-4 gap-10">
+                        {folders.map((v, i) => {
+                            return <Folders name={v.name} id={i} key={i} />;
+                        })}
+                    </div>
                 </div>
             </div>
         </div>
     );
 };
 
-export const TableData = ({ data }) => {
+export const Folders = ({ name, id }) => {
     return (
-        <table className=" w-full">
-            <tr className=" justify-between items-center bg-primary-blue-400  ">
-                <th className=" px-5 border border-primary-black border-t-0 py-2 text-body-1 font-body-1 text-white font-plusjakartasans">
-                    Client IP
-                </th>
-                <th className=" px-5 border border-primary-black border-t-0 py-2 text-body-1 font-body-1 text-white font-plusjakartasans">
-                    Status code
-                </th>
-                <th className=" px-5 border border-primary-black border-t-0 py-2 text-body-1 font-body-1 text-white font-plusjakartasans">
-                    Path
-                </th>
-                <th className=" px-5 border border-primary-black border-t-0 py-2 text-body-1 font-body-1 text-white font-plusjakartasans">
-                    Latency
-                </th>
-                <th className=" px-5 border border-primary-black border-t-0 py-2 text-body-1 font-body-1 text-white font-plusjakartasans">
-                    Thời gian hoạt động
-                </th>
-                <th className=" px-5 border border-primary-black border-t-0 py-2 text-body-1 font-body-1 text-white font-plusjakartasans">
-                    Thời gian hoạt động
-                </th>
-            </tr>
-            {data.map((v, i) => {
-                return (
-                    <tr key={i} className=" justify-between items-center ">
-                        <td className=" px-5 border border-primary-black text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
-                            {v.client_ip}
-                        </td>
-                        <td className=" px-5 border border-primary-black text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
-                            {v.status_code}
-                        </td>
-                        <td className=" px-5 border border-primary-black text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
-                            {v.path}
-                        </td>
-                        <td className=" px-5 border border-primary-black text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
-                            {v.latency}
-                        </td>
-                        <td className=" px-5 border border-primary-black text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
-                            {v.activity_time}
-                        </td>
-                        <td className=" px-5 border border-primary-black text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
-                            {v.expire_at}
-                        </td>
-                    </tr>
-                );
-            })}
-        </table>
+        <NavLink to={`/cloudinary/${id}`}>
+            <div className="border-[2px] hover:bg-neutral-grey cursor-pointer gap-1 flex justify-start items-center border-primary-black px-3 py-1">
+                <IconFolderSimple />
+                <h1 className=" text-button-1 font-button-1 font-plusjakartasans text-primary-black">{name}</h1>
+            </div>
+        </NavLink>
     );
 };
 

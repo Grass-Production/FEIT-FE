@@ -133,30 +133,35 @@ export default function UnitDetails() {
             //     setVocabulary(res);
             // }
             if (idUnit != null || idUnit != '') {
-                const res = await getVocabularyByUinit('6632921fff2c0d7a5d03b584');
+                const res = await getVocabularyByUinit(idUnit);
                 setVocabulary(res.vocabulary.vocabulary);
             }
         }
         async function GetLessons() {
             const res = await getLessons();
             const lessondata = await res.data;
-            const data = await lessondata.filter((v) => v._id === idLesson);
-            console.log('message da', data);
-            setLesson(res);
-            setNameLesson(data[0].name);
+            setLesson(lessondata);
+            if (idLesson !== '' || idLesson !== null) {
+                const data = await lessondata.filter((v) => v._id === idLesson);
+                console.log('data ::', data[0].name);
+                // console.log('message da', data);
+                setNameLesson(data[0].name);
+            }
         }
+
         async function GetUnits() {
             const res = await getUnitByIdLesson(idLesson);
 
             if (res !== null) {
-                const lessondata = await res.unit;
-                const data = await lessondata.filter((v) => v._id === idUnit);
-                setUnits(lessondata);
-                console.log(lessondata);
+                const unitdata = await res.unit;
+                const data = await unitdata.filter((v) => v._id === idUnit);
+                setUnits(unitdata);
+                console.log('lessondata : ', data);
                 setNameUnit(data[0].name);
             }
         }
-        // GetLessons();
+
+        GetLessons();
 
         GetVocabulary();
         GetUnits();
@@ -259,30 +264,34 @@ export default function UnitDetails() {
                 sendidlesson={handleSetIdLesson}
                 nameLesson={nameLesson}
                 datalesson={lesson}>
-                {vocabulary.map((v) => {
-                    return (
-                        <CardItem
-                            id={v._id}
-                            onClickDelete={handleDelete}
-                            word={v.word}
-                            mean={v.mean}
-                            partofspeech={v.part_of_speech}
-                            pronunciation={v.pronunciation}
-                            example_eng={v.example_eng}
-                            example_vie={v.example_vie}
-                            explain_eng={v.explain_eng}
-                            explain_vie={v.explain_vie}
-                            field_of_it={v.field_of_it}
-                            link_url={v.link_url}
-                            unit_id={v.unit_id}
-                            handleChange={handleChange}
-                            onClose={handleShowPopUp}
-                            handleUpdate={handleUpdate}
-                        />
-                    );
-                })}
+                {vocabulary !== null && (
+                    <>
+                        {vocabulary.map((v) => {
+                            return (
+                                <CardItem
+                                    id={v._id}
+                                    onClickDelete={handleDelete}
+                                    word={v.word}
+                                    mean={v.mean}
+                                    partofspeech={v.part_of_speech}
+                                    pronunciation={v.pronunciation}
+                                    example_eng={v.example_eng}
+                                    example_vie={v.example_vie}
+                                    explain_eng={v.explain_eng}
+                                    explain_vie={v.explain_vie}
+                                    field_of_it={v.field_of_it}
+                                    link_url={v.link_url}
+                                    unit_id={v.unit_id}
+                                    handleChange={handleChange}
+                                    onClose={handleShowPopUp}
+                                    handleUpdate={handleUpdate}
+                                />
+                            );
+                        })}
+                    </>
+                )}
             </CardView>
-            <button onClick={() => setShowPopUp(!showPopUp)}>Test Edit</button>
+            {/* <button onClick={() => setShowPopUp(!showPopUp)}>Test Edit</button> */}
         </div>
     );
 }
