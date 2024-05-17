@@ -203,7 +203,7 @@ export const CardItem = ({ onClickDelete, name = 'Lập trình', quantityVocabul
                         </div>
                     </div>
                     <div className=" flex justify-center items-center gap-3">
-                        <NavLink to={`/managelearn/lesson/${idlesson}/unitdetails/${id}`}>
+                        <NavLink to={`/manage/learn/lesson/${idlesson}/unitdetails/${id}`}>
                             <IconPencilSimple w="28" h="28" color="#3C79FE" />
                         </NavLink>
                         <Button onClick={handleDelete} icon={true} left={true} title="">

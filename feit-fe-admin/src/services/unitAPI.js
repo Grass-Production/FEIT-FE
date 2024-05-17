@@ -17,7 +17,6 @@ export const getUnitByIdLesson = async (lessonId) => {
             "Content-Type": "application / json",
         },
         credentials: "include",
-
     })
     return res
 }

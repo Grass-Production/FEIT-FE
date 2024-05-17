@@ -31,7 +31,7 @@ export default function LessonDetail() {
 
     return (
         <div className="">
-            <NavLink to="/managelearn/lesson">
+            <NavLink to="/manage/learn/lesson">
                 <Button icon={true} title="Trở về" left={true}>
                     <IconArrowUpLeft />
                 </Button>

@@ -56,19 +56,23 @@ export default function Feedback() {
                                     Thời gian
                                 </th>
                             </tr>
-                            {feedbacks.map((v, i) => {
-                                return (
-                                    <>
-                                        <TableData
-                                            key={i}
-                                            date={v.submitted_date}
-                                            feeling={v.feeling}
-                                            content={v.content}
-                                            is_love_web={v.is_love_web}
-                                        />
-                                    </>
-                                );
-                            })}
+                            {feedbacks !== null && (
+                                <>
+                                    {feedbacks.map((v, i) => {
+                                        return (
+                                            <>
+                                                <TableData
+                                                    key={i}
+                                                    date={v.submitted_date}
+                                                    feeling={v.feeling}
+                                                    content={v.content}
+                                                    is_love_web={v.is_love_web}
+                                                />
+                                            </>
+                                        );
+                                    })}
+                                </>
+                            )}
                         </table>
                     </>
                 )}

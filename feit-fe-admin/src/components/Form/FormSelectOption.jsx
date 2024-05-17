@@ -16,6 +16,7 @@ export const FormSelectOption = ({
     nameInput,
     classNameInput,
     label,
+    disabled,
     children,
     placeholder,
     status,
@@ -26,10 +27,14 @@ export const FormSelectOption = ({
 
     return (
         <div className={`${className} ${base()}`}>
-            <label className=" block mb-1 text-label-2 font-label-2 font-plusjakartasans text-primary-black">
+            <label className=" block mb-1 text-label-1 font-label-1 font-plusjakartasans text-secondary-gray">
                 {label}
             </label>
-            <select onChange={onChange} value={value} className="block w-full  border border-secondary-gray p-2">
+            <select
+                onChange={onChange}
+                disabled={disabled}
+                value={value}
+                className="block w-full  border border-secondary-gray p-2">
                 {children}
             </select>
         </div>

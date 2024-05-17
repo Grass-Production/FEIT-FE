@@ -63,7 +63,7 @@ const routesPrivate = privateRouter.map((route) => {
     console.log(route.href);
     // const title = route.title;
     switch (route.href) {
-        case '/managelearn':
+        case '/manage/learn':
             return {
                 path: route.href,
                 element: element,

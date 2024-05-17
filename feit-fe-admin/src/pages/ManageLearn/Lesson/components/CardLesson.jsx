@@ -220,7 +220,7 @@ export const CardItem = ({
                         </div>
                     </div>
                     <div className=" flex justify-center items-center gap-3">
-                        <NavLink to={`/managelearn/lessondetails/${id}`}>
+                        <NavLink to={`/manage/learn/lessondetails/${id}`}>
                             <IconPencilSimple w="28" h="28" color="#3C79FE" />
                         </NavLink>
                         <Button onClick={handleDelete} icon={true} left={true} title="">

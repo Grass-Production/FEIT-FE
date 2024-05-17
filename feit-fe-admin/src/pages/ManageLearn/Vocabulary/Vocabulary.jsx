@@ -18,7 +18,8 @@ import {
 } from '../../../services/vocabulary';
 
 import { createImages } from '../../../services/imageAPI';
-import { CardStatistic } from '../../ManageLearn/Course/component';
+// import { CardStatistic } from '../../Managelearn/Course/component';
+import { CardStatistic } from '../Course/component';
 import { CardCrud, CardItem, CardView } from './components';
 export default function UnitDetails() {
     const [units, setUnits] = useState([]);
@@ -71,7 +72,7 @@ export default function UnitDetails() {
         const res = await createVocabularyFile(file);
         if (res.status === 'success') {
             alert('Thêm bằng file thành công');
-            setRender((n) => n + 1);
+            setRender((r) => r + 1);
             console.log(res);
         }
         console.log(res);
@@ -132,39 +133,41 @@ export default function UnitDetails() {
             //     const res = await getVocabularyByLesson(nameLesson);
             //     setVocabulary(res);
             // }
-            if (idUnit != null || idUnit != '') {
+            console.log('message idunit', idUnit === '');
+            if (idUnit !== '') {
                 const res = await getVocabularyByUinit(idUnit);
-                setVocabulary(res.vocabulary.vocabulary);
+                setVocabulary(res.vocabulary);
             }
         }
         async function GetLessons() {
             const res = await getLessons();
             const lessondata = await res.data;
+            console.log(lessondata);
             setLesson(lessondata);
             if (idLesson !== '' || idLesson !== null) {
                 const data = await lessondata.filter((v) => v._id === idLesson);
-                console.log('data ::', data[0].name);
+                // console.log('data ::', data[0].name);
                 // console.log('message da', data);
                 setNameLesson(data[0].name);
             }
         }
 
         async function GetUnits() {
-            const res = await getUnitByIdLesson(idLesson);
-
-            if (res !== null) {
-                const unitdata = await res.unit;
-                const data = await unitdata.filter((v) => v._id === idUnit);
-                setUnits(unitdata);
-                console.log('lessondata : ', data);
-                setNameUnit(data[0].name);
+            if (idLesson !== '' || idLesson !== null) {
+                const res = await getUnitByIdLesson(idLesson);
+                console.log('message aaa : ', res);
+                if (res !== null || res !== '') {
+                    const unitdata = await res.unit;
+                    const data = await unitdata.filter((v) => v._id === idUnit);
+                    setUnits(unitdata);
+                    console.log('lessondata : ', data);
+                    setNameUnit(data[0].name);
+                }
             }
         }
-
-        GetLessons();
-
-        GetVocabulary();
         GetUnits();
+        GetLessons();
+        GetVocabulary();
     }, [idLesson, idUnit, render]);
     console.log(units);
     return (

@@ -1,13 +1,17 @@
 import { useEffect, useState } from 'react';
 import { Button, LoadingProgressBar } from '../../components';
 // import { RenderComponentUnitReview } from '../../untils/renderComponentUnitReview';
-import { RenderComponentUnitQuiz } from '../../untils/renderComponentUnitReview';
+// import { RenderComponentUnitQuiz } from '../../untils/renderComponentUnitReview';
+import { RenderComponentUnitQuiz } from '../../untils/renderComponentUnitQuiz';
 import { IconXCircle } from '../../svgs';
 import { Multiplechoice, FillInTheBlankReview, Listen, TrueFalse } from './component';
+import { getAllQuestionExamByIdExam, getOptionByIdQuestion } from '../../services/examAPI';
 import { Start } from './component';
 import 'animate.css';
 
-export default function UnitReview() {
+export default function UnitQuiz() {
+    const [questions, setQuestions] = useState([]);
+    const [option, setOption] = useState([]);
     const datas = [
         {
             id: '6611a3c017dae17cd8ca050b',
@@ -100,6 +104,28 @@ export default function UnitReview() {
             who_updates: 'John Doe',
         },
     ];
+
+    // useEffect(() => {
+    //     const GetQuestion = async () => {
+    //         const res = await getAllQuestionExamByIdExam('6646d4c193f595b4a8215f42');
+    //         console.log(' question :', res.data.exam_question_response[0]._id);
+    //         const idQuestion = await res.data.exam_question_response[0]._id;
+    //         console.log(idQuestion);
+    //         const option = await getOptionByIdQuestion(idQuestion);
+    //         console.log('option :: ', option);
+    //         console.log(' question :', option.data.exam_options);
+    //         setOption(option.data.exam_options);
+    //         setQuestions(res.data.exam_question_response);
+    //     };
+    //     GetQuestion();
+
+    //     // const GetOption = async () => {
+    //     //     const res = await getOptionByIdQuestion('6646d4c193f595b4a8215f42');
+    //     //     console.log(' question :', res.data.exam_question_response);
+    //     //     setQuestions(res.data.exam_question_response);
+    //     // };
+
+    // }, []);
     // Dùng để đếm số để render Component
     const [count, setCount] = useState(0);
 
@@ -141,7 +167,12 @@ export default function UnitReview() {
     function handleChange(event) {
         setInputValue(event.target.value);
     }
-
+    const GetOption = async (id) => {
+        const res = await getOptionByIdQuestion(id);
+        console.log(res);
+        console.log(' question :', res.data.exam_options);
+        setOption(res.data.exam_options);
+    };
     useEffect(() => {
         // Random 0->2 phục vụ cho random giao diện
         function createArrayRandomUI(length) {
@@ -175,6 +206,19 @@ export default function UnitReview() {
             }
             return numbers;
         }
+        const GetQuestion = async () => {
+            const res = await getAllQuestionExamByIdExam('6646d4c193f595b4a8215f42');
+            console.log(' question :', res.data.exam_question_response[0]._id);
+            const idQuestion = await res.data.exam_question_response[0]._id;
+            console.log(idQuestion);
+            const option = await getOptionByIdQuestion(idQuestion);
+            console.log('option :: ', option);
+            console.log(' question :', option.data.exam_options);
+            setOption(option.data.exam_options);
+            setQuestions(res.data.exam_question_response);
+        };
+        GetQuestion();
+
         //Lưu mãng từ 0->2 để random Giao diện
         setArrayRandomUI(createArrayRandomUI(20));
 
@@ -207,7 +251,8 @@ export default function UnitReview() {
             return;
         }
         setCheck(false);
-
+        GetOption(questions[index]._id);
+        console.log('questionsid :', questions[index]._id);
         setRightResult(false);
 
         setErrortResult(false);

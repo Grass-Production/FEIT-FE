@@ -227,6 +227,174 @@ export const CardUpdate = ({ name = 'Programing', namefile = 'congnghe.png', id 
     );
 };
 
+export const FormCreateExam = ({ name = 'Programing', namefile = 'congnghe.png', id }) => {
+    const [lessons, setLessons] = useState([]);
+    const [units, setUnits] = useState([]);
+    const [idLesson, setIdLesson] = useState('');
+    const [idUnit, setIdUnit] = useState('');
+    const [nameExam, setNameExam] = useState('');
+    const [descrExam, setDescrExam] = useState('');
+
+    useEffect(() => {
+        const GetLessons = async () => {
+            try {
+                const res = await getLessons();
+                setLessons(res.data);
+                if (res.status === 'success') {
+                    setRender((r) => r + 1);
+                }
+            } catch (error) {
+                console.log('message', error);
+            }
+        };
+
+        const GetUnit = async () => {
+            try {
+                if (idLesson !== '') {
+                    const res = await getUnitByIdLesson(idLesson);
+                    if (res !== null) {
+                        setUnits(res.unit);
+                    }
+                }
+            } catch (error) {
+                console.log('message : ', error);
+            }
+        };
+        getVocabularyByUinit;
+        GetLessons();
+        GetUnit();
+    }, [idLesson]);
+
+    const CreateExam = async () => {
+        try {
+            const res = await createExam({
+                lesson_id: idLesson,
+                unit_id: idUnit,
+                title: nameExam,
+                description: '',
+            });
+            console.log(res);
+        } catch (error) {
+            console.log('message createExam :', error);
+        }
+    };
+
+    const handleInputChangeNameExam = (event) => {
+        setNameExam(event.target.value);
+    };
+
+    const handleInputChangeDescrExam = (event) => {
+        setDescrExam(event.target.value);
+    };
+
+    const handleChangeSelectLesson = (event) => {
+        setIdLesson(event.target.value);
+    };
+
+    const handleChangeSelectUnit = (event) => {
+        setIdUnit(event.target.value);
+    };
+
+    return (
+        <div className=" border bg-white border-primary-black p-8 overflow-y-scroll  h-[65vh]">
+            <h1 className=" text-heading-7 font-heading-7 font-plusjakartasans text-primary-black mb-5">
+                Thông tin bài kiểm tra
+            </h1>
+            <div className=" mb-5  border-t-[2px] border-secondary-gray pt-8 ">
+                <h1 className=" mb-1 text-heading-7 font-heading-7 font-plusjakartasans text-primary-black">
+                    Tên bài kiểm tra
+                </h1>
+                <InputField
+                    value={nameExam}
+                    onChange={handleInputChangeNameExam}
+                    placeholder={'Ví dụ: Bài kiểm tra Unit 1'}
+                    className=" w-full rounded-none py-2 px-4"
+                />
+            </div>
+            <div className=" mb-4">
+                <FormSelectOption
+                    value={idLesson}
+                    onChange={handleChangeSelectLesson}
+                    label={'Chọn chủ đề'}
+                    className={
+                        ' w-full  !rounded-none text-button-1 font-button-1 font-plusjakartasans text-primary-black'
+                    }>
+                    <option value={''} className="">
+                        Chọn chủ đề
+                    </option>
+                    {lessons.map((v, i) => {
+                        return (
+                            <option key={v._id} value={v._id} className="">
+                                {v.name}
+                            </option>
+                        );
+                    })}
+                </FormSelectOption>
+            </div>
+            <div className=" mb-4">
+                <FormSelectOption
+                    value={idUnit}
+                    onChange={handleChangeSelectUnit}
+                    label={'Chọn chương'}
+                    className={
+                        ' w-full !rounded-none text-button-1 font-button-1 font-plusjakartasans text-primary-black'
+                    }>
+                    <option value={''} className=" ">
+                        Chọn chương
+                    </option>
+                    <>
+                        {idLesson !== '' && (
+                            <>
+                                {units.map((v, i) => {
+                                    return (
+                                        <>
+                                            <option key={v._id} value={v._id} className=" ">
+                                                {v.name}
+                                            </option>
+                                        </>
+                                    );
+                                })}
+                            </>
+                        )}
+                    </>
+                </FormSelectOption>
+            </div>
+            {/* <div className=" mb-5  border-t-[2px] border-secondary-gray pt-8 ">
+                <h1 className=" mb-1 text-heading-7 font-heading-7 font-plusjakartasans text-primary-black">
+                    Mô tả bài kiểm tra
+                </h1>
+                <textarea
+                    value={descrExam}
+                    placeholder={'Ví dụ: Bài kiểm tra Unit 1'}
+                    onChange={handleInputChangeDescrExam}
+                    className=" w-full py-2 px-4 resize-none border border-primary-black"
+                    rows={5}
+                    name=""
+                    id=""></textarea>
+            </div> */}
+            <div className="flex justify-between items-center gap-7 border-t border-primary-black pt-5">
+                <Button
+                    className=" w-full bg-background-disable border-background-disable text-secondary-gray rounded-none"
+                    title="Hủy"
+                    icon={true}
+                    right={true}
+                    color={'primary'}>
+                    <IconCloudArrowUp />
+                </Button>
+                <Button
+                    className=" w-full bg-background-disable border-background-disable text-secondary-gray rounded-none"
+                    title="Lưu"
+                    onClick={CreateExam}
+                    icon={true}
+                    right={true}
+                    color={'primary'}>
+                    <IconDesktopTower />
+                </Button>
+            </div>
+        </div>
+    );
+};
+
 export const FormCreate = ({ name = 'Programing', namefile = 'congnghe.png', id }) => {
     const [lessons, setLessons] = useState([]);
     const [units, setUnits] = useState([]);
@@ -238,10 +406,22 @@ export const FormCreate = ({ name = 'Programing', namefile = 'congnghe.png', id 
     const [result, setResult] = useState('');
     const [vocabularys, setVocabularys] = useState([]);
     const [exams, setExams] = useState([]);
-    const [idExam, setIdExams] = useState('');
+    const [idVocabulary, setIdVocabulary] = useState('');
     const [contentQuestion, setContenQuestion] = useState('');
     const optionTrueFalse = ['Đúng', 'Sai'];
+    const [idExam, setIdExam] = useState('');
+    const [nameLesson, setNameLesson] = useState('');
+    const [nameUnit, setNameUnit] = useState('');
+
     useEffect(() => {
+        const GetAllExam = async () => {
+            try {
+                const res = await getAllExam();
+                console.log('res exam : ', res);
+                setExams(res.data);
+            } catch (error) {}
+        };
+
         const GetLessons = async () => {
             try {
                 const res = await getLessons();
@@ -271,40 +451,72 @@ export const FormCreate = ({ name = 'Programing', namefile = 'congnghe.png', id 
                 if (idUnit !== '') {
                     const res = await getVocabularyByUinit(idUnit);
                     if (res !== null) {
-                        setVocabularys(res.vocabulary.vocabulary);
+                        setVocabularys(res.vocabulary);
                     }
                 }
             } catch (error) {
                 console.log('message : ', error);
             }
         };
-
-        getVocabularyByUinit;
+        GetAllExam();
+        GetVocabulary();
         GetLessons();
         GetUnit();
-    }, [idLesson]);
+    }, [idLesson, idUnit]);
+
+    // const CreateExam = async () => {
+    //     try {
+    //         const res = await createExam({
+    //             lesson_id: idLesson,
+    //             unit_id: idUnit,
+    //             vocabulary_id: '664637626c4c00abf5dee0a0',
+    //             title: 'thuat toan, programing, unit1,0',
+    //             description: '',
+    //         });
+    //         const exams = await getAllExam();
+    //         const lenghtExams = await exams.data.length;
+    //         const newExam = await exams.data[lenghtExams - 1];
+    //         const idnewExam = await newExam._id;
+    //         const createQuestion = await createQuestionExam({
+    //             exam_id: idnewExam,
+    //             vocabulary_id: idVocabulary,
+    //             content: contentQuestion,
+    //             type: typeQuestion,
+    //             level: 1,
+    //         });
+    //         const questions = await getAllQuestionExamByIdExam(idnewExam);
+    //         const lenghQuestions = await questions.data.exam_question_response.length;
+    //         const newQuestion = await questions.data.exam_question_response[lenghQuestions - 1];
+    //         const idNewQuestion = await newQuestion._id;
+
+    //         const createOption = await createOptionExam({
+    //             question_id: idNewQuestion,
+    //             options: typeQuestion === 'true/false' ? optionTrueFalse : inputValuesOption,
+    //             correct_answer: result,
+    //         });
+    //         if ((createOption.status = 'success')) {
+    //             alert('Tạo thành công');
+    //         }
+    //         console.log('createQuestion :', createQuestion);
+    //         console.log('newQuestion :', newQuestion);
+    //         console.log('idNewQuestion :', idNewQuestion);
+    //         console.log('createOption :', createOption);
+    //         console.log(res);
+    //     } catch (error) {
+    //         console.log('message createExam :', error);
+    //     }
+    // };
 
     const CreateExam = async () => {
         try {
-            const res = await createExam({
-                lesson_id: idLesson,
-                unit_id: idUnit,
-                vocabulary_id: '664637626c4c00abf5dee0a0',
-                title: 'thuat toan, programing, unit1,0',
-                description: '',
-            });
-            const exams = await getAllExam();
-            const lenghtExams = await exams.data.length;
-            const newExam = await exams.data[lenghtExams - 1];
-            const idnewExam = await newExam._id;
             const createQuestion = await createQuestionExam({
-                exam_id: idnewExam,
-                vocabulary_id: '664637626c4c00abf5dee0a0',
+                exam_id: idExam,
+                vocabulary_id: idVocabulary,
                 content: contentQuestion,
                 type: typeQuestion,
                 level: 1,
             });
-            const questions = await getAllQuestionExamByIdExam(idnewExam);
+            const questions = await getAllQuestionExamByIdExam(idExam);
             const lenghQuestions = await questions.data.exam_question_response.length;
             const newQuestion = await questions.data.exam_question_response[lenghQuestions - 1];
             const idNewQuestion = await newQuestion._id;
@@ -314,6 +526,9 @@ export const FormCreate = ({ name = 'Programing', namefile = 'congnghe.png', id 
                 options: typeQuestion === 'true/false' ? optionTrueFalse : inputValuesOption,
                 correct_answer: result,
             });
+            if ((createOption.status = 'success')) {
+                alert('Tạo thành công');
+            }
             console.log('createQuestion :', createQuestion);
             console.log('newQuestion :', newQuestion);
             console.log('idNewQuestion :', idNewQuestion);
@@ -353,6 +568,9 @@ export const FormCreate = ({ name = 'Programing', namefile = 'congnghe.png', id 
     const handleChangeSelectUnit = (event) => {
         setIdUnit(event.target.value);
     };
+    const handleChangeSelectVocabulary = (event) => {
+        setIdVocabulary(event.target.value);
+    };
 
     const handleChangeSelectTypeQuestion = (event) => {
         const selectedOption = event.target.selectedOptions[0];
@@ -360,10 +578,40 @@ export const FormCreate = ({ name = 'Programing', namefile = 'congnghe.png', id 
         setTypeQuestion(event.target.value);
         setSelectedTitleTypeQuestion(selectedTitle);
     };
+
+    const GetLessonById = async (id) => {
+        const res = await getLessonById(id);
+        console.log('lesson ne :', res);
+        setNameLesson(res.lesson.name);
+    };
+
+    const GetUnitByLesson = async (id, idofunit) => {
+        const res = await getUnitByIdLesson(id);
+        const units = await res.unit;
+        const unit = units.filter((u) => u._id === idofunit);
+        setNameUnit(unit[0].name);
+    };
+
+    const handleChangeSelectIdExam = (event) => {
+        const idExam = event.target.value;
+        setIdExam(idExam);
+        if (idExam === '') {
+            setNameLesson('');
+            setNameUnit('');
+            return;
+        }
+        const Exam = exams.filter((exam) => (exam._id = idExam));
+        const idOfUnit = Exam[0].unit_id;
+        const idOfLesson = Exam[0].lesson_id;
+        setIdUnit(idOfUnit);
+        GetLessonById(idOfLesson);
+        GetUnitByLesson(idOfLesson, idOfUnit);
+    };
+
     return (
         <div className=" border bg-white border-primary-black p-8 overflow-y-scroll  h-[65vh]">
             <h1 className=" text-heading-7 font-heading-7 font-plusjakartasans text-primary-black mb-5">
-                Thông tin câu hỏi
+                Bộ lọc tìm kiếm bài kiểm tra
             </h1>
             <div className=" mb-4">
                 <FormSelectOption
@@ -387,8 +635,8 @@ export const FormCreate = ({ name = 'Programing', namefile = 'congnghe.png', id 
             </div>
             <div className=" mb-4">
                 <FormSelectOption
-                    value={idUnit}
-                    onChange={handleChangeSelectUnit}
+                    // value={idUnit}
+                    // onChange={handleChangeSelectUnit}
                     label={'Chọn chủ đề'}
                     className={
                         ' w-full !rounded-none text-button-1 font-button-1 font-plusjakartasans text-primary-black'
@@ -413,10 +661,42 @@ export const FormCreate = ({ name = 'Programing', namefile = 'congnghe.png', id 
                     </>
                 </FormSelectOption>
             </div>
+
+            <h1 className=" text-heading-7 font-heading-7 font-plusjakartasans text-primary-black mb-5">
+                Thông tin câu hỏi
+            </h1>
             <div className=" mb-4">
                 <FormSelectOption
-                    value={idUnit}
-                    onChange={handleChangeSelectUnit}
+                    value={idExam}
+                    onChange={handleChangeSelectIdExam}
+                    label={'Chọn bài kiểm tra'}
+                    className={
+                        ' w-full  !rounded-none text-button-1 font-button-1 font-plusjakartasans text-primary-black'
+                    }>
+                    <option value={''} className="">
+                        Chọn bài kiểm tra
+                    </option>
+                    {/* {exams.map((v, i) => {
+                        return (
+                            <option key={v._id} value={v._id} title={v.unit_id} className="">
+                                {v.title}
+                            </option>
+                        );
+                    })} */}
+                </FormSelectOption>
+            </div>
+            <div className=" mb-4">
+                <h1 className=" text-label-1 font-label-1 font-plusjakartasans text-secondary-gray mb-1">Chủ đề</h1>
+                <InputField status={true} value={nameLesson} className=" w-full rounded-none px-4 " />
+            </div>
+            <div className=" mb-4">
+                <h1 className=" text-label-1 font-label-1 font-plusjakartasans text-secondary-gray mb-1">Chương</h1>
+                <InputField status={true} value={nameUnit} className=" w-full rounded-none px-4 " />
+            </div>
+            <div className=" mb-4">
+                <FormSelectOption
+                    value={idVocabulary}
+                    onChange={handleChangeSelectVocabulary}
                     label={'Chọn từ vựng bạn muốn cho kiểm tra'}
                     className={
                         ' w-full !rounded-none text-button-1 font-button-1 font-plusjakartasans text-primary-black'
@@ -487,7 +767,7 @@ export const FormCreate = ({ name = 'Programing', namefile = 'congnghe.png', id 
                     </h1>
                     {typeQuestion === 'blank' && (
                         <InputField
-                            value={contentQuestion}
+                            value={result}
                             onChange={handleInputChangeResultBlank}
                             placeholder={'Ví dụ: hãy chọn câu trả lời đúng'}
                             className=" w-full rounded-none py-2 px-4"
@@ -495,7 +775,7 @@ export const FormCreate = ({ name = 'Programing', namefile = 'congnghe.png', id 
                     )}
                     {typeQuestion === 'listen' && (
                         <InputField
-                            value={contentQuestion}
+                            value={result}
                             onChange={handleInputChangeResultBlank}
                             placeholder={'Ví dụ: hãy chọn câu trả lời đúng'}
                             className=" w-full rounded-none py-2 px-4"

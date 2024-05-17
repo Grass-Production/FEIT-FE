@@ -36,7 +36,7 @@ export const CardCourse = ({ id = 'test' }) => {
                         title="">
                         <IconDelete size="28" color="#3C79FE" />
                     </Button>
-                    <NavLink to={`/managelearn/coursedetails/${id}/setting`}>
+                    <NavLink to={`/manage/learn/coursedetails/${id}/setting`}>
                         <Button
                             className=" text-secondary-gray w-full border-none hover:bg-slate-300 rounded-none"
                             icon={true}
@@ -80,7 +80,7 @@ export const CardLesson = ({ id = 'test', name, quantityUnit }) => {
                     title="Xóa">
                     <IconDelete size="28" color="#3C79FE" />
                 </Button>
-                <NavLink to={`/managelearn/lessondetails/${id}/setting`}>
+                <NavLink to={`/manage/learn/lessondetails/${id}/setting`}>
                     <Button
                         className=" text-secondary-gray w-full border-none hover:bg-slate-300 rounded-none"
                         icon={true}
@@ -128,7 +128,7 @@ export const RowVocabulary = ({ word, id }) => {
                                 right={true}>
                                 <IconDelete />
                             </Button>
-                            <NavLink to={`/managelearn/vocabularydetails/${id}/setting`}>
+                            <NavLink to={`/manage/learn/vocabularydetails/${id}/setting`}>
                                 <Button
                                     color={'primary'}
                                     className="text-body-2 font-body-2 border-none rounded-none text-secondary-gray font-plusjakartasans"
@@ -151,8 +151,8 @@ export const CardUnit = ({ name, idUnit }) => {
     useEffect(() => {
         async function GetVocabulary() {
             const res = await getVocabularyByUinit(idUnit);
-            setVocabulary(res.vocabulary.vocabulary);
-            console.log('res :', res.vocabulary.vocabulary);
+            setVocabulary(res.vocabulary);
+            console.log('res :', res.vocabulary);
         }
         GetVocabulary();
     }, []);

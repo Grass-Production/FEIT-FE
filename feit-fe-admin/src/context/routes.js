@@ -5,10 +5,10 @@ import { IconLaptop, IconHouse, IconFileCloud, IconBell, IconList, IconChartBar,
 
 
 
-const Lesson = lazy(() => import("../pages/ManageLearn/Lesson"))
 const SignIn = lazy(() => import("../pages/SignIn"))
 const SignUp = lazy(() => import("../pages/SignUp"))
 const Unit = lazy(() => import("../pages/ManageLearn/Unit"))
+const Lesson = lazy(() => import("../pages/ManageLearn/Lesson"))
 const UnitDetails = lazy(() => import("../pages/ManageLearn/UnitDetails"))
 const Vocabulary = lazy(() => import("../pages/ManageLearn/Vocabulary"))
 const Dashboard = lazy(() => import("../pages/Dashboard"))
@@ -28,7 +28,11 @@ const Users = lazy(() => import("../pages/Users"))
 const Cloudinary = lazy(() => import("../pages/Cloudinary"))
 const CloudinaryDetails = lazy(() => import("../pages/CloudinaryDetails"))
 const CRUDExam = lazy(() => import("../pages/ManageExam/CRUDExam"))
+const Exam = lazy(() => import("../pages/ManageExam/Exam"))
+const ExamDetails = lazy(() => import("../pages/ManageExam/ExamDetails"))
 
+
+// import lesson from "../pages/ManageLearn/lesson";
 
 export const CHILD = {
     Lesson: 'lesson',
@@ -40,22 +44,24 @@ export const CHILD = {
 export const ROUTES = {
     Dashboard: '/',
     ActivityLog: '/logging',
+    Exam: '/exam',
     Feedback: '/managefeedback',
     Cloudinary: '/cloudinary',
     CloudinaryDetails: '/cloudinary/:idcloudinary',
     Users: '/manageusers',
     SignIn: '/signIn',
-    ManageLearn: '/managelearn',
+    ManageLearn: '/manage/learn',
     SignUp: '/signUp',
-    SubManageLearn: '/managelearn/details/:idlesson',
-    CourseDetail: '/managelearn/coursedetails/:idcourse',
-    LessonDetail: '/managelearn/lessondetails/:idlesson',
-    UnitDetails: '/managelearn/lesson/:idlesson/unitdetails/:idunit',
-    VocabularyDetail: '/managelearn/lesson/:idlesson/vocabularydetails/:idvocabulary',
-    CRUDCourse: '/managelearn/coursedetails/:idcourse/setting',
-    CRUDLesson: '/managelearn/lessondetails/:idlesson/setting',
-    CRUDUnit: '/managelearn/unitdetails/:idunit/setting',
-    CRUDVocabulary: '/managelearn/vocabularydetails/:idvocabulary/setting',
+    SubManageLearn: '/manage/learn/details/:idlesson',
+    CourseDetail: '/manage/learn/coursedetails/:idcourse',
+    LessonDetail: '/manage/learn/lessondetails/:idlesson',
+    UnitDetails: '/manage/learn/lesson/:idlesson/unitdetails/:idunit',
+    ExamDetail: '/manageexam/examdetail/:idexam',
+    VocabularyDetail: '/manage/learn/lesson/:idlesson/vocabularydetails/:idvocabulary',
+    CRUDCourse: '/manage/learn/coursedetails/:idcourse/setting',
+    CRUDLesson: '/manage/learn/lessondetails/:idlesson/setting',
+    CRUDUnit: '/manage/learn/unitdetails/:idunit/setting',
+    CRUDVocabulary: '/manage/learn/vocabularydetails/:idvocabulary/setting',
     CRUDExam: '/manageexam/exam',
 }
 
@@ -103,6 +109,13 @@ export const privateRouter = [
         title: 'FEIT',
         href: ROUTES.Feedback,
         component: Feedback,
+        name: 'Dashboard',
+        showSidebar: true,
+    },
+    {
+        title: 'FEIT',
+        href: ROUTES.Exam,
+        component: Exam,
         name: 'Dashboard',
         showSidebar: true,
     },
@@ -233,6 +246,13 @@ export const routerSidebar = [
         href: ROUTES.ManageLearn,
         component: ManageLearn,
         name: 'Quản lý bài học',
+        icon: IconHouse,
+    },
+    {
+        title: 'FEIT',
+        href: ROUTES.Exam,
+        component: Exam,
+        name: 'Quản lý bài kiểm tra',
         icon: IconHouse,
     },
     {

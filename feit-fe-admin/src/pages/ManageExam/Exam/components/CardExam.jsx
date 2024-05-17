@@ -9,6 +9,7 @@ import {
     IconPencilSimple,
     IconExport,
     IconArrowUp,
+    IconClose,
 } from '../../../../svgs';
 import { useState } from 'react';
 import { Button, InputSection, InputField } from '../../../../components';
@@ -16,50 +17,7 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import PaginationItem from '@mui/material/PaginationItem';
 import { NavLink } from 'react-router-dom';
-
-export const CardCrud = ({ onClickAddFile }) => {
-    const [file, setFile] = useState(null);
-
-    const handleFileChange = (event) => {
-        setFile(event.target.files[0]);
-    };
-    const handleDeteleFile = () => {
-        setFile(null);
-    };
-
-    const handleAddFile = () => {
-        onClickAddFile(file);
-    };
-    return (
-        <div className=" flex justify-between">
-            <h1 className=" text-heading-4 font-heading-4 font-plusjakartasans text-primary-black">Chủ đề</h1>
-            <div className=" flex justify-center items-center gap-1">
-                {file != null ? (
-                    <>
-                        <Button
-                            icon={true}
-                            right={true}
-                            onClick={handleAddFile}
-                            title="Thêm bằng file"
-                            color={'primary'}>
-                            <IconPlusCircle size="20" color="#3C79FE" />
-                        </Button>
-                        <Button icon={true} right={true} title="Xóa file" onClick={handleDeteleFile} color={'primary'}>
-                            <IconDelete size="20" color="#3C79FE" />
-                        </Button>
-                    </>
-                ) : (
-                    <h1>Chọn File Excel : </h1>
-                )}
-                <input type="file" onChange={handleFileChange} />
-                <Button icon={true} right={true} title="Xuất file mẫu" color={'primary'}>
-                    <IconExport size="24" color="#3C79FE" />
-                </Button>
-            </div>
-        </div>
-    );
-};
-
+import { useNavigate } from 'react-router-dom';
 export const CardView = ({
     sendidlesson,
     sendidunit,
@@ -114,12 +72,12 @@ export const CardView = ({
             <div className="">
                 <div className="flex mb-4 justify-between items-center border-b border-primary-black pb-3">
                     <h1 className=" text-heading-5 font-heading-5 font-plusjakartasans text-primary-black">
-                        Quản lý chương
+                        Quản lý bài kiểm tra
                     </h1>
                     <div className=" w-2/5 border-l border-primary-black pl-6">
                         <div className=" flex justify-between items-center ">
                             <h1 className=" text-body-3 font-body-3 font-plusjakartasans text-primary-black">
-                                2 Khóa học
+                                2 bài kiểm tra
                             </h1>
                             <Stack spacing={2}>
                                 <Pagination
@@ -146,11 +104,6 @@ export const CardView = ({
                         <div className=" bg-white border border-primary-black">
                             <div className=" flex gap-3 justify-between px-5 py-4 ">
                                 <div className=" w-3/5">
-                                    {showCheckbox && (
-                                        <div>
-                                            <InputSection label="Chọn" className={'gap-2'} />
-                                        </div>
-                                    )}
                                     <h1 className=" text-heading-7 font-heading-7 font-plusjakartasans text-secondary-gray">
                                         {nameCourse}
                                     </h1>
@@ -161,18 +114,13 @@ export const CardView = ({
                                         Chương: {nameUnit}
                                     </h1>
                                 </div>
-                                <div className=" ">
-                                    <Button icon={true} onClick={handleShowCheckbox} right={true} title="Xóa nhiều">
-                                        <IconDelete w="28" h="28" color="#3C79FE" />
-                                    </Button>
-                                </div>
                             </div>
-                            {children}
                         </div>
+                        {children}
                     </div>
                     <div className="">
                         <InputField className=" mb-5 rounded-none w-full" placeholder={'Từ khóa'} />
-                        <h1 className=" mb-5 text-heading-7 font-heading-7 font-plusjakartasans text-primary-black">
+                        <h1 className=" w-full mb-5 text-heading-7 font-heading-7 font-plusjakartasans text-primary-black">
                             Bộ lọc
                         </h1>
                         <Button
@@ -421,6 +369,188 @@ export const CardItem = ({
                     </div>
                 </div>
             )}
+        </div>
+    );
+};
+
+export const TableData = ({
+    date = '1',
+    feeling = '1',
+    content = '1',
+    is_love_web = '1',
+    name = 'Hoang',
+    position = 'IT',
+}) => {
+    const navigate = useNavigate();
+
+    const handleNavigate = () => {
+        navigate('/manageexam/exam/examdetail/:idexam');
+    };
+
+    const [isShowPopup, setIsShowPopup] = useState(false);
+    const handleShowPopup = () => {
+        setIsShowPopup(!isShowPopup);
+    };
+
+    const handleReceiveIsShowPopup = (value) => {
+        setIsShowPopup(value);
+    };
+    return (
+        <>
+            <tr onClick={handleNavigate} className=" justify-between bg-white items-center cursor-pointer">
+                <td className=" px-5 border-b-[2px] border-dashed border-secondary-gray  text-start py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
+                    <strong className=" bg-primary-green p-2">Mới</strong> <br />
+                    <strong className=" text-primary-blue-400">{name}</strong>
+                </td>
+                <td className=" px-5 border-b-[2px] border-dashed border-secondary-gray  text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
+                    {position}
+                </td>
+                <td className=" px-5 border-b-[2px] border-dashed border-secondary-gray  text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
+                    {date}
+                </td>
+            </tr>
+
+            {isShowPopup && (
+                <PopupFeedback
+                    feeling={feeling}
+                    content={content}
+                    isloveweb={is_love_web}
+                    handleSendIsPopup={handleReceiveIsShowPopup}
+                    name={name}
+                />
+            )}
+        </>
+    );
+};
+
+export const PopupFeedback = ({ handleSendIsPopup, name, feeling, content, isloveweb }) => {
+    const HandleParentSendIsPopup = () => {
+        handleSendIsPopup(false);
+    };
+
+    const HandleChilSendIsPopup = (event) => {
+        event.stopPropagation();
+        handleSendIsPopup(false);
+    };
+
+    return (
+        <div className="">
+            <div className="relative z-100" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+                <div className="fixed inset-0 z-10 bg-gray-500 bg-opacity-65 transition-opacity w-screen overflow-y-auto">
+                    <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                        <div className="  z-20  relative w-[60vw]  h-[95vh] flex flex-col justify-between  bg-white border-[4px] border-primary-black text-left shadow-xl transition-all  sm:max-w-5xl">
+                            <div className=" px-8 py-4 flex justify-between items-center border-b border-secondary-gray">
+                                <h1 className=" text-heading-7 font-heading-7 font-plusjakartasans text-primary-black">
+                                    Chi tiết câu hỏi
+                                </h1>
+                                <Button onClick={HandleChilSendIsPopup} icon={true} left={true} title="">
+                                    <IconClose />
+                                </Button>
+                            </div>
+                            <div className="px-20 flex flex-col h-full justify-center ">
+                                <div className=" flex flex-col justify-between p-8 border-[2px] border-primary-black bg-neutral-grey shadow-card-home">
+                                    <div className=" ">
+                                        <h1 className=" mb-1 text-heading-4 font-heading-4 font-plusjakartasans text-primary-black">
+                                            Phản hồi của người dùng
+                                        </h1>
+                                    </div>
+
+                                    <div className="">
+                                        <h1 className=" mb-1 text-lable-2 font-lable-2 font-plusjakartasans text-secondary-gray">
+                                            Cảm xúc
+                                        </h1>
+                                        <div className=" flex w-3/4 justify-start">
+                                            {feeling === 'sad' && (
+                                                <div className=" flex flex-col justify-center items-center p-2">
+                                                    <IconEmotionDissapointed />
+                                                    <h1 className=" mt-2 text-caption-1 font-caption-1 font-plusjakartasans text-primary-black">
+                                                        Thất vọng
+                                                    </h1>
+                                                </div>
+                                            )}
+                                            {feeling === 'happy' && (
+                                                <div className=" flex flex-col justify-center items-center p-2">
+                                                    <IconEmotionSad />
+                                                    <h1 className=" mt-2 text-caption-1 font-caption-1 font-plusjakartasans text-primary-black">
+                                                        Tạm được
+                                                    </h1>
+                                                </div>
+                                            )}
+                                            {feeling === 'disappointed' && (
+                                                <div className=" flex flex-col justify-center items-center p-2">
+                                                    <IconEmotionHappy />
+                                                    <h1 className=" mt-2 text-caption-1 font-caption-1 font-plusjakartasans text-primary-black">
+                                                        Hài lòng
+                                                    </h1>
+                                                </div>
+                                            )}
+                                            {feeling === 'good' && (
+                                                <div className=" flex flex-col justify-center items-center p-2">
+                                                    <IconEmotionGood />
+                                                    <h1 className=" mt-2 text-caption-1 font-caption-1 font-plusjakartasans text-primary-black">
+                                                        Quá tuyệt
+                                                    </h1>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+
+                                    <div className="">
+                                        <h1 className="mb-3 text-lable-2 font-lable-2 font-plusjakartasans text-secondary-gray">
+                                            Ý kiến của bạn
+                                        </h1>
+                                        <textarea
+                                            className=" text-body-1 font-body-1 font-plusjakartasans resize-none w-full border border-primary-black px-3 py-4"
+                                            rows={'5'}
+                                            name=""
+                                            value={content}
+                                            disabled
+                                            id=""
+                                            placeholder="Nhập ý kiến của bạn"></textarea>
+                                    </div>
+
+                                    <div className=" ">
+                                        <h1 className="mb-3 text-lable-2 font-lable-2 font-plusjakartasans text-secondary-gray">
+                                            Tiếp tục ở lại web
+                                        </h1>
+                                        <div className=" flex justify-between w-2/5 items-start">
+                                            <InputSection
+                                                name="choicse"
+                                                className={'w-full'}
+                                                id="1"
+                                                Checked={isloveweb === 1 && true}
+                                                value={1}
+                                                size={' w-5 h-5'}
+                                                type="radio"
+                                                label="Có"
+                                            />
+                                            <InputSection
+                                                name="choicse"
+                                                className={'w-full'}
+                                                id="1"
+                                                Checked={isloveweb === 0 && true}
+                                                value={1}
+                                                size={' w-5 h-5'}
+                                                type="radio"
+                                                label="Không"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="  px-4 border-secondary-gray  py-4 border-t">
+                                <Button
+                                    color={'primary'}
+                                    onClick={HandleChilSendIsPopup}
+                                    icon={true}
+                                    right={true}
+                                    title="Đóng"
+                                    className="w-full py-4"></Button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };

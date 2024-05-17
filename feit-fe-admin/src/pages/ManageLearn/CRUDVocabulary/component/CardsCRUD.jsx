@@ -76,7 +76,6 @@ export const CardUpdate = ({ name = 'Programing', namefile = 'congnghe.png' }) =
         const res = await createLessonFileLoading(selectedFile, handleSetSetProgess);
         if (res.status === 200) {
             alert('Thêm Dữ liệu bằng file thành công');
-            setRender((n) => n + 1);
         } else if (res.message === 'validate: Token is expired') {
             alert('Vui lòng đăng nhập');
         }
