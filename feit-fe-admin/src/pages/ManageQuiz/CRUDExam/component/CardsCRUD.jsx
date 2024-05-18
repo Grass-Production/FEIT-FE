@@ -6,7 +6,7 @@ import { Button } from '../../../../components';
 import { getLessonById, getLessons } from '../../../../services/lessonAPI';
 import { getUnitByIdLesson } from '../../../../services/unitAPI';
 import { getVocabularyByUinit } from '../../../../services/vocabulary';
-import { createExam, getAllExam, createQuestionExam, getManyExamByIdUnit } from '../../../../services/exerciseAPI';
+import { createExam, getAllExam, createQuestionExam, getManyExamByIdUnit } from '../../../../services/quizAPI';
 
 export const FormCreateExam = () => {
     const [lessons, setLessons] = useState([]);
@@ -14,13 +14,16 @@ export const FormCreateExam = () => {
     const [idLesson, setIdLesson] = useState('');
     const [idUnit, setIdUnit] = useState('');
     const [nameExam, setNameExam] = useState('');
-
+    console.log('idLesson :', idLesson);
+    console.log('idUnit :', idUnit);
     useEffect(() => {
         const GetLessons = async () => {
             try {
                 const res = await getLessons();
                 setLessons(res.data);
-            } catch (error) {}
+            } catch (error) {
+                console.log('message', error);
+            }
         };
 
         const GetUnit = async () => {
@@ -31,7 +34,9 @@ export const FormCreateExam = () => {
                         setUnits(res.unit);
                     }
                 }
-            } catch (error) {}
+            } catch (error) {
+                console.log('message : ', error);
+            }
         };
         getVocabularyByUinit;
         GetLessons();
@@ -44,12 +49,16 @@ export const FormCreateExam = () => {
                 lesson_id: idLesson,
                 unit_id: idUnit,
                 title: nameExam,
-                description: '',
+                description: 'Quiz',
+                duration: '60',
             });
-            if (re.status === 'success') {
+            console.log(res);
+            if (res.status === 'success') {
                 alert('Tạo bài kiểm tra thành công');
             }
-        } catch (error) {}
+        } catch (error) {
+            console.log('message createExam :', error);
+        }
     };
 
     const handleInputChangeNameExam = (event) => {
@@ -172,13 +181,16 @@ export const FormCreate = () => {
             try {
                 if (idUnit !== '') {
                     const res = await getManyExamByIdUnit(idUnit);
+                    console.log('res exam : ', res.data);
                     setExams(res.data);
 
                     return;
                 }
                 const allexam = await getAllExam();
                 setExams(allexam.data);
-            } catch (error) {}
+            } catch (error) {
+                console.log('message', error);
+            }
         };
 
         const GetLessons = async () => {
@@ -187,7 +199,9 @@ export const FormCreate = () => {
                 setLessons(res.data);
                 if (res.status === 'success') {
                 }
-            } catch (error) {}
+            } catch (error) {
+                console.log('message', error);
+            }
         };
 
         const GetUnit = async () => {
@@ -198,7 +212,9 @@ export const FormCreate = () => {
                         setUnits(res.unit);
                     }
                 }
-            } catch (error) {}
+            } catch (error) {
+                console.log('message : ', error);
+            }
         };
         const GetVocabulary = async () => {
             try {
@@ -208,29 +224,36 @@ export const FormCreate = () => {
                         setVocabularys(res.vocabulary);
                     }
                 }
-            } catch (error) {}
+            } catch (error) {
+                console.log('message : ', error);
+            }
         };
         GetManyExamByIdUnit();
         GetVocabulary();
         GetLessons();
         GetUnit();
     }, [idLesson, idUnit]);
+
     const CreateExam = async () => {
         try {
             const createQuestion = await createQuestionExam({
-                exercise_id: idExam,
+                exam_id: idExam,
                 vocabulary_id: idVocabulary,
                 content: contentQuestion,
                 type: typeQuestion,
                 level: 1,
-                // options: typeQuestion === 'true/false' ? optionTrueFalse : inputValuesOption,
+                options: typeQuestion === 'true/false' ? optionTrueFalse : inputValuesOption,
                 correct_answer: result,
             });
+            console.log('createQuestion :', createQuestion);
             if (createQuestion.status === 'success') {
                 alert('Tạo câu hỏi thành công');
             }
-        } catch (error) {}
+        } catch (error) {
+            console.log('message createExam :', error);
+        }
     };
+
     const handleInputChangeResultBlank = (event) => {
         setResult(event.target.value);
     };
@@ -276,6 +299,7 @@ export const FormCreate = () => {
 
     const GetLessonById = async (id) => {
         const res = await getLessonById(id);
+        console.log('lesson ne :', res);
         setNameLesson(res.lesson.name);
     };
 

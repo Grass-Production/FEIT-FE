@@ -117,7 +117,7 @@ export const CardView = ({
                                     </h1>
                                 </div>
                                 <div className=" flex h-1/2 gap-3">
-                                    <NavLink to="/manage/exercise/create">
+                                    <NavLink to="/manage/quiz/create">
                                         <Button icon={true} color={'primary'} right={true} title="Thêm bài kiểm tra">
                                             <IconPlusCircle w="28" h="28" color="#3C79FE" />
                                         </Button>
@@ -202,186 +202,6 @@ export const CardView = ({
     );
 };
 
-export const CardItem = ({
-    onClickDelete,
-    word = 'Function',
-    mean = 'Chức năng',
-    partofspeech = 'Noun(danh từ)',
-    pronunciation,
-    example_vie,
-    example_eng,
-    explain_vie,
-    explain_eng,
-    field_of_it,
-    link_url,
-    id,
-    handleChange,
-    unit_id,
-    handleUpdate,
-    onClose,
-}) => {
-    const [showPopUp, setShowPopUp] = useState(false);
-
-    const handleDelete = () => {
-        onClickDelete(id);
-    };
-    function OnClickClose() {
-        setShowPopUp(!showPopUp);
-    }
-    return (
-        <div className=" bg-white border-t border-dashed border-secondary-gray px-12 py-6">
-            <div className="">
-                <div className=" flex justify-between items-center">
-                    <div className=" flex justify-start items-center gap-7 w-4/5">
-                        <InputSection id="1" label="" />
-                        <div className="flex justify-between items-center w-full">
-                            <h1 className=" text-body-1 font-body-1 font-plusjakartasans text-primary-black">{word}</h1>
-                            <h1 className=" text-body-1 font-body-1 font-plusjakartasans text-secondary-gray">
-                                {mean}
-                            </h1>
-                            <h1 className=" text-body-1 font-body-1 font-plusjakartasans text-secondary-gray">
-                                {partofspeech}
-                            </h1>
-                        </div>
-                    </div>
-                    <div className=" flex justify-center items-center gap-3">
-                        <NavLink to={`/manage/learn/vocabularydetails/${id}/setting`}>
-                            <Button icon={true} left={true} title="">
-                                <IconPencilSimple w="28" h="28" color="#3C79FE" />
-                            </Button>
-                        </NavLink>
-                        <Button onClick={handleDelete} icon={true} left={true} title="">
-                            <IconDelete size="28" color="#3C79FE" />
-                        </Button>
-                    </div>
-                </div>
-            </div>
-            {showPopUp && (
-                <div className="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-                    <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity">
-                        <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
-                            <div className="flex min-h-full items-end justify-center p-4 sm:items-center sm:p-0">
-                                <div class="relative p-4 w-full max-w-md max-h-full">
-                                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                                        <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                                                Create New Unit
-                                            </h3>
-                                            <button
-                                                type="button"
-                                                onClick={OnClickClose}
-                                                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                                                data-modal-toggle="crud-modal">
-                                                <svg
-                                                    class="w-3 h-3"
-                                                    aria-hidden="true"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    fill="none"
-                                                    viewBox="0 0 14 14">
-                                                    <path
-                                                        stroke="currentColor"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-                                                    />
-                                                </svg>
-                                                <span class="sr-only">Close modal</span>
-                                            </button>
-                                        </div>
-                                        <form onSubmit={() => handleUpdate(id)} className=" flex  flex-col">
-                                            <input
-                                                type="text"
-                                                name="word"
-                                                value={word}
-                                                onChange={handleChange}
-                                                placeholder="Word"
-                                            />
-                                            <input
-                                                type="text"
-                                                name="part_of_speech"
-                                                value={partofspeech}
-                                                onChange={handleChange}
-                                                placeholder="Part of Speech"
-                                            />
-                                            <input
-                                                type="text"
-                                                name="pronunciation"
-                                                value={pronunciation}
-                                                onChange={handleChange}
-                                                placeholder="Pronunciation"
-                                            />
-                                            <input
-                                                type="text"
-                                                name="mean"
-                                                value={mean}
-                                                onChange={handleChange}
-                                                placeholder="Mean"
-                                            />
-                                            <input
-                                                type="text"
-                                                name="example_vie"
-                                                value={example_vie}
-                                                onChange={handleChange}
-                                                placeholder="Example (Vietnamese)"
-                                            />
-                                            <input
-                                                type="text"
-                                                name="example_eng"
-                                                value={example_eng}
-                                                onChange={handleChange}
-                                                placeholder="Example (English)"
-                                            />
-                                            <input
-                                                type="text"
-                                                name="explain_vie"
-                                                value={explain_vie}
-                                                onChange={handleChange}
-                                                placeholder="Explanation (Vietnamese)"
-                                            />
-                                            <input
-                                                type="text"
-                                                name="explain_eng"
-                                                value={explain_eng}
-                                                onChange={handleChange}
-                                                placeholder="Explanation (English)"
-                                            />
-                                            <input
-                                                type="text"
-                                                name="field_of_it"
-                                                value={field_of_it}
-                                                onChange={handleChange}
-                                                placeholder="Field of IT"
-                                            />
-                                            <input
-                                                type="text"
-                                                name="link_url"
-                                                value={link_url}
-                                                onChange={handleChange}
-                                                placeholder="Link URL"
-                                            />
-                                            <input
-                                                type="text"
-                                                name="unit_id"
-                                                value={unit_id}
-                                                onChange={handleChange}
-                                                placeholder="Unit ID"
-                                            />
-                                            <input type="file" multiple onChange={(e) => setFile(e.target.files[0])} />
-                                            <button type="submit">Create</button>
-                                        </form>
-                                        ;
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            )}
-        </div>
-    );
-};
-
 export const TableData = ({
     date = '1',
     feeling = '1',
@@ -397,7 +217,7 @@ export const TableData = ({
     const navigate = useNavigate();
 
     const handleNavigate = () => {
-        navigate(`/manage/exercise/exercisedetail/${idExam}`);
+        navigate(`/manage/quiz/quizdetail/${idExam}`);
     };
 
     const [isShowPopup, setIsShowPopup] = useState(false);

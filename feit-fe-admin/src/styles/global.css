@@ -8,10 +8,10 @@
     /* @apply text-2xl truncate overflow-hidden whitespace-nowrap; */
   }
 
- 
 }
-
-
+  html {
+    font-size: 85%;
+  }
 *{
   scroll-behavior: smooth;
 }
@@ -21,6 +21,8 @@
     font-size: 80%;
   }
 }
+
+
 
 @media (min-width: 740px) and (max-width: 1023px) {
   html {

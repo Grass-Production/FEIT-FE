@@ -60,7 +60,7 @@ export const UnitCard = ({
                         Đã học {exam_is_complete + exercise_is_complete + quiz_is_complete} / 3 bài học
                     </p>
                     <LoadingProgressBar className={'mb-2 h-2'} percent={percent} />
-                    {/* 
+
                     {exercise_is_complete === 0 && (
                         <NavLink to={`/learn/lesson/${lessonid}/unit/${unitid}`}>
                             <Button
@@ -70,15 +70,15 @@ export const UnitCard = ({
                                 title="Bắt đầu"
                                 color={!isUnitDisabled && 'primaryicon'}></Button>
                         </NavLink>
-                    )} */}
-                    <NavLink to={`/learn/lesson/${lessonid}/unit/${unitid}/quiz`}>
+                    )}
+                    {/* <NavLink to={`/learn/lesson/${lessonid}/unit/${unitid}/quiz`}>
                         <Button
                             icon={false}
                             disabled={isUnitDisabled}
                             className=" w-full py-6 rounded-none"
                             title="Bắt đầu"
                             color={!isUnitDisabled && 'primaryicon'}></Button>
-                    </NavLink>
+                    </NavLink> */}
                     {exercise_is_complete !== 0 && (
                         <NavLink to={`/learn/lesson/${lessonid}/unit/${unitid}/exercise`}>
                             <Button

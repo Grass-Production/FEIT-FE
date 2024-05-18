@@ -6,7 +6,7 @@ export const Sidebar = ({ show, children }) => {
     const navLinkStyle = ({ isActive }) => {
         return isActive
             ? ' text-primary-blue-400 text-button-1 font-plusjakartasans font-button-1 p-3 flex gap-1  mb-4 rounded items-center justify-start'
-            : ' text-primary-black text-button-1 font-plusjakartasans font-button-1 p-3 flex gap-1  mb-4 rounded items-center justify-start';
+            : ' text-primary-black border border-transparent hover:border hover:border-primary-black text-button-1 font-plusjakartasans font-button-1 p-3 flex gap-1  mb-4 rounded items-center justify-start';
     };
     const borderStyle = ({ isActive }) => {
         return {

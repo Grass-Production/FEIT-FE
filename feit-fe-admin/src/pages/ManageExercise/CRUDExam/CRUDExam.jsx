@@ -7,17 +7,16 @@ import { Button } from '../../../components';
 import { useParams } from 'react-router-dom';
 export default function CRUDLesson() {
     const [isCheck, setIsCheck] = useState(false);
-    let { idlesson } = useParams();
+    let { idexercise } = useParams();
 
     const handleRadioChange = (event) => {
         const value = event.target.value;
         setIsCheck(value === 'create');
-        console.log(isCheck);
     };
 
     return (
         <div className="">
-            <NavLink to={`/manage/exam`}>
+            <NavLink to={`/manage/exercise`}>
                 <Button icon={true} title="Trở về" left={true}>
                     <IconArrowUpLeft />
                 </Button>

@@ -5,7 +5,7 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import PaginationItem from '@mui/material/PaginationItem';
 import { NavLink } from 'react-router-dom';
-import { updateExam } from '../../../../services/exerciseAPI';
+import { updateExam } from '../../../../services/quizAPI';
 export const CardView = ({
     children,
     nameExam = 'Công nghệ thông tin',
@@ -75,7 +75,7 @@ export const CardView = ({
                         </div>
                     </div>
                     <div className="">
-                        <NavLink to="/manage/exercise">
+                        <NavLink to="/manage/quiz">
                             <Button icon={true} onClick={handleShowCheckbox} right={true} title="">
                                 <IconArrowUpLeft w="38" h="38" color="#3C79FE" />
                             </Button>
@@ -182,6 +182,11 @@ export const PopupQuestion = ({ handleSendIsPopup, lesson, unit, type, content, 
                             </div>
                             <div className="px-20 flex flex-col h-full justify-center ">
                                 <div className=" flex flex-col justify-between p-8 border-[2px] border-primary-black bg-neutral-grey shadow-card-home">
+                                    {/* <div className=" ">
+                                        <h1 className=" mb-1 text-heading-4 font-heading-4 font-plusjakartasans text-primary-black">
+                                            Phản hồi của người dùng
+                                        </h1>
+                                    </div> */}
                                     <div className=" mb-10 flex justify-between items-center pb-2 border-b border-primary-black">
                                         <div className="">
                                             <h1 className=" mb-1 text-left text-button-1 font-button-1 font-plusjakartasans text-secondary-gray">
@@ -241,7 +246,7 @@ export const PopupQuestion = ({ handleSendIsPopup, lesson, unit, type, content, 
                                 </Button>
                                 <NavLink
                                     className={' w-full'}
-                                    to={`/manage/exercise/${idexam}/question/${idquestion}/setting`}>
+                                    to={`/manage/quiz/${idexam}/question/${idquestion}/setting`}>
                                     <Button
                                         color={'primary'}
                                         onClick={HandleChilSendIsPopup}

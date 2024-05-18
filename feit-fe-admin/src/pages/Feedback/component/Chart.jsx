@@ -1,5 +1,5 @@
 import Chart from 'react-apexcharts';
-
+import { useState } from 'react';
 export const BarChart = () => {
     const options = {
         chart: {

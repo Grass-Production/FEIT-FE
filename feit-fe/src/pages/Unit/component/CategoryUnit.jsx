@@ -91,7 +91,16 @@ export const Example = ({ example_vie, example_eng }) => {
     );
 };
 
-export const FillInTheBlank = ({ field, result, right = false, error = false, inputValue, handleChange, sound }) => {
+export const FillInTheBlank = ({
+    field,
+    result,
+    right = false,
+    error = false,
+    inputValue,
+    handleChange,
+    sound,
+    question,
+}) => {
     return (
         <div className=" w-[56.563rem] max-h-[750px] h-[70vh] flex flex-col justify-around items-center">
             <div>
@@ -110,25 +119,25 @@ export const FillInTheBlank = ({ field, result, right = false, error = false, in
                         </div> */}
                         <Sound sound={sound} />
                         <div className="  mb-10 border-[4px] border-secondary-gray w-44 h-44 flex justify-center items-center rounded-[40px] bg-white">
-                            <IconSpeakerLow />
+                            <Sound sound={sound} />
                         </div>
                     </div>
                     <div className=" mb-10">
                         <h1 className=" text-caption-1 font-bold font-plusjakartasans text-primary-black mb-3">Câu</h1>
                         {right ? (
                             <h1 className="text-heading-7 font-heading-7 font-plusjakartasans text-semantic-success">
-                                Today i’m gonna interview {result}
+                                {question} : {result}
                             </h1>
                         ) : (
                             <h1
                                 className={`text-heading-7 font-heading-7 font-plusjakartasans ${error ? ' text-semantic-danger' : 'text-primary-black'} `}>
-                                Today i’m gonna interview {error ? field : '_ _ _ _'}
+                                {question} {error && inputValue}
                             </h1>
                         )}
                         {error && (
                             <>
                                 <h1 className=" text-heading-7 mt-3 font-heading-7 font-plusjakartasans text-semantic-success">
-                                    Today i’m gonna interview {result}
+                                    {question} : {result}
                                 </h1>
                             </>
                         )}

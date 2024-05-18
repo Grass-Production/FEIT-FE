@@ -8,12 +8,15 @@ import { PopUp } from '../../components/PopupVocabulary/PopupVocabulary';
 import { Example, Listen, FillInTheBlank, Tip } from './component/CategoryUnit';
 import { Finish, ListVocabulary, Score } from './component/UIFinish';
 import { getVocabulary } from '../../services/vocabulary';
+import { getExerciseByIdUnit, getQuestionByIdExercise } from '../../services/exerciseAPI';
 import 'animate.css';
 
 export default function Unit() {
     // Lấy lessonId và unitId
     let { lessonid, unitid } = useParams();
     const [vocabularys, setVocabularys] = useState([]);
+    const [exercise, setExercise] = useState([]);
+    const [questions, setQuestions] = useState([]);
 
     const [vocabulary, setVocabulary] = useState({
         word: '',
@@ -23,6 +26,7 @@ export default function Unit() {
         example: '',
         field_of_it: '',
         link_url: '',
+        question: '',
     });
 
     useEffect(() => {
@@ -32,6 +36,7 @@ export default function Unit() {
                 const res = vocabularys.vocabulary;
                 console.log('res :', res);
                 setVocabulary({
+                    ...vocabulary,
                     word: res[index].word,
                     _id: res[index]._id,
                     part_of_speech: res[index].part_of_speech,
@@ -49,6 +54,17 @@ export default function Unit() {
                 console.log(error);
             }
         }
+
+        async function GetQuestion() {
+            const exam = await getExerciseByIdUnit(unitid);
+            const question = await getQuestionByIdExercise(exam.data._id);
+            const questionData = await question.data.exercise_question;
+            setVocabulary({ ...vocabulary, question: questionData[index].content });
+            setQuestions(questionData);
+            console.log('questionData : ', questionData[index].content);
+        }
+
+        GetQuestion();
         fetchData();
     }, []);
     // Dùng để đếm số để render Component
@@ -120,6 +136,7 @@ export default function Unit() {
                 example_eng: vocabularys[index].example_eng,
                 field_of_it: vocabularys[index].field_of_it,
                 link_url: vocabularys[index].link_url,
+                question: questions[index].content,
             });
         }
 
@@ -168,7 +185,9 @@ export default function Unit() {
                         <ListVocabulary list={vocabularys.map((a, i) => a.word)} />
                     ) : (
                         <FillInTheBlank
-                            word={''}
+                            question={vocabulary.question}
+                            word={vocabulary.word}
+                            result={vocabulary.word}
                             sound={vocabulary.link_url}
                             inputValue={inputValue}
                             right={resultRight && true}

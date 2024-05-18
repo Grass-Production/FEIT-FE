@@ -1,14 +1,13 @@
-import { FormCreate, FormUpdate } from './component';
+import { FormCreate, FormCreateExam } from './component';
 import { NavLink } from 'react-router-dom';
 import { InputSection } from '../../../components';
+import { useState } from 'react';
 import { IconArrowUpLeft } from '../../../svgs';
 import { Button } from '../../../components';
 import { useParams } from 'react-router-dom';
-
 export default function CRUDLesson() {
     const [isCheck, setIsCheck] = useState(false);
-
-    let { idexercise, idquestion } = useParams();
+    let { idquiz } = useParams();
 
     const handleRadioChange = (event) => {
         const value = event.target.value;
@@ -18,7 +17,7 @@ export default function CRUDLesson() {
 
     return (
         <div className="">
-            <NavLink to={`/manage/exercise`}>
+            <NavLink to={`/manage/quiz`}>
                 <Button icon={true} title="Trở về" left={true}>
                     <IconArrowUpLeft />
                 </Button>
@@ -37,7 +36,7 @@ export default function CRUDLesson() {
                         <InputSection
                             size={' w-6 h-6'}
                             className={' w-2/4 text-label-2 font-label-2 font-plusjakartasans text-primary-black'}
-                            label="Sửa"
+                            label="Tạo bài kiểm tra"
                             id="Updatee"
                             value="update"
                             name="Setting"
@@ -48,7 +47,7 @@ export default function CRUDLesson() {
                         <InputSection
                             size={' w-6 h-6'}
                             className={' w-full text-label-2 font-label-2 font-plusjakartasans text-primary-black'}
-                            label="Tạo Câu hỏi mới"
+                            label="Tạo Câu hỏi"
                             id="Create"
                             name="Setting"
                             onChange={handleRadioChange}
@@ -57,13 +56,7 @@ export default function CRUDLesson() {
                         />
                     </div>
                 </div>
-                <div className=" w-1/2 bg-white">
-                    {isCheck ? (
-                        <FormCreate idexam={idexercise} />
-                    ) : (
-                        <FormUpdate idexam={idexercise} idquestion={idquestion} />
-                    )}
-                </div>
+                <div className=" w-1/2 bg-white">{isCheck ? <FormCreate /> : <FormCreateExam />}</div>
             </div>
         </div>
     );

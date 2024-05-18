@@ -8,7 +8,7 @@ import { useParams } from 'react-router-dom';
 export default function CRUDLesson() {
     const [isCheck, setIsCheck] = useState(false);
 
-    let { idexercise, idquestion } = useParams();
+    let { idquiz, idquestion } = useParams();
 
     const handleRadioChange = (event) => {
         const value = event.target.value;
@@ -18,7 +18,7 @@ export default function CRUDLesson() {
 
     return (
         <div className="">
-            <NavLink to={`/manage/exercise`}>
+            <NavLink to={`/manage/exam`}>
                 <Button icon={true} title="Trở về" left={true}>
                     <IconArrowUpLeft />
                 </Button>
@@ -58,11 +58,7 @@ export default function CRUDLesson() {
                     </div>
                 </div>
                 <div className=" w-1/2 bg-white">
-                    {isCheck ? (
-                        <FormCreate idexam={idexercise} />
-                    ) : (
-                        <FormUpdate idexam={idexercise} idquestion={idquestion} />
-                    )}
+                    {isCheck ? <FormCreate idexam={idquiz} /> : <FormUpdate idexam={idquiz} idquestion={idquestion} />}
                 </div>
             </div>
         </div>

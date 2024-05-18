@@ -2,8 +2,8 @@
 import { getLessons } from '../../../services/lessonAPI';
 import { getUnitByIdLesson } from '../../../services/unitAPI';
 import { useEffect, useState } from 'react';
-import { getAllQuestionExamByIdExam } from '../../../services/exerciseAPI';
-import { getExamByIdExam } from '../../../services/exerciseAPI';
+import { getAllQuestionExamByIdExam } from '../../../services/quizAPI';
+import { getExamByIdExam } from '../../../services/quizAPI';
 // import { TableData, JsonUI } from './components/DataUI';
 
 import { getVocabularyByUinit } from '../../../services/vocabulary';
@@ -21,7 +21,7 @@ export default function ExamDetails() {
     const [nameUnit, setNameUnit] = useState('');
     const [idLesson, setIdLesson] = useState('');
     const [idUnit, setItUnit] = useState('');
-    let { idexercise } = useParams();
+    let { idquiz } = useParams();
 
     const handleSetIdLesson = (data) => {
         setIdLesson(data);
@@ -49,13 +49,13 @@ export default function ExamDetails() {
             }
         }
         async function GetQuestions() {
-            const res = await getAllQuestionExamByIdExam(idexercise);
-            setQuestions(res.data.exercise_question);
-            console.log('question :', res.data.exercise_question);
+            const res = await getAllQuestionExamByIdExam(idquiz);
+            setQuestions(res.data.exam_question_response);
+            console.log('question :', res.data.exam_question_response);
         }
 
         async function GetExam() {
-            const res = await getExamByIdExam(idexercise);
+            const res = await getExamByIdExam(idquiz);
             setExam(res.data);
             setIdLesson(res.data.lesson_id);
             setItUnit(res.data.unit_id);
@@ -109,7 +109,7 @@ export default function ExamDetails() {
                                     return (
                                         <TableData
                                             idquestion={v._id}
-                                            idexam={idexercise}
+                                            idexam={idquiz}
                                             lesson={nameLesson}
                                             unit={nameUnit}
                                             key={v._id}

@@ -38,6 +38,11 @@ const Exercise = lazy(() => import("../pages/ManageExercise/Exam"))
 const ExerciseDetails = lazy(() => import("../pages/ManageExercise/ExamDetails"))
 const CRUDExerciseQuestion = lazy(() => import("../pages/ManageExercise/CRUDQuestion"))
 
+const CRUDQuiz = lazy(() => import("../pages/ManageQuiz/CRUDExam"))
+const Quiz = lazy(() => import("../pages/ManageQuiz/Exam"))
+const QuizDetails = lazy(() => import("../pages/ManageQuiz/ExamDetails"))
+const CRUDQuizQuestion = lazy(() => import("../pages/ManageQuiz/CRUDQuestion"))
+
 
 // import lesson from "../pages/ManageLearn/lesson";
 
@@ -49,6 +54,7 @@ export const CHILD = {
 }
 
 export const ROUTES = {
+
     Dashboard: '/',
     ActivityLog: '/logging',
 
@@ -62,22 +68,31 @@ export const ROUTES = {
     CRUDExerciseQuestion: '/manage/exercise/:idexercise/question/:idquestion/setting',
     CRUDExercise: '/manage/exercise/create',
 
+    Quiz: '/manage/quiz',
+    QuizDetails: 'manage/quiz/quizdetail/:idquiz',
+    CRUDQuizQuestion: '/manage/quiz/:idquiz/question/:idquestion/setting',
+    CRUDQuiz: '/manage/quiz/create',
+
     Feedback: '/managefeedback',
     Cloudinary: '/cloudinary',
     CloudinaryDetails: '/cloudinary/:idcloudinary',
+
     Users: '/manageusers',
     SignIn: '/signIn',
     ManageLearn: '/manage/learn',
     SignUp: '/signUp',
     SubManageLearn: '/manage/learn/details/:idlesson',
+
     CourseDetail: '/manage/learn/coursedetails/:idcourse',
     LessonDetail: '/manage/learn/lessondetails/:idlesson',
     UnitDetails: '/manage/learn/lesson/:idlesson/unitdetails/:idunit',
     VocabularyDetail: '/manage/learn/lesson/:idlesson/vocabularydetails/:idvocabulary',
+
     CRUDCourse: '/manage/learn/coursedetails/:idcourse/setting',
     CRUDLesson: '/manage/learn/lessondetails/:idlesson/setting',
     CRUDUnit: '/manage/learn/unitdetails/:idunit/setting',
     CRUDVocabulary: '/manage/learn/vocabularydetails/:idvocabulary/setting',
+
 }
 
 
@@ -127,6 +142,7 @@ export const privateRouter = [
         name: 'Dashboard',
         showSidebar: true,
     },
+    //------------- Exam
 
     {
         title: 'FEIT',
@@ -157,7 +173,7 @@ export const privateRouter = [
         showSidebar: true,
     },
 
-
+    //------------- Exercise
     {
         title: 'FEIT',
         href: ROUTES.Exercise,
@@ -183,6 +199,36 @@ export const privateRouter = [
         title: 'FEIT',
         href: ROUTES.CRUDExercise,
         component: CRUDExercise,
+        name: 'Exam',
+        showSidebar: true,
+    },
+
+    //------------- Quiz
+    {
+        title: 'FEIT',
+        href: ROUTES.Quiz,
+        component: Quiz,
+        name: 'Dashboard',
+        showSidebar: true,
+    },
+    {
+        title: 'FEIT',
+        href: ROUTES.QuizDetails,
+        component: QuizDetails,
+        name: 'Dashboard',
+        showSidebar: true,
+    },
+    {
+        title: 'FEIT',
+        href: ROUTES.CRUDQuizQuestion,
+        component: CRUDQuizQuestion,
+        name: 'Dashboard',
+        showSidebar: true,
+    },
+    {
+        title: 'FEIT',
+        href: ROUTES.CRUDQuiz,
+        component: CRUDQuiz,
         name: 'Exam',
         showSidebar: true,
     },
@@ -307,21 +353,28 @@ export const routerSidebar = [
         title: 'FEIT',
         href: ROUTES.ManageLearn,
         component: ManageLearn,
-        name: 'Quản lý bài học',
+        name: 'Quản lý khó học',
         icon: IconHouse,
     },
     {
         title: 'FEIT',
         href: ROUTES.Exam,
         component: Exam,
-        name: 'Quản lý bài kiểm tra',
+        name: 'Quản lý bài ôn tập',
         icon: IconHouse,
     },
     {
         title: 'FEIT',
         href: ROUTES.Exercise,
         component: Exercise,
-        name: 'Quản lý bài ôn tập',
+        name: 'Quản lý bài học',
+        icon: IconHouse,
+    },
+    {
+        title: 'FEIT',
+        href: ROUTES.Quiz,
+        component: Quiz,
+        name: 'Quản lý bài kiểm tra',
         icon: IconHouse,
     },
     {

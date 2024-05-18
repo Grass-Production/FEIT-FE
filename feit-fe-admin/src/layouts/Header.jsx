@@ -4,7 +4,11 @@ import { Button, InputField } from '../components';
 import { NoneIcon } from '../svgs';
 import { IconArrowLogin, LogoFEIT, IconSearch, IconPlusCircle, IconDelete, IconPencil, ArrowCircleDown } from '../svgs';
 import { routerList, routerSidebar } from '../context';
+import { getInforUser } from '../services/userAPI';
+import { useNavigate } from 'react-router-dom';
+
 export const Header = ({ title }) => {
+    const [infor, setInfor] = useState([]);
     const [scrolled, setScrolled] = useState(false);
     const navLinkStyle = ({ isActive }) => {
         return isActive
@@ -16,7 +20,25 @@ export const Header = ({ title }) => {
             boxShadow: isActive ? '4px 4px 0px 0px #000000' : '',
         };
     };
+    const navigate = useNavigate();
+
     useEffect(() => {
+        const GetMe = async () => {
+            try {
+                const res = await getInforUser();
+                console.log(res);
+                setInfor(res.user);
+                localStorage.setItem('isLogin', true);
+
+                console.log(res);
+            } catch (error) {
+                console.log(error);
+                localStorage.setItem('isLogin', false);
+
+                navigate(`/signIn`);
+            }
+        };
+
         const handleScroll = () => {
             const offset = window.scrollY;
             if (offset > 50) {
@@ -28,6 +50,7 @@ export const Header = ({ title }) => {
         };
 
         window.addEventListener('scroll', handleScroll);
+        GetMe();
 
         return () => {
             window.removeEventListener('scroll', handleScroll);
@@ -43,10 +66,10 @@ export const Header = ({ title }) => {
                     <img src="/src/assets/images/Avatar.png" alt="" />
                     <div className="">
                         <h1 className=" text-body-1 font-body-1 font-plusjakartasans text-primary-black">
-                            Ngô Hoài Phong
+                            {infor.full_name}
                         </h1>
                         <h1 className=" text-body-2 font-body-2 font-plusjakartasans text-secondary-gray">
-                            Administrator{' '}
+                            {infor.admin}
                         </h1>
                     </div>
                 </div>

@@ -79,6 +79,39 @@ const routesPrivate = privateRouter.map((route) => {
     }
 });
 
+// const routes = publicRouter.map((route) => {
+//     const Page = route.component;
+//     return {
+//         path: route.href,
+//         element: (
+//             <>
+//                 <Helmet>
+//                     <title>{route.title}</title>
+//                 </Helmet>
+//                 {route.showSidebar ? (
+//                     <Sidebar show={route.showSidebar}>
+//                         <Page />
+//                     </Sidebar>
+//                 ) : (
+//                     <>
+//                         <Page />
+//                     </>
+//                 )}
+//             </>
+//         ),
+//         errorElement: (
+//             <>
+//                 <Helmet>
+//                     <title>Not Found</title>
+//                 </Helmet>
+//                 <SignIn />
+//             </>
+//         ),
+//     };
+// });
+
 const routerPrivate = createBrowserRouter(routesPrivate);
+
+// const publicRouter = createBrowserRouter(publicRouter);
 
 export { routerPrivate };
