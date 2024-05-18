@@ -1,4 +1,4 @@
-import { FormCreate, FormCreateExam } from './component';
+import { FormCreate, FormCreateExam, FormUpdate } from './component';
 import { NavLink } from 'react-router-dom';
 import { InputSection } from '../../../components';
 import { useEffect, useState } from 'react';
@@ -7,9 +7,11 @@ import { Button } from '../../../components';
 import { createLessonFile } from '../../../services/lessonAPI';
 import { useParams } from 'react-router-dom';
 import { getLessons } from '../../../services/lessonAPI';
+
 export default function CRUDLesson() {
     const [isCheck, setIsCheck] = useState(false);
-    let { idlesson } = useParams();
+
+    let { idexam, idquestion } = useParams();
 
     const handleRadioChange = (event) => {
         const value = event.target.value;
@@ -38,7 +40,7 @@ export default function CRUDLesson() {
                         <InputSection
                             size={' w-6 h-6'}
                             className={' w-2/4 text-label-2 font-label-2 font-plusjakartasans text-primary-black'}
-                            label="Tạo bài kiểm tra"
+                            label="Sửa"
                             id="Updatee"
                             value="update"
                             name="Setting"
@@ -49,7 +51,7 @@ export default function CRUDLesson() {
                         <InputSection
                             size={' w-6 h-6'}
                             className={' w-full text-label-2 font-label-2 font-plusjakartasans text-primary-black'}
-                            label="Tạo Câu hỏi"
+                            label="Tạo Câu hỏi mới"
                             id="Create"
                             name="Setting"
                             onChange={handleRadioChange}
@@ -59,7 +61,7 @@ export default function CRUDLesson() {
                     </div>
                 </div>
                 <div className=" w-1/2 bg-white">
-                    {isCheck ? <FormCreate id={idlesson} /> : <FormCreateExam id={idlesson} />}
+                    {isCheck ? <FormCreate id={idlesson} /> : <FormUpdate idexam={idexam} idquestion={idquestion} />}
                 </div>
                 {/* <div className=" w-1/2 bg-white">
                     <FormCreate id={idlesson} />

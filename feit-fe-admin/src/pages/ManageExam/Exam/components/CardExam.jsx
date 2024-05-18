@@ -11,13 +11,14 @@ import {
     IconArrowUp,
     IconClose,
 } from '../../../../svgs';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, InputSection, InputField } from '../../../../components';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import PaginationItem from '@mui/material/PaginationItem';
 import { NavLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+
 export const CardView = ({
     sendidlesson,
     sendidunit,
@@ -30,7 +31,8 @@ export const CardView = ({
     dataunit,
     unit_id,
 }) => {
-    const [page, setPage] = useState(1);
+    const [page, setPage] = useState(3);
+
     const handleChange = (event, value) => {
         setPage(value);
     };
@@ -113,6 +115,13 @@ export const CardView = ({
                                     <h1 className=" text-body-1 font-body-1 font-plusjakartasans text-tetiary-tertiary">
                                         Chương: {nameUnit}
                                     </h1>
+                                </div>
+                                <div className=" flex h-1/2 gap-3">
+                                    <NavLink to="/manage/exam/create">
+                                        <Button icon={true} color={'primary'} right={true} title="Thêm bài kiểm tra">
+                                            <IconPlusCircle w="28" h="28" color="#3C79FE" />
+                                        </Button>
+                                    </NavLink>
                                 </div>
                             </div>
                         </div>
@@ -379,12 +388,16 @@ export const TableData = ({
     content = '1',
     is_love_web = '1',
     name = 'Hoang',
+    idExam,
     position = 'IT',
+    title,
+    lessonName,
+    unitName,
 }) => {
     const navigate = useNavigate();
 
     const handleNavigate = () => {
-        navigate('/manageexam/exam/examdetail/:idexam');
+        navigate(`/manage/exam/examdetail/${idExam}`);
     };
 
     const [isShowPopup, setIsShowPopup] = useState(false);
@@ -399,15 +412,15 @@ export const TableData = ({
         <>
             <tr onClick={handleNavigate} className=" justify-between bg-white items-center cursor-pointer">
                 <td className=" px-5 border-b-[2px] border-dashed border-secondary-gray  text-start py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
-                    <strong className=" bg-primary-green p-2">Mới</strong> <br />
-                    <strong className=" text-primary-blue-400">{name}</strong>
+                    <strong className=" text-primary-blue-400">{title}</strong>
+                    {/* {title} */}
+                </td>
+                {/* <td className=" px-5 border-b-[2px] border-dashed border-secondary-gray  text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
+                    {lessonName}
                 </td>
                 <td className=" px-5 border-b-[2px] border-dashed border-secondary-gray  text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
-                    {position}
-                </td>
-                <td className=" px-5 border-b-[2px] border-dashed border-secondary-gray  text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
-                    {date}
-                </td>
+                    {unitName}
+                </td> */}
             </tr>
 
             {isShowPopup && (

@@ -30,6 +30,7 @@ const CloudinaryDetails = lazy(() => import("../pages/CloudinaryDetails"))
 const CRUDExam = lazy(() => import("../pages/ManageExam/CRUDExam"))
 const Exam = lazy(() => import("../pages/ManageExam/Exam"))
 const ExamDetails = lazy(() => import("../pages/ManageExam/ExamDetails"))
+const CRUDExamQuestion = lazy(() => import("../pages/ManageExam/CRUDQuestion"))
 
 
 // import lesson from "../pages/ManageLearn/lesson";
@@ -44,7 +45,9 @@ export const CHILD = {
 export const ROUTES = {
     Dashboard: '/',
     ActivityLog: '/logging',
-    Exam: '/exam',
+    Exam: '/manage/exam',
+    ExamDetails: 'manage/exam/examdetail/:idexam',
+    CRUDExamQuestion: '/manage/exam/:idexam/question/:idquestion/setting',
     Feedback: '/managefeedback',
     Cloudinary: '/cloudinary',
     CloudinaryDetails: '/cloudinary/:idcloudinary',
@@ -56,13 +59,12 @@ export const ROUTES = {
     CourseDetail: '/manage/learn/coursedetails/:idcourse',
     LessonDetail: '/manage/learn/lessondetails/:idlesson',
     UnitDetails: '/manage/learn/lesson/:idlesson/unitdetails/:idunit',
-    ExamDetail: '/manageexam/examdetail/:idexam',
     VocabularyDetail: '/manage/learn/lesson/:idlesson/vocabularydetails/:idvocabulary',
     CRUDCourse: '/manage/learn/coursedetails/:idcourse/setting',
     CRUDLesson: '/manage/learn/lessondetails/:idlesson/setting',
     CRUDUnit: '/manage/learn/unitdetails/:idunit/setting',
     CRUDVocabulary: '/manage/learn/vocabularydetails/:idvocabulary/setting',
-    CRUDExam: '/manageexam/exam',
+    CRUDExam: '/manage/exam/create',
 }
 
 
@@ -116,6 +118,20 @@ export const privateRouter = [
         title: 'FEIT',
         href: ROUTES.Exam,
         component: Exam,
+        name: 'Dashboard',
+        showSidebar: true,
+    },
+    {
+        title: 'FEIT',
+        href: ROUTES.ExamDetails,
+        component: ExamDetails,
+        name: 'Dashboard',
+        showSidebar: true,
+    },
+    {
+        title: 'FEIT',
+        href: ROUTES.CRUDExamQuestion,
+        component: CRUDExamQuestion,
         name: 'Dashboard',
         showSidebar: true,
     },

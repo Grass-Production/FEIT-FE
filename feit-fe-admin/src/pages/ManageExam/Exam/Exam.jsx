@@ -8,7 +8,7 @@ import { getVocabularyByUinit } from '../../../services/vocabulary';
 
 import { CardView, TableData } from './components';
 import { NavLink } from 'react-router-dom';
-
+import { getAllExam, getManyExamByIdUnit } from '../../../services/examAPI';
 export default function Exam() {
     const [units, setUnits] = useState([]);
     const [lesson, setLesson] = useState([]);
@@ -18,7 +18,7 @@ export default function Exam() {
     const [nameUnit, setNameUnit] = useState('');
     const [idLesson, setIdLesson] = useState('');
     const [idUnit, setItUnit] = useState('');
-
+    const [exams, setExams] = useState([]);
     const handleSetIdLesson = (data) => {
         setIdLesson(data);
     };
@@ -57,6 +57,18 @@ export default function Exam() {
                 }
             }
         }
+        async function GetAllExams() {
+            if (idUnit !== '') {
+                const manyExams = await getManyExamByIdUnit(idUnit);
+                setExams(manyExams.data);
+                console.log('manyExams.data', manyExams.data);
+                return;
+            }
+            const res = await getAllExam();
+            setExams(res.data);
+        }
+
+        GetAllExams();
         GetUnits();
         GetLessons();
         GetVocabulary();
@@ -74,21 +86,22 @@ export default function Exam() {
                     <table className=" mt-6 w-full border-primary-black border-[2px] ">
                         <tr className=" justify-between items-center bg-neutral-grey  ">
                             <th className="text-start px-5 border border-primary-black  py-2 text-button-1 font-button-1 text-primary-black font-plusjakartasans">
-                                Tên
+                                Tiêu đề bài kiểm tra
+                            </th>
+                            {/* <th className="text-start px-5 border border-primary-black  py-2 text-button-1 font-button-1 text-primary-black font-plusjakartasans">
+                                Chủ đề
                             </th>
                             <th className="text-start px-5 border border-primary-black  py-2 text-button-1 font-button-1 text-primary-black font-plusjakartasans">
-                                Vai trò
-                            </th>
-                            <th className="text-start px-5 border border-primary-black  py-2 text-button-1 font-button-1 text-primary-black font-plusjakartasans">
-                                Thời gian
-                            </th>
+                                Chương
+                            </th> */}
                         </tr>
-                        <>
-                            <TableData />
-                            <TableData />
-                            <TableData />
-                            <TableData />
-                        </>
+                        {exams !== null && (
+                            <>
+                                {exams.map((v, i) => {
+                                    return <TableData idExam={v._id} key={v._id} title={v.title} />;
+                                })}
+                            </>
+                        )}
                     </table>
                 </>
             </CardView>

@@ -46,7 +46,7 @@ export default function UnitDetails() {
 
     return (
         <div className="">
-            <NavLink to="/manage/learn">
+            <NavLink to="/managelearn">
                 <Button icon={true} title="Trở về" left={true}>
                     <IconArrowUpLeft />
                 </Button>

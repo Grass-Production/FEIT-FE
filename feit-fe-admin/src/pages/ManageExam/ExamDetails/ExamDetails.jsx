@@ -2,21 +2,26 @@
 import { getLessons } from '../../../services/lessonAPI';
 import { getUnitByIdLesson } from '../../../services/unitAPI';
 import { useEffect, useState } from 'react';
+import { getAllQuestionExamByIdExam } from '../../../services/examAPI';
+import { getExamByIdExam } from '../../../services/examAPI';
 // import { TableData, JsonUI } from './components/DataUI';
 
 import { getVocabularyByUinit } from '../../../services/vocabulary';
 
 import { CardView, TableData } from './components';
+import { useParams } from 'react-router-dom';
 
 export default function ExamDetails() {
     const [units, setUnits] = useState([]);
     const [lesson, setLesson] = useState([]);
-
+    const [questions, setQuestions] = useState([]);
+    const [exam, setExam] = useState([]);
     // const [file, setFile] = useState(null);
     const [nameLesson, setNameLesson] = useState('Programing');
     const [nameUnit, setNameUnit] = useState('');
     const [idLesson, setIdLesson] = useState('');
     const [idUnit, setItUnit] = useState('');
+    let { idexam } = useParams();
 
     const handleSetIdLesson = (data) => {
         setIdLesson(data);
@@ -43,6 +48,18 @@ export default function ExamDetails() {
                 setNameLesson(data[0].name);
             }
         }
+        async function GetQuestions() {
+            const res = await getAllQuestionExamByIdExam(idexam);
+            setQuestions(res.data.exam_question_response);
+            console.log('question :', res.data.exam_question_response);
+        }
+
+        async function GetExam() {
+            const res = await getExamByIdExam(idexam);
+            setExam(res.data);
+            setIdLesson(res.data.lesson_id);
+            setItUnit(res.data.unit_id);
+        }
 
         async function GetUnits() {
             if (idLesson !== '' || idLesson !== null) {
@@ -56,8 +73,10 @@ export default function ExamDetails() {
                 }
             }
         }
+        GetExam();
         GetUnits();
         GetLessons();
+        GetQuestions();
         GetVocabulary();
     }, [idLesson, idUnit]);
     return (
@@ -65,6 +84,8 @@ export default function ExamDetails() {
             <CardView
                 sendidunit={handleSetIdUnit}
                 nameUnit={nameUnit}
+                nameExam={exam.title}
+                id={exam._id}
                 dataunit={units}
                 sendidlesson={handleSetIdLesson}
                 nameLesson={nameLesson}
@@ -73,7 +94,7 @@ export default function ExamDetails() {
                     <table className=" mt-6 w-full border-primary-black border-[2px] ">
                         <tr className=" justify-between items-center bg-neutral-grey  ">
                             <th className="text-start px-5 border border-primary-black  py-2 text-button-1 font-button-1 text-primary-black font-plusjakartasans">
-                                Tiêu đề câu hỏi
+                                Câu hỏi
                             </th>
                             <th className="text-start px-5 border border-primary-black  py-2 text-button-1 font-button-1 text-primary-black font-plusjakartasans">
                                 Loại
@@ -83,10 +104,20 @@ export default function ExamDetails() {
                             </th>
                         </tr>
                         <>
-                            <TableData />
-                            <TableData />
-                            <TableData />
-                            <TableData />
+                            {questions.map((v, i) => {
+                                return (
+                                    <TableData
+                                        idquestion={v._id}
+                                        idexam={idexam}
+                                        lesson={nameLesson}
+                                        unit={nameUnit}
+                                        key={v._id}
+                                        content={v.content}
+                                        type={v.type}
+                                        result={v.correct_answer}
+                                    />
+                                );
+                            })}
                         </>
                     </table>
                 </>
