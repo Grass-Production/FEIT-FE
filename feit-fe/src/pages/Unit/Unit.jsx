@@ -29,7 +29,7 @@ export default function Unit() {
         async function fetchData() {
             try {
                 const vocabularys = await getVocabulary(unitid);
-                const res = vocabularys.vocabulary.vocabulary;
+                const res = vocabularys.vocabulary;
                 console.log('res :', res);
                 setVocabulary({
                     word: res[index].word,

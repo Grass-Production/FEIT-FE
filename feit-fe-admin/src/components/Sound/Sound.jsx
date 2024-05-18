@@ -1,20 +1,55 @@
 import { IconSpeakerHigh } from '../../svgs';
 import { useState, useRef, useEffect } from 'react';
 
+// export function Sound({ sound }) {
+//     const [id, setId] = useState(document.getElementById('audio'));
+//     function playAudio() {
+//         var audio = document.getElementById('audio');
+//         audio.play();
+//     }
+//     return (
+//         <div>
+//             <audio id="audio">
+//                 <source src={sound} type="audio/mpeg" />
+//             </audio>
+//             <div
+//                 onClick={playAudio}
+//                 className=" m-auto border-[4px] flex justify-center items-center border-primary-black w-44 h-44  bg-white">
+//                 <IconSpeakerHigh sizew="100" sizeh="100" color="#14121B" />
+//             </div>
+//         </div>
+//     );
+// }
+
 export function Sound({ sound }) {
-    const [id, setId] = useState(document.getElementById('audio'));
+    const audioRef = useRef(null);
+
+    useEffect(() => {
+        if (audioRef.current) {
+            // Set playbackRate to 0.75 to slow down audio
+            audioRef.current.playbackRate = 0.75;
+
+            // Handle potential errors during playback rate change
+            audioRef.current.addEventListener('error', (error) => {
+                console.error('Error setting playback rate:', error);
+            });
+        }
+    }, [sound]); // Update playbackRate on sound change
+
     function playAudio() {
-        var audio = document.getElementById('audio');
-        audio.play();
+        if (audioRef.current) {
+            audioRef.current.play();
+        }
     }
+
     return (
         <div>
-            <audio id="audio">
+            <audio id="audio" ref={audioRef}>
                 <source src={sound} type="audio/mpeg" />
             </audio>
             <div
                 onClick={playAudio}
-                className=" m-auto border-[4px] flex justify-center items-center border-primary-black w-44 h-44  bg-white">
+                className="m-auto border-[4px] flex justify-center items-center border-primary-black w-44 h-44 bg-white">
                 <IconSpeakerHigh sizew="100" sizeh="100" color="#14121B" />
             </div>
         </div>

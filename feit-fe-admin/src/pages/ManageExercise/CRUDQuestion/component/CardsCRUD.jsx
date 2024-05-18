@@ -6,8 +6,8 @@ import { Button } from '../../../../components';
 import { getLessonById } from '../../../../services/lessonAPI';
 import { getUnitByIdLesson } from '../../../../services/unitAPI';
 import { getVocabularyByUinit } from '../../../../services/vocabulary';
-import { createQuestionExam, getExamByIdExam } from '../../../../services/examAPI';
-import { getQuestionByIdQuestion } from '../../../../services/examAPI';
+import { createQuestionExam, getExamByIdExam } from '../../../../services/exerciseAPI';
+import { getQuestionByIdQuestion } from '../../../../services/exerciseAPI';
 import { getVocabularyById } from '../../../../services/vocabulary';
 
 export const FormUpdate = ({ idexam, idquestion }) => {

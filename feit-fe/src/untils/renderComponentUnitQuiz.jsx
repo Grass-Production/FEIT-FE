@@ -5,16 +5,16 @@ export const RenderComponentUnitQuiz = ({ multipleChoice, fillInTheBlank, count,
     let componentToRender;
 
     switch (count) {
-        case 'multichoise':
+        case 'choose':
             componentToRender = <div className="animate__animated wow animate__fadeIn">{multipleChoice}</div>;
             break;
-        case 'fil':
+        case 'blank':
             componentToRender = <div className="animate__animated wow animate__fadeIn">{fillInTheBlank}</div>;
             break;
         case 'listen':
             componentToRender = <div className="animate__animated wow animate__fadeIn">{listen}</div>;
             break;
-        case 'truefalse':
+        case 'true/false':
             componentToRender = <div className="animate__animated wow animate__fadeIn">{truefalse}</div>;
             break;
         default:

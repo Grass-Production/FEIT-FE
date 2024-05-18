@@ -2,10 +2,16 @@ import { InputField } from '../../../components';
 import { IconSpeakerHigh, IconSpeakerLow } from '../../../svgs';
 import { Button } from '../../../components';
 import { useState } from 'react';
-
-export const Multiplechoice = ({ option = [], correctAnswer, checkresult, question }) => {
+import { Sound } from '../../../components';
+export const Multiplechoice = ({ option = [], correctAnswer, checkresult, question, sendAnswer }) => {
     const [index, setIndex] = useState(null);
 
+    const [buttonValue, setButtonValue] = useState('');
+
+    function handleClick(value) {
+        setButtonValue(value); // Update state with retrieved value
+        sendAnswer(value);
+    }
     var data = [
         {
             title: 'a',
@@ -23,8 +29,9 @@ export const Multiplechoice = ({ option = [], correctAnswer, checkresult, questi
 
     let abc = true;
 
-    function setIndexNe(i) {
+    function setIndexNe(i, value) {
         setIndex(i);
+        handleClick(value);
     }
 
     return (
@@ -41,23 +48,27 @@ export const Multiplechoice = ({ option = [], correctAnswer, checkresult, questi
                 <div className=" flex gap-8 justify-center">
                     <div className="  mb-10 border border-secondary-gray w-56 h-56 rounded-[40px] bg-white"></div>
                 </div>
+
                 {checkresult ? (
                     <>
                         {option.map((a, i) => {
                             return (
                                 <Button
+                                    id={i}
                                     key={i}
                                     title={a}
                                     color={
-                                        a === correctAnswer
-                                            ? 'success'
+                                        buttonValue === correctAnswer
+                                            ? index === i
+                                                ? 'success'
+                                                : 'secondary'
                                             : 'secondary' && index === i
                                               ? 'error'
                                               : 'secondary'
                                     }
                                     className={'text-left w-full p-5 mb-5'}
                                     active={false}
-                                    onClick={() => setIndexNe(i)}
+                                    onClick={() => setIndexNe(i, a)}
                                     icon={false}></Button>
                             );
                         })}
@@ -72,7 +83,7 @@ export const Multiplechoice = ({ option = [], correctAnswer, checkresult, questi
                                     color={'secondary'}
                                     className={'text-left w-full p-5 mb-5'}
                                     active={index === i}
-                                    onClick={() => setIndexNe(i)}
+                                    onClick={() => setIndexNe(i, a)}
                                     icon={false}></Button>
                             );
                         })}
@@ -83,8 +94,20 @@ export const Multiplechoice = ({ option = [], correctAnswer, checkresult, questi
     );
 };
 
-export const TrueFalse = ({ option = [], correctAnswer, checkresult, question }) => {
+export const TrueFalse = ({ option = [], correctAnswer, checkresult, question, sendAnswer }) => {
     const [index, setIndex] = useState(null);
+    const [buttonValue, setButtonValue] = useState('');
+
+    function handleClick(value) {
+        if (value == 'Đúng') {
+            setButtonValue('1'); // Update state with retrieved value
+            sendAnswer('1');
+        } else {
+            setButtonValue('0'); // Update state with retrieved value
+            sendAnswer('0');
+        }
+    }
+
     const truefalse = ['Đúng', 'Sai'];
     var data = [
         {
@@ -103,8 +126,9 @@ export const TrueFalse = ({ option = [], correctAnswer, checkresult, question })
 
     let abc = true;
 
-    function setIndexNe(i) {
+    function setIndexNe(i, value) {
         setIndex(i);
+        handleClick(value);
     }
 
     return (
@@ -130,17 +154,20 @@ export const TrueFalse = ({ option = [], correctAnswer, checkresult, question })
                                 return (
                                     <Button
                                         key={i}
+                                        id={i}
                                         title={a}
                                         color={
-                                            a === correctAnswer
-                                                ? 'success'
+                                            buttonValue === correctAnswer
+                                                ? index === i
+                                                    ? 'success'
+                                                    : 'secondary'
                                                 : 'secondary' && index === i
                                                   ? 'error'
                                                   : 'secondary'
                                         }
                                         className={'text-left w-full p-5 mb-5'}
                                         active={false}
-                                        onClick={() => setIndexNe(i)}
+                                        onClick={() => setIndexNe(i, a)}
                                         icon={false}></Button>
                                 );
                             })}
@@ -155,7 +182,7 @@ export const TrueFalse = ({ option = [], correctAnswer, checkresult, question })
                                         color={'secondary'}
                                         className={'text-left w-full p-5 mb-5'}
                                         active={index === i}
-                                        onClick={() => setIndexNe(i)}
+                                        onClick={() => setIndexNe(i, a)}
                                         icon={false}></Button>
                                 );
                             })}
@@ -167,24 +194,41 @@ export const TrueFalse = ({ option = [], correctAnswer, checkresult, question })
     );
 };
 
-export const Listen = ({ result, mean, right = false, error = false, inputValue, handleChange }) => {
+export const Listen = ({
+    result,
+    mean,
+    content,
+    right = false,
+    error = false,
+    inputValue,
+    handleChange,
+    sound,
+    answer,
+    sendAnswer,
+}) => {
+    // const [answer, setAnswer] = useState('');
+
+    const handleOnChange = (event) => {
+        sendAnswer(event.target.value);
+    };
+
     return (
         <div className=" w-[56.563rem] max-h-[750px] h-[70vh] flex flex-col justify-around items-center">
             <div>
                 <h1 className=" text-center text-heading-4 font-plusjakartasans font-heading-4 text-primary-black mb-3">
-                    Nghĩa của từ vựng {mean}
+                    Lắng nghe từ vựng
                 </h1>
                 <h1 className=" text-center text-body-1 font-body-1 font-plusjakartasans text-primary-black ">
-                    Hãy viết nghĩa tiếng Việt của từ vựng dưới đây
+                    {content}
                 </h1>
             </div>
 
             <div className=" flex gap-8 justify-center">
                 <div className="  mb-10 border-[4px] border-secondary-gray w-44 h-44 flex justify-center items-center rounded-[40px] bg-white">
-                    <IconSpeakerHigh sizeh="100" sizew="100" color="#14121B" />
+                    <Sound sound={sound} />
                 </div>
                 <div className="  mb-10 border-[4px] border-secondary-gray w-44 h-44 flex justify-center items-center rounded-[40px] bg-white">
-                    <IconSpeakerLow />
+                    <Sound sound={sound} />
                 </div>
             </div>
 
@@ -199,6 +243,7 @@ export const Listen = ({ result, mean, right = false, error = false, inputValue,
                                 <InputField
                                     className={' w-full'}
                                     value={result}
+                                    onChange={handleOnChange}
                                     placeholder={'Hãy viết từ còn trống'}
                                 />
                             </div>
@@ -220,8 +265,8 @@ export const Listen = ({ result, mean, right = false, error = false, inputValue,
                             <InputField
                                 status={error ? 'error' : null}
                                 className={' w-full'}
-                                value={inputValue}
-                                onChange={handleChange}
+                                value={answer}
+                                onChange={handleOnChange}
                                 placeholder={'Hãy viết từ còn trống'}
                             />
                         </div>
@@ -245,7 +290,21 @@ export const Listen = ({ result, mean, right = false, error = false, inputValue,
     );
 };
 
-export const FillInTheBlankReview = ({ result, mean, right = false, error = false, inputValue, handleChange }) => {
+export const FillInTheBlankReview = ({
+    result,
+    content,
+    right = false,
+    error = false,
+    inputValue,
+    handleChange,
+    sendAnswer,
+}) => {
+    const [answer, setAnswer] = useState('');
+
+    const handleOnChange = (event) => {
+        setAnswer(event.target.value);
+        sendAnswer(event.target.value);
+    };
     return (
         <div className=" w-[56.563rem] max-h-[750px] h-[70vh] flex flex-col justify-around items-center">
             <div>
@@ -258,7 +317,7 @@ export const FillInTheBlankReview = ({ result, mean, right = false, error = fals
             </div>
 
             <h1 className=" text-heading-6 font-heading-6 font-plusjakartasans text-primary-black text-center">
-                {mean}
+                {content}
             </h1>
 
             <div className="mx-auto w-11/12">
@@ -271,7 +330,7 @@ export const FillInTheBlankReview = ({ result, mean, right = false, error = fals
                                 </h1>
                                 <InputField
                                     value={result}
-                                    onChange={handleChange}
+                                    onChange={handleOnChange}
                                     className={' w-full'}
                                     placeholder={'Hãy viết từ còn trống'}
                                 />
@@ -295,8 +354,8 @@ export const FillInTheBlankReview = ({ result, mean, right = false, error = fals
                                 status={error ? 'error' : null}
                                 className={' w-full'}
                                 placeholder={'Hãy viết từ còn trống'}
-                                onChange={handleChange}
-                                value={inputValue}
+                                onChange={handleOnChange}
+                                value={answer}
                             />
                         </div>
                     )}

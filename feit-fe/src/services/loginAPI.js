@@ -5,7 +5,7 @@ import { useGoogleLogin } from "@react-oauth/google";
 export const Login = async (account, password) => {
     try {
         const response = await axios.post(
-            'http://localhost:8080/api/login/role',
+            'http://localhost:8080/api/login/user',
             {
                 email: account,
                 password: password,

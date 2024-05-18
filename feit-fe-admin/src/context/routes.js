@@ -27,10 +27,16 @@ const Feedback = lazy(() => import("../pages/Feedback"))
 const Users = lazy(() => import("../pages/Users"))
 const Cloudinary = lazy(() => import("../pages/Cloudinary"))
 const CloudinaryDetails = lazy(() => import("../pages/CloudinaryDetails"))
+
 const CRUDExam = lazy(() => import("../pages/ManageExam/CRUDExam"))
 const Exam = lazy(() => import("../pages/ManageExam/Exam"))
 const ExamDetails = lazy(() => import("../pages/ManageExam/ExamDetails"))
 const CRUDExamQuestion = lazy(() => import("../pages/ManageExam/CRUDQuestion"))
+
+const CRUDExercise = lazy(() => import("../pages/ManageExercise/CRUDExam"))
+const Exercise = lazy(() => import("../pages/ManageExercise/Exam"))
+const ExerciseDetails = lazy(() => import("../pages/ManageExercise/ExamDetails"))
+const CRUDExerciseQuestion = lazy(() => import("../pages/ManageExercise/CRUDQuestion"))
 
 
 // import lesson from "../pages/ManageLearn/lesson";
@@ -45,9 +51,17 @@ export const CHILD = {
 export const ROUTES = {
     Dashboard: '/',
     ActivityLog: '/logging',
+
     Exam: '/manage/exam',
     ExamDetails: 'manage/exam/examdetail/:idexam',
     CRUDExamQuestion: '/manage/exam/:idexam/question/:idquestion/setting',
+    CRUDExam: '/manage/exam/create',
+
+    Exercise: '/manage/exercise',
+    ExerciseDetails: 'manage/exercise/exercisedetail/:idexercise',
+    CRUDExerciseQuestion: '/manage/exercise/:idexercise/question/:idquestion/setting',
+    CRUDExercise: '/manage/exercise/create',
+
     Feedback: '/managefeedback',
     Cloudinary: '/cloudinary',
     CloudinaryDetails: '/cloudinary/:idcloudinary',
@@ -64,7 +78,6 @@ export const ROUTES = {
     CRUDLesson: '/manage/learn/lessondetails/:idlesson/setting',
     CRUDUnit: '/manage/learn/unitdetails/:idunit/setting',
     CRUDVocabulary: '/manage/learn/vocabularydetails/:idvocabulary/setting',
-    CRUDExam: '/manage/exam/create',
 }
 
 
@@ -114,6 +127,7 @@ export const privateRouter = [
         name: 'Dashboard',
         showSidebar: true,
     },
+
     {
         title: 'FEIT',
         href: ROUTES.Exam,
@@ -137,16 +151,48 @@ export const privateRouter = [
     },
     {
         title: 'FEIT',
-        href: ROUTES.Cloudinary,
-        component: Cloudinary,
-        name: 'Cloudinary',
+        href: ROUTES.CRUDExam,
+        component: CRUDExam,
+        name: 'Exam',
+        showSidebar: true,
+    },
+
+
+    {
+        title: 'FEIT',
+        href: ROUTES.Exercise,
+        component: Exercise,
+        name: 'Dashboard',
         showSidebar: true,
     },
     {
         title: 'FEIT',
-        href: ROUTES.CRUDExam,
-        component: CRUDExam,
+        href: ROUTES.ExerciseDetails,
+        component: ExerciseDetails,
+        name: 'Dashboard',
+        showSidebar: true,
+    },
+    {
+        title: 'FEIT',
+        href: ROUTES.CRUDExerciseQuestion,
+        component: CRUDExerciseQuestion,
+        name: 'Dashboard',
+        showSidebar: true,
+    },
+    {
+        title: 'FEIT',
+        href: ROUTES.CRUDExercise,
+        component: CRUDExercise,
         name: 'Exam',
+        showSidebar: true,
+    },
+
+
+    {
+        title: 'FEIT',
+        href: ROUTES.Cloudinary,
+        component: Cloudinary,
+        name: 'Cloudinary',
         showSidebar: true,
     },
     {
@@ -269,6 +315,13 @@ export const routerSidebar = [
         href: ROUTES.Exam,
         component: Exam,
         name: 'Quản lý bài kiểm tra',
+        icon: IconHouse,
+    },
+    {
+        title: 'FEIT',
+        href: ROUTES.Exercise,
+        component: Exercise,
+        name: 'Quản lý bài ôn tập',
         icon: IconHouse,
     },
     {

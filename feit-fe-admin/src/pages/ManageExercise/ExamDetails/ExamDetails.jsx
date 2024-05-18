@@ -2,8 +2,8 @@
 import { getLessons } from '../../../services/lessonAPI';
 import { getUnitByIdLesson } from '../../../services/unitAPI';
 import { useEffect, useState } from 'react';
-import { getAllQuestionExamByIdExam } from '../../../services/examAPI';
-import { getExamByIdExam } from '../../../services/examAPI';
+import { getAllQuestionExamByIdExam } from '../../../services/exerciseAPI';
+import { getExamByIdExam } from '../../../services/exerciseAPI';
 // import { TableData, JsonUI } from './components/DataUI';
 
 import { getVocabularyByUinit } from '../../../services/vocabulary';

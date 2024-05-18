@@ -1,14 +1,23 @@
 import { IconSpeakerHigh } from '../../svgs';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 export function Sound({ sound }) {
-    const [id, setId] = useState(document.getElementById('audio'));
+    const audioRef = useRef(null);
+    useEffect(() => {
+        // Update the audio source whenever the sound prop changes
+        if (audioRef.current) {
+            audioRef.current.load();
+        }
+    }, [sound]);
     function playAudio() {
-        var audio = document.getElementById('audio');
-        audio.play();
+        if (audioRef.current) {
+            audioRef.current.play().catch((error) => {
+                console.error('Audio playback failed:', error);
+            });
+        }
     }
     return (
         <div>
-            <audio id="audio">
+            <audio ref={audioRef} id="audio">
                 <source src={sound} type="audio/mpeg" />
             </audio>
             <div
@@ -20,48 +29,25 @@ export function Sound({ sound }) {
     );
 }
 
-// export function Sound({ sound }) {
-//     const audioRef = useRef(null);
-
-//     const playSlowAudio = () => {
-//         const audio = audioRef.current;
-//         const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-//         const source = audioContext.createMediaElementSource(audio);
-//         const gainNode = audioContext.createGain();
-//         const playbackRate = 0.75; // Tốc độ phát lại chậm lại 25%
-
-//         gainNode.gain.value = 1; // Giá trị mặc định là 1
-
-//         // Tạo node bộ lọc để chậm lại audio
-//         const playbackRateNode = audioContext.createPlaybackRate();
-//         playbackRateNode.playbackRate.value = playbackRate;
-
-//         // Kết nối các node với nhau
-//         source.connect(playbackRateNode).connect(gainNode).connect(audioContext.destination);
-
-//         // Bắt đầu phát audio
-//         audio.play();
-//     };
-
-//     return (
-//         <div>
-//             <audio ref={audioRef} id="audio">
-//                 <source src={sound} type="audio/mpeg" />
-//             </audio>
-//             <button onClick={playSlowAudio}>Play Slow</button>
-//         </div>
-//     );
-// }
-
 export function SoundSmall({ sound }) {
-    const [id, setId] = useState(document.getElementById('audiosmall'));
+    const audioRef = useRef(null);
+    useEffect(() => {
+        // Update the audio source whenever the sound prop changes
+        if (audioRef.current) {
+            audioRef.current.load();
+        }
+    }, [sound]);
+
     function playAudio() {
-        var audio = document.getElementById('audiosmall');
-        audio.play();
+        if (audioRef.current) {
+            audioRef.current.play().catch((error) => {
+                console.error('Audio playback failed:', error);
+            });
+        }
     }
     return (
         <div>
-            <audio id="audiosmall">
+            <audio ref={audioRef} id="audiosmall">
                 <source src={sound} type="audio/mpeg" />
             </audio>
             {/* <div

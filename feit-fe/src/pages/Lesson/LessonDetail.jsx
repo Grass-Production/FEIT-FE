@@ -9,6 +9,7 @@ import { NavLink } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { IconArrowUpLeft } from '../../svgs';
+import { PopupCreateList } from './component';
 export default function LessonDetail({ name }) {
     const [units, setUnits] = useState([]);
 
@@ -147,6 +148,7 @@ export default function LessonDetail({ name }) {
                                         percent={unit.is_complete}
                                         checkprocess={false}
                                     />
+                                    {/* <PopupCreateList /> */}
                                 </div>
                             );
                         })}
