@@ -68,7 +68,7 @@ export const FormVerify = ({ sendTypeForm }) => {
         const res = await verifypassowrd({ verification_code: inputs.join('') });
         console.log(res);
         if (res.status === 200) {
-            sendTypeForm(1);
+            sendTypeForm(2);
         }
     };
 

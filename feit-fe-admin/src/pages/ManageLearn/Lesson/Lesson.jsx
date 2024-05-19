@@ -105,17 +105,21 @@ export default function HomePage() {
                 <CardCrud onClickAddFile={handleCreateLessonFile} />
             </div>
             <CardView>
-                {data.map((v, i) => {
-                    return (
-                        <CardItem
-                            id={v._id}
-                            createAt={v.created_at}
-                            onClickDelete={handleDelete}
-                            key={i}
-                            name={v.name}
-                        />
-                    );
-                })}
+                {data !== null && (
+                    <>
+                        {data.map((v, i) => {
+                            return (
+                                <CardItem
+                                    id={v._id}
+                                    createAt={v.created_at}
+                                    onClickDelete={handleDelete}
+                                    key={i}
+                                    name={v.name}
+                                />
+                            );
+                        })}
+                    </>
+                )}
             </CardView>
         </div>
 

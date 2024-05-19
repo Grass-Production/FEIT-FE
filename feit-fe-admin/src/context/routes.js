@@ -1,48 +1,57 @@
-import { lazy } from "react";
+import { lazy } from 'react';
 
+import {
+    IconLaptop,
+    IconHouse,
+    IconFileCloud,
+    IconBell,
+    IconList,
+    IconChartBar,
+    IconSearch,
+    IconUser,
+    IconClockClockwise,
+    IconCrown,
+    IconChatTeardropText,
+    IconUsers,
+} from '../svgs';
 
-import { IconLaptop, IconHouse, IconFileCloud, IconBell, IconList, IconChartBar, IconSearch, IconUser, IconClockClockwise, IconCrown, IconChatTeardropText, IconUsers } from "../svgs";
+const SignIn = lazy(() => import('../pages/SignIn'));
+const SignUp = lazy(() => import('../pages/SignUp'));
+const Unit = lazy(() => import('../pages/ManageLearn/Unit'));
+const Lesson = lazy(() => import('../pages/ManageLearn/Lesson'));
+const UnitDetails = lazy(() => import('../pages/ManageLearn/UnitDetails'));
+const Vocabulary = lazy(() => import('../pages/ManageLearn/Vocabulary'));
+const Dashboard = lazy(() => import('../pages/Dashboard'));
+const Course = lazy(() => import('../pages/ManageLearn/Course'));
+const ManageLearn = lazy(() => import('../pages/ManageLearn'));
+const ActivityLog = lazy(() => import('../pages/ActivityLog'));
+const LessonDetail = lazy(() => import('../pages/ManageLearn/LessonDetail'));
+const SubManageLearn = lazy(() => import('../pages/SubManageLearn'));
+const VocabularyDetail = lazy(() => import('../pages/ManageLearn/VocabularyDetail'));
+const CourseDetail = lazy(() => import('../pages/ManageLearn/CourseDetail'));
+const CRUDCourse = lazy(() => import('../pages/ManageLearn/CRUDCourse'));
+const CRUDLesson = lazy(() => import('../pages/ManageLearn/CRUDLesson'));
+const CRUDUnit = lazy(() => import('../pages/ManageLearn/CRUDUnit'));
+const CRUDVocabulary = lazy(() => import('../pages/ManageLearn/CRUDVocabulary'));
+const Feedback = lazy(() => import('../pages/Feedback'));
+const Users = lazy(() => import('../pages/Users'));
+const Cloudinary = lazy(() => import('../pages/Cloudinary'));
+const CloudinaryDetails = lazy(() => import('../pages/CloudinaryDetails'));
 
+const CRUDExam = lazy(() => import('../pages/ManageExam/CRUDExam'));
+const Exam = lazy(() => import('../pages/ManageExam/Exam'));
+const ExamDetails = lazy(() => import('../pages/ManageExam/ExamDetails'));
+const CRUDExamQuestion = lazy(() => import('../pages/ManageExam/CRUDQuestion'));
 
+const CRUDExercise = lazy(() => import('../pages/ManageExercise/CRUDExam'));
+const Exercise = lazy(() => import('../pages/ManageExercise/Exam'));
+const ExerciseDetails = lazy(() => import('../pages/ManageExercise/ExamDetails'));
+const CRUDExerciseQuestion = lazy(() => import('../pages/ManageExercise/CRUDQuestion'));
 
-const SignIn = lazy(() => import("../pages/SignIn"))
-const SignUp = lazy(() => import("../pages/SignUp"))
-const Unit = lazy(() => import("../pages/ManageLearn/Unit"))
-const Lesson = lazy(() => import("../pages/ManageLearn/Lesson"))
-const UnitDetails = lazy(() => import("../pages/ManageLearn/UnitDetails"))
-const Vocabulary = lazy(() => import("../pages/ManageLearn/Vocabulary"))
-const Dashboard = lazy(() => import("../pages/Dashboard"))
-const Course = lazy(() => import("../pages/ManageLearn/Course"))
-const ManageLearn = lazy(() => import("../pages/ManageLearn"))
-const ActivityLog = lazy(() => import("../pages/ActivityLog"))
-const LessonDetail = lazy(() => import("../pages/ManageLearn/LessonDetail"))
-const SubManageLearn = lazy(() => import("../pages/SubManageLearn"))
-const VocabularyDetail = lazy(() => import("../pages/ManageLearn/VocabularyDetail"))
-const CourseDetail = lazy(() => import("../pages/ManageLearn/CourseDetail"))
-const CRUDCourse = lazy(() => import("../pages/ManageLearn/CRUDCourse"))
-const CRUDLesson = lazy(() => import("../pages/ManageLearn/CRUDLesson"))
-const CRUDUnit = lazy(() => import("../pages/ManageLearn/CRUDUnit"))
-const CRUDVocabulary = lazy(() => import("../pages/ManageLearn/CRUDVocabulary"))
-const Feedback = lazy(() => import("../pages/Feedback"))
-const Users = lazy(() => import("../pages/Users"))
-const Cloudinary = lazy(() => import("../pages/Cloudinary"))
-const CloudinaryDetails = lazy(() => import("../pages/CloudinaryDetails"))
-
-const CRUDExam = lazy(() => import("../pages/ManageExam/CRUDExam"))
-const Exam = lazy(() => import("../pages/ManageExam/Exam"))
-const ExamDetails = lazy(() => import("../pages/ManageExam/ExamDetails"))
-const CRUDExamQuestion = lazy(() => import("../pages/ManageExam/CRUDQuestion"))
-
-const CRUDExercise = lazy(() => import("../pages/ManageExercise/CRUDExam"))
-const Exercise = lazy(() => import("../pages/ManageExercise/Exam"))
-const ExerciseDetails = lazy(() => import("../pages/ManageExercise/ExamDetails"))
-const CRUDExerciseQuestion = lazy(() => import("../pages/ManageExercise/CRUDQuestion"))
-
-const CRUDQuiz = lazy(() => import("../pages/ManageQuiz/CRUDExam"))
-const Quiz = lazy(() => import("../pages/ManageQuiz/Exam"))
-const QuizDetails = lazy(() => import("../pages/ManageQuiz/ExamDetails"))
-const CRUDQuizQuestion = lazy(() => import("../pages/ManageQuiz/CRUDQuestion"))
-
+const CRUDQuiz = lazy(() => import('../pages/ManageQuiz/CRUDExam'));
+const Quiz = lazy(() => import('../pages/ManageQuiz/Exam'));
+const QuizDetails = lazy(() => import('../pages/ManageQuiz/ExamDetails'));
+const CRUDQuizQuestion = lazy(() => import('../pages/ManageQuiz/CRUDQuestion'));
 
 // import lesson from "../pages/ManageLearn/lesson";
 
@@ -51,10 +60,9 @@ export const CHILD = {
     Unit: 'unit',
     Vocabulary: 'vocabulary',
     Course: 'course',
-}
+};
 
 export const ROUTES = {
-
     Dashboard: '/',
     ActivityLog: '/logging',
 
@@ -92,9 +100,7 @@ export const ROUTES = {
     CRUDLesson: '/manage/learn/lessondetails/:idlesson/setting',
     CRUDUnit: '/manage/learn/unitdetails/:idunit/setting',
     CRUDVocabulary: '/manage/learn/vocabularydetails/:idvocabulary/setting',
-
-}
-
+};
 
 export const childRouter = [
     {
@@ -108,14 +114,12 @@ export const childRouter = [
         href: CHILD.Lesson,
         component: Lesson,
         showSidebar: false,
-
     },
     {
         title: 'FEIT',
         href: CHILD.Vocabulary,
         component: Vocabulary,
         showSidebar: false,
-
     },
     {
         title: 'FEIT',
@@ -123,9 +127,7 @@ export const childRouter = [
         component: Unit,
         showSidebar: false,
     },
-
-]
-
+];
 
 export const privateRouter = [
     {
@@ -233,7 +235,6 @@ export const privateRouter = [
         showSidebar: true,
     },
 
-
     {
         title: 'FEIT',
         href: ROUTES.Cloudinary,
@@ -339,7 +340,7 @@ export const privateRouter = [
         name: 'Đăng nhập',
         showSidebar: false,
     },
-]
+];
 
 export const routerSidebar = [
     {
@@ -353,7 +354,7 @@ export const routerSidebar = [
         title: 'FEIT',
         href: ROUTES.ManageLearn,
         component: ManageLearn,
-        name: 'Quản lý khó học',
+        name: 'Quản lý khóa học',
         icon: IconHouse,
     },
     {
@@ -412,7 +413,7 @@ export const routerSidebar = [
         name: 'Đăng nhập',
         icon: IconHouse,
     },
-]
+];
 
 export const routerList = [
     {
@@ -443,6 +444,5 @@ export const routerList = [
         name: 'Từ vựng',
         icon: IconHouse,
     },
-
-]
-export default routerList
+];
+export default routerList;

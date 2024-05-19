@@ -61,6 +61,7 @@ export default function Profile() {
                     <div className="shadow-card-home w-full overflow-scroll bg-white border-[4px] px-6 py-12 border-primary-black">
                         <CardInformation
                             name={inforUser.full_name}
+                            email={inforUser.email}
                             phone={inforUser.phone}
                             specialize={inforUser.specialize}
                         />
