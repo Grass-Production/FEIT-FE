@@ -3,6 +3,7 @@ import { Form, Button, FormSelectOption } from '../../../components';
 import { InputField } from '../../../components';
 import { Link } from 'react-router-dom';
 import IconEyeRegular from '../../../svgs/IconEyeRegular';
+
 export const FormSignUp = ({ account, onChange, onClick, inputData, onSubmit }) => {
     const [checkInput, setCheckInput] = useState({
         email: true,

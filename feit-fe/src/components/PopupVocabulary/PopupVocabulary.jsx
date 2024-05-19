@@ -7,7 +7,7 @@ import { SoundSmall } from '../Sound';
 import 'animate.css';
 import { IconSpeakerHigh, IconHeart, IconPlusCircle } from '../../svgs';
 import { getMaskList, createMarkVocabulary, createMaskList } from '../../services/masklistAPI';
-
+import { Loading } from '../Loading/Loading';
 export const PopUp = ({ OnClose, word, partofspeech, pronunciation, example, sound, idVocabulary }) => {
     const [show, setShow] = useState(false);
     const img =
@@ -117,6 +117,7 @@ export const CardVideo = ({ src = 'https://www.youtube.com/embed/y14IxVnBEaU' })
 };
 
 export const SubPopUp = ({ OnClose, idVocabulary }) => {
+    const [loading, setLoading] = useState(true);
     const [maskLists, setMaskLists] = useState([]);
     const [idmaskLists, setIdMaskLists] = useState([]);
     const [inputValue, setInputValue] = useState('');
@@ -125,12 +126,16 @@ export const SubPopUp = ({ OnClose, idVocabulary }) => {
     useEffect(() => {
         const handleGetMaskList = async () => {
             try {
+                setLoading(true);
                 const res = await getMaskList();
                 setMaskLists(res.mark_list.mark_list);
                 // if (res.mark_list.mark_list !== null || res.mark_list.mark_list !== '') {
                 //     setIsLoading(false);
                 // }
-                console.log(res.mark_list.mark_list);
+                console.log(res);
+                if (res.status === 'success') {
+                    setLoading(false);
+                }
             } catch (error) {
                 console.log('message :', error);
             }
@@ -149,11 +154,15 @@ export const SubPopUp = ({ OnClose, idVocabulary }) => {
 
     const handleCreateMaskList = async () => {
         try {
+            setLoading(true);
             const res = await createMaskList({ name_list: inputValue });
             console.log(res);
             setRender((r) => r + 1);
             setInputValue('');
             setIsShowInput(false);
+            if (res.status === 'success') {
+                setLoading(false);
+            }
         } catch (error) {
             console.log('message :', error);
         }
@@ -191,11 +200,13 @@ export const SubPopUp = ({ OnClose, idVocabulary }) => {
     const handleCreateMarkVocabulary = async () => {
         try {
             for (let i = 0; i < idmaskLists.length; i++) {
+                setLoading(true);
                 const res = await createMarkVocabulary({
                     mark_list_id: idmaskLists[i],
                     vocabulary_id: idVocabulary,
                 });
-                console.log(res);
+                console.log('them tu', res);
+                setLoading(false);
             }
         } catch (error) {
             console.log('message :', error);
@@ -203,63 +214,68 @@ export const SubPopUp = ({ OnClose, idVocabulary }) => {
     };
 
     return (
-        <div className="">
-            <div className="relative z-100" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-                <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+        <>
+            {loading === false ? (
+                <div className="">
+                    <div className="relative z-100" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+                        <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+                        <div className="fixed inset-0 z-10 bg-gray-500 bg-opacity-75 transition-opacity w-screen overflow-y-auto">
+                            <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                                <div className="relative w-[60vh] max-h-[60vh] min-h-[60vh] flex flex-col justify-between transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all  sm:max-w-5xl">
+                                    <div className=" flex bg-white justify-between items-center px-8 mb-6 py-4 border-b border-black">
+                                        <h1 className=" text-heading-7 font-heading-7 font-plusjakartasans text-primary-black">
+                                            Lưu từ vựng vào danh sách
+                                        </h1>
+                                        <Button title="X" onClick={OnClose}></Button>
+                                    </div>
 
-                <div className="fixed inset-0 z-10 bg-gray-500 bg-opacity-75 transition-opacity w-screen overflow-y-auto">
-                    <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-                        <div className="relative w-[60vh] max-h-[60vh] min-h-[60vh] flex flex-col justify-between transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all  sm:max-w-5xl">
-                            <div className=" flex bg-white justify-between items-center px-8 mb-6 py-4 border-b border-black">
-                                <h1 className=" text-heading-7 font-heading-7 font-plusjakartasans text-primary-black">
-                                    Lưu từ vựng vào danh sách
-                                </h1>
-                                <Button title="X" onClick={OnClose}></Button>
-                            </div>
-
-                            <div className=" flex flex-col justify-start items-start h-[50vh] px-4 max-h-[60] gap-3">
-                                <InputSection id="1" label="Danh sách yêu thích" />
-                                {maskLists.map((v, i) => (
-                                    <InputSection
-                                        onChange={handleCheckboxChange}
-                                        key={v._id}
-                                        label={v.name_list}
-                                        id={v._id}
-                                    />
-                                ))}
-                                {isShowInput && (
-                                    <InputField
-                                        value={inputValue}
-                                        onChange={handleOnChangeInput}
-                                        placeholder={'Nhập tên danh sách'}
-                                    />
-                                )}
-                            </div>
-                            <div className=" flex bg-white border-t border-secondary-gray p-4 gap-3">
-                                <Button
-                                    onClick={handleCreateMarkVocabulary}
-                                    color={'primary'}
-                                    title="Thêm"
-                                    className="w-full py-4 "></Button>
-                                {inputValue != '' ? (
-                                    <Button
-                                        onClick={handleCreateMaskList}
-                                        color={'primary'}
-                                        title={'Đồng ý'}
-                                        className="w-full py-4 "></Button>
-                                ) : (
-                                    <Button
-                                        onClick={handleIsShowInput}
-                                        color={!isShowInput && 'primary'}
-                                        title={isShowInput ? 'Hủy' : 'Tạo danh sách mới'}
-                                        className="w-full py-4 "></Button>
-                                )}
+                                    <div className=" flex flex-col justify-start items-start h-[50vh] px-4 max-h-[60] gap-3">
+                                        <InputSection id="1" label="Danh sách yêu thích" />
+                                        {maskLists.map((v, i) => (
+                                            <InputSection
+                                                onChange={handleCheckboxChange}
+                                                key={v._id}
+                                                label={v.name_list}
+                                                id={v._id}
+                                            />
+                                        ))}
+                                        {isShowInput && (
+                                            <InputField
+                                                value={inputValue}
+                                                onChange={handleOnChangeInput}
+                                                placeholder={'Nhập tên danh sách'}
+                                            />
+                                        )}
+                                    </div>
+                                    <div className=" flex bg-white border-t border-secondary-gray p-4 gap-3">
+                                        <Button
+                                            onClick={handleCreateMarkVocabulary}
+                                            color={'primary'}
+                                            title="Thêm"
+                                            className="w-full py-4 "></Button>
+                                        {inputValue != '' ? (
+                                            <Button
+                                                onClick={handleCreateMaskList}
+                                                color={'primary'}
+                                                title={'Đồng ý'}
+                                                className="w-full py-4 "></Button>
+                                        ) : (
+                                            <Button
+                                                onClick={handleIsShowInput}
+                                                color={!isShowInput && 'primary'}
+                                                title={isShowInput ? 'Hủy' : 'Tạo danh sách mới'}
+                                                className="w-full py-4 "></Button>
+                                        )}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            ) : (
+                <Loading />
+            )}
+        </>
     );
 };
 

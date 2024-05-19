@@ -5,11 +5,12 @@ import { IconXCircle } from '../../svgs';
 import { NavLink, useParams } from 'react-router-dom';
 // import { PopUp } from './component/PopUp';
 import { PopUp } from '../../components/PopupVocabulary/PopupVocabulary';
-import { Example, Listen, FillInTheBlank, Tip } from './component/CategoryUnit';
+import { Example, Listen, FillInTheBlank, Tip, PageLoading } from './component/CategoryUnit';
 import { Finish, ListVocabulary, Score } from './component/UIFinish';
 import { getVocabulary } from '../../services/vocabulary';
 import { getExerciseByIdUnit, getQuestionByIdExercise } from '../../services/exerciseAPI';
 import 'animate.css';
+import { PopupDeleteList } from './component/CategoryUnit';
 
 export default function Unit() {
     // Lấy lessonId và unitId
@@ -17,6 +18,12 @@ export default function Unit() {
     const [vocabularys, setVocabularys] = useState([]);
     const [exercise, setExercise] = useState([]);
     const [questions, setQuestions] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [isPopup, setIsPopup] = useState(false);
+
+    const handleReceivePopup = (value) => {
+        setIsPopup(value);
+    };
 
     const [vocabulary, setVocabulary] = useState({
         word: '',
@@ -61,6 +68,9 @@ export default function Unit() {
             const questionData = await question.data.exercise_question;
             setVocabulary({ ...vocabulary, question: questionData[index].content });
             setQuestions(questionData);
+            if (questionData !== '') {
+                setLoading(false);
+            }
             console.log('questionData : ', questionData[index].content);
         }
 
@@ -150,113 +160,129 @@ export default function Unit() {
     }
 
     return (
-        <div className=" flex flex-col justify-between h-screen items-center">
-            <div className=" flex w-full justify-center items-center gap-2 mt-7">
-                <NavLink to={`/learn/lesson/${lessonid}`}>
-                    <IconXCircle color={'#3C79FE'} />
-                </NavLink>
-                <div className=" w-3/4  flex justify-center items-center h-1.5 bg-gray-200 rounded-full  dark:bg-gray-700">
-                    <LoadingProgressBar percent={process} />
-                </div>
-            </div>
+        <>
+            {loading === false ? (
+                <>
+                    {isPopup && <PopupDeleteList lessonid={lessonid} handleSendIsPopup={handleReceivePopup} />}
+                    <div className=" flex flex-col justify-between h-screen items-center">
+                        <div className=" flex w-full justify-center items-center gap-2 mt-7">
+                            <Button onClick={() => setIsPopup(true)} icon={true} left={true} title="">
+                                <IconXCircle color={'#3C79FE'} />
+                            </Button>
+                            <div className=" w-3/4  flex justify-center items-center h-1.5 bg-gray-200 rounded-full  dark:bg-gray-700">
+                                <LoadingProgressBar percent={process} />
+                            </div>
+                        </div>
 
-            {/* <h1>d</h1> */}
-            <RenderComponentUnit
-                listen={
-                    process === 90 ? (
-                        <Finish />
-                    ) : (
-                        <Listen word={vocabulary.word} sound={vocabulary.link_url} mean={vocabulary.mean} />
-                    )
-                }
-                example={
-                    process === 95 ? (
-                        <Score score="10" />
-                    ) : (
-                        <Example
-                            exampleen={vocabulary.example}
-                            example_vie={vocabulary.example_vie}
-                            example_eng={vocabulary.example_eng}
-                        />
-                    )
-                }
-                fillInTheBlank={
-                    process === 100 ? (
-                        <ListVocabulary list={vocabularys.map((a, i) => a.word)} />
-                    ) : (
-                        <FillInTheBlank
-                            question={vocabulary.question}
-                            word={vocabulary.word}
-                            result={vocabulary.word}
-                            sound={vocabulary.link_url}
-                            inputValue={inputValue}
-                            right={resultRight && true}
-                            error={resultError && true}
-                            handleChange={handleChange}
-                        />
-                    )
-                }
-                tip={<Tip />}
-                count={process === 25 || process == 55 ? 3 : count}
-            />
-
-            <div className=" w-full py-10 flex justify-around items-center border-t-2 border-black">
-                {process === 100 ? (
-                    <NavLink className="w-3/4" to={`/learn/lesson/${lessonid}`}>
-                        <Button icon={false} color={'primary'} className="w-full" title="Hoàn tất"></Button>
-                    </NavLink>
-                ) : (
-                    <>
-                        {count === 2 ? (
-                            <Button
-                                icon={false}
-                                color={'primary'}
-                                onClick={check ? handleOnClick : checkResult}
-                                className="w-3/4 "
-                                title="Tiếp tục"></Button>
-                        ) : (
-                            <>
-                                {count !== 2 && process < 90 ? (
-                                    <>
-                                        <Button
-                                            icon={false}
-                                            color={'primary'}
-                                            onClick={handleOnClick}
-                                            className=" w-1/4 py-6 !bg-primary-blue-400 hover:!bg-primary-blue-500 !border-primary-black text-white"
-                                            title="Tiếp tục"></Button>
-                                        <Button
-                                            icon={false}
-                                            color={'primary'}
-                                            onClick={handlePopUp}
-                                            className=" w-1/4 py-6"
-                                            title="Giải thích từ vựng"></Button>
-                                    </>
+                        {/* <h1>d</h1> */}
+                        <RenderComponentUnit
+                            listen={
+                                process === 90 ? (
+                                    <Finish />
                                 ) : (
-                                    <Button
-                                        icon={false}
-                                        color={'primary'}
-                                        onClick={handleOnClick}
-                                        className="w-3/4"
-                                        title="Tiếp tục"></Button>
-                                )}
-                            </>
+                                    <Listen word={vocabulary.word} sound={vocabulary.link_url} mean={vocabulary.mean} />
+                                )
+                            }
+                            example={
+                                process === 95 ? (
+                                    <Score score="10" />
+                                ) : (
+                                    <Example
+                                        exampleen={vocabulary.example}
+                                        example_vie={vocabulary.example_vie}
+                                        example_eng={vocabulary.example_eng}
+                                    />
+                                )
+                            }
+                            fillInTheBlank={
+                                process === 100 ? (
+                                    <ListVocabulary list={vocabularys.map((a, i) => a.word)} />
+                                ) : (
+                                    <FillInTheBlank
+                                        question={vocabulary.question}
+                                        word={vocabulary.word}
+                                        result={vocabulary.word}
+                                        sound={vocabulary.link_url}
+                                        inputValue={inputValue}
+                                        right={resultRight && true}
+                                        error={resultError && true}
+                                        handleChange={handleChange}
+                                    />
+                                )
+                            }
+                            tip={<Tip />}
+                            count={process === 25 || process == 55 ? 3 : count}
+                        />
+
+                        <div className=" w-full py-10 flex justify-around items-center border-t-2 border-black">
+                            {process === 100 ? (
+                                <NavLink className="w-3/4" to={`/learn/lesson/${lessonid}`}>
+                                    <Button icon={false} color={'primary'} className="w-full" title="Hoàn tất"></Button>
+                                </NavLink>
+                            ) : (
+                                <>
+                                    {count === 2 ? (
+                                        <Button
+                                            icon={false}
+                                            color={'primary'}
+                                            onClick={check ? handleOnClick : checkResult}
+                                            className="w-3/4 "
+                                            title="Tiếp tục"></Button>
+                                    ) : (
+                                        <>
+                                            {count !== 2 && process < 90 ? (
+                                                <>
+                                                    <Button
+                                                        icon={false}
+                                                        color={'primary'}
+                                                        onClick={handleOnClick}
+                                                        className=" w-1/4 py-6 !bg-primary-blue-400 hover:!bg-primary-blue-500 !border-primary-black text-white"
+                                                        title="Tiếp tục"></Button>
+                                                    <Button
+                                                        icon={false}
+                                                        color={'primary'}
+                                                        onClick={handlePopUp}
+                                                        className=" w-1/4 py-6"
+                                                        title="Giải thích từ vựng"></Button>
+                                                </>
+                                            ) : (
+                                                <Button
+                                                    icon={false}
+                                                    color={'primary'}
+                                                    onClick={handleOnClick}
+                                                    className="w-3/4"
+                                                    title="Tiếp tục"></Button>
+                                            )}
+                                        </>
+                                    )}
+                                </>
+                            )}
+                        </div>
+                        {showpopup && (
+                            <div
+                                className={
+                                    showpopup
+                                        ? 'animate__animated animate__fadeIn'
+                                        : 'animate__animated animate__fadeOut'
+                                }>
+                                <PopUp
+                                    idVocabulary={vocabulary._id}
+                                    OnClose={handlePopUp}
+                                    sound={vocabulary.link_url}
+                                    word={vocabulary.word}
+                                    partofspeech={vocabulary.part_of_speech}
+                                    pronunciation={vocabulary.pronunciation}
+                                    example={vocabulary.explain_vie}
+                                />
+                            </div>
                         )}
-                    </>
-                )}
-            </div>
-            {showpopup && (
-                <div className={showpopup ? 'animate__animated animate__fadeIn' : 'animate__animated animate__fadeOut'}>
-                    <PopUp
-                        idVocabulary={vocabulary._id}
-                        OnClose={handlePopUp}
-                        sound={vocabulary.link_url}
-                        word={vocabulary.word}
-                        partofspeech={vocabulary.part_of_speech}
-                        pronunciation={vocabulary.pronunciation}
-                        example={vocabulary.explain_vie}
-                    />
+                    </div>
+                </>
+            ) : (
+                <div className=" flex flex-col justify-between h-screen items-center">
+                    <PageLoading />
                 </div>
             )}
-        </div>
+        </>
     );
 }

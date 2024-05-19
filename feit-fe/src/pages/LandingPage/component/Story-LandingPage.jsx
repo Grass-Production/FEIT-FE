@@ -1,9 +1,11 @@
 export const StoryLandingPage = () => {
     return (
         <div id="story" className=" mb-24">
-            <h1 className=" text-center text-heading-4 text-primary-blue-800 font-heading-4 mb-14">
-                Câu chuyện của chúng mình
-            </h1>
+            <div className="mb-24 flex justify-center">
+                <h1 className="  w-fit fontplusjakartasans text-center p-3 bg-primary-blue-50 text-heading-4 text-primary-blue-800 font-heading-4">
+                    Câu chuyện của chúng mình
+                </h1>
+            </div>
             <div className=" flex justify-between gap-8">
                 <div className=" px-12 py-3 w-1/2">
                     <h1 className=" font-plusjakartasans text-heading-6 font-heading-6 text-primary-black mb-5">

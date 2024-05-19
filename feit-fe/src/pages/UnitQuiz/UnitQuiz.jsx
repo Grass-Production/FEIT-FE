@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { Button, LoadingProgressBar } from '../../components';
 import { RenderComponentUnitQuiz } from '../../untils/renderComponentUnitQuiz';
 import { IconXCircle } from '../../svgs';
-import { Multiplechoice, FillInTheBlankReview, Listen, TrueFalse } from './component';
-import { getExamByIdUnit, getQuestionByIdUnit } from '../../services/examAPI';
+import { Multiplechoice, FillInTheBlankReview, Listen, TrueFalse, PageLoading, PopupDeleteList } from './component';
+import { getExamByIdUnit, getAllQuestionExamByIdExam } from '../../services/examAPI';
 import { Start } from './component';
 import { Finish } from './component';
 import { NavLink, useParams } from 'react-router-dom';
@@ -32,7 +32,7 @@ export default function UnitQuiz() {
         const GetQuestion = async () => {
             const exam = await getExamByIdUnit(unitid);
             const idexam = await exam.data._id;
-            const res = await getQuestionByIdUnit(idexam);
+            const res = await getAllQuestionExamByIdExam(idexam);
             const content = await res.data.exam_question_response[index].content;
             const options = await res.data.exam_question_response[index].options;
             const correct_answer = await res.data.exam_question_response[index].correct_answer;
@@ -64,7 +64,11 @@ export default function UnitQuiz() {
 
         GetQuestion();
     }, []);
+    const [isPopup, setIsPopup] = useState(false);
 
+    const handleReceivePopup = (value) => {
+        setIsPopup(value);
+    };
     // Dùng để lưu phần trăm
     const [process, setProcess] = useState(0);
     //Kiểm tra đáp án
@@ -132,78 +136,91 @@ export default function UnitQuiz() {
     }
 
     return (
-        <div className=" flex flex-col justify-between h-screen items-center">
-            <div className=" flex w-full justify-center items-center gap-2 mt-7">
-                <IconXCircle color={'#3C79FE'} />
-                <div className=" w-3/4   flex justify-center items-center h-1.5 bg-gray-200 rounded-full  dark:bg-gray-700">
-                    <LoadingProgressBar percent={process} />
+        <>
+            {dataRes.type !== '' ? (
+                <>
+                    {isPopup && <PopupDeleteList handleSendIsPopup={handleReceivePopup} lessonid={lessonid} />}
+                    <div className=" flex flex-col justify-between h-screen items-center">
+                        <div className=" flex w-full justify-center items-center gap-2 mt-7">
+                            <Button icon={true} left={true} title="" onClick={() => setIsPopup(true)}>
+                                <IconXCircle color={'#3C79FE'} />
+                            </Button>
+                            <div className=" w-3/4   flex justify-center items-center h-1.5 bg-gray-200 rounded-full  dark:bg-gray-700">
+                                <LoadingProgressBar percent={process} />
+                            </div>
+                        </div>
+                        {process < 100 && (
+                            <RenderComponentUnitQuiz
+                                multipleChoice={
+                                    <Multiplechoice
+                                        option={dataRes.options}
+                                        checkresult={check}
+                                        correctAnswer={dataRes.correct_answer}
+                                        question={dataRes.question}
+                                        sendAnswer={handleRecieveAnswer}
+                                        sound={dataRes.link_url}
+                                    />
+                                }
+                                fillInTheBlank={
+                                    <FillInTheBlankReview
+                                        content={dataRes.content}
+                                        right={resultRight && true}
+                                        error={resultError && true}
+                                        sendAnswer={handleRecieveAnswer}
+                                        result={dataRes.correct_answer}
+                                    />
+                                }
+                                listen={
+                                    <Listen
+                                        sendAnswer={handleRecieveAnswer}
+                                        content={dataRes.content}
+                                        right={resultRight && true}
+                                        error={resultError && true}
+                                        answer={answer}
+                                        result={dataRes.correct_answer}
+                                        sound={dataRes.link_url}
+                                    />
+                                }
+                                truefalse={
+                                    <TrueFalse
+                                        option={dataRes.options}
+                                        checkresult={check}
+                                        correctAnswer={dataRes.correct_answer}
+                                        question={dataRes.content}
+                                        sendAnswer={handleRecieveAnswer}
+                                    />
+                                }
+                                count={dataRes.type}
+                            />
+                        )}
+                        {process === 100 && <Finish />}
+                        <div className=" w-full py-10 flex justify-around items-center border-t-2 border-black">
+                            {process < 100 && (
+                                <Button
+                                    icon={false}
+                                    color={'primary'}
+                                    onClick={check ? handleOnClick : checkResult}
+                                    className="w-3/4"
+                                    title={'Tiếp tục'}></Button>
+                            )}
+                            {process >= 100 && (
+                                <NavLink className={' w-full flex justify-center'} to={`/learn/lesson/${lessonid}`}>
+                                    <Button
+                                        icon={false}
+                                        color={'primary'}
+                                        onClick={check ? handleOnClick : checkResult}
+                                        className="w-3/4"
+                                        title={'Hoàn thành'}></Button>
+                                </NavLink>
+                            )}
+                        </div>
+                    </div>
+                </>
+            ) : (
+                <div className=" flex flex-col justify-between h-screen items-center">
+                    <PageLoading />
                 </div>
-            </div>{' '}
-            {/* <Start /> */}
-            {process < 100 && (
-                <RenderComponentUnitQuiz
-                    multipleChoice={
-                        <Multiplechoice
-                            option={dataRes.options}
-                            checkresult={check}
-                            correctAnswer={dataRes.correct_answer}
-                            question={dataRes.question}
-                            sendAnswer={handleRecieveAnswer}
-                        />
-                    }
-                    fillInTheBlank={
-                        <FillInTheBlankReview
-                            content={dataRes.content}
-                            right={resultRight && true}
-                            error={resultError && true}
-                            sendAnswer={handleRecieveAnswer}
-                            result={dataRes.correct_answer}
-                        />
-                    }
-                    listen={
-                        <Listen
-                            sendAnswer={handleRecieveAnswer}
-                            content={dataRes.content}
-                            right={resultRight && true}
-                            error={resultError && true}
-                            answer={answer}
-                            result={dataRes.correct_answer}
-                            sound={dataRes.link_url}
-                        />
-                    }
-                    truefalse={
-                        <TrueFalse
-                            option={dataRes.options}
-                            checkresult={check}
-                            correctAnswer={dataRes.correct_answer}
-                            question={dataRes.content}
-                            sendAnswer={handleRecieveAnswer}
-                        />
-                    }
-                    count={dataRes.type}
-                />
             )}
-            {process === 100 && <Finish />}
-            <div className=" w-full py-10 flex justify-around items-center border-t-2 border-black">
-                {process < 100 && (
-                    <Button
-                        icon={false}
-                        color={'primary'}
-                        onClick={check ? handleOnClick : checkResult}
-                        className="w-3/4"
-                        title={'Tiếp tục'}></Button>
-                )}
-                {process >= 100 && (
-                    <NavLink className={' w-full flex justify-center'} to={`/learn/lesson/${lessonid}`}>
-                        <Button
-                            icon={false}
-                            color={'primary'}
-                            onClick={check ? handleOnClick : checkResult}
-                            className="w-3/4"
-                            title={'Hoàn thành'}></Button>
-                    </NavLink>
-                )}
-            </div>
-        </div>
+        </>
     );
 }

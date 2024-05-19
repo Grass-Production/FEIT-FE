@@ -12,7 +12,7 @@ export const Footer = () => {
                     <div className=" flex gap-3">
                         <FacebookLogo />
                         <InstagramLogo />
-                        <EmailLogo />
+                        <IconEmailLogo />
                     </div>
                 </div>
                 <div className=" w-1/2">

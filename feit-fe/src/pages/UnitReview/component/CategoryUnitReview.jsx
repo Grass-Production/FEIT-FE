@@ -233,3 +233,56 @@ export const FillInTheBlankReview = ({ result, mean, right = false, error = fals
         </div>
     );
 };
+
+export const PopupDeleteList = ({ handleSendIsPopup, lessonid }) => {
+    const HandleParentSendIsPopup = () => {
+        handleSendIsPopup(false);
+    };
+
+    const HandleChilSendIsPopup = (event) => {
+        event.stopPropagation();
+        handleSendIsPopup(false);
+    };
+
+    return (
+        <div className="">
+            <div className="relative z-100" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+                <div
+                    onClick={HandleParentSendIsPopup}
+                    className="fixed  inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+
+                <div className="fixed inset-0 z-10 bg-gray-500 bg-opacity-75 transition-opacity w-screen overflow-y-auto">
+                    <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                        <div className=" z-20  relative w-[20vw] max-h-[60vh] h-[40vh] flex flex-col justify-between  bg-white border-[4px] border-primary-black text-left shadow-xl transition-all  sm:max-w-5xl">
+                            <div className=" flex bg-white justify-between items-center px-8 mb-6 py-4 border-b border-black">
+                                <h1 className=" text-heading-7 font-heading-7 font-plusjakartasans text-semantic-danger">
+                                    Xóa danh sách
+                                </h1>
+                                <Button onClick={HandleChilSendIsPopup} icon={true} right={true} title="">
+                                    <IconClose color="#000000" />
+                                </Button>
+                            </div>
+                            <div className=" mx-auto w-16 h-16 flex justify-center items-center rounded-full bg-semantic-danger">
+                                <IconClose color="#fff" />
+                            </div>
+                            <div className=" flex flex-col justify-center items-center  px-4 gap-3">
+                                <h1 className=" text-button-2 font-button-2 font-plusjakartasans text-semantic-danger">
+                                    Bạn có có chắc muốn kết thúc phiên học ?
+                                </h1>
+                            </div>
+                            <div className=" flex px-4 border-secondary-gray gap-8 py-4 border-t">
+                                <NavLink className={'w-full'} to={`/learn/lesson/${lessonid}`}>
+                                    <Button
+                                        color={'primary'}
+                                        onClick={HandleChilSendIsPopup}
+                                        title="Chắn chắn"
+                                        className="w-full"></Button>
+                                </NavLink>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};

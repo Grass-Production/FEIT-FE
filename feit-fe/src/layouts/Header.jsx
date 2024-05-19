@@ -36,9 +36,9 @@ export const Header = () => {
 
                 <div className=" flex items-center  justify-between">
                     <div className="  flex items-center justify-between gap-8 mr-16">
-                        <Link className=" text-body-1 text-primary-black font-body-1 font-plusjakartasans" to="/">
+                        <a className=" text-body-1 text-primary-black font-body-1 font-plusjakartasans" href="#home">
                             Trang Chủ
-                        </Link>
+                        </a>
                         <a className=" text-body-1 text-primary-black font-body-1 font-plusjakartasans" href="#intro">
                             Giới Thiệu
                         </a>

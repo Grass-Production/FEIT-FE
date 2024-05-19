@@ -2,10 +2,11 @@ import { FormSignIn } from './component';
 import { useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
 import { useState } from 'react';
-
+import { IconGoogleLogo } from '../../svgs';
 import { Login } from '../../services/loginAPI';
 
 import { useNavigate } from 'react-router-dom';
+import { Button } from '../../components';
 
 export default function SignIn() {
     // const history = useHistory();
@@ -20,7 +21,12 @@ export default function SignIn() {
         const { name, value } = event.target;
         setFormInput({ ...formInput, [name]: value });
     };
-
+    const getCookie = (name) => {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+        return null;
+    };
     const LoginGoogle = useGoogleLogin({
         onSuccess: async (codeResponse) => {
             // Gửi mã phản hồi đến máy chủ để đăng nhập
@@ -57,7 +63,7 @@ export default function SignIn() {
 
     return (
         <div>
-            <div className=" flex h-screen">
+            <div className=" flex h-screen overflow-hidden">
                 <div className=" w-1/2 flex items-center h-screen bg-center bg-no-repeat bg-cover bg-[url('')]">
                     <img
                         className=" w-full m-auto"
@@ -70,7 +76,15 @@ export default function SignIn() {
                         <h1 className=" text-center text-heading-4 text-primary-black font-heading-4 mb-10">
                             Đăng nhập
                         </h1>
-                        <button onClick={LoginGoogle}>test Login</button>
+                        <Button
+                            className=" w-full border-[2px] border-primary-black rounded-none"
+                            color={'primaryicon'}
+                            onClick={LoginGoogle}
+                            title="Đăng nhập bằng Google"
+                            icon={true}
+                            left={true}>
+                            <IconGoogleLogo />
+                        </Button>
                         <h1 className=" mt-10 text-center mb-5 text-caption-1 font-bitter text-secondary-gray font-caption-1">
                             Hoặc đăng nhập bằng
                         </h1>

@@ -15,6 +15,11 @@ export const Login = async (account, password) => {
                 withCredentials: true,
             },
         );
+        console.log(response)
+        const token = await response.data.access_token
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+        console.log('heh :', axios.defaults.headers.common['Authorization'] = `Bearer ${token}`)
+
         if (response.status === 200) {
             localStorage.setItem('access_token', response.data.access_token);
             return response

@@ -1,6 +1,13 @@
 import { Form, InputSection, Button, InputField } from '../../../components';
 import { NavLink } from 'react-router-dom';
+import { useState } from 'react';
+import IconEyeRegular from '../../../svgs/IconEyeRegular';
+
 export const FormSignIn = ({ inputData, onClick, onChange }) => {
+    const [showPass, setShowPass] = useState(false);
+    const handleShowHidePass = () => {
+        setShowPass(!showPass);
+    };
     return (
         <form onSubmit={onClick}>
             <Form label={'Tài khoản'}>
@@ -13,15 +20,18 @@ export const FormSignIn = ({ inputData, onClick, onChange }) => {
                     onChange={onChange}
                 />
             </Form>
-            <Form label={'Mật khẩu'}>
-                <InputField
-                    placeholder={'Tạo mật khẩu'}
-                    className={' w-full mb-6'}
-                    name={Object.keys(inputData)[1]}
-                    value={inputData.password}
-                    type="text"
-                    onChange={onChange}
-                />
+            <Form label={'Mật khẩu'} className={'mb-6'}>
+                <div className="flex justify-center border p-3 border-secondary-gray items-center rounded-lg">
+                    <InputField
+                        placeholder={'Nhập mật khẩu'}
+                        className={' w-full border-none outline-none !p-0'}
+                        name={Object.keys(inputData)[1]}
+                        value={inputData.password}
+                        type={showPass ? 'text' : 'password'}
+                        onChange={onChange}
+                    />
+                    <IconEyeRegular onClick={handleShowHidePass} />
+                </div>
             </Form>
             <div className=" flex justify-between mb-9">
                 <InputSection label="Nhớ mật khẩu" />

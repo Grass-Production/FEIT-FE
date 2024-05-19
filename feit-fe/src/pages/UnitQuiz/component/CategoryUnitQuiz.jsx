@@ -1,9 +1,10 @@
 import { InputField } from '../../../components';
-import { IconSpeakerHigh, IconSpeakerLow } from '../../../svgs';
+import { IconSpeakerHigh, IconSpeakerLow, IconClose } from '../../../svgs';
 import { Button } from '../../../components';
 import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import { Sound } from '../../../components';
-export const Multiplechoice = ({ option = [], correctAnswer, checkresult, question, sendAnswer }) => {
+export const Multiplechoice = ({ option = [], correctAnswer, checkresult, question, sendAnswer, sound }) => {
     const [index, setIndex] = useState(null);
 
     const [buttonValue, setButtonValue] = useState('');
@@ -38,16 +39,15 @@ export const Multiplechoice = ({ option = [], correctAnswer, checkresult, questi
         <div className=" w-[56.563rem] max-h-[700px] h-[70vh] flex flex-col justify-around items-center">
             <div>
                 <h1 className=" text-center text-heading-4 font-plusjakartasans font-heading-4 text-primary-black mb-3">
-                    Câu ví dụ
+                    Chọn đáp án đúng
                 </h1>
                 <h1 className=" text-center text-body-1 font-body-1 font-plusjakartasans text-primary-black ">
                     {question}
                 </h1>
             </div>
             <div className="mx-auto w-2/3">
-                <div className=" flex gap-8 justify-center">
-                    <div className="  mb-10 border border-secondary-gray w-56 h-56 rounded-[40px] bg-white"></div>
-                </div>
+                <Sound sound={sound} />
+                <div className=" flex gap-8 justify-center mb-10"></div>
 
                 {checkresult ? (
                     <>
@@ -372,6 +372,70 @@ export const FillInTheBlankReview = ({
                             </div>
                         </>
                     )}
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export const PageLoading = () => {
+    return (
+        <div className=" h-screen justify-center flex flex-col items-center">
+            <div class=" relative flex justify-center items-center">
+                <div class="absolute animate-spin rounded-full  h-96 w-96 border-t-4 border-b-4 border-purple-500"></div>
+                <img src="https://www.svgrepo.com/show/509001/avatar-thinking-9.svg" class="rounded-full w-[15vw]" />
+            </div>
+        </div>
+    );
+};
+
+export const PopupDeleteList = ({ handleSendIsPopup, lessonid }) => {
+    const HandleParentSendIsPopup = () => {
+        handleSendIsPopup(false);
+    };
+
+    const HandleChilSendIsPopup = (event) => {
+        event.stopPropagation();
+        handleSendIsPopup(false);
+    };
+
+    return (
+        <div className="">
+            <div className="relative z-100" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+                <div
+                    onClick={HandleParentSendIsPopup}
+                    className="fixed  inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+
+                <div className="fixed inset-0 z-10 bg-gray-500 bg-opacity-75 transition-opacity w-screen overflow-y-auto">
+                    <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                        <div className=" z-20  relative w-[20vw] max-h-[60vh] h-[40vh] flex flex-col justify-between  bg-white border-[4px] border-primary-black text-left shadow-xl transition-all  sm:max-w-5xl">
+                            <div className=" flex bg-white justify-between items-center px-8 mb-6 py-4 border-b border-black">
+                                <h1 className=" text-heading-7 font-heading-7 font-plusjakartasans text-semantic-danger">
+                                    Xóa danh sách
+                                </h1>
+                                <Button onClick={HandleChilSendIsPopup} icon={true} right={true} title="">
+                                    <IconClose color="#000000" />
+                                </Button>
+                            </div>
+                            <div className=" mx-auto w-16 h-16 flex justify-center items-center rounded-full bg-semantic-danger">
+                                <IconClose color="#fff" />
+                            </div>
+                            <div className=" flex flex-col justify-center items-center  px-4 gap-3">
+                                <h1 className=" text-button-2 font-button-2 font-plusjakartasans text-semantic-danger">
+                                    Bạn có có chắc muốn kết thúc phiên học ?
+                                </h1>
+                            </div>
+                            <div className=" flex px-4 border-secondary-gray gap-8 py-4 border-t">
+                                <NavLink className={'w-full'} to={`/learn/lesson/${lessonid}`}>
+                                    <Button
+                                        color={'primary'}
+                                        onClick={HandleChilSendIsPopup}
+                                        title="Chắn chắn"
+                                        className="w-full"></Button>
+                                </NavLink>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

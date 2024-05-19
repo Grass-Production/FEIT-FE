@@ -55,3 +55,4 @@ export const deleteMaskList = async (idmasklist) => {
         })
     return res
 }
+

@@ -7,7 +7,7 @@ export const IntroduceLangdingPage = () => {
             </div>
             <div className=" w-2/3 flex flex-col justify-center items-center">
                 <div className=" pl-6">
-                    <h1 className=" mb-10 font-plusjakartasans text-heading-4 text-primary-blue-800 font-heading-4">
+                    <h1 className=" mb-10 p-3 bg-primary-blue-50 font-plusjakartasans text-heading-4 text-primary-blue-800 font-heading-4">
                         Website này dạy gì thế ?
                     </h1>
                     <p className=" text-body-1 font-plusjakartasans text-primary-black font-body-1">

@@ -9,10 +9,11 @@ import {
     IconMapPin,
     ArrowRight,
 } from '../../../svgs';
+import { Loading } from '../../../components/Loading/Loading';
 import { createFeedback } from '../../../services/feedbackAPI';
 import { InputSection, Button } from '../../../components';
 import { useState } from 'react';
-export const CardFormFeedback = () => {
+export const CardFormFeedback = ({ handleSendLoading }) => {
     const [activeIndex, setActiveIndex] = useState(null);
     const [content, setContent] = useState('');
     const [feeling, setFeeling] = useState('');
@@ -23,6 +24,7 @@ export const CardFormFeedback = () => {
             return;
         }
         try {
+            handleSendLoading(true);
             const res = await createFeedback({
                 title: 'Example Title',
                 content: content,
@@ -30,7 +32,8 @@ export const CardFormFeedback = () => {
                 is_love_web: selectedValue,
             });
             if ((res.status = 'success')) {
-                alert('Gửi Feedback thành công');
+                handleSendLoading(false);
+                // alert('Gửi Feedback thành công');
                 setContent('');
                 selectedValue(null);
                 setFeeling('');

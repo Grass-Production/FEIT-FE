@@ -24,13 +24,18 @@ export const FeatureLangdingPage = () => {
     return (
         <div id="feat" className=" mb-120px">
             <div>
-                <h1 className=" mb-24  fontplusjakartasans text-center   text-heading-4   text-primary-blue-800 font-heading-4">
-                    Những tính năng của website này có gì ?
-                </h1>
+                <div className="mb-24 flex justify-center">
+                    <h1 className="  w-fit fontplusjakartasans text-center p-3 bg-primary-blue-50 text-heading-4 text-primary-blue-800 font-heading-4">
+                        Những tính năng của website này có gì ?
+                    </h1>
+                </div>
                 <div className=" flex gap-8 justify-between">
                     {cards.map((card, i) => {
                         return (
-                            <div key={i} className=" shadow-md bg-[#FFFFFF] w-1/4 rounded-[40px]">
+                            <div
+                                style={{ boxShadow: '4px 6px 0px 0px #000000' }}
+                                key={i}
+                                className="  bg-[#FFFFFF] w-1/4 border-[4px] border-primary-black ">
                                 <div className=" p-6">
                                     <div className=" flex justify-center items-center  max-h-[504px] min-h-[504px] mb-4 rounded-lg   ">
                                         <img src={card.img} alt="" />

@@ -43,6 +43,8 @@ export const UnitCard = ({
                         <PopupCreateList
                             exam_is_complete={exam_is_complete}
                             quiz_is_complete={quiz_is_complete}
+                            lessonid={lessonid}
+                            unitid={unitid}
                             handleSendIsPopup={handleReceiveIsPopup}
                         />
                     )}
@@ -123,7 +125,7 @@ export const UnitCardLoad = () => {
     );
 };
 
-export const PopupCreateList = ({ handleSendIsPopup, exam_is_complete, quiz_is_complete }) => {
+export const PopupCreateList = ({ handleSendIsPopup, exam_is_complete, quiz_is_complete, lessonid, unitid }) => {
     const HandleParentSendIsPopup = () => {
         handleSendIsPopup(false);
     };
@@ -145,12 +147,28 @@ export const PopupCreateList = ({ handleSendIsPopup, exam_is_complete, quiz_is_c
                     </Button>
                 </div>
                 <div className=" flex flex-col justify-center items-start px-3  ">
-                    <Button
-                        color={'primary'}
-                        onClick={HandleChilSendIsPopup}
-                        title="Học từ mới"
-                        className=" rounded-none w-full p-0"></Button>
-                    <Button
+                    <NavLink className={' w-full'} to={`/learn/lesson/${lessonid}/unit/${unitid}`}>
+                        <Button
+                            color={'primary'}
+                            onClick={HandleChilSendIsPopup}
+                            title="Học từ mới"
+                            className=" rounded-none w-full p-0"></Button>
+                    </NavLink>
+                    <NavLink className={' w-full'} to={`/learn/lesson/${lessonid}/unit/${unitid}/exercise`}>
+                        <Button
+                            color={'primary'}
+                            onClick={HandleChilSendIsPopup}
+                            title="Ôn tập"
+                            className=" rounded-none w-full p-0"></Button>
+                    </NavLink>
+                    <NavLink className={' w-full'} to={`/learn/lesson/${lessonid}/unit/${unitid}/quiz`}>
+                        <Button
+                            color={'primary'}
+                            onClick={HandleChilSendIsPopup}
+                            title="Kiểm tra"
+                            className=" rounded-none w-full p-0"></Button>
+                    </NavLink>
+                    {/* <Button
                         color={exam_is_complete !== 0 && 'primary'}
                         disabled={exam_is_complete === 0 && true}
                         onClick={HandleChilSendIsPopup}
@@ -161,7 +179,7 @@ export const PopupCreateList = ({ handleSendIsPopup, exam_is_complete, quiz_is_c
                         disabled={quiz_is_complete === 0 && true}
                         onClick={HandleChilSendIsPopup}
                         title="Kiểm tra"
-                        className=" rounded-none w-full p-0"></Button>
+                        className=" rounded-none w-full p-0"></Button> */}
                 </div>
                 <div className=" flex px-4 border-secondary-gray gap-8 py-4 border-t">
                     <Button

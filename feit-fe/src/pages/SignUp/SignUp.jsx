@@ -47,12 +47,6 @@ export default function SignUp() {
                 <div className=" px-52 flex justify-center items-center">
                     <div>
                         <h1 className=" text-center text-heading-4 text-primary-black font-heading-4 mb-10">Đăng Ký</h1>
-                        {/* <GoogleOAuthProvider clientId="168558856798-cohnb8nqdnl38nriop2v752sap4mgpb8.apps.googleusercontent.com">
-                            <OAuthGoogle />
-                        </GoogleOAuthProvider> */}
-                        <h1 className=" mt-6  text-center mb-5 text-caption-1 font-bitter text-secondary-gray font-caption-1">
-                            Hoặc đăng ký bằng
-                        </h1>
                         <FormSignUp onSubmit={handleSignUp} onChange={handleOnChange} inputData={formInput} />
                     </div>
                 </div>
