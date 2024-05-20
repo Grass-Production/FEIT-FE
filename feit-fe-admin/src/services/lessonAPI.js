@@ -24,7 +24,7 @@ export const getLessonById = async (id) => {
 }
 
 export const getLessonByIdCourse = async () => {
-    const res = await get('http://localhost:8080/api/lesson/fetch/course_id?course_id=6631ff4e2f95034732cdbfaa', {
+    const res = await get('http://localhost:8080/api/lesson/fetch/course_id?course_id=664637556c4c00abf5dee033', {
         headers: {
             "Content-Type": "application / json"
         },
@@ -34,22 +34,23 @@ export const getLessonByIdCourse = async () => {
     return res
 }
 
-export const createLesson = async (courseId, name, content, level, file) => {
-    const token = localStorage.getItem('access_token')
+
+export const createLesson = async (courseId, name) => {
+
     const formData = new FormData(); // Tạo đối tượng FormData
     formData.append('course_id', courseId);
     formData.append('name', name);
-    // formData.append('content', content);
-    // formData.append('file', file);
-    const res = await post('http://localhost:8080/api/admin/lesson/create',
-        formData, {
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token} `,
-        },
-        credentials: "include",
-    })
-    return res
+    try {
+        const res = await fetch('http://localhost:8080/api/admin/lesson/create', {
+            method: 'POST',
+            credentials: "include",
+            body: formData,
+        })
+        console.log("message : ", res)
+        return res
+    } catch (error) {
+        console.error('Error:', error);
+    }
 }
 
 

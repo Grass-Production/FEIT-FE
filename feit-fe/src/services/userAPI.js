@@ -1,4 +1,4 @@
-import { get, post, patch } from "./fetch";
+import { get, post, patch, put } from "./fetch";
 import axios from "axios"
 
 export const getInforUser = async () => {
@@ -13,6 +13,49 @@ export const getInforUser = async () => {
     console.log('token : ', token)
     return res
 }
+
+export const updateUser = async (_id, full_name, cover_url, avatar_url, phone) => {
+    const formData = new FormData(); // Tạo đối tượng FormData
+    formData.append('_id', _id);
+    formData.append('full_name', full_name);
+    formData.append('avatar_url', avatar_url);
+    formData.append('cover_url', cover_url);
+    formData.append('phone', phone);
+    try {
+        const res = await axios.put('http://localhost:8080/api/update',
+            formData,
+            {
+                headers: { 'Content-Type': 'application/json' },
+                withCredentials: true,
+            },
+        );
+        return res;
+    } catch (error) {
+        console.log('error : ', error)
+    }
+};
+
+// export const updateUser = async (_id, full_name, cover_url, avatar_url, phone,) => {
+
+//     const formData = new FormData(); // Tạo đối tượng FormData
+//     formData.append('_id', _id);
+//     formData.append('full_name', full_name);
+//     formData.append('avatar_url', avatar_url);
+//     formData.append('cover_url', cover_url);
+//     formData.append('phone', phone);
+
+//     try {
+//         const res = await fetch('http://localhost:8080/api/update', {
+//             method: 'PUT',
+//             credentials: "include",
+//             body: formData,
+//         })
+//         console.log("message : ", res)
+//         return res
+//     } catch (error) {
+//         console.error('Error:', error);
+//     }
+// }
 
 export const LoginGoogle = async () => {
     try {

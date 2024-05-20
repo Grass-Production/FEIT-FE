@@ -5,15 +5,8 @@ import { routerPublic, routerPrivate } from './untils/renderRouter';
 import { useEffect } from 'react';
 
 export default function Layout() {
-    const [isLogin, setIslogin] = useState(false);
     const [loggedIn, setLoggedIn] = useState(null);
     useEffect(() => {
-        // const checkLoginStatus = () => {
-        //     const token = localStorage.getItem('access_token') !== null;
-        //     if (token) {
-        //         setIslogin(true);
-        //     }
-        // };
         const checkLoginStatus = () => {
             const loggedInValue = getCookie('logged_in');
             setLoggedIn(loggedInValue);
@@ -26,8 +19,6 @@ export default function Layout() {
         checkLoginStatus();
     }, []);
 
-    console.log('loggedInValue', loggedIn);
-
     const getCookie = (name) => {
         const value = `; ${document.cookie}`;
         const parts = value.split(`; ${name}=`);
@@ -37,9 +28,9 @@ export default function Layout() {
 
     return (
         <Suspense fallback={<Loading />}>
-            {loggedIn === true && <RouterProvider router={routerPrivate} />}
-            {loggedIn !== true && <RouterProvider router={routerPublic} />}
-            {/* <RouterProvider router={routerPrivate} /> */}
+            {/* {loggedIn === true && <RouterProvider router={routerPrivate} />}
+            {loggedIn !== true && <RouterProvider router={routerPublic} />} */}
+            <RouterProvider router={routerPrivate} />
         </Suspense>
     );
 }

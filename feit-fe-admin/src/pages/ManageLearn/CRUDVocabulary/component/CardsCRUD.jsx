@@ -38,7 +38,7 @@ export const CardUpdate = ({ name = 'Programing', namefile = 'congnghe.png' }) =
         unit_id: '',
     });
 
-    let { idvocabulary } = useParams();
+    let { idvocabulary, idunit } = useParams();
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -322,6 +322,9 @@ const FormCreateOne = () => {
     const [inputChange, setInputChange] = useState('Programing');
     const [file, setFile] = useState(null);
     const [progress, setProgess] = useState(0);
+
+    let { idvocabulary, idunit } = useParams();
+    console.log(idunit);
     const [formInput, setFormInput] = useState({
         word: '',
         part_of_speech: '',
@@ -335,7 +338,7 @@ const FormCreateOne = () => {
         link_url: '',
         image_url: '',
         video_url: '',
-        unit_id: '',
+        unit_id: idunit,
     });
 
     const handleInputChange = (event) => {
@@ -346,44 +349,65 @@ const FormCreateOne = () => {
     const handleSetSetProgess = (value) => {
         setProgess(value);
     };
-
+    console.log('formInput.unit_id : ', formInput.example_eng);
     const handleCreateVocabulary = async () => {
-        if (
-            formInput.word !== '' ||
-            formInput.part_of_speech !== '' ||
-            formInput.pronunciation !== '' ||
-            formInput.mean !== '' ||
-            formInput.example_vie !== '' ||
-            formInput.example_eng !== '' ||
-            formInput.field_of_it !== '' ||
-            formInput.link_url !== '' ||
-            formInput.image_url !== '' ||
-            formInput.video_url !== '' ||
-            formInput.unit_id !== ''
-        ) {
-            const res = await createVocabulary(
-                formInput.word,
-                formInput.part_of_speech,
-                formInput.pronunciation,
-                formInput.mean,
-                formInput.example_vie,
-                formInput.example_eng,
-                formInput.field_of_it,
-                formInput.link_url,
-                formInput.image_url,
-                formInput.video_url,
-                formInput.unit_id,
-            );
-            if (res.status === 200) {
-                alert('Thêm Dữ liệu bằng file thành công');
-                setRender((n) => n + 1);
-            } else if (res.message === 'validate: Token is expired') {
-                alert('Vui lòng đăng nhập');
-            }
-            console.log(res);
-        } else {
-            alert('Vui lòng điền đủ thông tin');
-        }
+        // if (
+        const res = await createVocabulary(
+            formInput.word,
+            formInput.part_of_speech,
+            formInput.pronunciation,
+            formInput.mean,
+            formInput.example_vie,
+            formInput.example_eng,
+            formInput.explain_vie,
+            formInput.explain_eng,
+            formInput.field_of_it,
+            formInput.link_url,
+            formInput.image_url,
+            formInput.video_url,
+            idunit,
+        );
+        console.log(res);
+
+        //     formInput.word !== '' ||
+        //     formInput.part_of_speech !== '' ||
+        //     formInput.pronunciation !== '' ||
+        //     formInput.mean !== '' ||
+        //     formInput.example_vie !== '' ||
+        //     formInput.example_eng !== '' ||
+        //     formInput.explain_vie !== '' ||
+        //     formInput.explain_eng !== '' ||
+        //     formInput.field_of_it !== '' ||
+        //     formInput.link_url !== '' ||
+        //     formInput.image_url !== '' ||
+        //     formInput.video_url !== '' ||
+        //     formInput.unit_id !== ''
+        // ) {
+        //     const res = await createVocabulary(
+        //         formInput.word,
+        //         formInput.part_of_speech,
+        //         formInput.pronunciation,
+        //         formInput.mean,
+        //         formInput.example_vie,
+        //         formInput.example_eng,
+        //         formInput.explain_vie,
+        //         formInput.explain_eng,
+        //         formInput.field_of_it,
+        //         formInput.link_url,
+        //         formInput.image_url,
+        //         formInput.video_url,
+        //         idunit,
+        //     );
+        //     if (res.status === 200) {
+        //         alert('Thêm Dữ liệu bằng file thành công');
+        //         setRender((n) => n + 1);
+        //     } else if (res.message === 'validate: Token is expired') {
+        //         alert('Vui lòng đăng nhập');
+        //     }
+        //     console.log(res);
+        // } else {
+        //     alert('Vui lòng điền đủ thông tin');
+        // }
     };
 
     const handleCreateLessonFile = async () => {

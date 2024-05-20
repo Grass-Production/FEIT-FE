@@ -7,7 +7,7 @@ import { getLessonById } from '../../../../services/lessonAPI';
 import { getUnitByIdLesson } from '../../../../services/unitAPI';
 import { getVocabularyByUinit } from '../../../../services/vocabulary';
 import { createQuestionExam, getExamByIdExam } from '../../../../services/examAPI';
-import { getQuestionByIdQuestion } from '../../../../services/examAPI';
+import { getQuestionByIdQuestion, updateQuestion } from '../../../../services/examAPI';
 import { getVocabularyById } from '../../../../services/vocabulary';
 
 export const FormUpdate = ({ idexam, idquestion }) => {
@@ -18,6 +18,7 @@ export const FormUpdate = ({ idexam, idquestion }) => {
     const [vocabularys, setVocabularys] = useState([]);
     const [exams, setExams] = useState([]);
     const [idVocabulary, setIdVocabulary] = useState('');
+    const [idQuestion, setIdQuestion] = useState('');
     const [contentQuestion, setContenQuestion] = useState('');
     const optionTrueFalse = ['Đúng', 'Sai'];
     const [nameLesson, setNameLesson] = useState('');
@@ -43,6 +44,7 @@ export const FormUpdate = ({ idexam, idquestion }) => {
             const res = await getQuestionByIdQuestion(idquestion);
             console.log('message question : ', res);
             setQuestion(res.data);
+            setIdQuestion(res.data._id);
             GetVocabularyById(res.data.vocabulary_id);
             setContenQuestion(res.data.content);
             setTypeQuestion(res.data.type);
@@ -73,16 +75,22 @@ export const FormUpdate = ({ idexam, idquestion }) => {
         const res = await getVocabularyById(id);
         setVocabularyCurent(res.vocabulary);
     };
-
+    console.log('result: ', result);
     const CreateExam = async () => {
         try {
-            const createQuestion = await createQuestionExam({
-                exam_id: idexam,
-                vocabulary_id: idVocabulary,
+            //test
+            console.log('vocabularyCurent._id: ', idVocabulary !== '' ? idVocabulary : vocabularyCurent._id);
+            console.log('idVocabulary: ', idVocabulary);
+            console.log('idexam: ', idexam);
+            console.log('contentQuestion: ', contentQuestion);
+            console.log('typeQuestion: ', typeQuestion);
+            console.log('result: ', result);
+            const createQuestion = await updateQuestion({
+                _id: idQuestion,
+                vocabulary_id: idVocabulary !== '' ? idVocabulary : vocabularyCurent._id,
                 content: contentQuestion,
                 type: typeQuestion,
                 level: 1,
-                options: typeQuestion === 'true/false' ? optionTrueFalse : inputValuesOption,
                 correct_answer: result,
             });
 
@@ -168,15 +176,19 @@ export const FormUpdate = ({ idexam, idquestion }) => {
                     <>
                         {vocabularys !== '' && (
                             <>
-                                {vocabularys.map((v, i) => {
-                                    return (
-                                        <>
-                                            <option key={v._id} value={v._id} className=" ">
-                                                {v.word}
-                                            </option>
-                                        </>
-                                    );
-                                })}
+                                {vocabularys !== null && (
+                                    <>
+                                        {vocabularys.map((v, i) => {
+                                            return (
+                                                <>
+                                                    <option key={v._id} value={v._id} className=" ">
+                                                        {v.word}
+                                                    </option>
+                                                </>
+                                            );
+                                        })}
+                                    </>
+                                )}
                             </>
                         )}
                     </>
@@ -248,7 +260,7 @@ export const FormUpdate = ({ idexam, idquestion }) => {
                             <InputSection
                                 name="typequestion"
                                 onChange={handleRadioChangeResultTrueFalse}
-                                value={1}
+                                value={'1'}
                                 id="1"
                                 Checked={question.correct_answer === '1'}
                                 size={' w-6 h-6'}
@@ -259,7 +271,7 @@ export const FormUpdate = ({ idexam, idquestion }) => {
                             <InputSection
                                 name="typequestion"
                                 onChange={handleRadioChangeResultTrueFalse}
-                                value={0}
+                                value={'0'}
                                 Checked={question.correct_answer === '0'}
                                 id="2"
                                 size={' w-6 h-6'}
@@ -520,15 +532,19 @@ export const FormCreate = ({ idexam }) => {
                     <>
                         {vocabularys !== '' && (
                             <>
-                                {vocabularys.map((v, i) => {
-                                    return (
-                                        <>
-                                            <option key={v._id} value={v._id} className=" ">
-                                                {v.word}
-                                            </option>
-                                        </>
-                                    );
-                                })}
+                                {vocabularys !== null && (
+                                    <>
+                                        {vocabularys.map((v, i) => {
+                                            return (
+                                                <>
+                                                    <option key={v._id} value={v._id} className=" ">
+                                                        {v.word}
+                                                    </option>
+                                                </>
+                                            );
+                                        })}
+                                    </>
+                                )}
                             </>
                         )}
                     </>

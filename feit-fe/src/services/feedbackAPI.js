@@ -8,6 +8,8 @@ export const createFeedback = async (newData) => {
                 "Content-Type": "application/json",
             },
             credentials: "include",
-        })
+        }
+    )
+
     return res
 }

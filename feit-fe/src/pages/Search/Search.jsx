@@ -50,7 +50,11 @@ export default function Search() {
                 console.log(error);
             }
         }
-        getApi();
+        const timeout = setTimeout(() => {
+            getApi();
+        }, 100);
+
+        return () => clearTimeout(timeout);
     }, [value]);
     const handleGetWord = (word) => {
         console.log('word : ', word);
@@ -70,16 +74,23 @@ export default function Search() {
         //         );
         //     })}
         // </div>
+        // w-3/5 mx-auto max-w-3xl mb-12 border-none
         <div className=" px-10">
             <div className=" flex justify-center items-center gap-5">
                 <h1 className=" text-center text-heading-3 font-bitter font-heading-3 text-primary-black">Tìm kiếm</h1>
                 <IconSearch sizew="40" sizeh="41" />
             </div>
-            <InputField
-                value={value}
-                className="w-3/5 mx-auto max-w-3xl mb-12"
-                onChange={(event) => setValue(event.target.value)}
-            />
+            <div className="bg-[#fff] w-3/5 mx-auto max-w-3xl mb-12 p-2 border border-primary-black">
+                <div className=" bg-[#fff] px-4 py-2 border border-primary-black  flex justify-center items-center  ">
+                    <IconSearch sizew="24" sizeh="24" />
+                    <InputField
+                        value={value}
+                        placeholder={'Tìm kiếm từ vựng'}
+                        className=" w-full outline-none p-1 rounded-none border-none"
+                        onChange={(event) => setValue(event.target.value)}
+                    />
+                </div>
+            </div>
             {words != null && (
                 <div className=" border-[4px] w-3/5 max-w-3xl border-secondary-gray rounded-xl p-6 mx-auto">
                     {words.map((value, index) => {

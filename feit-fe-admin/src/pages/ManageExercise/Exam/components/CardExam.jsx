@@ -142,15 +142,19 @@ export const CardView = ({
                         </Button>
                         {showFilterCourse && (
                             <>
-                                {dataCourse.map((v) => {
-                                    return (
-                                        <div
-                                            key={v.name}
-                                            className=" border-l border-primary-black text-button-1 font-button-1 font-plusjakartasans text-secondary-gray px-4 py-2 bg-primary-grey">
-                                            {v.name}
-                                        </div>
-                                    );
-                                })}
+                                {dataCourse !== null && (
+                                    <>
+                                        {dataCourse.map((v) => {
+                                            return (
+                                                <div
+                                                    key={v.name}
+                                                    className=" border-l border-primary-black text-button-1 font-button-1 font-plusjakartasans text-secondary-gray px-4 py-2 bg-primary-grey">
+                                                    {v.name}
+                                                </div>
+                                            );
+                                        })}
+                                    </>
+                                )}
                             </>
                         )}
                         <Button
@@ -163,15 +167,19 @@ export const CardView = ({
                         </Button>
                         {showFilterLesson && (
                             <>
-                                {datalesson.map((v) => {
-                                    return (
-                                        <Button
-                                            onClick={() => handleSendIdLesson(v._id)}
-                                            key={v.name}
-                                            title={v.name}
-                                            className="block rounded-none border-l border-primary-black text-button-1 font-button-1 font-plusjakartasans text-secondary-gray px-4 py-2 bg-primary-grey"></Button>
-                                    );
-                                })}
+                                {datalesson !== null && (
+                                    <>
+                                        {datalesson.map((v) => {
+                                            return (
+                                                <Button
+                                                    onClick={() => handleSendIdLesson(v._id)}
+                                                    key={v.name}
+                                                    title={v.name}
+                                                    className="block rounded-none border-l border-primary-black text-button-1 font-button-1 font-plusjakartasans text-secondary-gray px-4 py-2 bg-primary-grey"></Button>
+                                            );
+                                        })}
+                                    </>
+                                )}
                             </>
                         )}
                         <Button
@@ -184,15 +192,19 @@ export const CardView = ({
                         </Button>
                         {showFilterUnit && (
                             <>
-                                {dataunit.map((v) => {
-                                    return (
-                                        <Button
-                                            onClick={() => handleSendIdUnit(v._id)}
-                                            key={v.name}
-                                            title={v.name}
-                                            className="block rounded-none border-l border-primary-black text-button-1 font-button-1 font-plusjakartasans text-secondary-gray px-4 py-2 bg-primary-grey"></Button>
-                                    );
-                                })}
+                                {dataunit !== null && (
+                                    <>
+                                        {dataunit.map((v) => {
+                                            return (
+                                                <Button
+                                                    onClick={() => handleSendIdUnit(v._id)}
+                                                    key={v.name}
+                                                    title={v.name}
+                                                    className="block rounded-none border-l border-primary-black text-button-1 font-button-1 font-plusjakartasans text-secondary-gray px-4 py-2 bg-primary-grey"></Button>
+                                            );
+                                        })}
+                                    </>
+                                )}
                             </>
                         )}
                     </div>
@@ -245,7 +257,12 @@ export const CardItem = ({
                         </div>
                     </div>
                     <div className=" flex justify-center items-center gap-3">
-                        <NavLink to={`/manage/learn/vocabularydetails/${id}/setting`}>
+                        {/* <NavLink to={`/manage/learn/vocabularydetails/${id}/setting`}>
+                            <Button icon={true} left={true} title="">
+                                <IconPencilSimple w="28" h="28" color="#3C79FE" />
+                            </Button>
+                        </NavLink> */}
+                        <NavLink to={`/manage/learn/unit/${unit_id}/vocabularydetails/${id}/setting`}>
                             <Button icon={true} left={true} title="">
                                 <IconPencilSimple w="28" h="28" color="#3C79FE" />
                             </Button>

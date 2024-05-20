@@ -137,15 +137,19 @@ export const CardView = ({
                         </Button>
                         {showFilterCourse && (
                             <>
-                                {dataCourse.map((v) => {
-                                    return (
-                                        <div
-                                            key={v.name}
-                                            className=" border-l border-primary-black text-button-1 font-button-1 font-plusjakartasans text-secondary-gray px-4 py-2 bg-primary-grey">
-                                            {v.name}
-                                        </div>
-                                    );
-                                })}
+                                {dataCourse !== null && (
+                                    <>
+                                        {dataCourse.map((v) => {
+                                            return (
+                                                <div
+                                                    key={v.name}
+                                                    className=" border-l border-primary-black text-button-1 font-button-1 font-plusjakartasans text-secondary-gray px-4 py-2 bg-primary-grey">
+                                                    {v.name}
+                                                </div>
+                                            );
+                                        })}
+                                    </>
+                                )}
                             </>
                         )}
                         <Button
@@ -158,15 +162,19 @@ export const CardView = ({
                         </Button>
                         {showFilterLesson && (
                             <>
-                                {datalesson.map((v) => {
-                                    return (
-                                        <Button
-                                            onClick={() => handleSendIdLesson(v._id)}
-                                            key={v.name}
-                                            title={v.name}
-                                            className="block rounded-none border-l border-primary-black text-button-1 font-button-1 font-plusjakartasans text-secondary-gray px-4 py-2 bg-primary-grey"></Button>
-                                    );
-                                })}
+                                {datalesson !== null && (
+                                    <>
+                                        {datalesson.map((v) => {
+                                            return (
+                                                <Button
+                                                    onClick={() => handleSendIdLesson(v._id)}
+                                                    key={v.name}
+                                                    title={v.name}
+                                                    className="block rounded-none border-l border-primary-black text-button-1 font-button-1 font-plusjakartasans text-secondary-gray px-4 py-2 bg-primary-grey"></Button>
+                                            );
+                                        })}
+                                    </>
+                                )}
                             </>
                         )}
                     </div>

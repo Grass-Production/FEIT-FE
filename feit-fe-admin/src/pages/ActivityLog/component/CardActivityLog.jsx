@@ -77,30 +77,34 @@ export const TableData = ({ data }) => {
                     Thời gian hoạt động
                 </th>
             </tr>
-            {data.map((v, i) => {
-                return (
-                    <tr key={i} className=" justify-between items-center ">
-                        <td className=" px-5 border border-primary-black text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
-                            {v.client_ip}
-                        </td>
-                        <td className=" px-5 border border-primary-black text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
-                            {v.status_code}
-                        </td>
-                        <td className=" px-5 border border-primary-black text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
-                            {v.path}
-                        </td>
-                        <td className=" px-5 border border-primary-black text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
-                            {v.latency}
-                        </td>
-                        <td className=" px-5 border border-primary-black text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
-                            {v.activity_time}
-                        </td>
-                        <td className=" px-5 border border-primary-black text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
-                            {v.expire_at}
-                        </td>
-                    </tr>
-                );
-            })}
+            {data !== null && (
+                <>
+                    {data.map((v, i) => {
+                        return (
+                            <tr key={i} className=" justify-between items-center ">
+                                <td className=" px-5 border border-primary-black text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
+                                    {v.client_ip}
+                                </td>
+                                <td className=" px-5 border border-primary-black text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
+                                    {v.status_code}
+                                </td>
+                                <td className=" px-5 border border-primary-black text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
+                                    {v.path}
+                                </td>
+                                <td className=" px-5 border border-primary-black text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
+                                    {v.latency}
+                                </td>
+                                <td className=" px-5 border border-primary-black text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
+                                    {v.activity_time}
+                                </td>
+                                <td className=" px-5 border border-primary-black text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
+                                    {v.expire_at}
+                                </td>
+                            </tr>
+                        );
+                    })}
+                </>
+            )}
         </table>
     );
 };
@@ -108,84 +112,88 @@ export const TableData = ({ data }) => {
 export const CardItem = ({ data }) => {
     return (
         <>
-            {data.map((v, i) => {
-                return (
-                    <div key={i} className=" border-b border-primary-black px-3 pt-3 pb-4">
-                        <div className=" flex justify-start">
-                            <div className=" w-1/4">
-                                <h1>Client IP</h1>
+            {data !== null && (
+                <>
+                    {data.map((v, i) => {
+                        return (
+                            <div key={i} className=" border-b border-primary-black px-3 pt-3 pb-4">
+                                <div className=" flex justify-start">
+                                    <div className=" w-1/4">
+                                        <h1>Client IP</h1>
+                                    </div>
+                                    <div className="">
+                                        <h1>{v.client_ip}</h1>
+                                    </div>
+                                </div>
+                                <div className=" flex justify-start">
+                                    <div className=" w-1/4">
+                                        <h1>Method</h1>
+                                    </div>
+                                    <div className="">
+                                        <h1>{v.method}</h1>
+                                    </div>
+                                </div>
+                                <div className=" flex justify-start">
+                                    <div className=" w-1/4">
+                                        <h1>Status code</h1>
+                                    </div>
+                                    <div className="">
+                                        <h1>{v.status_code}</h1>
+                                    </div>
+                                </div>
+                                <div className=" flex justify-start">
+                                    <div className=" w-1/4">
+                                        <h1>Body size</h1>
+                                    </div>
+                                    <div className="">
+                                        <h1>{v.status_code}</h1>
+                                    </div>
+                                </div>
+                                <div className=" flex justify-start">
+                                    <div className=" w-1/4">
+                                        <h1>Path</h1>
+                                    </div>
+                                    <div className="">
+                                        <h1>{v.path}</h1>
+                                    </div>
+                                </div>
+                                <div className=" flex justify-start">
+                                    <div className=" w-1/4">
+                                        <h1>Latency</h1>
+                                    </div>
+                                    <div className="">
+                                        <h1>{v.latency}</h1>
+                                    </div>
+                                </div>
+                                <div className=" flex justify-start">
+                                    <div className=" w-1/4">
+                                        <h1>Error</h1>
+                                    </div>
+                                    <div className="">
+                                        <h1>{v.error}</h1>
+                                    </div>
+                                </div>
+                                <div className=" flex justify-start">
+                                    <div className=" w-1/4">
+                                        <h1>Thời gian hoạt động</h1>
+                                    </div>
+                                    <div className="">
+                                        <h1>{v.activity_time}</h1>
+                                    </div>
+                                </div>
+                                <div className=" flex justify-start">
+                                    <div className=" w-1/4">
+                                        <h1>Thời gian hết hạn</h1>
+                                    </div>
+                                    <div className="">
+                                        <h1>{v.expire_at}</h1>
+                                    </div>
+                                </div>
                             </div>
-                            <div className="">
-                                <h1>{v.client_ip}</h1>
-                            </div>
-                        </div>
-                        <div className=" flex justify-start">
-                            <div className=" w-1/4">
-                                <h1>Method</h1>
-                            </div>
-                            <div className="">
-                                <h1>{v.method}</h1>
-                            </div>
-                        </div>
-                        <div className=" flex justify-start">
-                            <div className=" w-1/4">
-                                <h1>Status code</h1>
-                            </div>
-                            <div className="">
-                                <h1>{v.status_code}</h1>
-                            </div>
-                        </div>
-                        <div className=" flex justify-start">
-                            <div className=" w-1/4">
-                                <h1>Body size</h1>
-                            </div>
-                            <div className="">
-                                <h1>{v.status_code}</h1>
-                            </div>
-                        </div>
-                        <div className=" flex justify-start">
-                            <div className=" w-1/4">
-                                <h1>Path</h1>
-                            </div>
-                            <div className="">
-                                <h1>{v.path}</h1>
-                            </div>
-                        </div>
-                        <div className=" flex justify-start">
-                            <div className=" w-1/4">
-                                <h1>Latency</h1>
-                            </div>
-                            <div className="">
-                                <h1>{v.latency}</h1>
-                            </div>
-                        </div>
-                        <div className=" flex justify-start">
-                            <div className=" w-1/4">
-                                <h1>Error</h1>
-                            </div>
-                            <div className="">
-                                <h1>{v.error}</h1>
-                            </div>
-                        </div>
-                        <div className=" flex justify-start">
-                            <div className=" w-1/4">
-                                <h1>Thời gian hoạt động</h1>
-                            </div>
-                            <div className="">
-                                <h1>{v.activity_time}</h1>
-                            </div>
-                        </div>
-                        <div className=" flex justify-start">
-                            <div className=" w-1/4">
-                                <h1>Thời gian hết hạn</h1>
-                            </div>
-                            <div className="">
-                                <h1>{v.expire_at}</h1>
-                            </div>
-                        </div>
-                    </div>
-                );
-            })}
+                        );
+                    })}
+                </>
+            )}
         </>
     );
 };

@@ -22,7 +22,7 @@ export const BarChart = () => {
 
     return (
         <div className="chart-container">
-            <Chart options={options} series={series} type="bar" width="100%" />
+            <Chart options={options} series={series} type="bar" height="450" width="100%" />
         </div>
     );
 };
@@ -54,7 +54,7 @@ export const PieChart = () => {
     const labels = ['A', 'B', 'C', 'D', 'E'];
 
     return (
-        <div className="donut">
+        <div className="donut ">
             <Chart options={options} series={series} type="donut" width="100%" />
         </div>
     );

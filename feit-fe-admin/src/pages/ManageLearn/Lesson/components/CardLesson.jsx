@@ -161,15 +161,19 @@ export const CardView = ({ children, name = 'Công nghệ thông tin', quantity 
                         </Button>
                         {showFilter && (
                             <>
-                                {dataCourse.map((v) => {
-                                    return (
-                                        <div
-                                            key={v.name}
-                                            className=" border-l border-primary-black text-button-1 font-button-1 font-plusjakartasans text-secondary-gray px-4 py-2 bg-primary-grey">
-                                            {v.name}
-                                        </div>
-                                    );
-                                })}
+                                {dataCourse !== null && (
+                                    <>
+                                        {dataCourse.map((v) => {
+                                            return (
+                                                <div
+                                                    key={v.name}
+                                                    className=" border-l border-primary-black text-button-1 font-button-1 font-plusjakartasans text-secondary-gray px-4 py-2 bg-primary-grey">
+                                                    {v.name}
+                                                </div>
+                                            );
+                                        })}
+                                    </>
+                                )}
                             </>
                         )}
                     </div>

@@ -97,9 +97,13 @@ export default function Exam() {
                         </tr>
                         {exams !== null && (
                             <>
-                                {exams.map((v, i) => {
-                                    return <TableData idExam={v._id} key={v._id} title={v.title} />;
-                                })}
+                                {exams !== null && (
+                                    <>
+                                        {exams.map((v, i) => {
+                                            return <TableData idExam={v._id} key={v._id} title={v.title} />;
+                                        })}
+                                    </>
+                                )}
                             </>
                         )}
                     </table>
