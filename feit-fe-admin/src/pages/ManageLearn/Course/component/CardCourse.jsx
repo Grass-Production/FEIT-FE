@@ -124,12 +124,11 @@ export const CardView = ({ children }) => {
                     <div className=" w-2/5 border-l border-primary-black pl-6">
                         <div className=" flex justify-between items-center ">
                             <div className="flex justify-between items-center gap-5">
-                                <Button icon={true} right={true} title="Thêm" color={'primary'}>
-                                    <IconPlusCircle size="20" color="#3C79FE" />
-                                </Button>
-                                <Button icon={true} right={true} title="Xóa" color={'primary'}>
-                                    <IconDelete size="20" color="#3C79FE" />
-                                </Button>
+                                <NavLink to="/manage/learn/addfile">
+                                    <Button icon={true} right={true} title="Thêm bằng file" color={'primary'}>
+                                        <IconPlusCircle size="20" color="#3C79FE" />
+                                    </Button>
+                                </NavLink>
                             </div>
                             <h1 className=" text-body-3 font-body-3 font-plusjakartasans text-primary-black">
                                 2 Khóa học

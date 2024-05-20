@@ -19,7 +19,7 @@ export default function CRUDCourse() {
 
     return (
         <div className="">
-            <NavLink to={`/manage/learn/course`}>
+            <NavLink to={`/manage/learn/add`}>
                 <Button icon={true} title="Trở về" left={true}>
                     <IconArrowUpLeft />
                 </Button>

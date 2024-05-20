@@ -58,20 +58,18 @@ export const createLesson = async (courseId, name, img, sendprogress) => {
     formData.append('course_id', courseId);
     formData.append('name', name);
     formData.append('image_url', img);
-    try {
-        const res = await axios.post('http://localhost:8080/api/admin/lesson/create', formData, {
-            withCredentials: true,
-            // Theo dõi % hoàn thành
-            onUploadProgress: (progressEvent) => {
-                const percentComplete = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-                sendprogress(percentComplete);
-            },
-        });
-        return res;
 
-    } catch (error) {
-        console.log('error : ', error)
-    }
+    const res = await axios.post('http://localhost:8080/api/admin/lesson/create', formData, {
+        withCredentials: true,
+        // Theo dõi % hoàn thành
+        onUploadProgress: (progressEvent) => {
+            const percentComplete = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+            sendprogress(percentComplete);
+        },
+    });
+    return res;
+
+
 };
 
 
@@ -157,7 +155,6 @@ export const createLessonFileLoading = async (newData, sendprogress) => {
 // };
 
 export const updateLesson = async (newData, sendprogress) => {
-
     try {
         const res = await axios.patch('http://localhost:8080/api/admin/lesson/update',
             newData,
@@ -173,6 +170,30 @@ export const updateLesson = async (newData, sendprogress) => {
         console.log('error : ', error)
     }
 };
+
+export const updateLessonFileLoading = async (_id, course_id, name, content, level, image_url, sendprogress) => {
+    const formData = new FormData();
+    formData.append('_id', _id);
+    formData.append('course_id', course_id);
+    formData.append('name', name);
+    formData.append('content', content);
+    formData.append('level', level);
+    formData.append('image_url', image_url);
+    try {
+        const res = await axios.post('http://localhost:8080/api/admin/lesson/update', formData, {
+            withCredentials: true,
+            // Theo dõi % hoàn thành
+            onUploadProgress: (progressEvent) => {
+                const percentComplete = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+                sendprogress(percentComplete);
+            },
+        });
+        return res;
+    } catch (error) {
+        console.log('error : ', error)
+    }
+};
+
 
 // export const updateLesson = async (newData) => {
 //     const token = localStorage.getItem('access_token')

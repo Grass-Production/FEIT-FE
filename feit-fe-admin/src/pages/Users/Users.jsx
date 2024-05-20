@@ -45,7 +45,32 @@ export default function Feedback() {
                     <>
                         {AllUser !== null && (
                             <>
-                                <TableData data={AllUser} />
+                                <table className=" w-full">
+                                    <tr className=" justify-between items-center bg-neutral-grey  ">
+                                        <th className=" text-start px-5 border border-primary-black  py-2 text-button-1 font-button-1 text-primary-black font-plusjakartasans">
+                                            Tên
+                                        </th>
+                                        <th className=" text-start px-5 border border-primary-black  py-2 text-button-1 font-button-1 text-primary-black font-plusjakartasans">
+                                            Nhà cung cấp
+                                        </th>
+                                        <th className=" text-start px-5 border border-primary-black  py-2 text-button-1 font-button-1 text-primary-black font-plusjakartasans">
+                                            Ngày thêm vào
+                                        </th>
+                                    </tr>
+                                    {AllUser.map((v, i) => {
+                                        return (
+                                            <TableData
+                                                full_name={v.full_name}
+                                                provider={v.provider}
+                                                created_at={v.created_at}
+                                                email={v.email}
+                                                avatar_url={v.avatar_url}
+                                                phone={v.phone}
+                                                cover_url={v.cover_url}
+                                            />
+                                        );
+                                    })}
+                                </table>
                             </>
                         )}
                     </>

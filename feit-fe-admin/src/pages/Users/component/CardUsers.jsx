@@ -127,7 +127,16 @@ export const CardView = ({ children, sendPage, count }) => {
     );
 };
 
-export const TableData = ({ data }) => {
+export const TableData = ({
+    full_name,
+    provider,
+    created_at,
+    email,
+    avatar_url,
+    phone,
+    cover_url,
+    position = 'IT',
+}) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleDropdown = () => {
@@ -135,38 +144,34 @@ export const TableData = ({ data }) => {
         console.log(isOpen);
     };
 
+    const handleRecieveIsOpen = (value) => {
+        setIsOpen(value);
+    };
+
     return (
         <>
-            {/* <PopupUser /> */}
-            {/* {isOpen && <div onClick={toggleDropdown} className=" z-10 fixed inset-0"></div>} */}
-            <table className=" w-full">
-                <tr className=" justify-between items-center bg-neutral-grey  ">
-                    <th className=" text-start px-5 border border-primary-black  py-2 text-button-1 font-button-1 text-primary-black font-plusjakartasans">
-                        Tên
-                    </th>
-                    <th className=" text-start px-5 border border-primary-black  py-2 text-button-1 font-button-1 text-primary-black font-plusjakartasans">
-                        Nhà cung cấp
-                    </th>
-                    <th className=" text-start px-5 border border-primary-black  py-2 text-button-1 font-button-1 text-primary-black font-plusjakartasans">
-                        Ngày thêm vào
-                    </th>
-                </tr>
-                {data.map((v, i) => {
-                    return (
-                        <tr onClick={toggleDropdown} key={i} className=" justify-between bg-white items-center ">
-                            <td className=" px-5 border border-primary-black text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
-                                {v.full_name}
-                            </td>
-                            <td className=" px-5 border border-primary-black text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
-                                {v.provider}
-                            </td>
-                            <td className=" px-5 border border-primary-black text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
-                                {v.created_at}
-                            </td>
-                        </tr>
-                    );
-                })}
-            </table>
+            {isOpen && (
+                <PopupUser
+                    handleSendIsPopup={handleRecieveIsOpen}
+                    email={email}
+                    avatar_url={avatar_url}
+                    phone={phone}
+                    cover_url={cover_url}
+                    position={position}
+                    full_name={full_name}
+                />
+            )}
+            <tr onClick={toggleDropdown} className=" cursor-pointer justify-between bg-white items-center ">
+                <td className=" px-5 border border-primary-black text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
+                    {full_name}
+                </td>
+                <td className=" px-5 border border-primary-black text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
+                    {provider}
+                </td>
+                <td className=" px-5 border border-primary-black text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
+                    {created_at}
+                </td>
+            </tr>
         </>
     );
 };
@@ -287,7 +292,7 @@ export const PopupUser = ({
                                 {/* <Button onClick={HandleChilSendIsPopup} icon={true} left={true} title="">
                                     <IconClose />
                                 </Button> */}
-                                <Button icon={true} left={true} title="">
+                                <Button onClick={HandleParentSendIsPopup} icon={true} left={true} title="">
                                     <IconClose />
                                 </Button>
                             </div>
@@ -300,8 +305,7 @@ export const PopupUser = ({
                                         <div
                                             className=" w-full h-52"
                                             style={{
-                                                background:
-                                                    'url(https://res.cloudinary.com/df4zm1xjy/image/upload/v1715501873/feit-user/wallpaperflare.com_wallpaper.jpg.jpg) center center/cover no-repeat',
+                                                background: `url(${cover_url}) center center/cover no-repeat`,
                                             }}></div>
                                     </div>
                                     <div className=" flex justify-between items-center gap-7">
@@ -312,8 +316,7 @@ export const PopupUser = ({
                                             <div
                                                 className=" w-full h-56"
                                                 style={{
-                                                    background:
-                                                        'url(https://res.cloudinary.com/df4zm1xjy/image/upload/v1715501873/feit-user/wallpaperflare.com_wallpaper.jpg.jpg) center center/cover no-repeat',
+                                                    background: `url(${avatar_url}) center center/cover no-repeat`,
                                                 }}></div>
                                         </div>
 
@@ -360,17 +363,11 @@ export const PopupUser = ({
                                 </div>
                             </div>
                             <div className="  px-4 border-secondary-gray  py-4 border-t">
-                                {/* <Button
-                                    color={'primary'}
-                                    onClick={HandleChilSendIsPopup}
-                                    icon={true}
-                                    right={true}
-                                    title="Đóng"
-                                    className="w-full py-4"></Button> */}
                                 <Button
                                     color={'primary'}
                                     icon={true}
                                     right={true}
+                                    onClick={HandleParentSendIsPopup}
                                     title="Đóng"
                                     className="w-full py-4"></Button>
                             </div>

@@ -1,7 +1,7 @@
 import { lazy } from "react";
 
 
-import { IconLaptop, IconHouse, IconFileCloud, IconBookOpenText, IconSquaresFour, IconUsersFour, IconCheckSquareOffset, IconNote, IconBell, IconList, IconChartBar, IconSearch, IconUser, IconClockClockwise, IconCrown, IconChatTeardropText, IconUsers } from "../svgs";
+import { IconLaptop, IconHouse, IconFileCloud, IconBookOpenText, IconNotePencil, IconSquaresFour, IconUsersFour, IconCheckSquareOffset, IconNote, IconBell, IconList, IconChartBar, IconSearch, IconUser, IconClockClockwise, IconCrown, IconChatTeardropText, IconUsers } from "../svgs";
 
 
 
@@ -42,6 +42,7 @@ const CRUDQuiz = lazy(() => import("../pages/ManageQuiz/CRUDExam"))
 const Quiz = lazy(() => import("../pages/ManageQuiz/Exam"))
 const QuizDetails = lazy(() => import("../pages/ManageQuiz/ExamDetails"))
 const CRUDQuizQuestion = lazy(() => import("../pages/ManageQuiz/CRUDQuestion"))
+const FormAddFile = lazy(() => import("../pages/ManageLearn/FormAddFile"))
 
 
 // import lesson from "../pages/ManageLearn/lesson";
@@ -57,6 +58,8 @@ export const ROUTES = {
 
     Dashboard: '/',
     ActivityLog: '/logging',
+    FormAddFile: '/manage/learn/addfile',
+
 
     Exam: '/manage/exam',
     ExamDetails: 'manage/exam/examdetail/:idexam',
@@ -241,6 +244,14 @@ export const privateRouter = [
         name: 'Cloudinary',
         showSidebar: true,
     },
+
+    {
+        title: 'FEIT',
+        href: ROUTES.FormAddFile,
+        component: FormAddFile,
+        name: 'Cloudinary',
+        showSidebar: true,
+    },
     {
         title: 'FEIT',
         href: ROUTES.CloudinaryDetails,
@@ -400,7 +411,7 @@ export const routerSidebar = [
         href: ROUTES.ActivityLog,
         component: ActivityLog,
         name: 'Activity Log',
-        icon: IconHouse,
+        icon: IconNotePencil,
     },
     {
         title: 'FEIT',
