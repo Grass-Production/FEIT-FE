@@ -1,9 +1,9 @@
-import { privateRouter, childRouter } from '../context';
+import { privateRouter, childRouter, publicRouter } from '../context';
 import { createBrowserRouter } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { Sidebar } from '../layouts';
 import NotFound from '../pages/NotFound';
-
+import SignIn from '../pages/SignIn';
 const childPrivate = childRouter.map((route) => {
     const Page = route.component;
     const title = route.title;
@@ -79,39 +79,39 @@ const routesPrivate = privateRouter.map((route) => {
     }
 });
 
-// const routes = publicRouter.map((route) => {
-//     const Page = route.component;
-//     return {
-//         path: route.href,
-//         element: (
-//             <>
-//                 <Helmet>
-//                     <title>{route.title}</title>
-//                 </Helmet>
-//                 {route.showSidebar ? (
-//                     <Sidebar show={route.showSidebar}>
-//                         <Page />
-//                     </Sidebar>
-//                 ) : (
-//                     <>
-//                         <Page />
-//                     </>
-//                 )}
-//             </>
-//         ),
-//         errorElement: (
-//             <>
-//                 <Helmet>
-//                     <title>Not Found</title>
-//                 </Helmet>
-//                 <SignIn />
-//             </>
-//         ),
-//     };
-// });
+const routes = publicRouter.map((route) => {
+    const Page = route.component;
+    return {
+        path: route.href,
+        element: (
+            <>
+                <Helmet>
+                    <title>{route.title}</title>
+                </Helmet>
+                {route.showSidebar ? (
+                    <Sidebar show={route.showSidebar}>
+                        <Page />
+                    </Sidebar>
+                ) : (
+                    <>
+                        <Page />
+                    </>
+                )}
+            </>
+        ),
+        errorElement: (
+            <>
+                <Helmet>
+                    <title>Not Found</title>
+                </Helmet>
+                <SignIn />
+            </>
+        ),
+    };
+});
 
 const routerPrivate = createBrowserRouter(routesPrivate);
 
-// const publicRouter = createBrowserRouter(publicRouter);
+const routerPublic = createBrowserRouter(routes);
 
-export { routerPrivate };
+export { routerPrivate, routerPublic };

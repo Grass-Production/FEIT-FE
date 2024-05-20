@@ -18,6 +18,7 @@ import Stack from '@mui/material/Stack';
 import PaginationItem from '@mui/material/PaginationItem';
 import { NavLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { data } from 'autoprefixer';
 
 export const CardView = ({
     sendidlesson,
@@ -142,15 +143,19 @@ export const CardView = ({
                         </Button>
                         {showFilterCourse && (
                             <>
-                                {dataCourse.map((v) => {
-                                    return (
-                                        <div
-                                            key={v.name}
-                                            className=" border-l border-primary-black text-button-1 font-button-1 font-plusjakartasans text-secondary-gray px-4 py-2 bg-primary-grey">
-                                            {v.name}
-                                        </div>
-                                    );
-                                })}
+                                {dataCourse !== null && (
+                                    <>
+                                        {dataCourse.map((v) => {
+                                            return (
+                                                <div
+                                                    key={v.name}
+                                                    className=" border-l border-primary-black text-button-1 font-button-1 font-plusjakartasans text-secondary-gray px-4 py-2 bg-primary-grey">
+                                                    {v.name}
+                                                </div>
+                                            );
+                                        })}
+                                    </>
+                                )}
                             </>
                         )}
                         <Button
@@ -163,15 +168,19 @@ export const CardView = ({
                         </Button>
                         {showFilterLesson && (
                             <>
-                                {datalesson.map((v) => {
-                                    return (
-                                        <Button
-                                            onClick={() => handleSendIdLesson(v._id)}
-                                            key={v.name}
-                                            title={v.name}
-                                            className="block rounded-none border-l border-primary-black text-button-1 font-button-1 font-plusjakartasans text-secondary-gray px-4 py-2 bg-primary-grey"></Button>
-                                    );
-                                })}
+                                {datalesson !== null && (
+                                    <>
+                                        {datalesson.map((v) => {
+                                            return (
+                                                <Button
+                                                    onClick={() => handleSendIdLesson(v._id)}
+                                                    key={v.name}
+                                                    title={v.name}
+                                                    className="block rounded-none border-l border-primary-black text-button-1 font-button-1 font-plusjakartasans text-secondary-gray px-4 py-2 bg-primary-grey"></Button>
+                                            );
+                                        })}
+                                    </>
+                                )}
                             </>
                         )}
                         <Button
@@ -184,15 +193,19 @@ export const CardView = ({
                         </Button>
                         {showFilterUnit && (
                             <>
-                                {dataunit.map((v) => {
-                                    return (
-                                        <Button
-                                            onClick={() => handleSendIdUnit(v._id)}
-                                            key={v.name}
-                                            title={v.name}
-                                            className="block rounded-none border-l border-primary-black text-button-1 font-button-1 font-plusjakartasans text-secondary-gray px-4 py-2 bg-primary-grey"></Button>
-                                    );
-                                })}
+                                {dataunit !== null && (
+                                    <>
+                                        {dataunit.map((v) => {
+                                            return (
+                                                <Button
+                                                    onClick={() => handleSendIdUnit(v._id)}
+                                                    key={v.name}
+                                                    title={v.name}
+                                                    className="block rounded-none border-l border-primary-black text-button-1 font-button-1 font-plusjakartasans text-secondary-gray px-4 py-2 bg-primary-grey"></Button>
+                                            );
+                                        })}
+                                    </>
+                                )}
                             </>
                         )}
                     </div>

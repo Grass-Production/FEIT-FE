@@ -1,28 +1,29 @@
 import { CardView, CardItem, TableData, CardStatic } from './component';
 import { getActivityLog } from '../../services/activitylogAPI';
 import { useEffect, useState } from 'react';
-
+import { getAllUser } from '../../services/userAPI';
 export default function Feedback() {
-    const [activitylog, setActivityLog] = useState([]);
+    const [AllUser, setAllUser] = useState([]);
     const [pageCurrent, setPageCurrent] = useState('');
     const [page, setPage] = useState('');
     const [loading, setLoading] = useState(true);
+
     useEffect(() => {
-        const GetActivityLog = async () => {
+        const GetAllUser = async () => {
             try {
                 setLoading(true);
-                const res = await getActivityLog(pageCurrent);
-                if ((res.status = '"success"')) {
+                const res = await getAllUser(pageCurrent);
+                if (res.status === 'success') {
                     setLoading(false);
-                    setActivityLog(res.activity_log.activity_log);
-                    setPage(res.activity_log.page);
+                    setAllUser(res.user.user);
                 }
-                console.log(res);
+                console.log('user', res);
             } catch (error) {
                 console.log('message :', error);
             }
         };
-        GetActivityLog();
+
+        GetAllUser();
     }, [pageCurrent]);
     console.log('page:', pageCurrent);
 
@@ -40,7 +41,7 @@ export default function Feedback() {
                     <div className=" animate-pulse h-[40vh] w-full bg-gray-200"></div>
                 ) : (
                     // <CardItem data={activitylog} />
-                    <TableData data={activitylog} />
+                    <TableData data={AllUser} />
                 )}
             </CardView>
         </div>

@@ -11,7 +11,7 @@ import { getVocabulary } from '../../services/vocabulary';
 import { getExerciseByIdUnit, getQuestionByIdExercise } from '../../services/exerciseAPI';
 import 'animate.css';
 import { PopupDeleteList } from './component/CategoryUnit';
-
+import { createAnswerExercise } from '../../services/answerAPI';
 export default function Unit() {
     // Lấy lessonId và unitId
     let { lessonid, unitid } = useParams();
@@ -40,7 +40,7 @@ export default function Unit() {
         async function fetchData() {
             try {
                 const vocabularys = await getVocabulary(unitid);
-                const res = vocabularys.vocabulary;
+                const res = await vocabularys.vocabulary;
                 console.log('res :', res);
                 setVocabulary({
                     ...vocabulary,
@@ -93,7 +93,10 @@ export default function Unit() {
     const [resultError, setErrortResult] = useState(false);
 
     const [inputValue, setInputValue] = useState('');
-
+    const CreateAnswer = async () => {
+        const res = await createAnswerExercise({ question_id: questions[index]._id, answer: inputValue });
+        console.log('res answer :', res);
+    };
     function handleChange(event) {
         setInputValue(event.target.value);
     }
@@ -109,10 +112,16 @@ export default function Unit() {
 
     // handleOnClick : Xử lý điều kiện render component bằng count và process để hiển thị thành phần trăm
     function handleOnClick() {
+        setInputValue('');
         // Nếu process đạt 100% thì return
         if (process === 100) {
             return;
         }
+
+        if (process === 15 || process === 35 || process === 50 || process === 70 || process === 85) {
+            CreateAnswer();
+        }
+
         setCheck(false);
         setRightResult(false);
         setErrortResult(false);
@@ -173,7 +182,9 @@ export default function Unit() {
                                 <LoadingProgressBar percent={process} />
                             </div>
                         </div>
-
+                        <h1>
+                            {inputValue} : {process} : {questions[index]._id}
+                        </h1>
                         {/* <h1>d</h1> */}
                         <RenderComponentUnit
                             listen={

@@ -100,13 +100,21 @@ export const FormCreateExam = () => {
                     <option value={''} className="">
                         Chọn chủ đề
                     </option>
-                    {lessons.map((v, i) => {
-                        return (
-                            <option key={v._id} value={v._id} className="">
-                                {v.name}
-                            </option>
-                        );
-                    })}
+                    {lessons !== null && (
+                        <>
+                            {lessons !== null && (
+                                <>
+                                    {lessons.map((v, i) => {
+                                        return (
+                                            <option key={v._id} value={v._id} className="">
+                                                {v.name}
+                                            </option>
+                                        );
+                                    })}
+                                </>
+                            )}
+                        </>
+                    )}
                 </FormSelectOption>
             </div>
             <div className=" mb-4">
@@ -123,13 +131,17 @@ export const FormCreateExam = () => {
 
                     {idLesson !== '' && (
                         <>
-                            {units.map((v, i) => {
-                                return (
-                                    <option value={v._id} className=" ">
-                                        {v.name}
-                                    </option>
-                                );
-                            })}
+                            {units !== null && (
+                                <>
+                                    {units.map((v, i) => {
+                                        return (
+                                            <option value={v._id} className=" ">
+                                                {v.name}
+                                            </option>
+                                        );
+                                    })}
+                                </>
+                            )}
                         </>
                     )}
                 </FormSelectOption>
@@ -342,13 +354,17 @@ export const FormCreate = () => {
                     <option value={''} className="">
                         Chọn chủ đề
                     </option>
-                    {lessons.map((v, i) => {
-                        return (
-                            <option key={v._id} value={v._id} className="">
-                                {v.name}
-                            </option>
-                        );
-                    })}
+                    {lessons !== null && (
+                        <>
+                            {lessons.map((v, i) => {
+                                return (
+                                    <option key={v._id} value={v._id} className="">
+                                        {v.name}
+                                    </option>
+                                );
+                            })}
+                        </>
+                    )}
                 </FormSelectOption>
             </div>
             <div className=" mb-4">

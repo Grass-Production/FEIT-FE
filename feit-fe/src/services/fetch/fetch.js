@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom"
+
 async function http(path, config,) {
     const request = new Request(path, config)
 
@@ -5,9 +7,12 @@ async function http(path, config,) {
 
     const rsp = await response.json().catch(() => ({}))
     if (!response.ok) {
-        console.log('error')
+        console.log('error', rsp.message)
+        // if (response.status === 401) {
+        //     navigate('/signIn');
+        // }
     } else {
-        console.log('success')
+        console.log('success', rsp.message)
     }
     return rsp
 }
@@ -25,9 +30,9 @@ export async function patch(path, body, config) {
     const init = { method: "patch", body: JSON.stringify(body), ...config }
     return await http(path, init)
 }
-export async function put(path, body, config, isShowToast = false) {
+export async function put(path, body, config) {
     const init = { method: "put", body: JSON.stringify(body), ...config }
-    return await http(path, init, isShowToast)
+    return await http(path, init)
 }
 export async function del(path, config) {
     const init = { method: "delete", ...config }

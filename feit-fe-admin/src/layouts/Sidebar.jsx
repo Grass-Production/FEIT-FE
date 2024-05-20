@@ -31,7 +31,7 @@ export const Sidebar = ({ show, children, titleHeader }) => {
                                     {/* // ----------- Active Link Router */}
                                     {({ isActive }) => (
                                         <div className=" flex justify-center items-center gap-2">
-                                            <Icon color={isActive ? '#5C8FFE' : '#14121B'} key={link.href} />
+                                            <Icon size="24" color={isActive ? '#5C8FFE' : '#14121B'} key={link.href} />
                                             {link.name}
                                         </div>
                                     )}

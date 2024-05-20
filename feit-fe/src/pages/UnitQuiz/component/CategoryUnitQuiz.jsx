@@ -4,7 +4,7 @@ import { Button } from '../../../components';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Sound } from '../../../components';
-export const Multiplechoice = ({ option = [], correctAnswer, checkresult, question, sendAnswer, sound }) => {
+export const Multiplechoice = ({ option = [], correctAnswer, checkresult, question, sendAnswer, sound, time }) => {
     const [index, setIndex] = useState(null);
 
     const [buttonValue, setButtonValue] = useState('');
@@ -36,16 +36,20 @@ export const Multiplechoice = ({ option = [], correctAnswer, checkresult, questi
     }
 
     return (
-        <div className=" w-[56.563rem] max-h-[700px] h-[70vh] flex flex-col justify-around items-center">
-            <div>
+        <div className=" w-[56.563rem] max-h-[700px] h-[70vh] ">
+            <div className=" mb-14">
                 <h1 className=" text-center text-heading-4 font-plusjakartasans font-heading-4 text-primary-black mb-3">
                     Chọn đáp án đúng
                 </h1>
-                <h1 className=" text-center text-body-1 font-body-1 font-plusjakartasans text-primary-black ">
-                    {question}
+                <h1 className=" text-center text-body-1 font-body-1 font-plusjakartasans text-secondary-gray ">
+                    Hãy chọn đáp ứng đúng khi bạn nghe được
+                </h1>
+                <h1 className=" text-center text-body-1 font-body-1 font-plusjakartasans text-secondary-gray ">
+                    {time}
                 </h1>
             </div>
-            <div className="mx-auto w-2/3">
+
+            <div className="mx-auto w-2/3 border-[4px] border-primary-black shadow-card-home p-6">
                 <Sound sound={sound} />
                 <div className=" flex gap-8 justify-center mb-10"></div>
 
@@ -94,7 +98,7 @@ export const Multiplechoice = ({ option = [], correctAnswer, checkresult, questi
     );
 };
 
-export const TrueFalse = ({ option = [], correctAnswer, checkresult, question, sendAnswer }) => {
+export const TrueFalse = ({ option = [], correctAnswer, checkresult, question, sendAnswer, time }) => {
     const [index, setIndex] = useState(null);
     const [buttonValue, setButtonValue] = useState('');
 
@@ -132,62 +136,69 @@ export const TrueFalse = ({ option = [], correctAnswer, checkresult, question, s
     }
 
     return (
-        <div className=" w-[56.563rem] max-h-[700px] h-[70vh] flex flex-col justify-around items-center">
-            <div>
+        <div className=" w-[56.563rem] max-h-[700px] h-[70vh] ">
+            <div className=" mb-10">
                 <h1 className=" text-center text-heading-4 font-plusjakartasans font-heading-4 text-primary-black mb-3">
                     Đúng hay sai
                 </h1>
-                <h1 className=" text-center text-body-1 font-body-1 font-plusjakartasans text-primary-black ">
-                    {question}
+                <h1 className=" text-center text-body-1 font-plusjakartasans font-body-1 text-secondary-gray mb-3">
+                    Bạn hãy chọn đáp đúng hoặc sai nhé
+                </h1>
+                <h1 className=" text-center text-body-1 font-plusjakartasans font-body-1 text-secondary-gray mb-3">
+                    {time}
                 </h1>
             </div>
-            <div className=" border-[2px] border-secondary-gray p-4 rounded-2xl">
-                <h1 className=" text-heading-6 font-heading-6 font-plusjakartasans text-primary-black text-center">
-                    {question}
-                </h1>
-            </div>
-            <div className="mx-auto w-2/3">
-                <div className="flex gap-8">
-                    {checkresult ? (
-                        <>
-                            {option.map((a, i) => {
-                                return (
-                                    <Button
-                                        key={i}
-                                        id={i}
-                                        title={a}
-                                        color={
-                                            buttonValue === correctAnswer
-                                                ? index === i
-                                                    ? 'success'
-                                                    : 'secondary'
-                                                : 'secondary' && index === i
-                                                  ? 'error'
-                                                  : 'secondary'
-                                        }
-                                        className={'text-left w-full p-5 mb-5'}
-                                        active={false}
-                                        onClick={() => setIndexNe(i, a)}
-                                        icon={false}></Button>
-                                );
-                            })}
-                        </>
-                    ) : (
-                        <>
-                            {option.map((a, i) => {
-                                return (
-                                    <Button
-                                        key={i}
-                                        title={a}
-                                        color={'secondary'}
-                                        className={'text-left w-full p-5 mb-5'}
-                                        active={index === i}
-                                        onClick={() => setIndexNe(i, a)}
-                                        icon={false}></Button>
-                                );
-                            })}
-                        </>
-                    )}
+            <div className=" mx-auto border-[4px] border-primary-black w-2/3 shadow-card-home p-6 ">
+                <div className="  p-4 mb-5">
+                    <h1 className=" text-heading-6 font-heading-6 font-plusjakartasans text-primary-black text-center">
+                        {question}
+                    </h1>
+                </div>
+                <div className="mx-auto">
+                    <div className="flex gap-8">
+                        {checkresult ? (
+                            <>
+                                {option.map((a, i) => {
+                                    return (
+                                        <Button
+                                            key={i}
+                                            id={i}
+                                            title={a}
+                                            color={
+                                                buttonValue === correctAnswer
+                                                    ? index === i
+                                                        ? 'success'
+                                                        : 'secondary'
+                                                    : 'secondary' && index === i
+                                                      ? 'error'
+                                                      : 'secondary'
+                                            }
+                                            className={'text-left rounded-none  !font-semibold  w-full !p-5 mb-5'}
+                                            active={false}
+                                            onClick={() => setIndexNe(i, a)}
+                                            icon={false}></Button>
+                                    );
+                                })}
+                            </>
+                        ) : (
+                            <>
+                                {option.map((a, i) => {
+                                    return (
+                                        <Button
+                                            key={i}
+                                            title={a}
+                                            color={'secondary'}
+                                            className={
+                                                'text-left rounded-none hover:bg-white !active:text-white  !text-primary-black w-full !p-5  mb-5'
+                                            }
+                                            active={index === i}
+                                            onClick={() => setIndexNe(i, a)}
+                                            icon={false}></Button>
+                                    );
+                                })}
+                            </>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>
@@ -204,6 +215,7 @@ export const Listen = ({
     handleChange,
     sound,
     answer,
+    time,
     sendAnswer,
 }) => {
     // const [answer, setAnswer] = useState('');
@@ -213,77 +225,82 @@ export const Listen = ({
     };
 
     return (
-        <div className=" w-[56.563rem] max-h-[750px] h-[70vh] flex flex-col justify-around items-center">
-            <div>
+        <div className=" w-[56.563rem] max-h-[750px] h-[70vh] ">
+            <div className=" mb-14">
                 <h1 className=" text-center text-heading-4 font-plusjakartasans font-heading-4 text-primary-black mb-3">
                     Lắng nghe từ vựng
                 </h1>
-                <h1 className=" text-center text-body-1 font-body-1 font-plusjakartasans text-primary-black ">
-                    {content}
+                <h1 className=" text-center text-body-1 font-body-1 font-plusjakartasans text-secondary-gray ">
+                    Bạn hãy viết từ bạn nghe được nhé
+                </h1>
+                <h1 className=" text-center text-body-1 font-body-1 font-plusjakartasans text-secondary-gray ">
+                    {time}
                 </h1>
             </div>
 
-            <div className=" flex gap-8 justify-center">
-                <div className="  mb-10 border-[4px] border-secondary-gray w-44 h-44 flex justify-center items-center rounded-[40px] bg-white">
-                    <Sound sound={sound} />
+            <div className="border-[4px] border-primary-black shadow-card-home p-6">
+                <div className=" flex gap-8 justify-center">
+                    <div className="  mb-10 border-[4px] border-secondary-gray w-44 h-44 flex justify-center items-center rounded-[40px] bg-white">
+                        <Sound sound={sound} />
+                    </div>
+                    <div className="  mb-10 border-[4px] border-secondary-gray w-44 h-44 flex justify-center items-center rounded-[40px] bg-white">
+                        <Sound sound={sound} />
+                    </div>
                 </div>
-                <div className="  mb-10 border-[4px] border-secondary-gray w-44 h-44 flex justify-center items-center rounded-[40px] bg-white">
-                    <Sound sound={sound} />
-                </div>
-            </div>
 
-            <div className="mx-auto w-11/12">
-                <div className="">
-                    {right ? (
-                        <>
+                <div className="mx-auto w-11/12">
+                    <div className="">
+                        {right ? (
+                            <>
+                                <div className=" mb-10">
+                                    <h1 className=" text-body-1 font-body-1  font-plusjakartasans text-primary-black mb-3">
+                                        Đáp án của bạn
+                                    </h1>
+                                    <InputField
+                                        className={' w-full !rounded-none border-primary-black border'}
+                                        value={result}
+                                        onChange={handleOnChange}
+                                        placeholder={'Hãy viết từ còn trống'}
+                                    />
+                                </div>
+                                <div className=" border-t border-secondary-gray pt-4">
+                                    <h1 className=" text-body-1 font-body-1  font-plusjakartasans text-secondary-gray mb-3">
+                                        Đáp án đúng
+                                    </h1>
+
+                                    <h1 className=" text-heading-7 font-heading-7 font-plusjakartasans text-semantic-success">
+                                        {result}
+                                    </h1>
+                                </div>
+                            </>
+                        ) : (
                             <div className=" mb-10">
-                                <h1 className=" text-caption-1 font-caption-1 font-plusjakartasans text-primary-black mb-3">
+                                <h1 className=" text-body-1 font-body-1  font-plusjakartasans text-primary-black mb-3">
                                     Đáp án của bạn
                                 </h1>
                                 <InputField
-                                    className={' w-full'}
-                                    value={result}
+                                    status={error ? 'error' : null}
+                                    className={' w-full !rounded-none border-primary-black border'}
+                                    value={answer}
                                     onChange={handleOnChange}
                                     placeholder={'Hãy viết từ còn trống'}
                                 />
                             </div>
-                            <div className=" border-t border-secondary-gray pt-4">
-                                <h1 className=" text-caption-1 font-caption-1 font-plusjakartasans text-secondary-gray mb-3">
-                                    Đáp án đúng
-                                </h1>
+                        )}
+                        {error && (
+                            <>
+                                <div className=" border-t border-secondary-gray pt-4">
+                                    <h1 className=" text-body-1 font-body-1 font-plusjakartasans text-secondary-gray mb-3">
+                                        Đáp án đúng
+                                    </h1>
 
-                                <h1 className=" text-heading-7 font-heading-7 font-plusjakartasans text-semantic-success">
-                                    {result}
-                                </h1>
-                            </div>
-                        </>
-                    ) : (
-                        <div className=" mb-10">
-                            <h1 className=" text-caption-1 font-caption-1 font-plusjakartasans text-primary-black mb-3">
-                                Đáp án của bạn
-                            </h1>
-                            <InputField
-                                status={error ? 'error' : null}
-                                className={' w-full'}
-                                value={answer}
-                                onChange={handleOnChange}
-                                placeholder={'Hãy viết từ còn trống'}
-                            />
-                        </div>
-                    )}
-                    {error && (
-                        <>
-                            <div className=" border-t border-secondary-gray pt-4">
-                                <h1 className=" text-caption-1 font-caption-1 font-plusjakartasans text-secondary-gray mb-3">
-                                    Đáp án đúng
-                                </h1>
-
-                                <h1 className=" text-heading-7 font-heading-7 font-plusjakartasans text-semantic-success">
-                                    {result}
-                                </h1>
-                            </div>
-                        </>
-                    )}
+                                    <h1 className=" text-heading-7 font-heading-7 font-plusjakartasans text-semantic-success">
+                                        {result}
+                                    </h1>
+                                </div>
+                            </>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>
@@ -298,6 +315,7 @@ export const FillInTheBlankReview = ({
     inputValue,
     handleChange,
     sendAnswer,
+    time,
 }) => {
     const [answer, setAnswer] = useState('');
 
@@ -306,72 +324,77 @@ export const FillInTheBlankReview = ({
         sendAnswer(event.target.value);
     };
     return (
-        <div className=" w-[56.563rem] max-h-[750px] h-[70vh] flex flex-col justify-around items-center">
-            <div>
+        <div className=" w-[56.563rem] max-h-[750px] h-[70vh] ">
+            <div className=" mb-14">
                 <h1 className=" text-center text-heading-4 font-plusjakartasans font-heading-4 text-primary-black mb-3">
                     Nghĩa của từ vựng
                 </h1>
-                <h1 className=" text-center text-body-1 font-body-1 font-plusjakartasans text-primary-black ">
+                <h1 className=" text-center text-body-1 font-body-1 font-plusjakartasans text-secondary-gray ">
                     Hãy viết nghĩa tiếng Việt của từ vựng dưới đây
+                </h1>
+                <h1 className=" text-center text-body-1 font-body-1 font-plusjakartasans text-secondary-gray ">
+                    {time}
                 </h1>
             </div>
 
-            <h1 className=" text-heading-6 font-heading-6 font-plusjakartasans text-primary-black text-center">
-                {content}
-            </h1>
+            <div className=" border-[4px] border-primary-black shadow-card-home p-6">
+                <h1 className=" mb-5 text-heading-6 font-heading-6 font-plusjakartasans text-primary-black text-center">
+                    {content}
+                </h1>
 
-            <div className="mx-auto w-11/12">
-                <div className="">
-                    {right ? (
-                        <>
+                <div className="mx-auto w-11/12">
+                    <div className="">
+                        {right ? (
+                            <>
+                                <div className=" mb-10">
+                                    <h1 className=" text-body-1 font-body-1 font-plusjakartasans text-primary-black mb-3">
+                                        Đáp án của bạn
+                                    </h1>
+                                    <InputField
+                                        value={result}
+                                        onChange={handleOnChange}
+                                        className={' w-full !rounded-none border-primary-black border'}
+                                        placeholder={'Hãy viết từ còn trống'}
+                                    />
+                                </div>
+                                <div className=" border-t border-secondary-gray pt-4">
+                                    <h1 className=" text-body-1 font-body-1 font-plusjakartasans text-secondary-gray mb-3">
+                                        Đáp án đúng
+                                    </h1>
+
+                                    <h1 className=" text-heading-7 font-heading-7 font-plusjakartasans text-semantic-success">
+                                        {result}
+                                    </h1>
+                                </div>
+                            </>
+                        ) : (
                             <div className=" mb-10">
-                                <h1 className=" text-caption-1 font-caption-1 font-plusjakartasans text-primary-black mb-3">
+                                <h1 className=" text-body-1 font-body-1 font-plusjakartasans text-primary-black mb-3">
                                     Đáp án của bạn
                                 </h1>
                                 <InputField
-                                    value={result}
-                                    onChange={handleOnChange}
-                                    className={' w-full'}
+                                    status={error ? 'error' : null}
+                                    className={' w-full !rounded-none border-primary-black border'}
                                     placeholder={'Hãy viết từ còn trống'}
+                                    onChange={handleOnChange}
+                                    value={answer}
                                 />
                             </div>
-                            <div className=" border-t border-secondary-gray pt-4">
-                                <h1 className=" text-caption-1 font-caption-1 font-plusjakartasans text-secondary-gray mb-3">
-                                    Đáp án đúng
-                                </h1>
+                        )}
+                        {error && (
+                            <>
+                                <div className=" border-t border-secondary-gray pt-4">
+                                    <h1 className=" text-buton-1 font-button-1 font-plusjakartasans text-secondary-gray mb-3">
+                                        Đáp án đúng
+                                    </h1>
 
-                                <h1 className=" text-heading-7 font-heading-7 font-plusjakartasans text-semantic-success">
-                                    {result}
-                                </h1>
-                            </div>
-                        </>
-                    ) : (
-                        <div className=" mb-10">
-                            <h1 className=" text-caption-1 font-caption-1 font-plusjakartasans text-primary-black mb-3">
-                                Đáp án của bạn
-                            </h1>
-                            <InputField
-                                status={error ? 'error' : null}
-                                className={' w-full'}
-                                placeholder={'Hãy viết từ còn trống'}
-                                onChange={handleOnChange}
-                                value={answer}
-                            />
-                        </div>
-                    )}
-                    {error && (
-                        <>
-                            <div className=" border-t border-secondary-gray pt-4">
-                                <h1 className=" text-caption-1 font-caption-1 font-plusjakartasans text-secondary-gray mb-3">
-                                    Đáp án đúng
-                                </h1>
-
-                                <h1 className=" text-heading-7 font-heading-7 font-plusjakartasans text-semantic-success">
-                                    {result}
-                                </h1>
-                            </div>
-                        </>
-                    )}
+                                    <h1 className=" text-heading-7 font-heading-7 font-plusjakartasans text-semantic-success">
+                                        {result}
+                                    </h1>
+                                </div>
+                            </>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>

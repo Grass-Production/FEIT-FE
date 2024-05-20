@@ -10,7 +10,6 @@ export default function Feedback() {
 
     return (
         <>
-            {' '}
             {loading === false ? (
                 <div className=" flex justify-center items-center h-screen px-10">
                     <div className=" shadow-card-home border-[4px] border-primary-black p-8">

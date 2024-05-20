@@ -62,8 +62,21 @@ export const getVocabularyByWord = async (word) => {
 
 export const createVocabulary = async (word, part_of_speech, pronunciation, mean, example_vie, example_eng, explain_vie, explain_eng, field_of_it, link_url, image_url, video_url, unit_id) => {
 
+    console.log('unit_id', unit_id);
+    console.log('word', word);
+    console.log('part_of_speech', part_of_speech);
+    console.log('pronunciation', pronunciation);
+    console.log('example_vie', example_vie);
+    console.log('mean', mean);
+    console.log('example_eng', example_eng);
+    console.log('explain_vie', explain_vie);
+    console.log('explain_eng', explain_eng);
+    console.log('field_of_it', field_of_it);
+    console.log('link_url', link_url);
+    console.log('image_url', image_url);
+    console.log('video_url', video_url);
     const formData = new FormData(); // Tạo đối tượng FormData
-    formData.append('unit_id', '6632921fff2c0d7a5d03b584');
+    formData.append('unit_id', unit_id);
     formData.append('word', word);
     formData.append('part_of_speech', part_of_speech);
     formData.append('pronunciation', pronunciation);

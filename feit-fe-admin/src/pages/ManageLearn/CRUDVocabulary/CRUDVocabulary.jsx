@@ -19,7 +19,7 @@ export default function CRUDVocabulary() {
 
     return (
         <div className="">
-            <NavLink to={`/manage/learn/lessondetails/${idlesson}`}>
+            <NavLink to={`/manage/learn/vocabulary`}>
                 <Button icon={true} title="Trở về" left={true}>
                     <IconArrowUpLeft />
                 </Button>

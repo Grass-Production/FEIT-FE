@@ -168,15 +168,19 @@ export const FormUpdate = ({ idexam, idquestion }) => {
                     <>
                         {vocabularys !== '' && (
                             <>
-                                {vocabularys.map((v, i) => {
-                                    return (
-                                        <>
-                                            <option key={v._id} value={v._id} className=" ">
-                                                {v.word}
-                                            </option>
-                                        </>
-                                    );
-                                })}
+                                {vocabularys !== null && (
+                                    <>
+                                        {vocabularys.map((v, i) => {
+                                            return (
+                                                <>
+                                                    <option key={v._id} value={v._id} className=" ">
+                                                        {v.word}
+                                                    </option>
+                                                </>
+                                            );
+                                        })}
+                                    </>
+                                )}
                             </>
                         )}
                     </>
@@ -520,15 +524,19 @@ export const FormCreate = ({ idexam }) => {
                     <>
                         {vocabularys !== '' && (
                             <>
-                                {vocabularys.map((v, i) => {
-                                    return (
-                                        <>
-                                            <option key={v._id} value={v._id} className=" ">
-                                                {v.word}
-                                            </option>
-                                        </>
-                                    );
-                                })}
+                                {vocabularys !== null && (
+                                    <>
+                                        {vocabularys.map((v, i) => {
+                                            return (
+                                                <>
+                                                    <option key={v._id} value={v._id} className=" ">
+                                                        {v.word}
+                                                    </option>
+                                                </>
+                                            );
+                                        })}
+                                    </>
+                                )}
                             </>
                         )}
                     </>

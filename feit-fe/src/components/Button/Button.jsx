@@ -5,11 +5,11 @@ export const buttonVariants = tv({
     variants: {
         color: {
             primary:
-                'bg-white text-button-1 font-button-1 border border-primary-blue-500 text-primary-blue-500  hover:bg-[#3C79FE] hover:text-white active:text-white active:bg-[#0A50E7]',
+                'bg-white text-button-1 font-button-1 border border-primary-blue-500 text-primary-blue-500 hover:fill-white hover:bg-[#3C79FE] hover:text-white active:text-white active:bg-[#0A50E7]',
             primaryerror:
                 'bg-white text-button-1 font-button-1 border border-semantic-danger text-semantic-danger  hover:bg-[#3C79FE] hover:text-white active:text-white active:bg-[#0A50E7]',
             secondary:
-                'bg-white  text-button-1 font-button-1 border border-[#74727F] text-primary-blue-500 hover:border-primary-blue-500 active:bg-[#85C8FF]',
+                'bg-white  text-button-1 font-button-1 border border-[#74727F] text-primary-blue-500 active:text-white hover:border-primary-blue-500 active:bg-[#85C8FF]',
             success:
                 'bg-white text-button-1 shadow-success-button font-button-1 border-[4px] border-semantic-success text-primary-blue-500 ',
 
@@ -20,7 +20,7 @@ export const buttonVariants = tv({
 
             primaryicon: 'bg-[#3C79FE]  text-button-1 font-button-1 text-white  hover:bg-[#0B58FE] active:bg-[#0A50E7]',
             secondaryicon:
-                'bg-[#FEFEFE]  text-button-1 font-button-1 text-primary-blue-500 hover:bg-[#3C79FE] active:bg-[#B3CBFF]',
+                'bg-[#FEFEFE]  text-button-1 hover:fill-white hover:text-white font-button-1 text-primary-blue-500 hover:bg-[#3C79FE] active:bg-[#B3CBFF]',
             successicon: 'bg-green-500  hover:bg-green-700',
             tertiaryicon:
                 'bg-[#BFBEC4]  text-button-1 font-button-1 text-primary-black hover:bg-[#9F9EA7] active:text-white active:bg-[#3C79FE]',

@@ -66,7 +66,7 @@ export const createOptionExam = async (newdata) => {
 }
 
 export const getAllQuestionExamByIdExam = async (id) => {
-    const res = await get(`http://localhost:8080/api/exam/question/fetch/exam_id?exam_id=${id}`, {
+    const res = await get(`http://localhost:8080/api/exam/question/fetch/n/exam_id?exam_id=${id}`, {
         headers: {
             "Content-Type": "application/json",
         },

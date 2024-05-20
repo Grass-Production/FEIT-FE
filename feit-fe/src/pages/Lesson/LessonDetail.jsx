@@ -10,6 +10,8 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { IconArrowUpLeft } from '../../svgs';
 import { PopupCreateList } from './component';
+import { useNavigate } from 'react-router-dom';
+
 export default function LessonDetail({ name }) {
     const [units, setUnits] = useState([]);
 
@@ -19,7 +21,7 @@ export default function LessonDetail({ name }) {
 
     let { lessonid } = useParams();
 
-    console.log(lessonid);
+    const navigate = useNavigate();
 
     const isUnitDisabled = (index) => {
         if (index === 0) return false; // Unit 1 luôn được enable
@@ -36,20 +38,17 @@ export default function LessonDetail({ name }) {
             try {
                 const res = await getUnitByIdLesson(lessonid);
                 const resLesson = await getLessons();
-                console.log('res: ', res);
-                console.log('resLesson: ', resLesson);
                 const lessons = await resLesson.data;
                 const name = lessons.filter((value) => value._id === lessonid);
-                console.log(name);
                 setNameLesson(name);
                 if (res === null || res === '') {
                     return;
                 }
                 setLoading(!loading);
                 setUnits(res.unit);
-                console.log(res);
             } catch (error) {
                 console.log(error);
+                navigate(`/signIn`);
             }
         }
         fetchData();
@@ -103,13 +102,17 @@ export default function LessonDetail({ name }) {
             <div className=" flex flex-col  ">
                 <div className=" flex justify-center mb-20 ">
                     <div className="  ">
-                        {nameLesson.map((a, i) => (
-                            <h1
-                                key={i}
-                                className=" text-center text-heading-2 font-heading-2 font-bitter text-primary-black">
-                                {a.name}
-                            </h1>
-                        ))}
+                        {nameLesson !== null && (
+                            <>
+                                {nameLesson.map((a, i) => (
+                                    <h1
+                                        key={i}
+                                        className=" text-center text-heading-2 font-heading-2 font-bitter text-primary-black">
+                                        {a.name}
+                                    </h1>
+                                ))}
+                            </>
+                        )}
                         <p className=" text-center text-body-1 font-body-1 font-plusjakartasans text-primary-black">
                             Đây là các từ vựng nền tảng trong ngành IT. Bạn hãy học thật tập trung và kỹ càng bạn nhé.
                             Chúc bạn học tập tốt.

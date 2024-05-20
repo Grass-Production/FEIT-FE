@@ -1,5 +1,6 @@
 import { IconChartBar, ArrowRight } from '../../../svgs';
 import { Button } from '../../../components';
+import { NavLink } from 'react-router-dom';
 export const CardLeaderBoard = () => {
     return (
         <div className=" w-3/4">
@@ -10,9 +11,11 @@ export const CardLeaderBoard = () => {
             <p className=" mb-2 text-body-1 font-body-1 font-plusjakartasans text-secondary-gray">
                 Hãy cùng xem bảng xếp hạng tuần này của bạn nhé
             </p>
-            <Button icon={true} color={'secondaryicon'} title="Xem" right={true}>
-                <ArrowRight color="#3C79FE" />
-            </Button>
+            <NavLink to="/leaderboard">
+                <Button icon={true} color={'secondaryicon'} title="Xem" right={true}>
+                    <ArrowRight color="#3C79FE" />
+                </Button>
+            </NavLink>
         </div>
     );
 };

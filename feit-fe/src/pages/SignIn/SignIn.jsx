@@ -6,7 +6,7 @@ import { IconGoogleLogo } from '../../svgs';
 import { Login } from '../../services/loginAPI';
 
 import { useNavigate } from 'react-router-dom';
-import { Button } from '../../components';
+import { Button, ToastError, ToastSuccess } from '../../components';
 
 export default function SignIn() {
     // const history = useHistory();
@@ -14,7 +14,8 @@ export default function SignIn() {
         account: '',
         password: '',
     });
-
+    const [isToastSuccess, setIsToastSuccess] = useState(false);
+    const [isToastError, setIsToastError] = useState(false);
     const navigate = useNavigate();
 
     const handleOnChange = (event) => {
@@ -51,18 +52,27 @@ export default function SignIn() {
 
     const handleLogin = async (event) => {
         event.preventDefault();
-        const res = await Login(formInput.account, formInput.password);
-        if (res.status === 200) {
-            navigate(`/`);
-            window.location.reload();
-            console.log('Login successful');
-        } else {
-            console.log('Login failed');
+        try {
+            const res = await Login(formInput.account, formInput.password);
+            setIsToastSuccess(true);
+            setTimeout(() => setIsToastSuccess(false), 2000);
+            if (res.status === 200) {
+                navigate(`/`);
+                window.location.reload();
+                console.log('Login successful');
+            } else {
+                console.log('Login failed');
+            }
+        } catch (error) {
+            setIsToastError(true);
+            setTimeout(() => setIsToastError(false), 2000);
         }
     };
 
     return (
         <div>
+            {isToastSuccess && <ToastSuccess />}
+            {isToastError && <ToastError message="Sai tên tài khoảng hoặc mật khẩu" />}
             <div className=" flex h-screen overflow-hidden">
                 <div className=" w-1/2 flex items-center h-screen bg-center bg-no-repeat bg-cover bg-[url('')]">
                     <img

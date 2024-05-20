@@ -66,10 +66,10 @@ export const Header = ({ title }) => {
                     <img src="/src/assets/images/Avatar.png" alt="" />
                     <div className="">
                         <h1 className=" text-body-1 font-body-1 font-plusjakartasans text-primary-black">
-                            {infor.full_name}
+                            {(infor !== null || infor !== '') && infor.full_name}
                         </h1>
                         <h1 className=" text-body-2 font-body-2 font-plusjakartasans text-secondary-gray">
-                            {infor.admin}
+                            {(infor !== null || infor !== '') && infor.admin}
                         </h1>
                     </div>
                 </div>

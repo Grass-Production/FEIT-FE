@@ -34,7 +34,7 @@ export const CardUpdate = ({ name = 'Programing', namefile = 'congnghe.png', id 
         const res = await updateLesson(
             {
                 _id: id,
-                course_id: '6631ff4e2f95034732cdbfaa',
+                course_id: '664637556c4c00abf5dee033',
                 name: inputChange,
                 content: 'Introduces fundamental concepts in computer networking.',
                 level: 6,
@@ -216,12 +216,14 @@ const FormCreateOne = () => {
     const [isCheckInputFile, setIsCheckInputFile] = useState(false);
     const [inputChange, setInputChange] = useState('Programing');
     const [progress, setProgess] = useState(0);
-
+    const [name, setname] = useState('');
     const handleSetSetProgess = (value) => {
         setProgess(value);
     };
+    console.log(inputChange);
     const handleCreateLesson = async () => {
-        const res = await createLessonFiles('6631ff4e2f95034732cdbfaa', inputChange);
+        const res = await createLesson('664637556c4c00abf5dee033', inputChange);
+        // const res = await createLessonFiles('664637556c4c00abf5dee033', inputChange);
         console.log(res);
     };
     const handleCreateLessonFile = async () => {

@@ -60,9 +60,13 @@ export default function SubManageLearn() {
                                 <CardLesson />
                             </div>
                             <div className=" w-3/4 grid grid-cols-2 gap-4">
-                                {unit.map((v) => {
-                                    return <CardUnit key={v._id} idUnit={v._id} name={v.name} />;
-                                })}
+                                {unit !== null && (
+                                    <>
+                                        {unit.map((v) => {
+                                            return <CardUnit key={v._id} idUnit={v._id} name={v.name} />;
+                                        })}
+                                    </>
+                                )}
                                 {/* <CardUnit />
                              <CardUnit />
                              <CardUnit />

@@ -95,7 +95,7 @@ export const CardLesson = ({ id = 'test', name, quantityUnit }) => {
     );
 };
 
-export const RowVocabulary = ({ word, id }) => {
+export const RowVocabulary = ({ word, id, idUnit }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleDropdown = () => {
@@ -128,7 +128,8 @@ export const RowVocabulary = ({ word, id }) => {
                                 right={true}>
                                 <IconDelete />
                             </Button>
-                            <NavLink to={`/manage/learn/vocabularydetails/${id}/setting`}>
+
+                            <NavLink to={`/manage/learn/unit/${idUnit}/vocabularydetails/${id}/setting`}>
                                 <Button
                                     color={'primary'}
                                     className="text-body-2 font-body-2 border-none rounded-none text-secondary-gray font-plusjakartasans"
@@ -138,6 +139,16 @@ export const RowVocabulary = ({ word, id }) => {
                                     <IconGear />
                                 </Button>
                             </NavLink>
+                            {/* <NavLink to={`/manage/learn/vocabularydetails/${id}/setting`}>
+                                <Button
+                                    color={'primary'}
+                                    className="text-body-2 font-body-2 border-none rounded-none text-secondary-gray font-plusjakartasans"
+                                    title="Tùy chỉnh"
+                                    icon={true}
+                                    right={true}>
+                                    <IconGear />
+                                </Button>
+                            </NavLink> */}
                         </div>
                     </>
                 )}
@@ -174,7 +185,7 @@ export const CardUnit = ({ name, idUnit }) => {
                 <div className="flex flex-col gap-1 justify-between items-start">
                     {vocabulary != null &&
                         vocabulary.map((v, i) => {
-                            return <RowVocabulary id={v._id} key={v._id} word={v.word} />;
+                            return <RowVocabulary idUnit={idUnit} id={v._id} key={v._id} word={v.word} />;
                         })}
                 </div>
             </div>

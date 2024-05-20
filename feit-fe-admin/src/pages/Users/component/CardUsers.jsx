@@ -145,41 +145,23 @@ export const TableData = ({ data }) => {
                         Tên
                     </th>
                     <th className=" text-start px-5 border border-primary-black  py-2 text-button-1 font-button-1 text-primary-black font-plusjakartasans">
-                        Vai trò
+                        Nhà cung cấp
                     </th>
                     <th className=" text-start px-5 border border-primary-black  py-2 text-button-1 font-button-1 text-primary-black font-plusjakartasans">
                         Ngày thêm vào
-                    </th>
-                    <th className=" text-start px-5 border border-primary-black  py-2 text-button-1 font-button-1 text-primary-black font-plusjakartasans">
-                        Latency
-                    </th>
-                    <th className=" text-start px-5 border border-primary-black  py-2 text-button-1 font-button-1 text-primary-black font-plusjakartasans">
-                        Thời gian hoạt động
-                    </th>
-                    <th className=" text-start px-5 border border-primary-black  py-2 text-button-1 font-button-1 text-primary-black font-plusjakartasans">
-                        Thời gian hoạt động
                     </th>
                 </tr>
                 {data.map((v, i) => {
                     return (
                         <tr onClick={toggleDropdown} key={i} className=" justify-between bg-white items-center ">
                             <td className=" px-5 border border-primary-black text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
-                                {v.client_ip}
+                                {v.full_name}
                             </td>
                             <td className=" px-5 border border-primary-black text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
-                                {v.status_code}
+                                {v.provider}
                             </td>
                             <td className=" px-5 border border-primary-black text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
-                                {v.path}
-                            </td>
-                            <td className=" px-5 border border-primary-black text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
-                                {v.latency}
-                            </td>
-                            <td className=" px-5 border border-primary-black text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
-                                {v.activity_time}
-                            </td>
-                            <td className=" px-5 border border-primary-black text-left py-2 text-body-1 font-body-1 text-primary-black font-plusjakartasans">
-                                {v.expire_at}
+                                {v.created_at}
                             </td>
                         </tr>
                     );
