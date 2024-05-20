@@ -97,14 +97,14 @@ export const CardCrud = () => {
     return (
         <div className=" flex justify-between">
             <h1 className=" text-heading-4 font-heading-4 font-plusjakartasans text-primary-black">Khóa học</h1>
-            <div className=" flex justify-center items-center gap-1">
+            {/* <div className=" flex justify-center items-center gap-1">
                 <Button icon={true} right={true} title="Thêm" color={'primary'}>
                     <IconPlusCircle size="20" color="#3C79FE" />
                 </Button>
                 <Button icon={true} right={true} title="Xóa" color={'primary'}>
                     <IconDelete size="24" color="#3C79FE" />
                 </Button>
-            </div>
+            </div> */}
         </div>
     );
 };
@@ -123,6 +123,14 @@ export const CardView = ({ children }) => {
                     </h1>
                     <div className=" w-2/5 border-l border-primary-black pl-6">
                         <div className=" flex justify-between items-center ">
+                            <div className="flex justify-between items-center gap-5">
+                                <Button icon={true} right={true} title="Thêm" color={'primary'}>
+                                    <IconPlusCircle size="20" color="#3C79FE" />
+                                </Button>
+                                <Button icon={true} right={true} title="Xóa" color={'primary'}>
+                                    <IconDelete size="20" color="#3C79FE" />
+                                </Button>
+                            </div>
                             <h1 className=" text-body-3 font-body-3 font-plusjakartasans text-primary-black">
                                 2 Khóa học
                             </h1>
@@ -152,7 +160,7 @@ export const CardView = ({ children }) => {
     );
 };
 
-export const CardItem = ({ name = 'Công nghệ thông tin', quantity = '10' }) => {
+export const CardItem = ({ name = 'Công nghệ thông tin', quantity = '10', idcourse }) => {
     return (
         <div className=" bg-white">
             <div className=" flex gap-3 justify-between px-5 py-4 border border-primary-black">
@@ -166,7 +174,10 @@ export const CardItem = ({ name = 'Công nghệ thông tin', quantity = '10' }) 
                     </h1>
                 </div>
                 <div className=" flex gap-3">
-                    <IconPencilSimple w="28" h="28" />
+                    <NavLink to={`/manage/learn/coursedetails/${idcourse}/setting`}>
+                        <IconPencilSimple w="28" h="28" />
+                    </NavLink>
+
                     <IconDelete />
                 </div>
             </div>

@@ -2,6 +2,7 @@ import { CardView, CardItem, TableData, CardStatic } from './component';
 import { getActivityLog } from '../../services/activitylogAPI';
 import { useEffect, useState } from 'react';
 import { getAllUser } from '../../services/userAPI';
+import { Loading } from '../../components';
 export default function Feedback() {
     const [AllUser, setAllUser] = useState([]);
     const [pageCurrent, setPageCurrent] = useState('');
@@ -38,10 +39,16 @@ export default function Feedback() {
             </div>
             <CardView sendPage={handleSetPage} count={page}>
                 {loading ? (
-                    <div className=" animate-pulse h-[40vh] w-full bg-gray-200"></div>
+                    <Loading />
                 ) : (
                     // <CardItem data={activitylog} />
-                    <TableData data={AllUser} />
+                    <>
+                        {AllUser !== null && (
+                            <>
+                                <TableData data={AllUser} />
+                            </>
+                        )}
+                    </>
                 )}
             </CardView>
         </div>

@@ -9,6 +9,9 @@ import { getVocabularyByUinit } from '../../../services/vocabulary';
 import { CardView, TableData } from './components';
 import { NavLink } from 'react-router-dom';
 import { getAllExam, getManyExamByIdUnit } from '../../../services/examAPI';
+
+import { Loading } from '../../../components';
+
 export default function Exam() {
     const [units, setUnits] = useState([]);
     const [lesson, setLesson] = useState([]);
@@ -19,6 +22,7 @@ export default function Exam() {
     const [idLesson, setIdLesson] = useState('');
     const [idUnit, setItUnit] = useState('');
     const [exams, setExams] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
     const handleSetIdLesson = (data) => {
         setIdLesson(data);
     };
@@ -28,29 +32,34 @@ export default function Exam() {
     };
 
     useEffect(() => {
-        async function GetVocabulary() {
-            console.log('message idunit', idUnit === '');
-            if (idUnit !== '') {
-                const res = await getVocabularyByUinit(idUnit);
-                setVocabulary(res.vocabulary);
-            }
-        }
         async function GetLessons() {
+            setIsLoading(true);
+
             const res = await getLessons();
             const lessondata = await res.data;
+            setIsLoading(false);
+
             setLesson(lessondata);
             if (idLesson !== '' || idLesson !== null) {
+                setIsLoading(false);
+
                 const data = await lessondata.filter((v) => v._id === idLesson);
                 setNameLesson(data[0].name);
             }
         }
 
         async function GetUnits() {
+            setIsLoading(true);
+
             if (idLesson !== '' || idLesson !== null) {
                 const res = await getUnitByIdLesson(idLesson);
                 console.log('message aaa : ', res);
+                setIsLoading(false);
+
                 if (res !== null || res !== '') {
                     const unitdata = await res.unit;
+                    setIsLoading(false);
+
                     const data = await unitdata.filter((v) => v._id === idUnit);
                     setUnits(unitdata);
                     setNameUnit(data[0].name);
@@ -58,57 +67,66 @@ export default function Exam() {
             }
         }
         async function GetAllExams() {
+            setIsLoading(true);
+
             if (idUnit !== '') {
                 const manyExams = await getManyExamByIdUnit(idUnit);
                 setExams(manyExams.data);
+                setIsLoading(false);
                 console.log('manyExams.data', manyExams.data);
                 return;
             }
             const res = await getAllExam();
             setExams(res.data);
+            setIsLoading(false);
         }
 
         GetAllExams();
         GetUnits();
         GetLessons();
-        GetVocabulary();
     }, [idLesson, idUnit]);
     return (
         <div className="">
-            <CardView
-                sendidunit={handleSetIdUnit}
-                nameUnit={nameUnit}
-                dataunit={units}
-                sendidlesson={handleSetIdLesson}
-                nameLesson={nameLesson}
-                datalesson={lesson}>
-                <>
-                    <table className=" mt-6 w-full border-primary-black border-[2px] ">
-                        <tr className=" justify-between items-center bg-neutral-grey  ">
-                            <th className="text-start px-5 border border-primary-black  py-2 text-button-1 font-button-1 text-primary-black font-plusjakartasans">
-                                Tiêu đề bài kiểm tra
-                            </th>
-                            {/* <th className="text-start px-5 border border-primary-black  py-2 text-button-1 font-button-1 text-primary-black font-plusjakartasans">
-                                Chủ đề
-                            </th>
-                            <th className="text-start px-5 border border-primary-black  py-2 text-button-1 font-button-1 text-primary-black font-plusjakartasans">
-                                Chương
-                            </th> */}
-                        </tr>
-                        {exams !== null && (
-                            <>
+            {isLoading ? (
+                <Loading />
+            ) : (
+                <div>
+                    <CardView
+                        sendidunit={handleSetIdUnit}
+                        nameUnit={nameUnit}
+                        dataunit={units}
+                        sendidlesson={handleSetIdLesson}
+                        nameLesson={nameLesson}
+                        datalesson={lesson}>
+                        <>
+                            <table className=" mt-6 w-full border-primary-black border-[2px] ">
+                                <tr className=" justify-between items-center bg-neutral-grey  ">
+                                    <th className="text-start px-5 border border-primary-black  py-2 text-button-1 font-button-1 text-primary-black font-plusjakartasans">
+                                        Tiêu đề bài kiểm tra
+                                    </th>
+                                    {/* <th className="text-start px-5 border border-primary-black  py-2 text-button-1 font-button-1 text-primary-black font-plusjakartasans">
+                                    Chủ đề
+                                </th>
+                                <th className="text-start px-5 border border-primary-black  py-2 text-button-1 font-button-1 text-primary-black font-plusjakartasans">
+                                    Chương
+                                </th> */}
+                                </tr>
                                 {exams !== null && (
                                     <>
-                                        {exams.map((v, i) => {
-                                            return <TableData idExam={v._id} key={v._id} title={v.title} />;
-                                        })}
+                                        {exams !== null && (
+                                            <>
+                                                {exams.map((v, i) => {
+                                                    return <TableData idExam={v._id} key={v._id} title={v.title} />;
+                                                })}
+                                            </>
+                                        )}
                                     </>
                                 )}
-                            </>
-                        )}
-                    </table>
-                </>
-            </CardView>
+                            </table>
+                        </>
+                    </CardView>
+                </div>
+            )}
         </div>
     );
 }

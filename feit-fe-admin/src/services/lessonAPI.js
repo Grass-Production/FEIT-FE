@@ -35,25 +35,44 @@ export const getLessonByIdCourse = async () => {
 }
 
 
-export const createLesson = async (courseId, name) => {
+// export const createLesson = async (courseId, name) => {
 
-    const formData = new FormData(); // Tạo đối tượng FormData
+//     const formData = new FormData(); // Tạo đối tượng FormData
+//     formData.append('course_id', courseId);
+//     formData.append('name', name);
+//     try {
+//         const res = await fetch('http://localhost:8080/api/admin/lesson/create', {
+//             method: 'POST',
+//             credentials: "include",
+//             body: formData,
+//         })
+//         console.log("message : ", res)
+//         return res
+//     } catch (error) {
+//         console.error('Error:', error);
+//     }
+// }
+
+export const createLesson = async (courseId, name, img, sendprogress) => {
+    const formData = new FormData();
     formData.append('course_id', courseId);
     formData.append('name', name);
+    formData.append('image_url', img);
     try {
-        const res = await fetch('http://localhost:8080/api/admin/lesson/create', {
-            method: 'POST',
-            credentials: "include",
-            body: formData,
-        })
-        console.log("message : ", res)
-        return res
+        const res = await axios.post('http://localhost:8080/api/admin/lesson/create', formData, {
+            withCredentials: true,
+            // Theo dõi % hoàn thành
+            onUploadProgress: (progressEvent) => {
+                const percentComplete = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+                sendprogress(percentComplete);
+            },
+        });
+        return res;
+
     } catch (error) {
-        console.error('Error:', error);
+        console.log('error : ', error)
     }
-}
-
-
+};
 
 
 

@@ -3,32 +3,30 @@ import { useGoogleLogin } from "@react-oauth/google";
 
 
 export const Login = async (account, password) => {
-    try {
-        const response = await axios.post(
-            'http://localhost:8080/api/login/user',
-            {
-                email: account,
-                password: password,
-            },
-            {
-                headers: { 'Content-Type': 'application/json' },
-                withCredentials: true,
-            },
-        );
-        console.log(response)
-        const token = await response.data.access_token
-        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
-        console.log('heh :', axios.defaults.headers.common['Authorization'] = `Bearer ${token}`)
 
-        if (response.status === 200) {
-            localStorage.setItem('access_token', response.data.access_token);
-            return response
-        } else {
-            console.log('Login failed');
-        }
-    } catch (error) {
-        console.error('Error:', error);
+    const response = await axios.post(
+        'http://localhost:8080/api/login/user',
+        {
+            email: account,
+            password: password,
+        },
+        {
+            headers: { 'Content-Type': 'application/json' },
+            withCredentials: true,
+        },
+    );
+    console.log(response)
+    const token = await response.data.access_token
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+    console.log('heh :', axios.defaults.headers.common['Authorization'] = `Bearer ${token}`)
+
+    if (response.status === 200) {
+        localStorage.setItem('access_token', response.data.access_token);
+        return response
+    } else {
+        console.log('Login failed');
     }
+
 }
 
 // export const LoginGoogle = useGoogleLogin({

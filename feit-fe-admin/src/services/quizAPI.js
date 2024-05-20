@@ -116,6 +116,16 @@ export const getAllExam = async () => {
     return res
 }
 
+export const getAllQuiz = async () => {
+    const res = await get('http://localhost:8080/api/admin/quiz/fetch', {
+        headers: {
+            "Content-Type": "application/json",
+        },
+        credentials: "include",
+    })
+    return res
+}
+
 export const deleteVocabulary = async (vocabularyid) => {
     const token = localStorage.getItem('access_token')
     const res = await del(`http://localhost:8080/api/exercise/question/delete`,

@@ -8,7 +8,7 @@ import {
     createLessonFile,
     createLessonFiles,
 } from '../../../services/lessonAPI';
-
+import { Loading } from '../../../components';
 export default function HomePage() {
     const [data, setData] = useState([]);
     const [courseId, setCourseId] = useState('');
@@ -17,11 +17,12 @@ export default function HomePage() {
     const [level, setLevel] = useState(0);
     // const [file, setFile] = useState(null);
     const [render, setRender] = useState(0);
-
+    const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
         async function GetLessons() {
             const res = await getLessons();
             setData(res.data);
+            setIsLoading(false);
         }
         GetLessons();
     }, [render]);
@@ -100,27 +101,33 @@ export default function HomePage() {
     };
 
     return (
-        <div className="">
-            <div className=" mb-7">
-                <CardCrud onClickAddFile={handleCreateLessonFile} />
-            </div>
-            <CardView>
-                {data !== null && (
-                    <>
-                        {data.map((v, i) => {
-                            return (
-                                <CardItem
-                                    id={v._id}
-                                    createAt={v.created_at}
-                                    onClickDelete={handleDelete}
-                                    key={i}
-                                    name={v.name}
-                                />
-                            );
-                        })}
-                    </>
-                )}
-            </CardView>
+        <div>
+            {isLoading ? (
+                <Loading />
+            ) : (
+                <div className="">
+                    <div className=" mb-7">
+                        <CardCrud onClickAddFile={handleCreateLessonFile} />
+                    </div>
+                    <CardView>
+                        {data !== null && (
+                            <>
+                                {data.map((v, i) => {
+                                    return (
+                                        <CardItem
+                                            id={v._id}
+                                            createAt={v.created_at}
+                                            onClickDelete={handleDelete}
+                                            key={i}
+                                            name={v.name}
+                                        />
+                                    );
+                                })}
+                            </>
+                        )}
+                    </CardView>
+                </div>
+            )}
         </div>
 
         // <div className="">

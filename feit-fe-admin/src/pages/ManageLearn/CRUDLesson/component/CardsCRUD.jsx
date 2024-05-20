@@ -11,6 +11,8 @@ import { Button } from '../../../../components';
 import { createLessonFileLoading } from '../../../../services/lessonAPI';
 import axios from 'axios';
 import { updateLesson, getLessonById, createLesson, createLessonFiles } from '../../../../services/lessonAPI';
+import { getCourse } from '../../../../services/courseAPI';
+
 export const CardUpdate = ({ name = 'Programing', namefile = 'congnghe.png', id }) => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [isCheckInputFile, setIsCheckInputFile] = useState(false);
@@ -216,13 +218,25 @@ const FormCreateOne = () => {
     const [isCheckInputFile, setIsCheckInputFile] = useState(false);
     const [inputChange, setInputChange] = useState('Programing');
     const [progress, setProgess] = useState(0);
-    const [name, setname] = useState('');
+
+    const [imageUrlFile, setImageUrlFile] = useState(null);
+
+    const handleAvatarChange = (event) => {
+        const file = event.target.files[0];
+        setSelectedAvatar(file);
+        const imageUrl = URL.createObjectURL(file);
+        setImageUrlAvatar(imageUrl);
+        console.log('file', file);
+    };
+
     const handleSetSetProgess = (value) => {
         setProgess(value);
     };
     console.log(inputChange);
     const handleCreateLesson = async () => {
-        const res = await createLesson('664637556c4c00abf5dee033', inputChange);
+        const course = await getCourse();
+        // const courseID = await
+        const res = await createLesson('664637556c4c00abf5dee033', inputChange, selectedFile, handleSetSetProgess);
         // const res = await createLessonFiles('664637556c4c00abf5dee033', inputChange);
         console.log(res);
     };
@@ -244,13 +258,17 @@ const FormCreateOne = () => {
         // console.log('file name', file.name);
         if (file !== undefined) {
             setIsCheckInputFile(true);
+            const imageUrl = URL.createObjectURL(file);
+            setImageUrlFile(imageUrl);
         } else {
             setIsCheckInputFile(false);
         }
     };
+
     const handleSetIsActive = (active) => {
         setIsActive(active);
     };
+
     const handleInputChange = (event) => {
         const input = event.target.value;
         setInputChange(input);
@@ -271,10 +289,20 @@ const FormCreateOne = () => {
                 </>
                 <div className=" border mb-5 flex justify-center items-center h-64 bg-white border-dashed border-primary-black">
                     <div className="">
-                        <div className=" flex justify-center">
-                            <IconImagesSquare />
-                        </div>
-                        <h1>Tệp tin của bạn</h1>
+                        {isCheckInputFile ? (
+                            <div className=" flex justify-center">
+                                <div className=" w-32">
+                                    <img src={imageUrlFile} alt="" />
+                                </div>
+                            </div>
+                        ) : (
+                            <>
+                                <div className="flex justify-center">
+                                    <IconImagesSquare />
+                                </div>
+                                <h1>Tệp tin của bạn</h1>
+                            </>
+                        )}
                     </div>
                 </div>
                 <div className=" border bg-white p-4  border-dashed border-primary-black mb-5">
@@ -336,7 +364,13 @@ const FormCreateOne = () => {
                         className="font-plusjakartasans cursor-pointer py-2 px-4  flex justify-center items-center gap-[6px] w-full bg-white text-button-1 font-button-1 border border-primary-blue-500 text-primary-blue-500  hover:bg-[#3C79FE] hover:text-white hover:fill-white active:text-white active:bg-[#0A50E7]">
                         <IconCloudArrowUp />
                         Từ máy tính của bạn
-                        <input onChange={handleFileChange} type="file" id="uploadFile" class="hidden" />
+                        <input
+                            onChange={handleFileChange}
+                            accept="image/*"
+                            type="file"
+                            id="uploadFile"
+                            class="hidden"
+                        />
                     </label>
                 </div>
             </div>

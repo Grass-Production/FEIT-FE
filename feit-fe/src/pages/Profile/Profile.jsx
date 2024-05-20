@@ -28,7 +28,7 @@ export default function Profile() {
         cover_url: inforUser.cover_url,
         phone: inforUser.phone,
     });
-
+    console.log(inforUser._id);
     const handleCoverChange = (event) => {
         const file = event.target.files[0];
         setSelectedCover(file);

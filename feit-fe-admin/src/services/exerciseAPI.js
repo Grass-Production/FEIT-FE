@@ -96,6 +96,7 @@ export const getExamByIdExam = async (id) => {
 }
 
 
+
 export const getManyExamByIdUnit = async (id) => {
     const res = await get(`http://localhost:8080/api/admin/exercise/fetch/ns/unit_id?unit_id=${id}`, {
         headers: {
@@ -107,6 +108,16 @@ export const getManyExamByIdUnit = async (id) => {
 }
 
 export const getAllExam = async () => {
+    const res = await get('http://localhost:8080/api/admin/exercise/fetch', {
+        headers: {
+            "Content-Type": "application/json",
+        },
+        credentials: "include",
+    })
+    return res
+}
+
+export const getAllExercise = async () => {
     const res = await get('http://localhost:8080/api/admin/exercise/fetch', {
         headers: {
             "Content-Type": "application/json",

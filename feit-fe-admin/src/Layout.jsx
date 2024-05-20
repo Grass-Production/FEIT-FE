@@ -27,9 +27,9 @@ export default function Layout() {
     };
     return (
         <Suspense fallback={<Loading />}>
-            {/* <RouterProvider router={routerPrivate} /> */}
-            {loggedIn === true && <RouterProvider router={routerPrivate} />}
-            {loggedIn !== true && <RouterProvider router={routerPublic} />}
+            <RouterProvider router={routerPrivate} />
+            {/* {loggedIn === true && <RouterProvider router={routerPrivate} />}
+            {loggedIn !== true && <RouterProvider router={routerPublic} />} */}
         </Suspense>
     );
 }

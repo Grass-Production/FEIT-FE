@@ -4,27 +4,36 @@ import { useState } from 'react';
 
 import { Login } from '../../services/loginAPI';
 import { useNavigate } from 'react-router-dom';
+import { ToastError } from '../../components/Toast';
 
 export default function SignIn() {
     // const history = useHistory();
     const [account, setAccount] = useState('');
     const [password, setPassword] = useState('');
+    const [isShowToast, setIsShowToast] = useState(false);
     const navigate = useNavigate();
 
     const handleLogin = async (event) => {
         event.preventDefault();
-        const res = await Login(account, password);
-        if (res.status === 200) {
-            navigate(`/`);
-            window.location.reload();
-            console.log('Login successful');
-        } else {
-            console.log('Login failed');
+        try {
+            const res = await Login(account, password);
+
+            if (res.status === 200) {
+                navigate(`/`);
+                window.location.reload();
+                console.log('Login successful');
+            } else {
+                console.log('Login failed');
+            }
+        } catch (error) {
+            setIsShowToast(true);
+            setTimeout(() => setIsShowToast(false), 2000);
         }
     };
 
     return (
         <div>
+            {isShowToast && <ToastError message="Sai tên tài khoản hoặc nhập khẩu" />}
             <div className=" flex h-screen">
                 <div className=" w-1/2 flex items-center h-screen bg-center bg-no-repeat bg-cover bg-[url('')]">
                     <img

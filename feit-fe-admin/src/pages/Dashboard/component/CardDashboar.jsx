@@ -1,80 +1,96 @@
 import Chart from 'react-apexcharts';
 import { useState } from 'react';
 
-import { IconTimer, IconListNumbers, FireSimple, IconBook } from '../../../svgs';
+import {
+    IconTimer,
+    IconListNumbers,
+    FireSimple,
+    IconBook,
+    IconGraduationCap,
+    IconArrowUpRight,
+    IconUsers,
+    IconHardDrive,
+    IconList,
+    IconCloud,
+} from '../../../svgs';
 
-export const CardTime = ({ time = '153' }) => {
+export const CardTime = ({ quantityExam = '153' }) => {
     return (
-        <div className=" ">
-            <div className="flex gap-1 justify-center items-center border-b border-secondary-gray py-2 mb-6">
-                <IconTimer />
-                <h1 className=" text-heading-7 font-heading-7 font-plusjakartasans text-primary-black">Thời gian</h1>
-            </div>
-            <h1 className=" text-center text-heading-5 font-heading-5 font-plusjakartasans text-primary-blue-600">
-                {time} phút
-            </h1>
-        </div>
-    );
-};
-
-export const CardScore = ({ score = '1800' }) => {
-    return (
-        <div className=" ">
-            <div className="border-b border-secondary-gray py-2 mb-6">
-                <h1 className=" text-heading-7 font-heading-7 font-plusjakartasans text-primary-black">
-                    Tổng số điễm đã đạt
+        <div className="   py-16  px-12 flex justify-center items-end gap-3">
+            <div className="">
+                <IconList size="40" />
+                <h1 className=" text-heading-3 font-heading-3 font-plusjakartasans text-primary-blue-600">
+                    {quantityExam}
+                </h1>
+                <h1 className=" text-button-1 font-button-1 font-plusjakartasans text-secondary-gray">
+                    Số lượng bài kiểm tra
                 </h1>
             </div>
-            <h1 className=" text-center text-heading-4 font-heading-4 font-plusjakartasans text-primary-blue-800">
-                {score}
-            </h1>
         </div>
     );
 };
 
-export const CardLessonComplete = ({ number = '3' }) => {
+export const CardScore = ({ quantitylearns = '1800' }) => {
     return (
-        <div className=" ">
-            <div className="flex gap-1 justify-center items-center border-b border-secondary-gray py-2 mb-6">
-                <IconListNumbers />
-                <h1 className=" text-heading-7 font-heading-7 font-plusjakartasans text-primary-black">
-                    Chủ đề hoàn thành
+        <div className="   py-16  px-12 flex justify-center items-end gap-3">
+            <div className="">
+                <IconBook color="#858585" size="40" />
+                <h1 className=" text-heading-3 font-heading-3 font-plusjakartasans text-primary-blue-600">
+                    {quantitylearns}
+                </h1>
+                <h1 className=" text-button-1 font-button-1 font-plusjakartasans text-secondary-gray">
+                    Số lượng bài học
                 </h1>
             </div>
-            <h1 className=" text-center text-heading-5 font-heading-5 font-plusjakartasans text-primary-blue-600">
-                {number}
-            </h1>
         </div>
     );
 };
 
-export const CardStreak = ({ streak = '7' }) => {
+export const CardLessonComplete = ({ curent = '3', max }) => {
     return (
-        <div className="">
-            <div className=" ">
-                <div className="flex gap-1 justify-center items-center border-b border-secondary-gray py-2 mb-6">
-                    <FireSimple />
-                    <h1 className=" text-heading-7 font-heading-7 font-plusjakartasans text-primary-black">Streak</h1>
+        <div className="   py-16  px-12 flex justify-center items-end gap-3">
+            <div className="">
+                <IconHardDrive color="#858585" size="40" />
+                <div className=" mt-1 relative w-[15vw] h-2 bg-primary-blue-50 rounded-full">
+                    <div className=" bg-primary-blue-500  top-0 rounded-full w-1/2 h-full "></div>
                 </div>
-                <h1 className=" text-center text-heading-5 font-heading-5 font-plusjakartasans text-primary-blue-600">
-                    {streak}
+                <h1 className=" text-heading-3 font-heading-3 font-plusjakartasans text-primary-blue-600">
+                    {curent} GB / {max} GB
+                </h1>
+                <h1 className=" text-button-1 font-button-1 font-plusjakartasans text-secondary-gray">
+                    Dung lượng hệ thống
                 </h1>
             </div>
         </div>
     );
 };
-export const CardVocabulareComplete = ({ vocabulary = '50' }) => {
+
+export const CardStreak = ({ users = '7' }) => {
     return (
-        <div className="">
-            <div className=" ">
-                <div className="flex gap-1 justify-center items-center border-b border-secondary-gray py-2 mb-6">
-                    <IconBook />
-                    <h1 className=" text-heading-7 font-heading-7 font-plusjakartasans text-primary-black">
-                        Từ đã học
-                    </h1>
+        <div className="   py-16  px-12 flex justify-center items-end gap-3">
+            <div className="">
+                <IconUsers size="40" />
+                <h1 className=" text-heading-3 font-heading-3 font-plusjakartasans text-primary-blue-600">{users}</h1>
+                <h1 className=" text-button-1 font-button-1 font-plusjakartasans text-secondary-gray">
+                    Số lượng truy cập
+                </h1>
+            </div>
+        </div>
+    );
+};
+export const CardVocabulareComplete = ({ curent = '50', max }) => {
+    return (
+        <div className="   py-16  px-12 flex justify-center items-end gap-3">
+            <div className="">
+                <IconCloud color="#858585" size="40" />
+                <div className=" mt-1 relative w-[15vw] h-2 bg-primary-blue-50 rounded-full">
+                    <div className=" bg-primary-blue-500  top-0 rounded-full w-1/2 h-full "></div>
                 </div>
-                <h1 className=" text-center text-heading-5 font-heading-5 font-plusjakartasans text-primary-blue-600">
-                    {vocabulary}
+                <h1 className=" text-heading-3 font-heading-3 font-plusjakartasans text-primary-blue-600">
+                    {curent} GB / {max} GB
+                </h1>
+                <h1 className=" text-button-1 font-button-1 font-plusjakartasans text-secondary-gray">
+                    Dung lượng hệ thống
                 </h1>
             </div>
         </div>
@@ -156,7 +172,7 @@ export const LineChart = () => {
 
     return (
         <div className=" bg-[#35696B]">
-            <Chart options={options} series={options.series} type="line" height={400} />
+            <Chart options={options} series={options.series} type="line" height={480} />
         </div>
     );
 };

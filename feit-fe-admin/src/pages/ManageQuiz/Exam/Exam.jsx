@@ -5,14 +5,14 @@ import { useEffect, useState } from 'react';
 // import { TableData, JsonUI } from './components/DataUI';
 
 import { getVocabularyByUinit } from '../../../services/vocabulary';
-
+import { Loading } from '../../../components';
 import { CardView, TableData } from './components';
 import { NavLink } from 'react-router-dom';
-import { getAllExam, getManyExamByIdUnit } from '../../../services/quizAPI';
+import { getAllExam, getManyExamByIdUnit, getAllQuiz } from '../../../services/quizAPI';
 export default function Exam() {
     const [units, setUnits] = useState([]);
     const [lesson, setLesson] = useState([]);
-
+    const [isLoading, setIsLoading] = useState(true);
     // const [file, setFile] = useState(null);
     const [nameLesson, setNameLesson] = useState('Programing');
     const [nameUnit, setNameUnit] = useState('');
@@ -28,20 +28,23 @@ export default function Exam() {
     };
 
     useEffect(() => {
-        async function GetVocabulary() {
-            console.log('message idunit', idUnit === '');
-            if (idUnit !== '') {
-                const res = await getVocabularyByUinit(idUnit);
-                setVocabulary(res.vocabulary);
-            }
-        }
         async function GetLessons() {
             const res = await getLessons();
             const lessondata = await res.data;
             setLesson(lessondata);
-            if (idLesson !== '' || idLesson !== null) {
+            console.log('lessondata', lessondata);
+            console.log('idLesson', idLesson);
+            if (idLesson !== '') {
                 const data = await lessondata.filter((v) => v._id === idLesson);
+                console.log('data', data);
                 setNameLesson(data[0].name);
+            }
+        }
+        async function GetVocabulary() {
+            console.log('message idunit', idUnit === '');
+            if (idUnit !== '') {
+                const res = await getVocabularyByUinit(idUnit);
+                // setVocabulary(res.vocabulary);
             }
         }
 
@@ -61,11 +64,14 @@ export default function Exam() {
             if (idUnit !== '') {
                 const manyExams = await getManyExamByIdUnit(idUnit);
                 setExams(manyExams.data);
+                setIsLoading(false);
+
                 console.log('manyExams.data', manyExams.data);
                 return;
             }
-            const res = await getAllExam();
-            setExams(res.data);
+            const res = await getAllQuiz();
+            setExams(res.quiz);
+            setIsLoading(false);
         }
 
         GetAllExams();
@@ -75,36 +81,40 @@ export default function Exam() {
     }, [idLesson, idUnit]);
     return (
         <div className="">
-            <CardView
-                sendidunit={handleSetIdUnit}
-                nameUnit={nameUnit}
-                dataunit={units}
-                sendidlesson={handleSetIdLesson}
-                nameLesson={nameLesson}
-                datalesson={lesson}>
-                <>
-                    <table className=" mt-6 w-full border-primary-black border-[2px] ">
-                        <tr className=" justify-between items-center bg-neutral-grey  ">
-                            <th className="text-start px-5 border border-primary-black  py-2 text-button-1 font-button-1 text-primary-black font-plusjakartasans">
-                                Tiêu đề bài kiểm tra
-                            </th>
-                            {/* <th className="text-start px-5 border border-primary-black  py-2 text-button-1 font-button-1 text-primary-black font-plusjakartasans">
+            {isLoading ? (
+                <Loading />
+            ) : (
+                <CardView
+                    sendidunit={handleSetIdUnit}
+                    nameUnit={nameUnit}
+                    dataunit={units}
+                    sendidlesson={handleSetIdLesson}
+                    nameLesson={nameLesson}
+                    datalesson={lesson}>
+                    <>
+                        <table className=" mt-6 w-full border-primary-black border-[2px] ">
+                            <tr className=" justify-between items-center bg-neutral-grey  ">
+                                <th className="text-start px-5 border border-primary-black  py-2 text-button-1 font-button-1 text-primary-black font-plusjakartasans">
+                                    Tiêu đề bài kiểm tra
+                                </th>
+                                {/* <th className="text-start px-5 border border-primary-black  py-2 text-button-1 font-button-1 text-primary-black font-plusjakartasans">
                                 Chủ đề
                             </th>
                             <th className="text-start px-5 border border-primary-black  py-2 text-button-1 font-button-1 text-primary-black font-plusjakartasans">
                                 Chương
                             </th> */}
-                        </tr>
-                        {exams !== null && (
-                            <>
-                                {exams.map((v, i) => {
-                                    return <TableData idExam={v._id} key={v._id} title={v.title} />;
-                                })}
-                            </>
-                        )}
-                    </table>
-                </>
-            </CardView>
+                            </tr>
+                            {exams !== null && (
+                                <>
+                                    {exams.map((v, i) => {
+                                        return <TableData idExam={v._id} key={v._id} title={v.title} />;
+                                    })}
+                                </>
+                            )}
+                        </table>
+                    </>
+                </CardView>
+            )}
         </div>
     );
 }

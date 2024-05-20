@@ -67,4 +67,6 @@ export { default as IconCheckSquareOffset } from './IconCheckSquareOffset'
 export { default as IconUsersFour } from './IconUsersFour'
 export { default as IconNotePencil } from './IconNotePencil'
 export { default as IconSquaresFour } from './IconSquaresFour'
+export { default as IconHardDrive } from './IconHardDrive'
+export { default as IconCloud } from './IconCloud'
 

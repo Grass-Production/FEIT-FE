@@ -22,7 +22,7 @@ export const updateUser = async (_id, full_name, cover_url, avatar_url, phone) =
     formData.append('cover_url', cover_url);
     formData.append('phone', phone);
     try {
-        const res = await axios.put('http://localhost:8080/api/update',
+        const res = await axios.patch('http://localhost:8080/api/update',
             formData,
             {
                 headers: { 'Content-Type': 'application/json' },
