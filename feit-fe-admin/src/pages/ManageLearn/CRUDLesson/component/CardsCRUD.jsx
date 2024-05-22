@@ -13,6 +13,7 @@ import axios from 'axios';
 import { updateLesson, getLessonById, createLesson, createLessonFiles } from '../../../../services/lessonAPI';
 import { getCourse } from '../../../../services/courseAPI';
 import { ToastSuccess, ToastError } from '../../../../components/Toast';
+
 export const CardUpdate = ({ name = 'Programing', namefile = 'congnghe.png', id }) => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [isCheckInputFile, setIsCheckInputFile] = useState(false);
@@ -91,7 +92,7 @@ export const CardUpdate = ({ name = 'Programing', namefile = 'congnghe.png', id 
                     Thông tin
                 </h1>
                 <h3 className=" text-label-2 font-label-2 font-plusjakartasans text-primary-black mb-2">
-                    Tên khóa học
+                    Tên chủ đê
                 </h3>
                 <InputField
                     onChange={handleInputChange}
@@ -231,7 +232,6 @@ const FormCreateOne = () => {
     const handleCreateLesson = async () => {
         try {
             const course = await getCourse();
-
             const courseID = await course.data[0]._id;
             const res = await createLesson(courseID, inputChange, selectedFile, handleSetSetProgess);
             // const res = await createLessonFiles('664637556c4c00abf5dee033', inputChange);
@@ -283,7 +283,7 @@ const FormCreateOne = () => {
             <div className=" p-3 border border-primary-black bg-primary-grey mb-5">
                 <>
                     <h3 className=" text-label-2 font-label-2 font-plusjakartasans text-primary-black mb-2">
-                        Tên khóa học
+                        Tên chủ đề
                     </h3>
                     <InputField
                         onChange={handleInputChange}
@@ -305,7 +305,7 @@ const FormCreateOne = () => {
                                 <div className="flex justify-center">
                                     <IconImagesSquare />
                                 </div>
-                                <h1>Tệp tin của bạn</h1>
+                                <h1>Tệp tin ảnh của bạn</h1>
                             </>
                         )}
                     </div>
@@ -406,19 +406,27 @@ const FormCreateFile = () => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [isCheckInputFile, setIsCheckInputFile] = useState(false);
     const [progress, setProgess] = useState(0);
-
+    const [isToast, setIsToas] = useState(0);
     const handleSetSetProgess = (value) => {
         setProgess(value);
     };
 
     const handleCreateLessonFile = async () => {
-        const res = await createLessonFileLoading(selectedFile, handleSetSetProgess);
-        if (res.status === 200) {
-            alert('Thêm Dữ liệu bằng file thành công');
-        } else if (res.message === 'validate: Token is expired') {
-            alert('Vui lòng đăng nhập');
+        try {
+            const res = await createLessonFileLoading(selectedFile, handleSetSetProgess);
+            if (res.status === 200) {
+                setIsToas(1);
+                setTimeout(() => setIsToas(0), 2000);
+                alert('Thêm Dữ liệu bằng file thành công');
+            } else if (res.message === 'validate: Token is expired') {
+                alert('Vui lòng đăng nhập');
+            }
+            console.log('res create flie : ', res);
+        } catch (error) {
+            setIsToas(2);
+            setTimeout(() => setIsToas(0), 2000);
         }
-        console.log('res create flie : ', res);
+
     };
 
     const handleFileChange = (event) => {
@@ -435,13 +443,15 @@ const FormCreateFile = () => {
 
     return (
         <>
+            {isToast === 1 && <ToastSuccess message='Thêm dữ liệu thành công' />}
+            {isToast === 2 && <ToastError message='Thêm dữ liệu thất bại' />}
             <div className=" p-3 border border-primary-black bg-primary-grey mb-5">
                 <div className=" mb-5 border flex justify-center items-center h-64 bg-white border-dashed border-primary-black">
                     <div className="">
                         <div className=" flex justify-center">
                             <IconImagesSquare />
                         </div>
-                        <h1>Tệp tin của bạn</h1>
+                        <h1>Tệp tin của bạn </h1>
                     </div>
                 </div>
                 <div className=" border bg-white p-4  border-dashed border-primary-black mb-5">
@@ -503,7 +513,7 @@ const FormCreateFile = () => {
                         className="font-plusjakartasans cursor-pointer py-2 px-4  flex justify-center items-center gap-[6px] w-full bg-white text-button-1 font-button-1 border border-primary-blue-500 text-primary-blue-500  hover:bg-[#3C79FE] hover:text-white hover:fill-white active:text-white active:bg-[#0A50E7]">
                         <IconCloudArrowUp />
                         Từ máy tính của bạn
-                        <input onChange={handleFileChange} type="file" id="uploadFile" class="hidden" />
+                        <input onChange={handleFileChange} accept=".xlsx, .xls" type="file" id="uploadFile" class="hidden" />
                     </label>
                 </div>
             </div>

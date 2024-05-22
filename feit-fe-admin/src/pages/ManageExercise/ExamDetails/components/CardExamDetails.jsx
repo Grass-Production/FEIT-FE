@@ -6,6 +6,7 @@ import Stack from '@mui/material/Stack';
 import PaginationItem from '@mui/material/PaginationItem';
 import { NavLink } from 'react-router-dom';
 import { updateExam } from '../../../../services/exerciseAPI';
+import { ToastSuccess, ToastError } from '../../../../components/Toast';
 export const CardView = ({
     children,
     nameExam = 'Công nghệ thông tin',
@@ -34,6 +35,7 @@ export const CardView = ({
 
     return (
         <>
+
             {isShowPopup && (
                 <PopupUpdateExam
                     title={nameExam}
@@ -263,6 +265,7 @@ export const PopupQuestion = ({ handleSendIsPopup, lesson, unit, type, content, 
 
 export const PopupUpdateExam = ({ handleSendIsPopup, unit, lesson, title, id }) => {
     const [inputNameExam, setInputNameExam] = useState(title);
+    const [isToast, setIsToast] = useState(0)
 
     const handleOnChangeInput = (event) => {
         setInputNameExam(event.target.value);
@@ -273,12 +276,23 @@ export const PopupUpdateExam = ({ handleSendIsPopup, unit, lesson, title, id }) 
     };
 
     const UpdateExam = async () => {
-        const res = updateExam({ _id: id, title: inputNameExam });
-        console.log(res);
+        try {
+            const res = await updateExam({ _id: id, title: inputNameExam });
+            setIsToast(1);
+            setTimeout(() => setIsToast(0), 2000);
+            console.log(res);
+
+        } catch (error) {
+            setIsToast(2);
+            setTimeout(() => setIsToast(0), 2000);
+        }
+
     };
 
     return (
         <div className="">
+            {isToast === 1 && <ToastSuccess message='Cập nhật thông tin thành công' />}
+            {isToast === 1 && <ToastSuccess message='Cập nhật thông tin thất bại' />}
             <div className="relative z-100" aria-labelledby="modal-title" role="dialog" aria-modal="true">
                 <div className="fixed inset-0 z-10 bg-gray-500 bg-opacity-65 transition-opacity w-screen overflow-y-auto">
                     <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">

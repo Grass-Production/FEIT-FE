@@ -46,7 +46,7 @@ export const Start = ({ handleSendValue }) => {
             img: 'https://res.cloudinary.com/df4zm1xjy/image/upload/v1711706258/feit-static/Frame%20854-1.png.png',
         },
         {
-            duration: 5,
+            duration: 30,
             title: 'Khó',
             subtitle: '20 câu, 30s trả lời',
             img: 'https://res.cloudinary.com/df4zm1xjy/image/upload/v1711706258/feit-static/Frame%20854-2.png.png',

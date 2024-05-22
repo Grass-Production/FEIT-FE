@@ -19,7 +19,6 @@ export const updateExam = async (newData) => {
         const res = await axios.patch('http://localhost:8080/api/admin/exercise/update',
             newData,
             {
-                headers: { 'Content-Type': 'application/json' },
                 withCredentials: true,
             },
         );

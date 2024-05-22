@@ -75,13 +75,14 @@ export const PopupCreateList = ({ handleSendIsPopup, sendRender }) => {
                                 />
                             </div>
                             <div className=" flex px-4 border-secondary-gray gap-8 py-4 border-t">
+
                                 <Button
                                     color={'primary'}
+                                    title="Hủy"
                                     onClick={HandleChilSendIsPopup}
                                     icon={true}
                                     right={true}
-                                    title="Hủy"
-                                    className="w-full  py-4">
+                                    className="w-full py-4 ">
                                     <IconClose />
                                 </Button>
                                 <Button
@@ -203,7 +204,7 @@ export const PopupDeleteList = ({ handleSendIsPopup, idmasklist, sendRender }) =
                                     icon={true}
                                     right={true}
                                     title="Hủy"
-                                    className="w-full py-4 border-[2px] bg-primary-blue-500 !text-white">
+                                    className="w-full py-4 ">
                                     <IconClose color="#FEFEFE" />
                                 </Button>
                                 <Button

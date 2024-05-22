@@ -7,11 +7,17 @@ import { getLessonByIdCourse, getLessonById } from '../../../services/lessonAPI'
 import { getUnitByIdLesson } from '../../../services/unitAPI';
 import { getVocabularyByUinit } from '../../../services/vocabulary';
 import { useParams } from 'react-router-dom';
-
+import { deleteVocabulary } from '../../../services/vocabulary';
 export default function LessonDetail() {
     const [lesson, setLesson] = useState([]);
     const [unit, setUnit] = useState([]);
+    const [isRender, setIsRender] = useState(0);
+
     let { idlesson } = useParams();
+
+    const handleSetIsRender = (value) => {
+        setIsRender(n => n + value)
+    }
 
     useEffect(() => {
         async function GetUnit() {
@@ -27,7 +33,7 @@ export default function LessonDetail() {
         }
         GetLessonById();
         GetUnit();
-    }, []);
+    }, [isRender]);
 
     return (
         <div className="">
@@ -57,7 +63,7 @@ export default function LessonDetail() {
                                 {unit !== null && (
                                     <>
                                         {unit.map((v) => {
-                                            return <CardUnit key={v._id} idUnit={v._id} name={v.name} />;
+                                            return <CardUnit render={handleSetIsRender} key={v._id} idUnit={v._id} name={v.name} />;
                                         })}
                                     </>
                                 )}

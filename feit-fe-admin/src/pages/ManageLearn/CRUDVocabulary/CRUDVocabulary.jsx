@@ -9,7 +9,7 @@ import { useParams } from 'react-router-dom';
 import { SoundSmall } from '../../../components/Sound';
 export default function CRUDVocabulary() {
     const [isCheck, setIsCheck] = useState(false);
-    let { idlesson } = useParams();
+    let { idvocabulary } = useParams();
 
     const handleRadioChange = (event) => {
         const value = event.target.value;
@@ -28,7 +28,7 @@ export default function CRUDVocabulary() {
                 <div className=" w-1/2  ">
                     <div className=" border-b border-primary-black pb-2 mb-5">
                         <h1 className=" text-heading-6 font-heading-6 font-plusjakartasans text-primary-black">
-                            Chủ đề {idlesson}
+                            Từ vựng
                         </h1>
                         <p className=" text-body-1 font-body-1 font-plusjakartasans text-secondary-gray">
                             Bạn có thể chỉnh sửa chủ đề hoặc thêm một chủ đề bằng cách thủ công hoặc thêm bằng file

@@ -4,6 +4,8 @@ import { FormSignUp } from './component';
 import { useState } from 'react';
 import { signup } from '../../services/userAPI';
 import { useNavigate } from 'react-router-dom';
+import { Button, ToastError, ToastSuccess } from '../../components';
+import { Loading } from '../../components';
 export default function SignUp() {
     const [formInput, setFormInput] = useState({
         full_name: '',
@@ -16,9 +18,11 @@ export default function SignUp() {
         repassword: '',
     });
     const navigate = useNavigate();
-
+    const [isLoading, setIsLoading] = useState(false)
+    const [isToast, setIsToast] = useState(false)
     const handleSignUp = async () => {
         try {
+            setIsLoading(true)
             const res = await signup({
                 full_name: formInput.full_name,
                 email: formInput.email,
@@ -28,11 +32,15 @@ export default function SignUp() {
                 phone: formInput.phone,
             });
             if (res.status === 200) {
+                setIsLoading(false)
                 navigate(`/verify/signup`);
             }
             console.log(res);
         } catch (error) {
             console.log('error : ', error);
+            setIsLoading(false)
+            setIsToast(true)
+            setTimeout(() => setIsToast(false), 2000);
         }
     };
 
@@ -42,14 +50,18 @@ export default function SignUp() {
     };
 
     return (
+
         <div>
+            {isToast && <ToastError message='Đăng ký thất bại' />}
             <div className=" flex h-screen">
                 <div className=" px-52 flex justify-center items-center">
                     <div>
                         <h1 className=" text-center text-heading-4 text-primary-black font-heading-4 mb-10">Đăng Ký</h1>
-                        <FormSignUp onSubmit={handleSignUp} onChange={handleOnChange} inputData={formInput} />
+                        <FormSignUp loading={isLoading} onSubmit={handleSignUp} onChange={handleOnChange} inputData={formInput} />
                     </div>
+
                 </div>
+
                 <div className=" w-1/2 flex items-center h-screen bg-center bg-no-repeat bg-cover bg-[url('')]">
                     <img
                         className=" w-full m-auto"
@@ -59,5 +71,6 @@ export default function SignUp() {
                 </div>
             </div>
         </div>
+
     );
 }

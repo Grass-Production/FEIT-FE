@@ -6,12 +6,15 @@ import { getInforUser } from '../../services/userAPI';
 import { logout } from '../../services/userAPI';
 import { useNavigate } from 'react-router-dom';
 import { updateUser } from '../../services/userAPI';
+import { ToastSuccess, ToastError } from '../../components';
 export default function Profile() {
     const [inforUser, setInforUser] = useState({
         full_name: '',
         phone: '',
         specialize: '',
     });
+    const [isToast, setIsToast] = useState(0)
+
     const navigate = useNavigate();
 
     const [selectedAvatar, setSelectedAvatar] = useState(null);
@@ -28,7 +31,7 @@ export default function Profile() {
         cover_url: inforUser.cover_url,
         phone: inforUser.phone,
     });
-    console.log(inforUser._id);
+
     const handleCoverChange = (event) => {
         const file = event.target.files[0];
         setSelectedCover(file);
@@ -38,14 +41,20 @@ export default function Profile() {
     };
 
     const UpdateUser = async () => {
-        const res = await updateUser({
-            _id: inforUser._id,
-            full_name: formInput.full_name,
-            avatar_url: imageUrlAvatar,
-            cover_url: imageUrlCover,
-            phone: formInput.phone,
-        });
-        console.log(res);
+        try {
+            const res = await updateUser(
+                formInput.full_name,
+                imageUrlCover,
+                imageUrlAvatar,
+                formInput.phone,
+            );
+            setIsToast(1)
+            setTimeout(() => setIsToast(0), 2000);
+        } catch (error) {
+            setIsToast(2)
+            setTimeout(() => setIsToast(0), 2000);
+        }
+
     };
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -93,6 +102,8 @@ export default function Profile() {
     };
     return (
         <div className=" px-10 pt-7  ">
+            {isToast === 1 && <ToastSuccess message='Cập nhật thông tin thành công' />}
+            {isToast === 2 && <ToastError message='Cập nhật thông tin thất bại' />}
             <div className="">
                 <h1 className=" text-center text-heading-3 font-heading-3 font-bitter text-primary-black">
                     Thông tin tài khoản
@@ -100,7 +111,7 @@ export default function Profile() {
                 <div
                     className=" relative bg-[#FFFFFF] w-full h-[30vh] border-[4px] border-primary-black flex justify-end items-baseline mb-5"
                     style={{
-                        background: `url(${imageUrlCover}) no-repeat center/contain `,
+                        background: `url(${imageUrlCover !== null ? imageUrlCover : formInput.cover_url}) no-repeat center/contain `,
                     }}>
                     <label
                         for="cover"
@@ -116,17 +127,17 @@ export default function Profile() {
                             <div
                                 className=" mb-14 h-60 w-full flex justify-center items-center"
                                 style={{
-                                    background: `url(${imageUrlAvatar}) no-repeat center/contain `,
+                                    background: `url(${imageUrlAvatar !== null ? imageUrlAvatar : formInput.avatar_url}) no-repeat center/contain `,
                                 }}>
-                                {/* <img src={imageUrlAvatar} className=" rounded-[40px] w-full  max-h-52" alt="" /> */}
+
                             </div>
+
                             <label
                                 for="avatar"
-                                accept="image/*"
                                 className=" text-button-1 font-button-1 text-primary-black font-plusjakartasans hover:bg-secondary-gray text-center cursor-pointer py-2 px-4  flex justify-center items-center gap-[6px] w-full  ">
                                 Thay đổi ảnh đại diện
                                 <IconUploadSimple color="#14121B" />
-                                <input onChange={handleAvatarChange} type="file" id="avatar" class="hidden" />
+                                <input onChange={handleAvatarChange} accept="image/*" type="file" id="avatar" class="hidden" />
                             </label>
                             <Button
                                 title="Cài đặt tài khoản"
@@ -224,6 +235,6 @@ export default function Profile() {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 }

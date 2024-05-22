@@ -13,10 +13,10 @@ import { createLessonFileLoading } from '../../../../services/lessonAPI';
 import { getVocabularyById } from '../../../../services/vocabulary';
 import { useParams } from 'react-router-dom';
 import { SoundSmall } from '../../../../components/Sound';
-import { createVocabulary } from '../../../../services/vocabulary';
+import { createVocabulary, updateVocabulary } from '../../../../services/vocabulary';
 import axios from 'axios';
 
-export const CardUpdate = ({ name = 'Programing', namefile = 'congnghe.png' }) => {
+export const CardUpdate = ({ name = 'Programing', namefile = 'congnghe.png', }) => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [isCheckInputFile, setIsCheckInputFile] = useState(false);
     const [inputChange, setInputChange] = useState('Programing');
@@ -74,6 +74,27 @@ export const CardUpdate = ({ name = 'Programing', namefile = 'congnghe.png' }) =
 
     const handleCreateLessonFile = async () => {
         const res = await createLessonFileLoading(selectedFile, handleSetSetProgess);
+        if (res.status === 200) {
+            alert('Thêm Dữ liệu bằng file thành công');
+        } else if (res.message === 'validate: Token is expired') {
+            alert('Vui lòng đăng nhập');
+        }
+        console.log(res);
+    };
+
+
+    const UpdateVocabulary = async () => {
+        const res = await updateVocabulary(
+            formInput.word,
+            formInput.part_of_speech,
+            formInput.pronunciation,
+            formInput.mean,
+            formInput.example_vie,
+            formInput.example_eng,
+            formInput.explain_vie,
+            formInput.explain_eng,
+            formInput.field_of_it
+            , idvocabulary);
         if (res.status === 200) {
             alert('Thêm Dữ liệu bằng file thành công');
         } else if (res.message === 'validate: Token is expired') {
@@ -303,7 +324,7 @@ export const CardUpdate = ({ name = 'Programing', namefile = 'congnghe.png' }) =
                     <IconCloudArrowUp />
                 </Button>
                 <Button
-                    onClick={handleCreateLessonFile}
+                    onClick={UpdateVocabulary}
                     className=" w-full bg-background-disable border-background-disable text-secondary-gray rounded-none"
                     title="Lưu"
                     icon={true}

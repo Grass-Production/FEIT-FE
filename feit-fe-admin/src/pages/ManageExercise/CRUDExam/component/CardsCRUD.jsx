@@ -7,20 +7,21 @@ import { getLessonById, getLessons } from '../../../../services/lessonAPI';
 import { getUnitByIdLesson } from '../../../../services/unitAPI';
 import { getVocabularyByUinit } from '../../../../services/vocabulary';
 import { createExam, getAllExam, createQuestionExam, getManyExamByIdUnit } from '../../../../services/exerciseAPI';
-
+import { ToastSuccess, ToastError } from '../../../../components/Toast';
 export const FormCreateExam = () => {
     const [lessons, setLessons] = useState([]);
     const [units, setUnits] = useState([]);
     const [idLesson, setIdLesson] = useState('');
     const [idUnit, setIdUnit] = useState('');
     const [nameExam, setNameExam] = useState('');
+    const [isToast, setIsToast] = useState(0);
 
     useEffect(() => {
         const GetLessons = async () => {
             try {
                 const res = await getLessons();
                 setLessons(res.data);
-            } catch (error) {}
+            } catch (error) { }
         };
 
         const GetUnit = async () => {
@@ -31,7 +32,7 @@ export const FormCreateExam = () => {
                         setUnits(res.unit);
                     }
                 }
-            } catch (error) {}
+            } catch (error) { }
         };
         getVocabularyByUinit;
         GetLessons();
@@ -47,9 +48,14 @@ export const FormCreateExam = () => {
                 description: '',
             });
             if (re.status === 'success') {
+                setIsToast(1);
+                setTimeout(() => setIsToast(false), 2000);
                 alert('Tạo bài kiểm tra thành công');
             }
-        } catch (error) {}
+        } catch (error) {
+            setIsToast(2);
+            setTimeout(() => setIsToast(false), 2000);
+        }
     };
 
     const handleInputChangeNameExam = (event) => {
@@ -65,95 +71,99 @@ export const FormCreateExam = () => {
     };
 
     return (
-        <div className=" border bg-white border-primary-black p-8 overflow-y-scroll  h-[65vh]">
-            <h1 className=" text-heading-7 font-heading-7 font-plusjakartasans text-primary-black mb-5">
-                Thông tin bài kiểm tra
-            </h1>
-            <div className=" mb-5  border-t-[2px] border-secondary-gray pt-8 ">
-                <h1 className=" mb-1 text-heading-7 font-heading-7 font-plusjakartasans text-primary-black">
-                    Tên bài kiểm tra
+        <>
+            {isToast === 1 && <ToastSuccess message='Thêm bài học thành công' />}
+            {isToast === 2 && <ToastSuccess message='Thêm bài học thất bại' />}
+            <div className=" border bg-white border-primary-black p-8 overflow-y-scroll  h-[65vh]">
+                <h1 className=" text-heading-7 font-heading-7 font-plusjakartasans text-primary-black mb-5">
+                    Thông tin bài kiểm tra
                 </h1>
-                <InputField
-                    value={nameExam}
-                    onChange={handleInputChangeNameExam}
-                    placeholder={'Ví dụ: Bài kiểm tra Unit 1'}
-                    className=" w-full rounded-none py-2 px-4"
-                />
-            </div>
-            <div className=" mb-4">
-                <FormSelectOption
-                    value={idLesson}
-                    onChange={handleChangeSelectLesson}
-                    label={'Chọn chủ đề'}
-                    className={
-                        ' w-full  !rounded-none text-button-1 font-button-1 font-plusjakartasans text-primary-black'
-                    }>
-                    <option value={''} className="">
-                        Chọn chủ đề
-                    </option>
-                    {lessons !== null && (
-                        <>
-                            {lessons.map((v, i) => {
-                                return (
-                                    <option key={v._id} value={v._id} className="">
-                                        {v.name}
-                                    </option>
-                                );
-                            })}
-                        </>
-                    )}
-                </FormSelectOption>
-            </div>
-            <div className=" mb-4">
-                <FormSelectOption
-                    value={idUnit}
-                    onChange={handleChangeSelectUnit}
-                    label={'Chọn chương'}
-                    className={
-                        ' w-full !rounded-none text-button-1 font-button-1 font-plusjakartasans text-primary-black'
-                    }>
-                    <option value={''} className=" ">
-                        Chọn chương
-                    </option>
+                <div className=" mb-5  border-t-[2px] border-secondary-gray pt-8 ">
+                    <h1 className=" mb-1 text-heading-7 font-heading-7 font-plusjakartasans text-primary-black">
+                        Tên bài kiểm tra
+                    </h1>
+                    <InputField
+                        value={nameExam}
+                        onChange={handleInputChangeNameExam}
+                        placeholder={'Ví dụ: Bài kiểm tra Unit 1'}
+                        className=" w-full rounded-none py-2 px-4"
+                    />
+                </div>
+                <div className=" mb-4">
+                    <FormSelectOption
+                        value={idLesson}
+                        onChange={handleChangeSelectLesson}
+                        label={'Chọn chủ đề'}
+                        className={
+                            ' w-full  !rounded-none text-button-1 font-button-1 font-plusjakartasans text-primary-black'
+                        }>
+                        <option value={''} className="">
+                            Chọn chủ đề
+                        </option>
+                        {lessons !== null && (
+                            <>
+                                {lessons.map((v, i) => {
+                                    return (
+                                        <option key={v._id} value={v._id} className="">
+                                            {v.name}
+                                        </option>
+                                    );
+                                })}
+                            </>
+                        )}
+                    </FormSelectOption>
+                </div>
+                <div className=" mb-4">
+                    <FormSelectOption
+                        value={idUnit}
+                        onChange={handleChangeSelectUnit}
+                        label={'Chọn chương'}
+                        className={
+                            ' w-full !rounded-none text-button-1 font-button-1 font-plusjakartasans text-primary-black'
+                        }>
+                        <option value={''} className=" ">
+                            Chọn chương
+                        </option>
 
-                    {idLesson !== '' && (
-                        <>
-                            {units !== null && (
-                                <>
-                                    {units.map((v, i) => {
-                                        return (
-                                            <option value={v._id} className=" ">
-                                                {v.name}
-                                            </option>
-                                        );
-                                    })}
-                                </>
-                            )}
-                        </>
-                    )}
-                </FormSelectOption>
-            </div>
+                        {idLesson !== '' && (
+                            <>
+                                {units !== null && (
+                                    <>
+                                        {units.map((v, i) => {
+                                            return (
+                                                <option value={v._id} className=" ">
+                                                    {v.name}
+                                                </option>
+                                            );
+                                        })}
+                                    </>
+                                )}
+                            </>
+                        )}
+                    </FormSelectOption>
+                </div>
 
-            <div className="flex justify-between items-center gap-7 border-t border-primary-black pt-5">
-                <Button
-                    className=" w-full bg-background-disable border-background-disable text-secondary-gray rounded-none"
-                    title="Hủy"
-                    icon={true}
-                    right={true}
-                    color={'primary'}>
-                    <IconCloudArrowUp />
-                </Button>
-                <Button
-                    className=" w-full bg-background-disable border-background-disable text-secondary-gray rounded-none"
-                    title="Lưu"
-                    onClick={CreateExam}
-                    icon={true}
-                    right={true}
-                    color={'primary'}>
-                    <IconDesktopTower />
-                </Button>
+                <div className="flex justify-between items-center gap-7 border-t border-primary-black pt-5">
+                    <Button
+                        className=" w-full bg-background-disable border-background-disable text-secondary-gray rounded-none"
+                        title="Hủy"
+                        icon={true}
+                        right={true}
+                        color={'primary'}>
+                        <IconCloudArrowUp />
+                    </Button>
+                    <Button
+                        className=" w-full bg-background-disable border-background-disable text-secondary-gray rounded-none"
+                        title="Lưu"
+                        onClick={CreateExam}
+                        icon={true}
+                        right={true}
+                        color={'primary'}>
+                        <IconDesktopTower />
+                    </Button>
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 
@@ -186,7 +196,7 @@ export const FormCreate = () => {
                 }
                 const allexam = await getAllExam();
                 setExams(allexam.data);
-            } catch (error) {}
+            } catch (error) { }
         };
 
         const GetLessons = async () => {
@@ -195,7 +205,7 @@ export const FormCreate = () => {
                 setLessons(res.data);
                 if (res.status === 'success') {
                 }
-            } catch (error) {}
+            } catch (error) { }
         };
 
         const GetUnit = async () => {
@@ -206,7 +216,7 @@ export const FormCreate = () => {
                         setUnits(res.unit);
                     }
                 }
-            } catch (error) {}
+            } catch (error) { }
         };
         const GetVocabulary = async () => {
             try {
@@ -216,7 +226,7 @@ export const FormCreate = () => {
                         setVocabularys(res.vocabulary);
                     }
                 }
-            } catch (error) {}
+            } catch (error) { }
         };
         GetManyExamByIdUnit();
         GetVocabulary();
@@ -237,7 +247,7 @@ export const FormCreate = () => {
             if (createQuestion.status === 'success') {
                 alert('Tạo câu hỏi thành công');
             }
-        } catch (error) {}
+        } catch (error) { }
     };
     const handleInputChangeResultBlank = (event) => {
         setResult(event.target.value);

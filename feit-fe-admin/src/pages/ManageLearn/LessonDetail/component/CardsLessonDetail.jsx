@@ -3,7 +3,8 @@ import { IconPencilSimple, IconDelete, IconDotsThreeVertical, IconGear } from '.
 import { useEffect, useState } from 'react';
 import { getVocabularyByUinit } from '../../../../services/vocabulary';
 import { NavLink } from 'react-router-dom';
-
+import { deleteVocabulary } from '../../../../services/vocabulary';
+import { ToastSuccess, ToastError } from '../../../../components/Toast';
 export const CardCourse = ({ id = 'test' }) => {
     return (
         <div>
@@ -95,51 +96,67 @@ export const CardLesson = ({ id = 'test', name, quantityUnit }) => {
     );
 };
 
-export const RowVocabulary = ({ word, id, idUnit }) => {
+export const RowVocabulary = ({ word, id, idUnit, render }) => {
     const [isOpen, setIsOpen] = useState(false);
-
+    const [isToast, setIsToast] = useState(false)
+    const handleDelete = async (id) => {
+        const res = await deleteVocabulary(id);
+        if (res.status === 'success') {
+            // alert('Xóa thành công');
+            setIsToast(true)
+            setTimeout(() => setIsToast(false), 2000);
+            render(1);
+            console.log(res);
+        }
+    };
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
         console.log(isOpen);
     };
 
     return (
-        <div className=" flex justify-between items-center w-full">
-            {isOpen && <div onClick={toggleDropdown} className=" z-10 bg-transparent fixed inset-0"></div>}
+        <>
+            <div className=" flex justify-between items-center w-full">
 
-            <InputSection
-                className={''}
-                size={' w-5 h-5'}
-                classNameText={'text-body-2 font-body-2 text-secondary-gray font-plusjakartasans'}
-                label={word}
-            />
-            <div className=" relative ">
-                <IconDotsThreeVertical onClick={toggleDropdown} className="dropbtn cursor-pointer" />
-                {isOpen && (
-                    <>
-                        <div
-                            id=""
-                            className=" z-40 w-40 absolute  flex flex-col  bg-white left-1/2 border-x border-b border-primary-black">
-                            <Button
-                                color={'primary'}
-                                className="text-body-2 font-body-2 border-none rounded-none text-secondary-gray font-plusjakartasans"
-                                title=" Xóa"
-                                icon={true}
-                                right={true}>
-                                <IconDelete />
-                            </Button>
+                {isOpen && <div onClick={toggleDropdown} className=" z-10 bg-transparent fixed inset-0"></div>}
 
-                            <NavLink to={`/manage/learn/unit/${idUnit}/vocabularydetails/${id}/setting`}>
+                <InputSection
+                    className={''}
+                    size={' w-5 h-5'}
+                    classNameText={'text-body-2 font-body-2 text-secondary-gray font-plusjakartasans'}
+                    label={word}
+                />
+                <div className=" relative ">
+                    {isToast === true &&
+                        <ToastSuccess message='Xóa từ vựng thành công' />
+                    }
+                    <IconDotsThreeVertical onClick={toggleDropdown} className="dropbtn cursor-pointer" />
+                    {isOpen && (
+                        <>
+                            <div
+                                id=""
+                                className=" z-40 w-40 absolute  flex flex-col  bg-white left-1/2 border-x border-b border-primary-black">
                                 <Button
                                     color={'primary'}
                                     className="text-body-2 font-body-2 border-none rounded-none text-secondary-gray font-plusjakartasans"
-                                    title="Tùy chỉnh"
+                                    title=" Xóa"
+                                    onClick={() => handleDelete(id)}
                                     icon={true}
                                     right={true}>
-                                    <IconGear />
+                                    <IconDelete />
                                 </Button>
-                            </NavLink>
-                            {/* <NavLink to={`/manage/learn/vocabularydetails/${id}/setting`}>
+
+                                <NavLink to={`/manage/learn/unit/${idUnit}/vocabularydetails/${id}/setting`}>
+                                    <Button
+                                        color={'primary'}
+                                        className="text-body-2 font-body-2 border-none rounded-none text-secondary-gray font-plusjakartasans"
+                                        title="Tùy chỉnh"
+                                        icon={true}
+                                        right={true}>
+                                        <IconGear />
+                                    </Button>
+                                </NavLink>
+                                {/* <NavLink to={`/manage/learn/vocabularydetails/${id}/setting`}>
                                 <Button
                                     color={'primary'}
                                     className="text-body-2 font-body-2 border-none rounded-none text-secondary-gray font-plusjakartasans"
@@ -149,15 +166,16 @@ export const RowVocabulary = ({ word, id, idUnit }) => {
                                     <IconGear />
                                 </Button>
                             </NavLink> */}
-                        </div>
-                    </>
-                )}
+                            </div>
+                        </>
+                    )}
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 
-export const CardUnit = ({ name, idUnit }) => {
+export const CardUnit = ({ name, idUnit, render }) => {
     const [vocabulary, setVocabulary] = useState([]);
     useEffect(() => {
         async function GetVocabulary() {
@@ -185,7 +203,7 @@ export const CardUnit = ({ name, idUnit }) => {
                 <div className="flex flex-col gap-1 justify-between items-start">
                     {vocabulary != null &&
                         vocabulary.map((v, i) => {
-                            return <RowVocabulary idUnit={idUnit} id={v._id} key={v._id} word={v.word} />;
+                            return <RowVocabulary render={render} idUnit={idUnit} id={v._id} key={v._id} word={v.word} />;
                         })}
                 </div>
             </div>

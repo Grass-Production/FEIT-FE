@@ -85,7 +85,7 @@ export const ROUTES = {
     ManageLearn: '/manage/learn',
     SignUp: '/signUp',
     SubManageLearn: '/manage/learn/details/:idlesson',
-
+    // /manage/learn/lesson/${}
     CourseDetail: '/manage/learn/coursedetails/:idcourse',
     LessonDetail: '/manage/learn/lessondetails/:idlesson',
     UnitDetails: '/manage/learn/lesson/:idlesson/unitdetails/:idunit',

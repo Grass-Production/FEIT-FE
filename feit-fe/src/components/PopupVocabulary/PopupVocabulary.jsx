@@ -105,9 +105,9 @@ export const PopUp = ({ OnClose, word, partofspeech, pronunciation, example, sou
 
 export const CardVideo = ({ src = 'https://www.youtube.com/embed/y14IxVnBEaU' }) => {
     return (
-        <div>
+        <div className=' h-[90%]'>
             <iframe
-                className=" h-fit w-full"
+                className=" h-full w-full"
                 src={src}
                 title="YouTube video player"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -279,4 +279,4 @@ export const SubPopUp = ({ OnClose, idVocabulary }) => {
     );
 };
 
-export const Toast = () => {};
+export const Toast = () => { };

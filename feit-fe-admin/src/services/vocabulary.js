@@ -157,27 +157,26 @@ export const createVocabularyFile = async (newData) => {
 }
 
 export const updateVocabulary = async (newData, vocabularyid) => {
-    const token = localStorage.getItem('access_token')
+
     const res = await put(`http://localhost:8080/api/admin/vocabulary/update/:_id?id=${vocabularyid}`,
         newData,
         {
             credentials: "include",
             headers: {
                 "Content-Type": "application/json",
-                Authorization: `Bearer ${token} `,
+
             },
         })
     return res
 }
 
 export const deleteVocabulary = async (vocabularyid) => {
-    const token = localStorage.getItem('access_token')
+
     const res = await del(`http://localhost:8080/api/admin/vocabulary/delete/1/_id?_id=${vocabularyid}`,
         {
             credentials: "include",
             headers: {
                 "Content-Type": "application/json",
-                Authorization: `Bearer ${token} `,
             },
         })
     return res

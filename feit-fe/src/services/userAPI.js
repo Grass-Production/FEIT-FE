@@ -14,18 +14,23 @@ export const getInforUser = async () => {
     return res
 }
 
-export const updateUser = async (_id, full_name, cover_url, avatar_url, phone) => {
+export const updateUser = async (full_name, cover_url, avatar_url, phone) => {
+
     const formData = new FormData(); // Tạo đối tượng FormData
-    formData.append('_id', _id);
     formData.append('full_name', full_name);
     formData.append('avatar_url', avatar_url);
     formData.append('cover_url', cover_url);
     formData.append('phone', phone);
+
+    console.log('full_name', full_name);
+    console.log('avatar_url', avatar_url);
+    console.log('cover_url', cover_url);
+    console.log('phone', phone);
+
     try {
-        const res = await axios.patch('http://localhost:8080/api/update',
+        const res = await axios.patch('http://localhost:8080/api/user/update',
             formData,
             {
-                headers: { 'Content-Type': 'application/json' },
                 withCredentials: true,
             },
         );
