@@ -3,7 +3,7 @@ import { LoadingProgressBar, Button, InputField } from '../../../components';
 import { useState } from 'react';
 import { IconClose, IconPlus } from '../../../svgs';
 export const UnitCard = ({
-    img = 'https://res.cloudinary.com/df4zm1xjy/image/upload/v1711464162/feit-static/Ch%C6%B0%C6%A1ng%208.png.png',
+    img = '/src/assets/images/imgunit.jpg',
     name = 'Chương 1',
     percent,
     lessonid,
@@ -50,10 +50,10 @@ export const UnitCard = ({
                     )}
 
                     <div className={`  max-h-72 bg-no-repeat bg-contain bg-center h-[25vh] overflow-hidden  `}>
-                        {/* <img
-                            src="https://res.cloudinary.com/df4zm1xjy/image/upload/v1711464162/feit-static/Ch%C6%B0%C6%A1ng%208.png.png"
+                        <img
+                            src="/src/assets/images/imgunit.jpg"
                             alt=""
-                        /> */}
+                        />
                     </div>
                     <h1 className="truncate overflow-hidden whitespace-nowrap mt-3 text-center text-heading-7 font-plusjakartasans font-heading-7 text-primary-black mb-3">
                         {name}

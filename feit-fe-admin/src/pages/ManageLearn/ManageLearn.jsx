@@ -11,10 +11,14 @@ export default function ManageLearn() {
     useEffect(() => {
         const GetCourse = async () => {
             const res = await getCourse();
-            setCourse(res.detail.statistics.total);
-            setStatistic(res.data[0]);
-            console.log(res.detail.statistics.total);
-            setIsLoading(false);
+            if (res !== null || res !== '') {
+                setCourse(res.detail.statistics.total);
+                if (res.data) {
+                    setStatistic(res.data[0]);
+                }
+                console.log(res.detail.statistics.total);
+                setIsLoading(false);
+            }
         };
         GetCourse();
     }, []);

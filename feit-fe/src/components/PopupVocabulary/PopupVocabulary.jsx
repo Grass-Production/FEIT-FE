@@ -103,7 +103,7 @@ export const PopUp = ({ OnClose, word, partofspeech, pronunciation, example, sou
     );
 };
 
-export const CardVideo = ({ src = 'https://www.youtube.com/embed/y14IxVnBEaU' }) => {
+export const CardVideo = ({ src = 'https://www.youtube.com/embed/2ENmRL7pTSg' }) => {
     return (
         <div className=' h-[90%]'>
             <iframe
@@ -231,14 +231,17 @@ export const SubPopUp = ({ OnClose, idVocabulary }) => {
 
                                     <div className=" flex flex-col justify-start items-start h-[50vh] px-4 max-h-[60] gap-3">
                                         <InputSection id="1" label="Danh sách yêu thích" />
-                                        {maskLists.map((v, i) => (
-                                            <InputSection
-                                                onChange={handleCheckboxChange}
-                                                key={v._id}
-                                                label={v.name_list}
-                                                id={v._id}
-                                            />
-                                        ))}
+                                        {maskLists !== null && <>
+                                            {maskLists.map((v, i) => (
+                                                <InputSection
+                                                    onChange={handleCheckboxChange}
+                                                    key={v._id}
+                                                    label={v.name_list}
+                                                    id={v._id}
+                                                />
+                                            ))}
+
+                                        </>}
                                         {isShowInput && (
                                             <InputField
                                                 value={inputValue}

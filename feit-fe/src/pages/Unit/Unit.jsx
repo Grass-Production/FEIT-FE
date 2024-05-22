@@ -35,15 +35,25 @@ export default function Unit() {
         link_url: '',
         question: '',
     });
+    console.log(vocabulary.word)
 
     useEffect(() => {
         async function fetchData() {
             try {
                 const vocabularys = await getVocabulary(unitid);
                 const res = await vocabularys.vocabulary;
+                const exam = await getExerciseByIdUnit(unitid);
+                const question = await getQuestionByIdExercise(exam.data._id);
+                const questionData = await question.data.exercise_question;
+                // setVocabulary({ ...vocabulary, question: questionData[index].content });
+                setQuestions(questionData);
+                if (questionData !== '') {
+                    setLoading(false);
+                }
+                console.log('questionData : ', questionData[index].content);
                 console.log('res :', res);
                 setVocabulary({
-                    ...vocabulary,
+                    question: questionData[index].content,
                     word: res[index].word,
                     _id: res[index]._id,
                     part_of_speech: res[index].part_of_speech,
@@ -74,7 +84,7 @@ export default function Unit() {
             console.log('questionData : ', questionData[index].content);
         }
 
-        GetQuestion();
+        // GetQuestion();
         fetchData();
     }, []);
     // Dùng để đếm số để render Component
@@ -183,7 +193,7 @@ export default function Unit() {
                             </div>
                         </div>
                         <h1>
-                            {inputValue} : {process} : {questions[index]._id}
+
                         </h1>
                         {/* <h1>d</h1> */}
                         <RenderComponentUnit

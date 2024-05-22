@@ -1,8 +1,8 @@
 import { get, post, put, del, patch } from "./fetch";
 import axios from "axios"
 
-export const getLessons = async () => {
-    const res = await get('http://localhost:8080/api/lesson/fetch', {
+export const getLessons = async (page = '') => {
+    const res = await get(`http://localhost:8080/api/lesson/fetch${page}`, {
         headers: {
             "Content-Type": "application / json"
         },

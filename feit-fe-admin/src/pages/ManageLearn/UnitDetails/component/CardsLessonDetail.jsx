@@ -182,7 +182,8 @@ import { IconPencilSimple, IconDelete, IconDotsThreeVertical, IconGear } from '.
 import { useEffect, useState } from 'react';
 import { getVocabularyByUinit } from '../../../../services/vocabulary';
 import { NavLink } from 'react-router-dom';
-
+import { deleteVocabulary } from '../../../../services/vocabulary';
+import { ToastSuccess, ToastError } from '../../../../components/Toast';
 export const CardCourse = ({ id = 'test' }) => {
     return (
         <div>

@@ -102,7 +102,7 @@ const routes = publicRouter.map((route) => {
         errorElement: (
             <>
                 <Helmet>
-                    <title>Not Found</title>
+                    <title>Sign In</title>
                 </Helmet>
                 <SignIn />
             </>

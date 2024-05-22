@@ -62,16 +62,25 @@ export const CardCrud = ({ onClickAddFile }) => {
     );
 };
 
-export const CardView = ({ children, name = 'Công nghệ thông tin', quantity = '10' }) => {
+export const CardView = ({ children, name = 'Công nghệ thông tin', quantity = '10', sendPage, count }) => {
+
     const [page, setPage] = useState(1);
-    const handleChange = (event, value) => {
-        setPage(value);
-    };
+
     const [showFilter, setShowFilter] = useState(false);
 
     const [showCheckbox, setShowCheckbox] = useState(false);
     const handleShowCheckbox = () => {
         setShowCheckbox(!showCheckbox);
+    };
+
+    const handleChange = (event, value) => {
+        setPage(value);
+        console.log(value);
+        if (value > 1) {
+            sendPage(`?page=${value}`);
+        } else {
+            sendPage('');
+        }
     };
 
     const handleShowFilter = () => {
@@ -99,7 +108,7 @@ export const CardView = ({ children, name = 'Công nghệ thông tin', quantity 
                             </h1>
                             <Stack spacing={2}>
                                 <Pagination
-                                    count={1}
+                                    count={count}
                                     siblingCount={0}
                                     page={page}
                                     onChange={handleChange}
@@ -108,7 +117,7 @@ export const CardView = ({ children, name = 'Công nghệ thông tin', quantity 
                                     renderItem={(item) => (
                                         <PaginationItem
                                             component={NavLink}
-                                            to={`/course${item.page === 1 ? '' : `?page=${item.page}`}`}
+                                            to={`/manage/learn/lesson${item.page === 1 ? '' : `?page=${item.page}`}`}
                                             {...item}
                                         />
                                     )}

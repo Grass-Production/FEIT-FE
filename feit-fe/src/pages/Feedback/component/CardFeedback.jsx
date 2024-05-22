@@ -53,7 +53,7 @@ export const CardFormFeedback = ({ handleSendLoading }) => {
             console.log(res);
         } catch (error) {
             setIsToastError(true);
-            navigate(`/signIn`);
+            // navigate(`/signIn`);
             setTimeout(() => setIsToastError(false), 2000);
         }
     };
@@ -68,9 +68,8 @@ export const CardFormFeedback = ({ handleSendLoading }) => {
         setFeeling(text);
     };
     const getClassNames = (index) => {
-        return `flex flex-col justify-center items-center p-2 border hover:border hover:border-primary-blue-500 hover:bg-white  ${
-            activeIndex === index ? 'border border-primary-blue-500 bg-white' : ''
-        }`;
+        return `flex flex-col justify-center items-center p-2 border hover:border hover:border-primary-blue-500 hover:bg-white  ${activeIndex === index ? 'border border-primary-blue-500 bg-white' : ''
+            }`;
     };
     return (
         <>

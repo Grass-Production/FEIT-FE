@@ -1,7 +1,7 @@
 import { lazy } from "react";
 
 
-import { IconLaptop, IconHouse, IconFileCloud, IconBookOpenText, IconNotePencil, IconSquaresFour, IconUsersFour, IconCheckSquareOffset, IconNote, IconBell, IconList, IconChartBar, IconSearch, IconUser, IconClockClockwise, IconCrown, IconChatTeardropText, IconUsers } from "../svgs";
+import { IconLaptop, IconHouse, IconFileCloud, IconBook, IconBookOpenText, IconNotePencil, IconSquaresFour, IconUsersFour, IconCheckSquareOffset, IconNote, IconBell, IconList, IconChartBar, IconSearch, IconUser, IconClockClockwise, IconCrown, IconChatTeardropText, IconUsers } from "../svgs";
 
 
 
@@ -396,7 +396,7 @@ export const routerSidebar = [
         href: ROUTES.Exercise,
         component: Exercise,
         name: 'Quản lý bài học',
-        icon: IconHouse,
+        icon: IconBook,
     },
 
     {
@@ -427,13 +427,7 @@ export const routerSidebar = [
         name: 'Cloudinary',
         icon: IconFileCloud,
     },
-    {
-        title: 'FEIT',
-        href: ROUTES.SignIn,
-        component: SignIn,
-        name: 'Đăng nhập',
-        icon: IconHouse,
-    },
+
 ]
 
 export const routerList = [

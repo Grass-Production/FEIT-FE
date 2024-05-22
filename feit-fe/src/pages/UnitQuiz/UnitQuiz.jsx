@@ -181,7 +181,7 @@ export default function UnitQuiz() {
                                         <LoadingProgressBar percent={process} />
                                     </div>
                                 </div>
-                                <h1>{process}</h1>
+
                                 {/* <h1 className=" text-center">{second}</h1> */}
                                 {process < 100 && (
                                     <RenderComponentUnitQuiz

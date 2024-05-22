@@ -16,17 +16,27 @@ export default function HomePage() {
     const [content, setContent] = useState('');
     const [level, setLevel] = useState(0);
     // const [file, setFile] = useState(null);
+    const [pageCurrent, setPageCurrent] = useState('');
+    const [page, setPage] = useState('');
+
     const [render, setRender] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
         async function GetLessons() {
-            const res = await getLessons();
-            setData(res.data);
-            setIsLoading(false);
+            const res = await getLessons(pageCurrent);
+            if (res !== null) {
+                console.log(res)
+                setData(res.data);
+                setPage(res.detail.page);
+                setIsLoading(false);
+            }
         }
         GetLessons();
-    }, [render]);
+    }, [render, pageCurrent]);
 
+    const handleSetPage = (pageCurrent) => {
+        setPageCurrent(pageCurrent);
+    };
     // const handleFileChange = (event) => {
     //     setFile(event.target.files[0]);
     // };
@@ -109,7 +119,7 @@ export default function HomePage() {
                     <div className=" mb-7">
                         <CardCrud onClickAddFile={handleCreateLessonFile} />
                     </div>
-                    <CardView>
+                    <CardView sendPage={handleSetPage} count={page}>
                         {data !== null && (
                             <>
                                 {data.map((v, i) => {

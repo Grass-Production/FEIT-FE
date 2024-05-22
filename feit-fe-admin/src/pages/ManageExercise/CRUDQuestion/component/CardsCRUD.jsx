@@ -542,6 +542,7 @@ export const FormCreate = ({ idexam }) => {
                     </>
                 </FormSelectOption>
             </div>
+
             <div className=" mb-8">
                 <FormSelectOption
                     value={typeQuestion}
@@ -567,6 +568,7 @@ export const FormCreate = ({ idexam }) => {
                     </option>
                 </FormSelectOption>
             </div>
+
             <div className="">
                 <h1 className=" text-heading-5 font-heading-5 font-plusjakartasans text-secondary-gray pt-4 pb-2 border-t-[2px] border-dashed border-secondary-gray">
                     {selectedTitleTypeQuestion}

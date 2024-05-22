@@ -156,7 +156,17 @@ export const createVocabularyFile = async (newData) => {
     }
 }
 
-export const updateVocabulary = async (newData, vocabularyid) => {
+export const updateVocabulary = async (word, part_of_speech, pronunciation, mean, example_vie, example_eng, explain_vie, explain_eng, field_of_it, vocabularyid) => {
+    const formData = new FormData(); // Tạo đối tượng FormData
+    formData.append('word', word);
+    formData.append('part_of_speech', part_of_speech);
+    formData.append('pronunciation', pronunciation);
+    formData.append('example_vie', example_vie);
+    formData.append('mean', mean);
+    formData.append('example_eng', example_eng);
+    formData.append('explain_vie', explain_vie);
+    formData.append('explain_eng', explain_eng);
+    formData.append('field_of_it', field_of_it);
 
     const res = await put(`http://localhost:8080/api/admin/vocabulary/update/:_id?id=${vocabularyid}`,
         newData,
@@ -169,6 +179,20 @@ export const updateVocabulary = async (newData, vocabularyid) => {
         })
     return res
 }
+
+// export const updateVocabulary = async (newData, vocabularyid) => {
+
+//     const res = await put(`http://localhost:8080/api/admin/vocabulary/update/:_id?id=${vocabularyid}`,
+//         newData,
+//         {
+//             credentials: "include",
+//             headers: {
+//                 "Content-Type": "application/json",
+
+//             },
+//         })
+//     return res
+// }
 
 export const deleteVocabulary = async (vocabularyid) => {
 
