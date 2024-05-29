@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  h1 {
+    /* @apply text-2xl truncate overflow-hidden whitespace-nowrap; */
+  }
+
+}
+  html {
+    font-size: 85%;
+  }
+*{
+  scroll-behavior: smooth;
+}
+
+@media (max-width: 1270px) {
+  html {
+    font-size: 80%;
+  }
+}
+
+
+
+@media (min-width: 740px) and (max-width: 1023px) {
+  html {
+    font-size: 55.5%;
+  }
+}
+
+@media (max-width: 739px) {
+  html {
+    font-size: 50%;
+  }
+}
+
+
+
+

@@ -1,50 +1,21 @@
-import {tv} from 'tailwind-variants';
-import {Button} from '../Button';
-import {InputSection} from '../Input/InputSection';
-import {NavLink} from 'react-router-dom';
+import { tv } from 'tailwind-variants';
+import { InputField } from '../Input';
+
 const formVariants = tv({
     slots: {
         base: ' w-96 ',
-        input: ' block w-full border border-black rounded-lg p-3',
-        label: ' mb-2 ',
+        input: ' block w-full border border-secondary-gray rounded-lg p-3',
     },
 });
 
-export const Form = ({valueName, onChangeName, valuePass, onChangePass}) => {
-    const {base, input, label} = formVariants();
+export const Form = ({ className, label, children }) => {
+    const { base, input } = formVariants();
     return (
-        <form className={base()}>
-            <div className=" mb-3">
-                <label className=" mb-2" htmlFor="">
-                    Email
-                </label>
-                <input
-                    value={valueName}
-                    onChange={onChangeName}
-                    placeholder="Nhập mail"
-                    className={input()}
-                    type="text"
-                />
+        <div className={`${className} ${base()}`}>
+            <div className="">
+                <label className=" block text-label-2 font-label-2 text-primary-black mb-2">{label}</label>
+                {children}
             </div>
-            <div className={label()}>
-                <label htmlFor="">Mật khẩu</label>
-                <input
-                    value={valuePass}
-                    onChange={onChangePass}
-                    placeholder="Nhập mật khẩu"
-                    className={input()}
-                    type="text"
-                />
-            </div>
-            <div className=" flex justify-between mb-9">
-                <InputSection label="Nhớ mật khẩu" />
-                <NavLink className=" underline text-primary-primary" to="/home">
-                    Quên mật khẩu ?
-                </NavLink>
-            </div>
-            <div className=" flex justify-center ">
-                <Button title="Đăng nhập" className=" w-64" size={'lg'} />
-            </div>
-        </form>
+        </div>
     );
 };

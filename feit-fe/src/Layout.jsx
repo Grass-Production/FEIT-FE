@@ -1,40 +1,36 @@
-import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import routerList from './context/routes';
+import { RouterProvider } from 'react-router-dom';
 import Loading from './pages/LandingPage/component/Loading';
-import {Helmet} from 'react-helmet';
-import SignIn from './pages/SignIn/SignIn';
-import {Suspense, lazy} from 'react';
+import { Suspense, useState } from 'react';
+import { routerPublic, routerPrivate } from './untils/renderRouter';
+import { useEffect } from 'react';
 
-const MainLayout = lazy(() => import('./pages/MainLayout/MainLayout'));
 export default function Layout() {
-    const path = window.location.pathname;
+    const [loggedIn, setLoggedIn] = useState(null);
+    useEffect(() => {
+        const checkLoginStatus = () => {
+            const loggedInValue = getCookie('logged_in');
+            setLoggedIn(loggedInValue);
+            if (loggedInValue !== null) {
+                setLoggedIn(true);
+            } else {
+                setLoggedIn(false);
+            }
+        };
+        checkLoginStatus();
+    }, []);
+
+    const getCookie = (name) => {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+        return null;
+    };
+
     return (
-        <Router>
-            <Suspense fallback={<Loading />}>
-                <Routes>
-                    <Route element={<MainLayout />}>
-                        {routerList.map((route) => {
-                            const Page = route.component;
-                            return (
-                                <Route
-                                    key={route.title}
-                                    path={route.href}
-                                    element={
-                                        <>
-                                            <Helmet>
-                                                <title>{route.title}</title>
-                                            </Helmet>
-                                            <Page />
-                                        </>
-                                    }
-                                />
-                            );
-                        })}
-                        <Route />
-                    </Route>
-                    <Route path="/signin" element={<SignIn />} />
-                </Routes>
-            </Suspense>
-        </Router>
+        <Suspense fallback={<Loading />}>
+            {loggedIn === true && <RouterProvider router={routerPrivate} />}
+            {loggedIn !== true && <RouterProvider router={routerPublic} />}
+            {/* <RouterProvider router={routerPrivate} /> */}
+        </Suspense>
     );
 }
